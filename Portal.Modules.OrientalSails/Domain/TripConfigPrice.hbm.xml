@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="Portal.Modules.OrientalSails" namespace="Portal.Modules.OrientalSails.Domain" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="TripConfigPrice" table="os_tripConfigPrice" lazy="true" >
+    <id name="Id" column="Id">
+      <generator class="identity" />
+    </id>
+    <many-to-one name="Trip" column="TripId" class="SailsTrip"/>
+    <many-to-one name="AgentLevel" column="AgentLevelId" class="QAgentLevel"/>
+    <many-to-one name="Campaign" column="CampaignId" class="Campaign"/>
+    <property name="FromDate">
+      <column name="FromDate" sql-type="datetime" not-null="false" />
+    </property>
+    <property name="ToDate">
+      <column name="ToDate" sql-type="datetime" not-null="false" />
+    </property>
+    <many-to-one name="CreatedBy" column="CreatedBy" class="CMS.Core.Domain.User, CMS.Core" not-found="ignore"/>
+    <many-to-one name="ModifiedBy" column="ModifiedBy" class="CMS.Core.Domain.User, CMS.Core" not-found="ignore"/>
+    <property name="Enable"/>
+    <property name="CreatedDate"/>
+    <property name="ModifyDate"/>
+  </class>
+</hibernate-mapping>

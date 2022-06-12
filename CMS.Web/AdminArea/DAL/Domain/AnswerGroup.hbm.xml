@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   namespace="CMS.Web.AdminArea.DAL.Domain"
+                   assembly="CMS.Web" auto-import="false">
+	<class name="AnswerGroup" table="sv_AnswerGroup" batch-size="10">
+		<cache usage="read-write"/>
+		<id name="Id">
+			<generator class="native" />
+		</id>
+		<property name="GroupId"/>
+		<property name="AnswerSheetId"/>
+		<property name="Comment"/>
+	</class>
+</hibernate-mapping>

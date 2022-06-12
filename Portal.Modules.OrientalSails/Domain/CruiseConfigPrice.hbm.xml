@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="Portal.Modules.OrientalSails" namespace="Portal.Modules.OrientalSails.Domain" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="CruiseConfigPrice" table="os_CruiseConfigPrice" lazy="true" >
+    <id name="Id" column="Id">
+      <generator class="identity" />
+    </id>
+    <property name="TripConfigPriceId">
+      <column name="TripConfigPriceId" sql-type="int" not-null="false" />
+    </property>
+    <property name="CruiseId">
+      <column name="CruiseId" sql-type="int" not-null="false" />
+    </property>
+    <property name="RoomClassId">
+      <column name="RoomClassId" sql-type="int" not-null="false" />
+    </property>
+    <property name="RoomTypeId">
+      <column name="RoomTypeId" sql-type="nchar" not-null="false" />
+    </property>
+    <property name="Price">
+      <column name="Price" sql-type="money" not-null="false" />
+    </property>
+    <property name="CusFrom">
+      <column name="CusFrom" sql-type="int" not-null="false" />
+    </property>
+    <property name="CusTo">
+      <column name="CusTo" sql-type="int" not-null="false" />
+    </property>
+    <property name="IsCharter"/>
+  </class>
+</hibernate-mapping>

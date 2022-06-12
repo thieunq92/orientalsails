@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="Portal.Modules.OrientalSails" namespace="Portal.Modules.OrientalSails.Domain" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Reviews" table="os_Reviews" lazy="true" >
+    <id name="Id" column="Id">
+      <generator class="identity" />
+    </id>
+    <property name="ReviewType">
+      <column name="ReviewType" sql-type="nvarchar" not-null="false" />
+    </property>
+    <!--<many-to-one name="User" column="UserId" class="CMS.Core.Domain.User, CMS.Core" not-found="ignore"/>-->
+    <property name="Body">
+      <column name="Body" sql-type="nvarchar" not-null="false" />
+    </property>
+    <property name="FullName">
+      <column name="FullName" sql-type="nvarchar" not-null="false" />
+    </property>
+    <property name="Email">
+      <column name="Email" sql-type="nvarchar" not-null="false" />
+    </property>
+    <property name="Phone">
+      <column name="Phone" sql-type="nvarchar" not-null="false" />
+    </property>
+    <property name="Disable">
+      <column name="Disable" sql-type="bit" not-null="false" />
+    </property>
+    <property name="CreateDate">
+      <column name="CreateDate" sql-type="datetime" not-null="false" />
+    </property>
+    <property name="Rating">
+      <column name="Rating" sql-type="float" not-null="false" />
+    </property>
+    <property name="ObjectId">
+      <column name="ObjectId" sql-type="nvarchar" not-null="false" />
+    </property>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   namespace="Portal.Modules.OrientalSails.Domain"
+                   assembly="Portal.Modules.OrientalSails">
+  <class name="FacilitieMap" table="os_facilitiemap" batch-size="10">
+    <cache usage="read-write"/>
+    <id name="Id">
+      <generator class="native" />
+    </id>
+    <property name="FacilitieType"/>
+    <property name="ObjectId"/>
+    <many-to-one name="Facilitie" column="FacilitieId" class="Portal.Modules.OrientalSails.Domain.Facilitie, Portal.Modules.OrientalSails" not-found="ignore"/>
+
+  </class>
+</hibernate-mapping>
