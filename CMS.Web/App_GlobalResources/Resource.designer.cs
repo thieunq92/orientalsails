@@ -19,7 +19,7 @@ namespace Resources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option or rebuild the Visual Studio project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Web.Application.StronglyTypedResourceProxyBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Web.Application.StronglyTypedResourceProxyBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resource {
@@ -61,11 +61,12 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;p style=&quot;text-align: center&quot;&gt;
+        ///   Looks up a localized string similar to  &lt;p style=&quot;text-align: center&quot;&gt;
         ///                                    &lt;span style=&quot;color: #a46c2a; font-weight: bold&quot;&gt;Address:&lt;/span&gt; 8th Floor, No 77 Nguyen Thai Hoc street, Dien Bien quarter, Ba Dinh district, Ha Noi city, Viet Nam
         ///                        &lt;br /&gt;
         ///                                    &lt;span style=&quot;color: #a46c2a; font-weight: bold;&quot;&gt;Phone:&lt;/span&gt; 84-243 926 4009 &amp;nbsp;&amp;nbsp;         
-        ///                        &lt;span style=&quot;color: #a46c2a; font-weight: bold;&quot;&gt;Email:&lt;/span&gt; sales@orientalsails.co [rest of string was truncated]&quot;;.
+        ///                        &lt;span style=&quot;color: #a46c2a; font-weight: bold;&quot;&gt;Email:&lt;/span&gt; sales@orientalsails.com 
+        ///  [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Feedback_Address_Phone_Email {
             get {
@@ -236,12 +237,12 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;p style=&quot;font-size: 14px; clear: both&quot;&gt;
+        ///   Looks up a localized string similar to  &lt;p style=&quot;font-size: 14px; clear: both&quot;&gt;
         ///                                    &lt;span style=&quot;font-weight: bold&quot;&gt;Dear Valued Customer, &lt;/span&gt;
         ///                                    &lt;br /&gt;
         ///                                    Thank you for choosing &lt;span style=&quot;font-weight: bold&quot;&gt;ORIENTAL SAILS&lt;/span&gt;. It is our great pleasure to provide you the best quality of service always.
         ///                                    &lt;br /&gt;
-        ///                                    Your assistance in completing this form is greatly appre [rest of string was truncated]&quot;;.
+        ///                                    Your assistance in completing this form is greatly appreciate [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Feedback_ThankYou {
             get {

@@ -24,5 +24,4 @@ using System.Security;
 [assembly: AssemblyVersionAttribute("1.0.0.0")]
 [assembly: AssemblyInformationalVersionAttribute("1.5.1.676")]
 [assembly: AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: AllowPartiallyTrustedCallersAttribute()]
 
