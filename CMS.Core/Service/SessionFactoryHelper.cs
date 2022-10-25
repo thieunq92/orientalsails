@@ -4,6 +4,7 @@ using System.Reflection;
 using NHibernate;
 using NHibernate.Cfg;
 using Castle.MicroKernel;
+using System.Security;
 
 namespace CMS.Core.Service
 {

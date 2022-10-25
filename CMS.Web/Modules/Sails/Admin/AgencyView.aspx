@@ -5,8 +5,6 @@
 <%@ Import Namespace="Portal.Modules.OrientalSails.Domain" %>
 <%@ Register Assembly="CMS.ServerControls" Namespace="CMS.ServerControls" TagPrefix="svc" %>
 <asp:Content ID="Head" ContentPlaceHolderID="Head" runat="server">
-    <link rel="stylesheet" type="text/css" href="/css/jqueryfileupload/v9.21.0/jquery.fileupload.css" />
-    <link rel="stylesheet" type="text/css" href="/css/jqueryfileupload/v9.21.0/jquery.fileupload-ui.css" />
 </asp:Content>
 <asp:Content ID="AdminContent" ContentPlaceHolderID="AdminContent" runat="server">
     <div class="wrapper">
@@ -235,6 +233,7 @@
                                     <% if (String.IsNullOrEmpty(litTax.Text))
                                         { %>
                                     none
+                                   
                                     <% } %>
                                 </div>
                             </div>
@@ -298,6 +297,7 @@
                         <asp:HyperLink runat="server" ID="hplBookingList" CssClass="btn btn-primary">Booking by agency</asp:HyperLink>
                         <div id="disableInform" style="display: none">
                             You don't have permission to use this function. If you want to use this function please contact administrator
+                       
                         </div>
                         <asp:HyperLink runat="server" ID="hplReceivable"
                             CssClass="btn btn-primary">Receivables (last 3 months)</asp:HyperLink>
@@ -524,14 +524,14 @@
                                             <%# ((DateTime?)Eval("QuotationValidToDate")) == null ? "" : ((DateTime?)Eval("QuotationValidToDate")).Value.ToString("dd/MM/yyyy") %>
                                         </td>
                                         <td class="--text-left">
-                                            <%# ((AgencyContract)Container.DataItem).ContractTemplateName %>
+                                            <%# ((AgencyContract)Container.DataItem).FileName %>
                                             <%# ((AgencyContract)Container.DataItem).QuotationTemplateName %>
                                         </td>
                                         <td></td>
                                         <td class="--text-left">
-                                            <asp:HyperLink runat="server" ID="hplDownload" ToolTip="Download"></asp:HyperLink>
-                                            <%--<asp:LinkButton runat="server" ID="lbtDownloadContract" Text="<%# ((AgencyContract)Container.DataItem).ContractTemplateName %>" CommandName="DownloadContract" CommandArgument="<%# ((AgencyContract)Container.DataItem).Id %>"></asp:LinkButton>
-                                            <asp:LinkButton runat="server" ID="lbtDownloadQuotation" Text="<%# ((AgencyContract)Container.DataItem).QuotationTemplateName %>" CommandName="DownloadQuotation" CommandArgument="<%# ((AgencyContract)Container.DataItem).Id %>"></asp:LinkButton>--%>
+                                            <asp:HyperLink runat="server" ID="hplDownload" ToolTip="Download" Visible="<%# ((AgencyContract)Container.DataItem).IsAgencyIssue %>"></asp:HyperLink>
+                                            <asp:LinkButton runat="server" ID="lbtDownloadContract" Visible="<%# !((AgencyContract)Container.DataItem).IsAgencyIssue %>" Text="<%# ((AgencyContract)Container.DataItem).FileName %>" CommandName="DownloadContract" CommandArgument="<%# ((AgencyContract)Container.DataItem).Id %>"></asp:LinkButton>
+                                           <%-- <asp:LinkButton runat="server" ID="lbtDownloadQuotation" Text="<%# ((AgencyContract)Container.DataItem).QuotationTemplateName %>" CommandName="DownloadQuotation" CommandArgument="<%# ((AgencyContract)Container.DataItem).Id %>"></asp:LinkButton>--%>
                                         </td>
                                     </tr>
                                 </ItemTemplate>
@@ -607,24 +607,12 @@
                                 <div class="col-xs-10 --no-padding-leftright">
                                     <div class="row">
                                         <div class="col-xs-12 --no-padding-leftright" style="margin-bottom: 10px">
-                                            <span class="btn btn-success fileinput-button">
-                                                <i class="glyphicon glyphicon-plus"></i>
-                                                <span>Add file</span>
-                                                <input id="btnFileUploadContract" name="file" multiple="" type="file">
-                                                <asp:HiddenField runat="server" ID="hifContractTemplatePath" />
-                                                <asp:HiddenField runat="server" ID="hifContractTemplateName" />
-                                            </span>
+
+                                            <asp:FileUpload ID="fileUploadContract" runat="server" />
+
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-xs-12 --no-padding-leftright">
-                                            <div class="progress">
-                                                <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
-                                                    <span class="sr-only"></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -742,12 +730,14 @@
                         <div class="row">
                             <div class="col-xs-2 --no-padding-leftright">
                                 Date meeting
+                           
                             </div>
                             <div class="col-xs-4 --no-padding-leftright">
                                 <asp:TextBox runat="server" ID="txtDateMeeting" CssClass="form-control" placeholder="Date meeting" data-control="datetimepicker" data-id="txtDateMeeting" />
                             </div>
                             <div class="col-xs-2 --no-padding-left --text-right">
                                 Type
+                           
                             </div>
                             <div class="col-xs-4 --no-padding-leftright">
                                 <asp:DropDownList runat="server" ID="ddlType" CssClass="form-control" data-id="ddlType">
@@ -761,6 +751,7 @@
                         <div class="row">
                             <div class="col-xs-2 --no-padding-leftright">
                                 Cruise
+                           
                             </div>
                             <div class="col-xs-4 --no-padding-leftright">
                                 <asp:DropDownList runat="server" ID="ddlCruise" AppendDataBoundItems="true" CssClass="form-control" data-id="ddlCruise">
@@ -772,23 +763,28 @@
                                     <legend class="--reset-this" style="line-height: 0">Problems</legend>
                                     <label for="<%= chkFood.ClientID %>" class="--text-normal">
                                         Food
-                                <asp:CheckBox runat="server" ID="chkFood" Text="" CssClass="checkbox-group__horizontal" data-id="chkFood"></asp:CheckBox>
+                               
+                                        <asp:CheckBox runat="server" ID="chkFood" Text="" CssClass="checkbox-group__horizontal" data-id="chkFood"></asp:CheckBox>
                                     </label>
                                     <label for="<%= chkCabin.ClientID %>" class="--text-normal">
                                         Cabin
-                                <asp:CheckBox runat="server" ID="chkCabin" Text="" CssClass="checkbox-group__horizontal" data-id="chkCabin"></asp:CheckBox>
+                               
+                                        <asp:CheckBox runat="server" ID="chkCabin" Text="" CssClass="checkbox-group__horizontal" data-id="chkCabin"></asp:CheckBox>
                                     </label>
                                     <label for="<%= chkGuide.ClientID %>" class="--text-normal">
                                         Guide
-                                <asp:CheckBox runat="server" ID="chkGuide" Text="" CssClass="checkbox-group__horizontal" data-id="chkGuide"></asp:CheckBox>
+                               
+                                        <asp:CheckBox runat="server" ID="chkGuide" Text="" CssClass="checkbox-group__horizontal" data-id="chkGuide"></asp:CheckBox>
                                     </label>
                                     <label for="<%= chkBus.ClientID %>" class="--text-normal">
                                         Bus
-                                <asp:CheckBox runat="server" ID="chkBus" Text="" CssClass="checkbox-group__horizontal" data-id="chkBus"></asp:CheckBox>
+                               
+                                        <asp:CheckBox runat="server" ID="chkBus" Text="" CssClass="checkbox-group__horizontal" data-id="chkBus"></asp:CheckBox>
                                     </label>
                                     <label for="<%= chkOthers.ClientID %>" class="--text-normal">
                                         Others
-                                <asp:CheckBox runat="server" ID="chkOthers" Text="" CssClass="checkbox-group__horizontal" data-id="chkOthers"></asp:CheckBox>
+                               
+                                        <asp:CheckBox runat="server" ID="chkOthers" Text="" CssClass="checkbox-group__horizontal" data-id="chkOthers"></asp:CheckBox>
                                     </label>
                                 </fieldset>
                             </div>
@@ -798,6 +794,7 @@
                         <div class="row">
                             <div class="col-xs-2 --no-padding-leftright">
                                 Note
+                           
                             </div>
                             <div class="col-xs-10 --no-padding-leftright">
                                 <asp:TextBox runat="server" ID="txtNote" CssClass="form-control" TextMode="MultiLine" Rows="12" placeholder="Note" Text="" data-id="txtNote" />
@@ -808,6 +805,7 @@
                         <div class="row">
                             <div class="col-xs-2 --no-padding-leftright">
                                 Attachment
+                           
                             </div>
                             <div class="col-xs-10 --no-padding-leftright">
                                 <asp:FileUpload runat="server" ID="fuAttachment"></asp:FileUpload>
@@ -845,6 +843,7 @@
                             </div>
                             <div class="col-xs-2 --no-padding-leftright">
                                 For role
+                           
                             </div>
                             <div class="col-xs-10 --no-padding-leftright --width-auto">
                                 <asp:DropDownList ID="ddlAgencyNotesRole" runat="server" CssClass="form-control" AppendDataBoundItems="true" data-id="ddlAgencyNotesRole">
@@ -857,6 +856,7 @@
                         <div class="row">
                             <div class="col-xs-2 --no-padding-leftright">
                                 Note
+                           
                             </div>
                             <div class="col-xs-10 --no-padding-leftright">
                                 <asp:TextBox runat="server" ID="txtAgencyNotesNote" CssClass="form-control" TextMode="MultiLine" Rows="12" placeholder="Note" Text="" data-id="txtAgencyNotesNote" />
@@ -888,19 +888,19 @@
             $("#aspnetForm").validate({
                 rules: {
                     <%= txtContractValidFromDate.UniqueID%>: "required",
-                    <%= txtContractValidToDate.UniqueID%>:"required",
+                    <%= txtContractValidToDate.UniqueID%>: "required",
                     <%--              <%= txtQuotationValidFromDate.UniqueID%>:"required",
                     <%= txtQuotationValidToDate.UniqueID%>:"required",--%>
-                    <%= txtDateMeeting.UniqueID%>:"required",
-                    <%= txtNote.UniqueID%>:"required",
+                    <%= txtDateMeeting.UniqueID%>: "required",
+                    <%= txtNote.UniqueID%>: "required",
                 },
                 messages: {
                     <%= txtContractValidFromDate.UniqueID%>: "Yêu cầu chọn ngày valid from",
-                    <%= txtContractValidToDate.UniqueID%>:"Yêu cầu chọn ngày valid to",
+                    <%= txtContractValidToDate.UniqueID%>: "Yêu cầu chọn ngày valid to",
                     <%--<%= txtQuotationValidFromDate.UniqueID%>:"Yêu cầu chọn ngày valid from",
                     <%= txtQuotationValidToDate.UniqueID%>:"Yêu cầu chọn ngày valid to",--%>
-                    <%= txtDateMeeting.UniqueID%>:"Yêu cầu chọn ngày",
-                    <%= txtNote.UniqueID%>:"Yêu cầu điền Note",
+                    <%= txtDateMeeting.UniqueID%>: "Yêu cầu chọn ngày",
+                    <%= txtNote.UniqueID%>: "Yêu cầu điền Note",
                 },
                 errorElement: "em",
                 errorPlacement: function (error, element) {
@@ -950,7 +950,7 @@
         }
     </script>
     <script>
-        function clearFormAgencyNotes(){
+        function clearFormAgencyNotes() {
             clearForm($('#addNoteModal .modal-content'));
         }
         function issueQuotation(agencyIssueId) {

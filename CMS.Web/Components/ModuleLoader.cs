@@ -15,12 +15,16 @@ using CMS.Core.Service;
 using CMS.Core.Service.SiteStructure;
 using CMS.Web.Util;
 using log4net;
+using System.Security;
 
 namespace CMS.Web.Components
 {
     /// <summary>
     /// Responsible for loading module assemblies and registering these in the application.
     /// </summary>
+    /// 
+
+    
     public class ModuleLoader
     {
         private static ILog log = LogManager.GetLogger(typeof(ModuleLoader));

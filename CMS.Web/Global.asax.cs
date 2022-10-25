@@ -33,10 +33,6 @@ namespace CMS.Web
 
         protected void Application_Start(Object sender, EventArgs e)
         {
-            HttpConfiguration config = GlobalConfiguration.Configuration;
-            config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize;
-            config.Formatters.JsonFormatter.SerializerSettings.PreserveReferencesHandling
-                 = Newtonsoft.Json.PreserveReferencesHandling.Objects;
             // Initialize Cuyahoga environment
             SpreadsheetInfo.SetLicense("ETZX-IT28-33Q6-1HA2");
 
