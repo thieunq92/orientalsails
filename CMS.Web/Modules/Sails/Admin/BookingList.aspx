@@ -7,12 +7,14 @@
         <div class="row">
             <div class="col-xs-1">
                 Booking code
+           
             </div>
             <div class="col-xs-4">
                 <asp:TextBox ID="txtBookingId" runat="server" CssClass="form-control --width-auto" placeholder="Booking code"></asp:TextBox>
             </div>
             <div class="col-xs-1 --no-padding-right">
                 Customer name
+           
             </div>
             <div class="col-xs-4">
                 <asp:TextBox ID="txtCustomerName" runat="server" CssClass="form-control --width-auto" placeholder="Customer name"></asp:TextBox>
@@ -23,6 +25,7 @@
         <div class="row">
             <div class="col-xs-1">
                 Trip
+           
             </div>
             <div class="col-xs-4">
                 <asp:DropDownList ID="ddlTrip" runat="server" CssClass="form-control">
@@ -30,6 +33,7 @@
             </div>
             <div class="col-xs-1">
                 Start date
+           
             </div>
             <div class="col-xs-4">
                 <asp:TextBox ID="txtStartDate" runat="server" CssClass="form-control --width-auto" placeholder="Start date (dd/mm/yyyy)" data-control="datetimepicker"></asp:TextBox>
@@ -40,6 +44,7 @@
         <div class="row">
             <div class="col-xs-1">
                 Cruise
+           
             </div>
             <div class="col-xs-4">
                 <asp:DropDownList ID="ddlCruises" runat="server" CssClass="form-control --width-auto">
@@ -51,6 +56,7 @@
         <div class="row">
             <div class="col-xs-1 --no-padding-right">
                 Booking status
+           
             </div>
             <div class="col-xs-5">
                 <div class="btn-group" role="group" aria-label="...">
@@ -90,17 +96,20 @@
                             </th>
                             <th>Customer Name
                             </th>
+                            <% if (CanViewTotal)
+                                { %>
                             <th>Partner
                             </th>
                             <th>TA Code
                             </th>
+                            <%} %>
                             <th>Status
                             </th>
                             <th>Last Edit
                             </th>
                             <th>Start Date
                             </th>
-                            <th style="width:4%">Action
+                            <th style="width: 4%">Action
                             </th>
                         </tr>
                         <asp:Repeater ID="rptBookingList" runat="server" OnItemDataBound="rptBookingList_ItemDataBound">
@@ -122,12 +131,14 @@
                                     <td>
                                         <asp:Literal ID="ltrCustomerName" runat="server"></asp:Literal>
                                     </td>
-                                    <td>
+
+                                    <td id="tdAgencyName">
                                         <%# Eval("Agency.Name") %>
                                     </td>
-                                    <td>
+                                    <td id="tdAgencyCode">
                                         <%#Eval("AgencyCode") %>
                                     </td>
+
                                     <td>
                                         <%#Eval("Status").ToString()%>
                                     </td>

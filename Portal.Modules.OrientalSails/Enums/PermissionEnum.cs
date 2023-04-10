@@ -77,5 +77,9 @@ namespace Portal.Modules.OrientalSails.Enums
         FORM_HAIPHONGEXPENSEREPORT = 83,
         FORM_QUESTIONGROUPEDIT = 84,
         FORM_QUESTIONVIEW = 85,
+        FORM_KEEPROOMCONFIG = 88,
+        FORM_KEEPROOMSTATUS = 89,
+        SPECIALREQUEST_ROOM = 90,
+        SPECIALREQUEST_FOOD = 91
     }
 }

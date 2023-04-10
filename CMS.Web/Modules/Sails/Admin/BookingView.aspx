@@ -12,7 +12,7 @@
     <div class="row">
         <div class="col-md-12">
             <% if (UserIdentity.UserName != "captain.os1")
-               { %>
+                { %>
             <asp:Button ID="buttonSubmit" runat="server" CssClass="btn btn-primary" OnClientClick="screenCapture.capture();return false" disabled="disabled" />
             <asp:Button ID="button1" runat="server" CssClass="btn btn-primary hidden" OnClick="buttonSubmit_Click" />
             <a href="SendEmail.aspx?NodeId=1&SectionId=15&BookingId=<%= Booking.Id %>" class="btn btn-primary" id="sendemail">SendEmail</a>
@@ -26,6 +26,7 @@
             <div class="row">
                 <div class="col-xs-1 ">
                     Booking code
+               
                 </div>
                 <div class="col-xs-1">
                     <asp:Label ID="lblBookingId" runat="server"></asp:Label>
@@ -34,6 +35,7 @@
                     <div class="checkbox">
                         <label>
                             <input type="checkbox" id="chkInspection" runat="server">Inspection
+                       
                         </label>
                     </div>
                 </div>
@@ -43,6 +45,7 @@
                             <div class="checkbox">
                                 <label>
                                     <input type="checkbox" id="chkCharter" runat="server" onserverchange="chkCharter_OnCheckedChanged" onclick="submit()">Charter
+                               
                                 </label>
                             </div>
                         </ContentTemplate>
@@ -50,6 +53,7 @@
                 </div>
                 <div class="col-xs-1 --no-padding-left">
                     Trip
+               
                 </div>
                 <div class="col-xs-2">
                     <asp:PlaceHolder runat="server" ID="plhTripReadonly" Visible="false">
@@ -64,12 +68,13 @@
                 </div>
                 <div class="col-xs-1 --no-padding-left">
                     <% if (UserIdentity.UserName != "captain.os1")
-                       { %>
+                        { %>
                     <button class="btn btn-success" onclick="return changeTrip()">Change trip</button>
                     <%} %>
                 </div>
                 <div class="col-xs-1 --text-right">
                     Cruise
+               
                 </div>
                 <div class="col-xs-2 --no-padding-left">
                     <asp:DropDownList ID="ddlCruises" Enabled="False" runat="server" CssClass="form-control">
@@ -77,7 +82,7 @@
                 </div>
                 <div class="col-xs-1 --no-padding-left">
                     <% if (UserIdentity.UserName != "captain.os1")
-                       { %>
+                        { %>
                     <%--                <a href="RoomSelector.aspx?NodeId=1&SectionId=15&bookingid=<%= Booking.Id %>" class="btn btn-primary" id="roomorganizer">Room Organizer</a>--%>
                     <button class="btn btn-success" onclick="return changeBoat()">Change boat</button>
                     <%} %>
@@ -94,6 +99,7 @@
                 </div>
                 <div class="col-xs-1 --no-padding-left">
                     Status
+               
                 </div>
                 <div class="col-xs-2">
                     <asp:DropDownList ID="ddlStatusType" runat="server" CssClass="form-control">
@@ -108,6 +114,7 @@
                 </div>
                 <div class="col-xs-1 nopadding-right --no-padding-left">
                     Number Of Pax
+               
                 </div>
                 <div class="col-xs-1 nopadding-left nopadding-right" style="width: 3%">
                     <asp:Literal ID="litPax" runat="server"></asp:Literal>
@@ -115,6 +122,7 @@
                 </div>
                 <div class="col-xs-1 nopadding-left nopadding-right">
                     Number Of Cabin
+               
                 </div>
                 <div class="col-xs-1 nopadding-left nopadding-right" style="width: 3%">
                     <asp:Literal ID="litCabins" runat="server"></asp:Literal>
@@ -159,7 +167,7 @@
                 </div>
                 <div class="col-xs-2 nopadding-left --width-auto">
                     <% if (UserIdentity.UserName != "captain.os1")
-                       { %>
+                        { %>
                     <asp:Button ID="lbtCalculate" CssClass="btn btn-primary" runat="server" OnClick="lbtCalculate_Click" Text="Calculate"
                         Style="width: auto"></asp:Button>
                     <asp:Button runat="server" ID="btnLockIncome" CssClass="btn btn-primary" Visible="false" Text="Lock this booking"
@@ -168,7 +176,7 @@
                         Text="Unlock" OnClick="btnUnlockIncome_Click" />
                     <i class="fa fa-info-circle fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="<%= UserGetUserLockIncomeDetails() %>"></i>
                     <% 
-                       }%>
+                        }%>
                 </div>
                 <div class="col-xs-5 nopadding-left">
                     <div class="checkbox">
@@ -179,9 +187,11 @@
                         <label class="checkbox-inline">
                             <input id="chkIsPaymentNeeded" runat="server" type="checkbox" />
                             Pay Before Tour
+                       
                         </label>
                         <label class="checkbox-inline">
                             <input runat="server" id="chkEarlyBird" type="checkbox" />Early Bird
+                       
                         </label>
                     </div>
                 </div>
@@ -218,13 +228,14 @@
             <div class="row">
                 <div class="col-xs-1 --no-padding-right">
                     Voucher Code
+               
                 </div>
                 <div class="col-xs-4 nopadding-right">
                     <div class="input-group" style="width: 97%">
                         <asp:TextBox ID="txtAllVoucher" placeholder="Voucher code" runat="server" CssClass="form-control"></asp:TextBox>
                         <span class="input-group-btn">
                             <% if (UserIdentity.UserName != "captain.os1")
-                               { %>
+                                { %>
                             <input type="button" class="btn btn-primary" value="Check Code" id="checkvoucher" style="height: 25px" />
                             <%} %>
                         </span>
@@ -259,6 +270,7 @@
                     <div class="row">
                         <div class="col-xs-1 nopadding-right --width-auto">
                             Bus type
+                       
                         </div>
                         <div class="col-xs-2" style="margin-top: -8px; width: 10%">
                             <asp:Repeater ID="rptBusType" runat="server">
@@ -277,6 +289,7 @@
                         </div>
                         <div class="col-xs-2 nopadding-right" style="width: 6%">
                             Service
+                       
                         </div>
                         <div class="col-xs-2 --width-auto" style="margin-top: -8px">
                             <div class="radio">
@@ -297,6 +310,7 @@
                                 <div class="row">
                                     <div class="col-xs-4">
                                         Date to
+                                   
                                     </div>
                                     <div class="col-xs-8">
                                         <asp:TextBox ID="txtTransfer_Dateto" CssClass="form-control"
@@ -309,6 +323,7 @@
                                 <div class="row">
                                     <div class="col-xs-4">
                                         Date back
+                                   
                                     </div>
                                     <div class="col-xs-8">
                                         <asp:TextBox ID="txtTransfer_Dateback" CssClass="form-control"
@@ -318,11 +333,12 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xs-1 nopadding-right" style="width: 3%">
-                            Note
+                        <div class="col-xs-1 nopadding-right" style="width: 10%">
+                            Special Request Transfer
+                       
                         </div>
                         <div class="col-xs-5 --no-padding-right" style="width: 32.8%">
-                            <asp:TextBox ID="txtTransfer_Note" CssClass="form-control" runat="server" placeholder="Note"
+                            <asp:TextBox ID="txtTransfer_Note" CssClass="form-control" runat="server" placeholder="Special Request Transfer"
                                 TextMode="MultiLine"></asp:TextBox>
                         </div>
                     </div>
@@ -340,18 +356,30 @@
             <div class="col-xs-3">
                 <label for="pickupaddress">
                     Pickup Address
+               
                 </label>
             </div>
             <div class="col-xs-1">
                 <label for="pickupaddress">
                     Pickup time
+               
                 </label>
             </div>
+            <%if (CanViewSpecialRequestFood)
+                { %>
             <div class="col-xs-4 --no-padding-left">
-                Special Request
+                Special Request Food
             </div>
+            <% } %>
+            <%if (CanViewSpecialRequestRoom)
+                { %>
             <div class="col-xs-4 --no-padding-left">
+                Special Request Room
+            </div>
+            <% } %>
+            <div class="col-xs-4 --no-padding-left" style="display: none">
                 Customer Info              
+           
             </div>
         </div>
         <div class="row">
@@ -361,18 +389,27 @@
             <div class="col-xs-1">
                 <asp:TextBox ID="txtPickupTime" runat="server" CssClass="form-control" autocomplete="off" placeholder="(hh:mm)" data-control="timepicker"></asp:TextBox>
             </div>
+            <%if (CanViewSpecialRequestFood)
+                { %>
             <div class="col-xs-4 --no-padding-left">
-                <asp:TextBox ID="txtSpecialRequest" runat="server" CssClass="form-control" TextMode="MultiLine" placeholder="Special Request"></asp:TextBox>
+                <asp:TextBox ID="txtSpecialRequest" runat="server" CssClass="form-control" TextMode="MultiLine" placeholder="Special Request Food"></asp:TextBox>
             </div>
+            <% }%>
+            <%if (CanViewSpecialRequestRoom)
+                { %>
             <div class="col-xs-4 --no-padding-left">
-                <asp:TextBox ID="txtCustomerInfo" runat="server" CssClass="form-control" TextMode="MultiLine" placeholder="Customer Info"></asp:TextBox>
+                <asp:TextBox ID="txtSpecialRequestRoom" runat="server" CssClass="form-control" TextMode="MultiLine" placeholder="Special Request Room"></asp:TextBox>
+            </div>
+            <% }%>
+            <div class="col-xs-4 --no-padding-left">
+                <asp:TextBox ID="txtCustomerInfo" runat="server" CssClass="form-control" TextMode="MultiLine" placeholder="Customer Info" Visible="false"></asp:TextBox>
             </div>
         </div>
         <br />
         <div class="row">
             <div class="col-xs-12">
                 <% if (UserIdentity.UserName != "captain.os1")
-                   { %>
+                    { %>
                 <%--                <a href="RoomSelector.aspx?NodeId=1&SectionId=15&bookingid=<%= Booking.Id %>" class="btn btn-primary" id="roomorganizer">Room Organizer</a>--%>
                 <asp:Button ID="btnAddRoom" runat="server" Text="Add Room"
                     CssClass="btn btn-primary" />
@@ -440,7 +477,7 @@
                             </div>
                             <div class="col-xs-2">
                                 <% if (UserIdentity.UserName != "captain.os1")
-                                   { %>
+                                    { %>
                                 <asp:Button ID="btnDelete" runat="server" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "Id") %>'
                                     CommandName="delete" CssClass="btn btn-primary" Text="Delete this room" OnClientClick="return confirm('All unsaved customer data (included another rooms in this book) will be lost forever. Are you sure want to delete this room?')" />
                                 <%} %>
@@ -527,7 +564,7 @@
         </div>
     </div>
     <% if (UserIdentity.UserName != "captain.os1")
-       { %>
+        { %>
     <asp:PlaceHolder ID="plhAddRoom" runat="server">
         <div class="row">
             <div class="col-xs-12">
@@ -558,32 +595,32 @@
         $(function () {
             $(function () {
                 $("#<%= txtPickupTime.ClientID%>").datetimepicker({
-                    datepicker:false,    
+                    datepicker: false,
                     timepicker: true,
                     format: 'H:i',
-                    scrollInput:false,
-                    scrollMonth:false
-                });                
+                    scrollInput: false,
+                    scrollMonth: false
+                });
             })
             $("#<%= txtStartDate.ClientID%>").datetimepicker({
                 timepicker: false,
                 format: 'd/m/Y',
-                scrollInput:false,
-                scrollMonth:false
+                scrollInput: false,
+                scrollMonth: false
             });
 
             $("#<%= txtDeadline.ClientID%>").datetimepicker({
                 format: 'd/m/Y H:i',
-                scrollImput:false,
-                scrollMonth:false
+                scrollImput: false,
+                scrollMonth: false
             });
         })
     </script>
     <script type="text/javascript">  
         $(function () {
             //workaround datetimepicker do not show date table when off mousedown and focusin and blank input value
-            $("[data-control = 'datepicker']").each(function(i,e){
-                if($(e).val()==""){
+            $("[data-control = 'datepicker']").each(function (i, e) {
+                if ($(e).val() == "") {
                     $(e).val("workaround");
                 }
             })
@@ -591,12 +628,12 @@
             $("[data-control = 'datepicker']").datetimepicker({
                 timepicker: false,
                 format: 'd/m/Y',
-                scrollInput:false,
-                scrollMonth:false,
+                scrollInput: false,
+                scrollMonth: false,
             })
 
-            $("[data-control = 'datepicker']").each(function(i,e){
-                if($(e).val()=="workaround"){
+            $("[data-control = 'datepicker']").each(function (i, e) {
+                if ($(e).val() == "workaround") {
                     $(e).val("");
                 }
             })
@@ -604,7 +641,7 @@
             $("[data-control = 'datepicker']").off("mousedown");
             $("[data-control = 'datepicker']").off("focusin");
 
-            $(".fa-calendar").click(function(){
+            $(".fa-calendar").click(function () {
                 $(this).siblings("input").datetimepicker("show");
             })
         });
@@ -614,13 +651,13 @@
     <script>
         DropdownOptionSetVisible();
         $("#<%=ddlTrips.ClientID%>").change(DropdownOptionSetVisible);
-        
-        function DropdownOptionSetVisible(){
+
+        function DropdownOptionSetVisible() {
             $("#<%=ddlOptions.ClientID%>").hide();
-            if($("#<%=ddlTrips.ClientID%> option:selected").attr("data-option-visible") == "true"){
+            if ($("#<%=ddlTrips.ClientID%> option:selected").attr("data-option-visible") == "true") {
                 $("#<%=ddlOptions.ClientID%>").show();
             }
-          
+
         }
     </script>
 
@@ -628,9 +665,9 @@
         TACodeSetVisible();
         $("#<%=ddlAgencies.ClientID%>").change(TACodeSetVisible);
 
-        function TACodeSetVisible(){
+        function TACodeSetVisible() {
             $("#<%=txtAgencyCode.ClientID%>").hide();
-            if(!$("#<%=ddlAgencies.ClientID%> option:selected").is($("#<%=ddlAgencies.ClientID%> option:first-child"))){
+            if (!$("#<%=ddlAgencies.ClientID%> option:selected").is($("#<%=ddlAgencies.ClientID%> option:first-child"))) {
                 $("#<%=txtAgencyCode.ClientID%>").show();
             }
         }
@@ -646,16 +683,16 @@
         }
     </script>
     <script>
-        function CheckVoucher() { 
+        function CheckVoucher() {
             PopupCenter(url, 'Check Voucher', 400, 600);
         }
     </script>
     <script>
-        function statusInforShow(){
+        function statusInforShow() {
             var txtCutOffDays = $("#<%= txtCutOffDays.ClientID%>");
             var txtDeadline = $("#<%= txtDeadline.ClientID%>");
             var txtCancelledReason = $("#<%= txtCancelledReason.ClientID%>");
-            var selectedStatus =  $("#<%= ddlStatusType.ClientID%> option:selected");
+            var selectedStatus = $("#<%= ddlStatusType.ClientID%> option:selected");
 
             if (selectedStatus.html() === "Pending") {
                 txtDeadline.show();
@@ -678,9 +715,9 @@
                 txtCancelledReason.hide();
             }
         }
-   
+
         statusInforShow();
-        $("#<%= ddlStatusType.ClientID%>").change(statusInforShow);   
+        $("#<%= ddlStatusType.ClientID%>").change(statusInforShow);
     </script>
 
     <script>
@@ -812,13 +849,13 @@
             height: 600,
         });
 
-        if(getParameterValues("confirm") == 1){
+        if (getParameterValues("confirm") == 1) {
             $("#sendemail").colorbox({
                 iframe: true,
                 width: 1200,
                 height: 600,
-                open:true
-            });    
+                open: true
+            });
         }
     </script>
     <script>
@@ -830,28 +867,28 @@
     </script>
     <script>
         AgencyDropdownlistFillTitle();
-        $("#<%=ddlAgencies.ClientID%>").change(function(){
+        $("#<%=ddlAgencies.ClientID%>").change(function () {
             AgencyDropdownlistFillTitle();
-        }); 
-        function AgencyDropdownlistFillTitle(){
+        });
+        function AgencyDropdownlistFillTitle() {
             $("#<%=ddlAgencies.ClientID%>").attr("title", $("#<%=ddlAgencies.ClientID%> option:selected").html());
         }
     </script>
     <script>
-        $("#checkvoucher").click(function(){
+        $("#checkvoucher").click(function () {
             var code = document.getElementById('<%= txtAllVoucher.ClientID %>').value;
             var url = 'CheckVoucher.aspx?NodeId=1&SectionId=15&code=' + code + '&bookingid=' + <%= Request.QueryString["bi"] %>;
             $.colorbox({
-                href:url,
-                iframe:true,
-                width:1200,
-                height:600,
+                href: url,
+                iframe: true,
+                width: 1200,
+                height: 600,
             })
         });
     </script>
     <script type="text/javascript">
         var screenCapture = {
-            capture : function(){
+            capture: function () {
          <%--       var allow = 0;
                 $("body").find("div:hidden").remove();
                 html2canvas(document.querySelector("body")).then(canvas => {
@@ -868,27 +905,27 @@
             }
         }
     </script>
-    
+
     <script>
-        $(document).ready(function(){
+        $(document).ready(function () {
             $("<%= buttonSubmit.ClientID %>").removeAttr("disabled");
         })
     </script>
     <script>
-        $(document).ready(function(){
+        $(document).ready(function () {
             var $controllerTransferServiceScope = angular.element(document.querySelector("[ng-controller='controllerTransferService']")).scope();
-            $controllerTransferServiceScope.Transfers=Transfers;
-        })    
+            $controllerTransferServiceScope.Transfers = Transfers;
+        })
     </script>
     <script>
-        $(document).ready(function(){
+        $(document).ready(function () {
             var $controllerTransferServiceScope = angular.element(document.querySelector("[ng-controller='controllerTransferService']")).scope();
-            $controllerTransferServiceScope.addServiceWatch = function(control){
-                $controllerTransferServiceScope.$watch('transfer_Service',function(){
-                    if($controllerTransferServiceScope.transfer_Service == "rbtTransferService_TwoWay"){
+            $controllerTransferServiceScope.addServiceWatch = function (control) {
+                $controllerTransferServiceScope.$watch('transfer_Service', function () {
+                    if ($controllerTransferServiceScope.transfer_Service == "rbtTransferService_TwoWay") {
                         $controllerTransferServiceScope.transfer_DateTo = "<%= Booking.StartDate.ToString("dd/MM/yyyy")%>";
                         $controllerTransferServiceScope.transfer_DateBack = "<%= Booking.EndDate.ToString("dd/MM/yyyy")%>";
-                    }else if($controllerTransferServiceScope.transfer_Service == "rbtTransferService_OneWay"){
+                    } else if ($controllerTransferServiceScope.transfer_Service == "rbtTransferService_OneWay") {
                         $controllerTransferServiceScope.transfer_DateTo = "<%= Booking.Transfer_DateTo.HasValue 
     ? Booking.Transfer_DateTo.Value.ToString("dd/MM/yyyy"): Booking.StartDate.ToString("dd/MM/yyyy")%>";
                         $controllerTransferServiceScope.transfer_DateBack = "";
@@ -897,49 +934,51 @@
                 angular.element(document.querySelector("[ng-controller='controllerTransferService']")).scope().$apply();
             }
             $("#<%= rbtTransferService_OneWay.ClientID %>")
-                .attr({"ng-model":"transfer_Service"}).change(function(){
+                .attr({ "ng-model": "transfer_Service" }).change(function () {
                     angular.element(document.querySelector("[ng-controller='controllerTransferService']")).scope().addServiceWatch(this);
                 });
             $("#<%= rbtTransferService_TwoWay.ClientID %>")
-                .attr({"ng-model":"transfer_Service","ng-init":"transfer_Service='"
-                    +
+                .attr({
+                    "ng-model": "transfer_Service", "ng-init": "transfer_Service='"
+                        +
                     "<%= String.IsNullOrEmpty(Booking.Transfer_Service) 
     ? "rbtTransferService_TwoWay" : (Booking.Transfer_Service == "Two Way" 
     ? "rbtTransferService_TwoWay" : "rbtTransferService_OneWay")%>"
-                    +"'"}).change(function(){
-                        angular.element(document.querySelector("[ng-controller='controllerTransferService']")).scope().addServiceWatch(this);
-                    });
-            angular.element(document.querySelector("[ng-controller='controllerTransferService']")).injector().invoke(function($rootScope, $compile) {
+                        + "'"
+                }).change(function () {
+                    angular.element(document.querySelector("[ng-controller='controllerTransferService']")).scope().addServiceWatch(this);
+                });
+            angular.element(document.querySelector("[ng-controller='controllerTransferService']")).injector().invoke(function ($rootScope, $compile) {
                 $compile(document.getElementById("<%= rbtTransferService_OneWay.ClientID %>"))($rootScope);
                 $compile(document.getElementById("<%= rbtTransferService_TwoWay.ClientID %>"))($rootScope);
             });
         })
     </script>
     <script>
-        $(document).ready(function(){   
+        $(document).ready(function () {
             var $controllerTransferServiceScope = angular.element(document.querySelector("[ng-controller='controllerTransferService']")).scope();
-            function LoadTransferDate(){
-                if($controllerTransferServiceScope.transfer_Service == "rbtTransferService_TwoWay"){
+            function LoadTransferDate() {
+                if ($controllerTransferServiceScope.transfer_Service == "rbtTransferService_TwoWay") {
                     $controllerTransferServiceScope.transfer_DateTo = "<%= Booking.Transfer_DateTo.HasValue 
     ? Booking.Transfer_DateTo.Value.ToString("dd/MM/yyyy"): Booking.StartDate.ToString("dd/MM/yyyy")%>";
                     $controllerTransferServiceScope.transfer_DateBack = "<%= Booking.Transfer_DateBack.HasValue 
     ? Booking.Transfer_DateBack.Value.ToString("dd/MM/yyyy") : Booking.EndDate.ToString("dd/MM/yyyy")%>";
-                }else
-                    if($controllerTransferServiceScope.transfer_Service == "rbtTransferService_OneWay"){
+                } else
+                    if ($controllerTransferServiceScope.transfer_Service == "rbtTransferService_OneWay") {
                         $controllerTransferServiceScope.transfer_DateTo = "<%= Booking.Transfer_DateTo.HasValue 
     ? Booking.Transfer_DateTo.Value.ToString("dd/MM/yyyy"): ""%>";
                         $controllerTransferServiceScope.transfer_DateBack = "<%= Booking.Transfer_DateBack.HasValue 
     ? Booking.Transfer_DateBack.Value.ToString("dd/MM/yyyy") : ""%>";
-                    }  
+                    }
             }
-        
-            $controllerTransferServiceScope.transferDateBackChangedHandler = function(){
-                if($controllerTransferServiceScope.transfer_Service == "rbtTransferService_OneWay"){
+
+            $controllerTransferServiceScope.transferDateBackChangedHandler = function () {
+                if ($controllerTransferServiceScope.transfer_Service == "rbtTransferService_OneWay") {
                     $controllerTransferServiceScope.transfer_DateTo = "";
                 }
             };
-            $controllerTransferServiceScope.transferDateToChangedHandler = function(){
-                if($controllerTransferServiceScope.transfer_Service == "rbtTransferService_OneWay"){
+            $controllerTransferServiceScope.transferDateToChangedHandler = function () {
+                if ($controllerTransferServiceScope.transfer_Service == "rbtTransferService_OneWay") {
                     $controllerTransferServiceScope.transfer_DateBack = "";
                 }
             };
@@ -948,22 +987,22 @@
         })
     </script>
     <script>
-        $(document).ready(function(){
+        $(document).ready(function () {
             $("#<%=buttonSubmit.ClientID%>").removeAttr("disabled");
         })
         function closePoup(refesh) {
             $("#addBookingModal").modal('hide');
-            if (refesh===1) {
+            if (refesh === 1) {
                 window.location.href = window.location.href;
             }
         }
-        function editRoom(bookingId,roomId) {
-            var src = "/Modules/Sails/Admin/HomeChangeRoom.aspx?NodeId=1&SectionId=15&roomId=" + roomId + "&bookingId=" + bookingId + "&tripId="+$("#<%=ddlTrips.ClientID%>").val();
+        function editRoom(bookingId, roomId) {
+            var src = "/Modules/Sails/Admin/HomeChangeRoom.aspx?NodeId=1&SectionId=15&roomId=" + roomId + "&bookingId=" + bookingId + "&tripId=" + $("#<%=ddlTrips.ClientID%>").val();
             $("#addBookingModal iframe").attr('src', src);
             $("#addBookingModal").modal();
         }
-        function selectRoom(bookingId,bkroomId) {
-            var src = "/Modules/Sails/Admin/HomeChangeRoom.aspx?NodeId=1&SectionId=15&bookingRoomId=" + bkroomId + "&bookingId=" + bookingId + "&tripId="+$("#<%=ddlTrips.ClientID%>").val();
+        function selectRoom(bookingId, bkroomId) {
+            var src = "/Modules/Sails/Admin/HomeChangeRoom.aspx?NodeId=1&SectionId=15&bookingRoomId=" + bkroomId + "&bookingId=" + bookingId + "&tripId=" + $("#<%=ddlTrips.ClientID%>").val();
             $("#addBookingModal iframe").attr('src', src);
             $("#addBookingModal").modal();
         }
@@ -989,15 +1028,15 @@
             return false;
         }
         function addRoom(bookingId) {
-            var src = "/Modules/Sails/Admin/BookingAddRoom.aspx?NodeId=1&SectionId=15&addBooking=1&bookingId=" + bookingId ;
+            var src = "/Modules/Sails/Admin/BookingAddRoom.aspx?NodeId=1&SectionId=15&addBooking=1&bookingId=" + bookingId;
             $("#addBookingModal iframe").attr('src', src);
             $("#addBookingModal").modal();
             return false;
         }
     </script>
     <script>
-        $("#addBookingModal").on('shown.bs.modal', function(){
-            $(this).css('padding-right',0);
+        $("#addBookingModal").on('shown.bs.modal', function () {
+            $(this).css('padding-right', 0);
         });
     </script>
 </asp:Content>

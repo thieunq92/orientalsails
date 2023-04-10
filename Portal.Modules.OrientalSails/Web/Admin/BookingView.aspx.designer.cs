@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Portal.Modules.OrientalSails.Web.Admin {
-    
-    
-    public partial class BookingView {
-        
+namespace Portal.Modules.OrientalSails.Web.Admin
+{
+
+
+    public partial class BookingView
+    {
+
         /// <summary>
         /// buttonSubmit control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button buttonSubmit;
-        
+
         /// <summary>
         /// button1 control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button button1;
-        
+
         /// <summary>
         /// lblBookingId control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblBookingId;
-        
+
         /// <summary>
         /// chkInspection control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox chkInspection;
-        
+
         /// <summary>
         /// chkCharter control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox chkCharter;
-        
+
         /// <summary>
         /// plhTripReadonly control.
         /// </summary>
@@ -65,7 +67,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.PlaceHolder plhTripReadonly;
-        
+
         /// <summary>
         /// litTrip control.
         /// </summary>
@@ -74,7 +76,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal litTrip;
-        
+
         /// <summary>
         /// ddlTrips control.
         /// </summary>
@@ -83,7 +85,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlTrips;
-        
+
         /// <summary>
         /// ddlOptions control.
         /// </summary>
@@ -92,7 +94,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlOptions;
-        
+
         /// <summary>
         /// ddlCruises control.
         /// </summary>
@@ -101,7 +103,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlCruises;
-        
+
         /// <summary>
         /// txtStartDate control.
         /// </summary>
@@ -110,7 +112,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtStartDate;
-        
+
         /// <summary>
         /// ddlStatusType control.
         /// </summary>
@@ -119,7 +121,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlStatusType;
-        
+
         /// <summary>
         /// txtDeadline control.
         /// </summary>
@@ -128,7 +130,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDeadline;
-        
+
         /// <summary>
         /// txtCutOffDays control.
         /// </summary>
@@ -137,7 +139,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtCutOffDays;
-        
+
         /// <summary>
         /// txtCancelledReason control.
         /// </summary>
@@ -146,7 +148,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtCancelledReason;
-        
+
         /// <summary>
         /// litPax control.
         /// </summary>
@@ -155,7 +157,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal litPax;
-        
+
         /// <summary>
         /// litCabins control.
         /// </summary>
@@ -164,7 +166,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal litCabins;
-        
+
         /// <summary>
         /// ddlAgencies control.
         /// </summary>
@@ -173,7 +175,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlAgencies;
-        
+
         /// <summary>
         /// txtAgencyCode control.
         /// </summary>
@@ -182,7 +184,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtAgencyCode;
-        
+
         /// <summary>
         /// txtSeriesCode control.
         /// </summary>
@@ -191,7 +193,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtSeriesCode;
-        
+
         /// <summary>
         /// cddlBooker control.
         /// </summary>
@@ -200,7 +202,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::CMS.ServerControls.CascadingDropDown cddlBooker;
-        
+
         /// <summary>
         /// txtTotal control.
         /// </summary>
@@ -209,7 +211,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtTotal;
-        
+
         /// <summary>
         /// ddlCurrencies control.
         /// </summary>
@@ -218,7 +220,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlCurrencies;
-        
+
         /// <summary>
         /// lbtCalculate control.
         /// </summary>
@@ -227,7 +229,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button lbtCalculate;
-        
+
         /// <summary>
         /// btnLockIncome control.
         /// </summary>
@@ -236,7 +238,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnLockIncome;
-        
+
         /// <summary>
         /// btnUnlockIncome control.
         /// </summary>
@@ -245,7 +247,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnUnlockIncome;
-        
+
         /// <summary>
         /// chkSpecial control.
         /// </summary>
@@ -254,7 +256,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox chkSpecial;
-        
+
         /// <summary>
         /// chkInvoice control.
         /// </summary>
@@ -263,7 +265,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox chkInvoice;
-        
+
         /// <summary>
         /// chkIsPaymentNeeded control.
         /// </summary>
@@ -272,7 +274,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox chkIsPaymentNeeded;
-        
+
         /// <summary>
         /// chkEarlyBird control.
         /// </summary>
@@ -281,7 +283,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox chkEarlyBird;
-        
+
         /// <summary>
         /// txtCommission control.
         /// </summary>
@@ -290,7 +292,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtCommission;
-        
+
         /// <summary>
         /// ddlCommissionCurrencies control.
         /// </summary>
@@ -299,7 +301,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlCommissionCurrencies;
-        
+
         /// <summary>
         /// txtPenalty control.
         /// </summary>
@@ -308,7 +310,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtPenalty;
-        
+
         /// <summary>
         /// txtAllVoucher control.
         /// </summary>
@@ -317,7 +319,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtAllVoucher;
-        
+
         /// <summary>
         /// litCreated control.
         /// </summary>
@@ -326,7 +328,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal litCreated;
-        
+
         /// <summary>
         /// plhDetailService control.
         /// </summary>
@@ -335,7 +337,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.PlaceHolder plhDetailService;
-        
+
         /// <summary>
         /// rptExtraServices control.
         /// </summary>
@@ -344,7 +346,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptExtraServices;
-        
+
         /// <summary>
         /// rptBusType control.
         /// </summary>
@@ -353,7 +355,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptBusType;
-        
+
         /// <summary>
         /// rbtTransferService_TwoWay control.
         /// </summary>
@@ -362,7 +364,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButton rbtTransferService_TwoWay;
-        
+
         /// <summary>
         /// rbtTransferService_OneWay control.
         /// </summary>
@@ -371,7 +373,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButton rbtTransferService_OneWay;
-        
+
         /// <summary>
         /// txtTransfer_Dateto control.
         /// </summary>
@@ -380,7 +382,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtTransfer_Dateto;
-        
+
         /// <summary>
         /// txtTransfer_Dateback control.
         /// </summary>
@@ -389,7 +391,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtTransfer_Dateback;
-        
+
         /// <summary>
         /// txtTransfer_Note control.
         /// </summary>
@@ -398,7 +400,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtTransfer_Note;
-        
+
         /// <summary>
         /// litInform control.
         /// </summary>
@@ -407,7 +409,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal litInform;
-        
+
         /// <summary>
         /// txtPickup control.
         /// </summary>
@@ -416,7 +418,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtPickup;
-        
+
         /// <summary>
         /// txtPickupTime control.
         /// </summary>
@@ -425,7 +427,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtPickupTime;
-        
+
         /// <summary>
         /// txtSpecialRequest control.
         /// </summary>
@@ -434,7 +436,16 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtSpecialRequest;
-        
+
+        /// <summary>
+        /// txtSpecialRequestRoom control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSpecialRequestRoom;
+
         /// <summary>
         /// txtCustomerInfo control.
         /// </summary>
@@ -443,7 +454,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtCustomerInfo;
-        
+
         /// <summary>
         /// btnAddRoom control.
         /// </summary>
@@ -452,7 +463,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnAddRoom;
-        
+
         /// <summary>
         /// btnDeleteAllRoomNA control.
         /// </summary>
@@ -461,7 +472,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnDeleteAllRoomNA;
-        
+
         /// <summary>
         /// btnDeleteRoomSelect control.
         /// </summary>
@@ -470,7 +481,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnDeleteRoomSelect;
-        
+
         /// <summary>
         /// rptRoomList control.
         /// </summary>
@@ -479,7 +490,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptRoomList;
-        
+
         /// <summary>
         /// plhAddRoom control.
         /// </summary>
@@ -488,7 +499,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.PlaceHolder plhAddRoom;
-        
+
         /// <summary>
         /// ddlRoomTypes control.
         /// </summary>
@@ -497,7 +508,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlRoomTypes;
-        
+
         /// <summary>
         /// ScreenCapture control.
         /// </summary>

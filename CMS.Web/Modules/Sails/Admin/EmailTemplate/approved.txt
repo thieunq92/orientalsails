@@ -1,8 +1,8 @@
-<html>
+﻿<html>
 
 <head>
-<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
-<meta name=Generator content="Microsoft Word 12 (filtered)">
+<meta http-equiv=Content-Type content="text/html; charset=utf-8">
+<meta name=Generator content="Microsoft Word 15 (filtered)">
 <style>
 <!--
  /* Font Definitions */
@@ -12,9 +12,6 @@
 @font-face
 	{{font-family:Calibri;
 	panose-1:2 15 5 2 2 2 4 3 2 4;}}
-@font-face
-	{{font-family:Consolas;
-	panose-1:2 11 6 9 2 2 4 3 2 4;}}
  /* Style Definitions */
  p.MsoNormal, li.MsoNormal, div.MsoNormal
 	{{margin-top:0in;
@@ -23,222 +20,384 @@
 	margin-left:0in;
 	line-height:115%;
 	font-size:11.0pt;
-	font-family:"Calibri","sans-serif";}}
-p.MsoPlainText, li.MsoPlainText, div.MsoPlainText
-	{{mso-style-link:"Plain Text Char";
-	margin:0in;
-	margin-bottom:.0001pt;
-	font-size:10.5pt;
-	font-family:Consolas;}}
-span.PlainTextChar
-	{{mso-style-name:"Plain Text Char";
-	mso-style-link:"Plain Text";
-	font-family:Consolas;}}
-@page Section1
+	font-family:"Calibri",sans-serif;}}
+p.MsoListParagraph, li.MsoListParagraph, div.MsoListParagraph
+	{{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:10.0pt;
+	margin-left:.5in;
+	line-height:115%;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif;}}
+p.MsoListParagraphCxSpFirst, li.MsoListParagraphCxSpFirst, div.MsoListParagraphCxSpFirst
+	{{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	line-height:115%;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif;}}
+p.MsoListParagraphCxSpMiddle, li.MsoListParagraphCxSpMiddle, div.MsoListParagraphCxSpMiddle
+	{{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:.5in;
+	line-height:115%;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif;}}
+p.MsoListParagraphCxSpLast, li.MsoListParagraphCxSpLast, div.MsoListParagraphCxSpLast
+	{{margin-top:0in;
+	margin-right:0in;
+	margin-bottom:10.0pt;
+	margin-left:.5in;
+	line-height:115%;
+	font-size:11.0pt;
+	font-family:"Calibri",sans-serif;}}
+.MsoChpDefault
+	{{font-family:"Calibri",sans-serif;}}
+.MsoPapDefault
+	{{margin-bottom:10.0pt;
+	line-height:115%;}}
+@page WordSection1
 	{{size:8.5in 11.0in;
-	margin:1.0in 75.1pt 1.0in 75.05pt;}}
-div.Section1
-	{{page:Section1;}}
+	margin:1.0in 1.0in 1.0in 1.0in;}}
+div.WordSection1
+	{{page:WordSection1;}}
+ /* List Definitions */
+ ol
+	{{margin-bottom:0in;}}
+ul
+	{{margin-bottom:0in;}}
 -->
 </style>
 
 </head>
 
-<body lang=EN-US>
+<body lang=EN-US style='word-wrap:break-word'>
 
-<div class=Section1>
+<div class=WordSection1>
 
-<p class=MsoPlainText><span lang=X-NONE style='font-family:"Times New Roman","Arial","sans-serif"'>Dear</span></p>
+<p class=MsoNormal style='margin-bottom:0in;background:white'><span
+style='font-size:12.0pt;line-height:115%;font-family:"Times New Roman",serif;
+color:black'>Kính gửi </span></p>
 
-<p class=MsoPlainText><span lang=X-NONE style='font-family:"Times New Roman","Arial","sans-serif"'>&nbsp;</span></p>
+<p class=MsoNormal style='background:white'><span style='font-size:12.0pt;
+line-height:115%;font-family:"Times New Roman",serif;color:black'>Công ty
+Oriental Sails xin xác nhận booking của quý anh chị như phía dưới:</span></p>
 
-<p class=MsoPlainText><span lang=X-NONE style='font-family:"Times New Roman","Arial","sans-serif"'>Please
-kindly note our confirmation of your booking with details as below:</span></p>
-
-<table class=MsoTableGrid border=0 cellspacing=0 cellpadding=0
- style='border-collapse:collapse;border:none'>
+<table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0
+ style='background:white;border-collapse:collapse'>
  <tr>
-  <td width=121 valign=top style='width:90.9pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoPlainText><span lang=X-NONE style='font-family:"Times New Roman","Arial","sans-serif"'>From:</span></p>
+  <td width=163 valign=top style='width:1.7in;border:solid lightgrey 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%;
+  font-family:"Times New Roman",serif'>Đại lý</span></b></p>
   </td>
-  <td width=315 valign=top style='width:236.35pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoPlainText><span style='font-family:"Times New Roman","Arial","sans-serif"'>{0}</span></p>
+  <td width=468 valign=top style='width:351.0pt;border:solid lightgrey 1.0pt;
+  border-left:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+  "Times New Roman",serif;color:black'>{0}</span></p>
   </td>
  </tr>
  <tr>
-  <td width=121 valign=top style='width:90.9pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoPlainText><span style='font-family:"Times New Roman","Arial","sans-serif"'>TA code:</span></p>
+  <td width=163 valign=top style='width:1.7in;border:solid lightgrey 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%;
+  font-family:"Times New Roman",serif;color:black'>Mã đặt phòng</span></b></p>
   </td>
-  <td width=315 valign=top style='width:236.35pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoPlainText><span style='font-family:"Times New Roman","Arial","sans-serif"'>{1}</span></p>
+  <td width=468 valign=top style='width:351.0pt;border-top:none;border-left:
+  none;border-bottom:solid lightgrey 1.0pt;border-right:solid lightgrey 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>{1}</td>
+ </tr>
+ <tr>
+  <td width=163 valign=top style='width:1.7in;border:solid lightgrey 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%;
+  font-family:"Times New Roman",serif;color:black'>Mã Oriental Sails</span></b></p>
+  </td>
+  <td width=468 valign=top style='width:351.0pt;border-top:none;border-left:
+  none;border-bottom:solid lightgrey 1.0pt;border-right:solid lightgrey 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+  "Times New Roman",serif;color:black'>{2}</span></p>
   </td>
  </tr>
  <tr>
-  <td width=121 valign=top style='width:90.9pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoPlainText><span style='font-family:"Times New Roman","Arial","sans-serif"'>Our ID:</span></p>
+  <td width=163 valign=top style='width:1.7in;border:solid lightgrey 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%;
+  font-family:"Times New Roman",serif;color:black'>Dịch vụ</span></b></p>
   </td>
-  <td width=315 valign=top style='width:236.35pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoPlainText><span style='font-family:"Times New Roman","Arial","sans-serif"'>{2}</span></p>
-  </td>
- </tr>
- <tr>
-  <td width=121 valign=top style='width:90.9pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoPlainText><span style='font-family:"Times New Roman","Arial","sans-serif"'>Service:</span></p>
-  </td>
-  <td width=315 valign=top style='width:236.35pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoPlainText><span style='font-family:"Times New Roman","Arial","sans-serif"'>{3}</span></p>
+  <td width=468 valign=top style='width:351.0pt;border-top:none;border-left:
+  none;border-bottom:solid lightgrey 1.0pt;border-right:solid lightgrey 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+  "Times New Roman",serif;color:black'>{3}</span></p>
   </td>
  </tr>
  <tr>
-  <td width=121 valign=top style='width:90.9pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoPlainText><span style='font-family:"Times New Roman","Arial","sans-serif"'>Start
-  date:</span></p>
+  <td width=163 valign=top style='width:1.7in;border:solid lightgrey 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%;
+  font-family:"Times New Roman",serif;color:black'>Ngày khởi hành</span></b></p>
   </td>
-  <td width=315 valign=top style='width:236.35pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoPlainText><span style='font-family:"Times New Roman","Arial","sans-serif"'>{4}</span></p>
-  </td>
- </tr>
- <tr>
-  <td width=121 valign=top style='width:90.9pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoPlainText><span style='font-family:"Times New Roman","Arial","sans-serif"'>Number
-  of pax:</span></p>
-  </td>
-  <td width=315 valign=top style='width:236.35pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoPlainText><span style='font-family:"Times New Roman","Arial","sans-serif"'>{5}</span></p>
+  <td width=468 valign=top style='width:351.0pt;border-top:none;border-left:
+  none;border-bottom:solid lightgrey 1.0pt;border-right:solid lightgrey 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+  "Times New Roman",serif;color:black'>{4}</span></p>
   </td>
  </tr>
  <tr>
-  <td width=121 valign=top style='width:90.9pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoPlainText><span style='font-family:"Times New Roman","Arial","sans-serif"'>Clients'
-  names</span></p>
+  <td width=163 valign=top style='width:1.7in;border:solid lightgrey 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%;
+  font-family:"Times New Roman",serif;color:black'>Ngày kết thúc</span></b></p>
   </td>
-  <td width=315 valign=top style='width:236.35pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoPlainText><span style='font-family:"Times New Roman","Arial","sans-serif"'>{6}</span></p>
-  </td>
- </tr>
- <tr>
-  <td width=121 valign=top style='width:90.9pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoPlainText><span style='font-family:"Times New Roman","Arial","sans-serif"'>Room
-  type:</span></p>
-  </td>
-  <td width=315 valign=top style='width:236.35pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoPlainText><span style='font-family:"Times New Roman","Arial","sans-serif"'>{7}</span></p>
+  <td width=468 valign=top style='width:351.0pt;border-top:none;border-left:
+  none;border-bottom:solid lightgrey 1.0pt;border-right:solid lightgrey 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+  "Times New Roman",serif;color:black'>{16}</span></p>
   </td>
  </tr>
  <tr>
-  <td width=121 valign=top style='width:90.9pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoPlainText><span style='font-family:"Times New Roman","Arial","sans-serif"'>Pick up and Drop off at:</span></p>
+  <td width=163 valign=top style='width:1.7in;border:solid lightgrey 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%;
+  font-family:"Times New Roman",serif;color:black'>Số lượng khách</span></b></p>
   </td>
-  <td width=315 valign=top style='width:236.35pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoPlainText><span style='font-family:"Times New Roman","Arial","sans-serif"'>{8}</span></p>
-  </td>
- </tr>
- <tr>
-  <td width=121 valign=top style='width:90.9pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoPlainText><span style='font-family:"Times New Roman","Arial","sans-serif"'>Special
-  request:</span></p>
-  </td>
-  <td width=315 valign=top style='width:236.35pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoPlainText><span style='font-family:"Times New Roman","Arial","sans-serif"'>{9}</span></p>
+  <td width=468 valign=top style='width:351.0pt;border-top:none;border-left:
+  none;border-bottom:solid lightgrey 1.0pt;border-right:solid lightgrey 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+  "Times New Roman",serif;color:black'>{5}</span></p>
   </td>
  </tr>
  <tr>
-  <td width=121 valign=top style='width:90.9pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoPlainText><span style='font-family:"Times New Roman","Arial","sans-serif"'>Total
-  Price:</span></p>
+  <td width=163 valign=top style='width:1.7in;border:solid lightgrey 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%;
+  font-family:"Times New Roman",serif;color:black'>Tên hành khách</span></b></p>
   </td>
-  <td width=315 valign=top style='width:236.35pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoPlainText><span style='font-family:"Times New Roman","Arial","sans-serif"'>{10}</span></p>
+  <td width=468 valign=top style='width:351.0pt;border-top:none;border-left:
+  none;border-bottom:solid lightgrey 1.0pt;border-right:solid lightgrey 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+  "Times New Roman",serif;color:black'>{6}</span></p>
   </td>
  </tr>
  <tr>
-  <td width=121 valign=top style='width:90.9pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoPlainText><span style='font-family:"Times New Roman","Arial","sans-serif"'>Contact in harbor:</span></p>
+  <td width=163 valign=top style='width:1.7in;border:solid lightgrey 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%;
+  font-family:"Times New Roman",serif;color:black'>Loại phòng</span></b></p>
   </td>
-  <td width=315 valign=top style='width:236.35pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoPlainText><span style='font-family:"Times New Roman","Arial","sans-serif"'>{14}</span></p>
+  <td width=468 valign=top style='width:351.0pt;border-top:none;border-left:
+  none;border-bottom:solid lightgrey 1.0pt;border-right:solid lightgrey 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+  "Times New Roman",serif;color:black'>{7}</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=163 valign=top style='width:1.7in;border:solid lightgrey 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%;
+  font-family:"Times New Roman",serif;color:black'>Điểm đón/trả</span></b></p>
+  </td>
+  <td width=468 valign=top style='width:351.0pt;border-top:none;border-left:
+  none;border-bottom:solid lightgrey 1.0pt;border-right:solid lightgrey 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-bottom:0in'><b><span style='font-size:12.0pt;
+  line-height:115%;font-family:"Times New Roman",serif;color:red'>Với không xe:</span></b><span
+  style='font-size:12.0pt;line-height:115%;font-family:"Times New Roman",serif;
+  color:black'>{17}</span></p>
+  <p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%;
+  font-family:"Times New Roman",serif;color:red'>Với có xe: </span></b><span
+  style='font-size:12.0pt;line-height:115%;font-family:"Times New Roman",serif;
+  color:black'>{8}</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=163 valign=top style='width:1.7in;border:solid lightgrey 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%;
+  font-family:"Times New Roman",serif;color:black'>Yêu cầu đặc biệt về thực phẩm</span></b></p>
+  </td>
+  <td width=468 valign=top style='width:351.0pt;border-top:none;border-left:
+  none;border-bottom:solid lightgrey 1.0pt;border-right:solid lightgrey 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+  "Times New Roman",serif;color:black'>{9}</span></p>
+  </td>
+ </tr>
+  <tr>
+  <td width=163 valign=top style='width:1.7in;border:solid lightgrey 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%;
+  font-family:"Times New Roman",serif;color:black'>Yêu cầu đặc biệt về phòng</span></b></p>
+  </td>
+  <td width=468 valign=top style='width:351.0pt;border-top:none;border-left:
+  none;border-bottom:solid lightgrey 1.0pt;border-right:solid lightgrey 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+  "Times New Roman",serif;color:black'>{9}</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=163 valign=top style='width:1.7in;border:solid lightgrey 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%;
+  font-family:"Times New Roman",serif;color:black'>Tổng chi phí</span></b></p>
+  </td>
+  <td width=468 valign=top style='width:351.0pt;border-top:none;border-left:
+  none;border-bottom:solid lightgrey 1.0pt;border-right:solid lightgrey 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+  "Times New Roman",serif;color:black'>{10}</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=163 valign=top style='width:1.7in;border:solid lightgrey 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%;
+  font-family:"Times New Roman",serif;color:black'>Yêu cầu thanh toán</span></b></p>
+  </td>
+  <td width=468 valign=top style='width:351.0pt;border-top:none;border-left:
+  none;border-bottom:solid lightgrey 1.0pt;border-right:solid lightgrey 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+  "Times New Roman",serif;color:black'>Thanh toán trước 3 ngày check in
+Chuyển khoản theo thông tin tài khoản sau:
+TK CHUYỂN TIỀN TÀU ORIENTAL SAILS ( No VAT)
+Tên tài khoản    Bùi Văn Chi
+Số tài khoản     0011004389709
+Ngân hàng        Vietcombank SGD Hà Nội </span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=163 valign=top style='width:1.7in;border:solid lightgrey 1.0pt;
+  border-top:none;padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal><b><span style='font-size:12.0pt;line-height:115%;
+  font-family:"Times New Roman",serif;color:black'>Liên hệ đón/trả</span></b></p>
+  </td>
+  <td width=468 valign=top style='width:351.0pt;border-top:none;border-left:
+  none;border-bottom:solid lightgrey 1.0pt;border-right:solid lightgrey 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+ <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
+  "Times New Roman",serif;color:black'>{18}</span></p>
   </td>
  </tr>
 </table>
-<p class=MsoPlainText><span style='font-family:"Times New Roman","Arial","sans-serif"'><h3 style="color: red;"><span style="font-family:&quot;Times New Roman&quot;,&quot;Arial&quot;,&quot;sans-serif&quot;">{15}</span></h3></p>
-<p class=MsoPlainText><span lang=X-NONE style='font-family:"Times New Roman","Arial","sans-serif"'>Please kindly help us to collect tourists information as attached file before the departure date.</span></p>
-<p class=MsoPlainText><span lang=X-NONE style='font-family:"Times New Roman","Arial","sans-serif"'>Please inform us all special requests on food  like DIET, VEGETARIAN, ALLERGY... so that we can prepare food ingredients for our guests. The latest time to inform with FIT is 24 hours and with GIT is 7 days before departure</p>
-<p class=MsoPlainText><span lang=X-NONE style='font-family:"Times New Roman","Arial","sans-serif"'>Thank
-you very much for your supports,</span></p>
 
-<p class=MsoPlainText><span lang=X-NONE style='font-family:"Times New Roman","Arial","sans-serif"'>&nbsp;</span></p>
+<p class=MsoNormal style='margin-top:12.0pt;margin-right:0in;margin-bottom:
+0in;margin-left:0in;background:white'><b><span style='font-size:12.0pt;
+line-height:115%;font-family:"Times New Roman",serif;color:black'>Chú ý:</span></b></p>
 
-<p class=MsoPlainText><span lang=X-NONE style='font-family:"Times New Roman","Arial","sans-serif"'>Best
-regards,</span></p>
+<p class=MsoListParagraphCxSpFirst style='margin-bottom:0in;text-indent:-.25in;
+background:white'><span style='font-size:12.0pt;line-height:115%;font-family:
+"Times New Roman",serif'>1.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:12.0pt;line-height:115%;font-family:"Times New Roman",serif;
+color:black'>Đối với những khách hàng đặt xe ghép đón từ trung tâm Phố Cổ Hà Nội, xin vui lòng có mặt tại điểm hẹn từ 8:00-8:30 và theo thông tin được thông báo trước ngày khởi hành bởi nhân viên của Oriental Sails. Để đảm bảo chuyến tham quan thật chuyên nghiệp, chúng tôi không chịu trách nhiệm cho việc quý khách đến điểm hẹn </span></p>
 
-<p class=MsoPlainText><span lang=X-NONE style='font-family:"Times New Roman","Arial","sans-serif"'>&nbsp;</span></p>
+<p class=MsoListParagraphCxSpMiddle style='margin-bottom:0in;text-indent:-.25in;
+background:white'><span style='font-size:12.0pt;line-height:115%;font-family:
+"Times New Roman",serif'>2.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:12.0pt;line-height:115%;font-family:"Times New Roman",serif;
+color:black'>Để đăng ký lệnh ngủ đêm theo yêu cầu của Ban Quản Lý vịnh, quý khách vui lòng khai báo thông tin theo form thông tin đính kèm trong mail ít nhất 3 ngày trước ngày khởi hành.</span></p>
 
-<p class=MsoPlainText><span lang=X-NONE style='font-family:"Times New Roman","Arial","sans-serif"'>&nbsp;</span></p>
+<p class=MsoListParagraphCxSpMiddle style='margin-bottom:0in;text-indent:-.25in;
+background:white'><span style='font-size:12.0pt;line-height:115%;font-family:
+"Times New Roman",serif'>3.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:12.0pt;line-height:115%;font-family:"Times New Roman",serif;
+color:black'>Mọi yêu cầu về ăn kiêng/ăn chay/dị ứng đồ ăn, xin vui lòng thông báo ít nhất 1 ngày trước khởi hành để chúng tôi phục vụ chu đáo trong suốt hành trình.</span></p>
 
-<p class=MsoPlainText><span style='font-family:"Times New Roman","Arial","sans-serif"'>{11}</span></p>
+<p class=MsoListParagraphCxSpLast style='margin-bottom:0in;text-indent:-.25in;
+background:white'><span style='font-size:12.0pt;line-height:115%;font-family:
+"Times New Roman",serif'>4.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:12.0pt;line-height:115%;font-family:"Times New Roman",serif;
+color:black'>Quý khách vui lòng mang theo giấy tờ tùy thân: CMT/Hộ chiếu/Thẻ căn cước đối với người lớn; Giấy khai sinh đối với trẻ em vào ngày tham gia tour.</span></p>
 
-<table class=MsoTableGrid border=0 cellspacing=0 cellpadding=0
- style='border-collapse:collapse;border:none'>
- <tr>
-  <td width=69 valign=top style='width:51.65pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoPlainText><span lang=X-NONE style='font-family:"Times New Roman","Arial","sans-serif"'>Mobile:</span></p>
-  </td>
-  <td width=150 valign=top style='width:112.6pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoPlainText><span style='font-family:"Times New Roman","Arial","sans-serif"'>&nbsp;</span></p>
-  </td>
-  <td width=42 valign=top style='width:31.25pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoPlainText><span style='font-family:"Times New Roman","Arial","sans-serif"'>&nbsp;</span></p>
-  </td>
-  <td width=150 valign=top style='width:112.6pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoPlainText><span style='font-family:"Times New Roman","Arial","sans-serif"'>&nbsp;</span></p>
-  </td>
- </tr>
- <tr>
-  <td width=69 valign=top style='width:51.65pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoPlainText><span style='font-family:"Times New Roman","Arial","sans-serif"'>Tel:</span></p>
-  </td>
-  <td width=150 valign=top style='width:112.6pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoPlainText><span lang=X-NONE style='font-family:"Times New Roman","Arial","sans-serif"'>+84
-  4 3926 4009</span></p>
-  </td>
-  <td width=42 valign=top style='width:31.25pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoPlainText><span style='font-family:"Times New Roman","Arial","sans-serif"'>Fax:</span></p>
-  </td>
-  <td width=150 valign=top style='width:112.6pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoPlainText><span lang=X-NONE style='font-family:"Times New Roman","Arial","sans-serif"'>+84
-  4 3926 4010</span></p>
-  </td>
- </tr>
- <tr>
-  <td width=69 valign=top style='width:51.65pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoPlainText><span style='font-family:"Times New Roman","Arial","sans-serif"'>Email:</span></p>
-  </td>
-  <td width=150 valign=top style='width:112.6pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoPlainText><span style='font-family:"Times New Roman","Arial","sans-serif"'>{12}</span></p>
-  </td>
-  <td width=42 valign=top style='width:31.25pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoPlainText><span style='font-family:"Times New Roman","Arial","sans-serif"'>&nbsp;</span></p>
-  </td>
-  <td width=150 valign=top style='width:112.6pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoPlainText><span style='font-family:"Times New Roman","Arial","sans-serif"'>&nbsp;</span></p>
-  </td>
- </tr>
- <tr>
-  <td width=69 valign=top style='width:51.65pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoPlainText><span style='font-family:"Times New Roman","Arial","sans-serif"'>Website:</span></p>
-  </td>
-  <td width=150 valign=top style='width:112.6pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoPlainText><span style='font-family:"Times New Roman","Arial","sans-serif"'>{13}</span></p>
-  </td>
-  <td width=42 valign=top style='width:31.25pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoPlainText><span style='font-family:"Times New Roman","Arial","sans-serif"'>&nbsp;</span></p>
-  </td>
-  <td width=150 valign=top style='width:112.6pt;padding:0in 5.4pt 0in 5.4pt'>
-  <p class=MsoPlainText><span style='font-family:"Times New Roman","Arial","sans-serif"'>&nbsp;</span></p>
-  </td>
- </tr>
-</table>
-<p class=MsoPlainText><span style='font-family:"Times New Roman","Arial","sans-serif"'>&nbsp;</span></p>
+<p class=MsoListParagraphCxSpLast style='margin-bottom:0in;text-indent:-.25in;
+background:white'><span style='font-size:12.0pt;line-height:115%;font-family:
+"Times New Roman",serif'>4.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:12.0pt;line-height:115%;font-family:"Times New Roman",serif;
+color:black'>Quý khách vui lòng không mang đồ ăn, thức uống lên tàu ngoại trừ cháo và sữa cho trẻ em. Nếu mang lên sẽ bị tính phụ phí theo quy định của nhà tàu:</span></p>
+
+<p class=MsoListParagraphCxSpLast style='margin-bottom:0in;text-indent:-.25in;
+background:white'><span style='font-size:12.0pt;line-height:115%;font-family:
+"Times New Roman",serif'>4.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:12.0pt;line-height:115%;font-family:"Times New Roman",serif;
+color:black'>Cháo, sữa trẻ em miễn phí</span></p>
+
+<p class=MsoListParagraphCxSpLast style='margin-bottom:0in;text-indent:-.25in;
+background:white'><span style='font-size:12.0pt;line-height:115%;font-family:
+"Times New Roman",serif'>4.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:12.0pt;line-height:115%;font-family:"Times New Roman",serif;
+color:black'>•           Đồ uống soft drink : 20.000 đ/lon</span></p>
+
+<p class=MsoListParagraphCxSpLast style='margin-bottom:0in;text-indent:-.25in;
+background:white'><span style='font-size:12.0pt;line-height:115%;font-family:
+"Times New Roman",serif'>4.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:12.0pt;line-height:115%;font-family:"Times New Roman",serif;
+color:black'>•           Rượu Vn tính theo lít : 200.000 đ/lít</span></p>
+
+<p class=MsoListParagraphCxSpLast style='margin-bottom:0in;text-indent:-.25in;
+background:white'><span style='font-size:12.0pt;line-height:115%;font-family:
+"Times New Roman",serif'>4.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:12.0pt;line-height:115%;font-family:"Times New Roman",serif;
+color:black'>•           Rượu vang: 350.000 đ /chai</span></p>
+
+<p class=MsoListParagraphCxSpLast style='margin-bottom:0in;text-indent:-.25in;
+background:white'><span style='font-size:12.0pt;line-height:115%;font-family:
+"Times New Roman",serif'>4.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:12.0pt;line-height:115%;font-family:"Times New Roman",serif;
+color:black'>•           Rượu mạnh: 400.000 đ/chai</span></p>
+
+<p class=MsoListParagraphCxSpLast style='margin-bottom:0in;text-indent:-.25in;
+background:white'><span style='font-size:12.0pt;line-height:115%;font-family:
+"Times New Roman",serif'>4.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:12.0pt;line-height:115%;font-family:"Times New Roman",serif;
+color:black'>Quý khách nên mang theo: khẩu trang, sát khuẩn cá nhân, đồ bơi, quần áo phù hợp để bơi và chèo kayak; kem chống nắng, kính mát hoặc mũ khi trời nắng; bao chống nước dùng cho máy ảnh, camera hoặc điện thoại khi tham gia các hoạt động</span></p>
+
+<p class=MsoListParagraphCxSpLast style='margin-bottom:0in;text-indent:-.25in;
+background:white'><span style='font-size:12.0pt;line-height:115%;font-family:
+"Times New Roman",serif'>4.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:12.0pt;line-height:115%;font-family:"Times New Roman",serif;
+color:black'>Do chính sách hạn chế rác thải từ túi nilon dùng một lần trên Vịnh để bảo vệ môi trường biển, bên em khuyến khích đoàn mang theo túi có thể tái sử dụng để đựng quần áo lúc đi bơi và chèo kayak.</span></p>
+
+<p class=MsoListParagraphCxSpLast style='margin-bottom:0in;text-indent:-.25in;
+background:white'><span style='font-size:12.0pt;line-height:115%;font-family:
+"Times New Roman",serif'>4.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:12.0pt;line-height:115%;font-family:"Times New Roman",serif;
+color:black'>Thuốc cá nhân riêng nếu cần (Do tàu chỉ được trang bị thuốc cơ bản).</span></p>
+
+<p class=MsoListParagraphCxSpLast style='margin-bottom:0in;text-indent:-.25in;
+background:white'><span style='font-size:12.0pt;line-height:115%;font-family:
+"Times New Roman",serif'>4.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:12.0pt;line-height:115%;font-family:"Times New Roman",serif;
+color:black'>Wifi ở trên tàu bị kém do địa hình núi + biển và mới thay đổi cột sóng dưới vịnh, anh chị vui lòng dùng thêm 4G và xử lý các việc quan trọng trước khi xuống tàu do điều kiện giữa biển thì đôi khi sóng điện thoại có thể bị ảnh hưởng.</span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;background:white'><span
+style='font-size:12.0pt;line-height:115%;font-family:"Times New Roman",serif'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;background:white'><span
+style='font-size:12.0pt;line-height:115%;font-family:"Times New Roman",serif;
+color:black'>Oriental Sails xin chân thành cám ơn sự ủng hộ của quý anh chị.</span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;background:white'><span
+style='font-size:12.0pt;line-height:115%;font-family:"Times New Roman",serif;
+color:black'>Trân trọng,</span></p>
+
+<p class=MsoNormal style='background:white'><span lang=X-NONE style='font-size:
+12.0pt;line-height:115%;font-family:"Times New Roman",serif;color:black'>&nbsp;</span></p>
+
+<p class=MsoNormal style='margin-bottom:0in;background:white'><span
+style='font-size:12.0pt;line-height:115%;font-family:"Times New Roman",serif'>&nbsp;</span></p>
+
+<p class=MsoNormal style='background:white'><span lang=X-NONE style='font-size:
+12.0pt;line-height:115%;font-family:"Times New Roman",serif;color:black'>&nbsp;</span></p>
 
 </div>
 

@@ -389,6 +389,11 @@ article {
         text-decoration: underline;
     }
 
+.custom-bookingowner {
+    background-color: #76bb76;
+    color: #fff;
+}
+
 .busbydate {
     z-index: 999 !important;
     background-color: #fff;

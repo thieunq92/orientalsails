@@ -60,8 +60,11 @@
                     </th>
                     <th rowspan="2">Special request
                     </th>
+                    <% if (CanViewAgency)
+                        {  %>
                     <th rowspan="2">Agency
                     </th>
+                    <% } %>
                     <th rowspan="2">Booking code
                     </th>
                     <% if (CanViewTotal)
@@ -71,7 +74,8 @@
                     <% } %>
                     <th rowspan="2">Feedback</th>
                     <th rowspan="2">P/u time
-                        <br/>
+                       
+                        <br />
                         <asp:Button runat="server" ID="btnSavePickupTime" Text="update" CssClass="btn btn-primary" OnClick="btnSavePickupTime_OnClick" />
                     </th>
                 </tr>
@@ -88,7 +92,8 @@
                     <ItemTemplate>
                         <tr class="
                             <%# ((Booking)(Container.DataItem)).StartDate < Date ? "custom-warning":""%>
-                            <%# ((Booking)(Container.DataItem)).Status == StatusType.Pending ? "custom-info":"" %>
+                            <%# IsBookingOwner((Booking)(Container.DataItem)) ? "custom-bookingowner":""%>
+                            <%# ((Booking)(Container.DataItem)).Status == StatusType.Pending ? "custom-info":""%>
                             ">
                             <td <%= ((List<Booking>)(rptBookingList.DataSource)).Any(x=>x.Inspection == true) ? "" : "class='hide'" %>>
                                 <i class="fa fa-lg fa-clipboard-list text-disabled 
@@ -124,8 +129,11 @@
                                 <%# ((Booking)(Container.DataItem)).PickupAddress != null ? ((Booking)(Container.DataItem)).PickupAddress.Replace(Environment.NewLine,"<br/>") :"" %>
                             </td>
                             <td class="--text-left">
-                                <%# ((Booking)(Container.DataItem)).SpecialRequest != null ? ((Booking)(Container.DataItem)).SpecialRequest.Replace(Environment.NewLine,"<br/>") :"" %>
+                                <%# CanViewSpecialRequestFood && ((Booking)(Container.DataItem)).SpecialRequest != null ? ((Booking)(Container.DataItem)).SpecialRequest.Replace(Environment.NewLine,"<br/>") :"" %>
+                                <%# CanViewSpecialRequestRoom && ((Booking)(Container.DataItem)).SpecialRequestRoom != null ? ((Booking)(Container.DataItem)).SpecialRequestRoom.Replace(Environment.NewLine,"<br/>") :"" %>
                             </td>
+                            <% if (CanViewAgency)
+                                { %>
                             <td>
                                 <a href="" data-toggle="tooltip" title="<%# GetAgencyNotes(((Booking)Container.DataItem).Agency) %>">
                                     <i class="fa fa-lg fa-comment-dots icon icon__note"></i>
@@ -133,6 +141,7 @@
                                 <br />
                                 <a href="AgencyView.aspx?NodeId=1&SectionId=15&agencyid=<%# ((Booking)(Container.DataItem)).Agency != null ? ((Booking)(Container.DataItem)).Agency.Id :-1%>"><%# ((Booking)(Container.DataItem)).Agency != null ? ((Booking)(Container.DataItem)).Agency.Name : "" %></a>
                             </td>
+                            <% } %>
                             <td>
                                 <a href="BookingView.aspx?NodeId=1&SectionId=15&bi=<%#((Booking)(Container.DataItem)).Id%>">
                                     <%#((Booking)(Container.DataItem)).BookingIdOS%>
@@ -148,7 +157,7 @@
                             <td>
                                 <asp:HiddenField runat="server" ID="hidId" Value='<%#Eval("Id") %>' />
                                 <asp:Literal runat="server" ID="litPickupTime"></asp:Literal>
-                                <asp:TextBox ID="txtPickupTime" autocomplete="off" runat="server" CssClass="form-control timepicker" style="width: 65px" placeholder="hh:mm" data-control="timepicker"></asp:TextBox>
+                                <asp:TextBox ID="txtPickupTime" autocomplete="off" runat="server" CssClass="form-control timepicker" Style="width: 65px" placeholder="hh:mm" data-control="timepicker"></asp:TextBox>
                             </td>
                         </tr>
                     </ItemTemplate>
@@ -507,13 +516,14 @@
                             data-uniqueid="<%= btnLockDate.UniqueID %>"
                             ng-click="lockDate()" ng-show="!LockingExpense">
                             Lock date
+                       
                         </button>
                         <asp:Button ID="btnLockDate" runat="server" OnClick="btnLockDate_Click" ng-show="false"></asp:Button>
                         <button class="btn btn-primary" type="button" ng-click="unlockDate()" data-uniqueid="<%= btnUnlockDate.UniqueID %>" id="btnUnlockDate"
                             ng-show="LockingExpense">
                             Unlock date</button>
                         <asp:Button ID="btnUnlockDate" runat="server" OnClick="btnUnlockDate_Click" ng-show="false"></asp:Button>
-                        <asp:Button ID="btnExportXml" runat="server" OnClick="btnExportXml_OnClick" 
+                        <asp:Button ID="btnExportXml" runat="server" OnClick="btnExportXml_OnClick"
                             CssClass="btn btn-primary" Text="Export XML"></asp:Button>
                     </div>
                 </div>
