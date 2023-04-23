@@ -242,7 +242,7 @@ Oriental Sails xin xác nhận booking của quý anh chị như phía dưới:<
   none;border-bottom:solid lightgrey 1.0pt;border-right:solid lightgrey 1.0pt;
   padding:0in 5.4pt 0in 5.4pt'>
   <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
-  "Times New Roman",serif;color:black'>{9}</span></p>
+  "Times New Roman",serif;color:black'>{19}</span></p>
   </td>
  </tr>
  <tr>

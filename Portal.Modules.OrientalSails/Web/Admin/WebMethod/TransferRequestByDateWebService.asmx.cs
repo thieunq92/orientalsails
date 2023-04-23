@@ -555,8 +555,24 @@ namespace Portal.Modules.OrientalSails.Web.Admin.WebMethod
             var shortRouteName = StringUtil.GetFirstLetter(busByDate.Route.Name);
             var sheet = excelPackage.Workbook.Worksheets.Copy("Tour Command", "TC" + "-"
                 + shortRouteName.Replace(" ", "").Replace("-", "_") + "-" + busByDate.BusType.Name + "-G" + busByDate.Group);
-            sheet.Cells["I1"].Value = "Group " + busByDate.Group;
-            sheet.Cells["E1"].Value = (busByDate.Date.HasValue ? busByDate.Date.Value.ToLongDateString() : "");
+            if (shortRouteName == "H N - T C ")
+            {
+                sheet.Cells["A1"].Value = "LỆNH ĐIỀU XE HÀ NỘI - TUẦN CHÂU";
+            }
+            else if (shortRouteName == "T C - H N ")
+            {
+                sheet.Cells["A1"].Value = "LỆNH ĐIỀU XE TUẦN CHÂU - HÀ NỘI";
+            }
+            else if (shortRouteName == "H N - H L ")
+            {
+                sheet.Cells["A1"].Value = "LỆNH ĐIỀU XE HÀ NỘI - HẠ LONG";
+            }
+            else if (shortRouteName == "H L - H N ")
+            {
+                sheet.Cells["A1"].Value = "LỆNH ĐIỀU XE HẠ LONG - HÀ NỘI";
+            }
+            sheet.Cells["J1"].Value = "Group " + busByDate.Group;
+            sheet.Cells["H1"].Value = (busByDate.Date.HasValue ? busByDate.Date.Value.ToLongDateString() : "");
             //Điền guide vào lệnh điều tour
             var startRow = 3;
             var currentRow = startRow;
@@ -588,12 +604,32 @@ namespace Portal.Modules.OrientalSails.Web.Admin.WebMethod
             FillOpt(listOpt_Distinct, sheet, ref currentRow);
             //--
             //Export booking trong ngày
+            var titleRow = currentRow;
             currentRow = currentRow + 2;//Chuyển current row đến templaterow booking
             int templateRow = currentRow;
             int totalRow = templateRow + listBooking.Count();
             int index = 1;
             currentRow++;//Chuyển current row đến trước template row để bắt đầu coppyrow
+            var expenses = TransferRequestByDateBLL.ExpenseGetAllByCriterion(busByDate.Date).Future().ToList();
+            if (shortRouteName == "H N - T C ")
+            {
+                sheet.Cells[titleRow, 9].Value = "Hà Nội - Ô 26 Tuần Châu \r\n(Giao cho)";
+            }
+            else if (shortRouteName == "T C - H N ")
+            {
+                sheet.Cells[titleRow, 9].Value = "Ô 26 Tuần Châu - Hà Nội \r\n(Nhận khách từ)";
+            }
+            else if (shortRouteName == "H N - H L ")
+            {
+                sheet.Cells[titleRow, 9].Value = "Hà Nội - Bến Sun Group \r\n(Giao cho)";
+            }
+            else if (shortRouteName == "H L - H N ")
+            {
+                sheet.Cells[titleRow, 9].Value = "Bến Sun Group - Hà Nội \r\n(Nhận khách từ)";
+            }
+
             sheet.InsertRow(currentRow, listBooking.Count, templateRow);
+
             for (int i = 0; i < listBooking.Count; i++)
             {
                 var booking = listBooking[i] as Booking;
@@ -608,8 +644,18 @@ namespace Portal.Modules.OrientalSails.Web.Admin.WebMethod
                     sheet.Cells[currentRow, 6].Value = booking.Baby;
                     sheet.Cells[currentRow, 7].Value = booking.Trip.TripCode;
                     sheet.Cells[currentRow, 8].Value = booking.PickupAddress;
-                    sheet.Cells[currentRow, 9].Value = booking.SpecialRequest;
-                    sheet.Cells[currentRow, 11].Value = "OS" + booking.Id;
+                    if (shortRouteName == "H N - T C " || shortRouteName == "T C - H N ")
+                    {
+                        var guides = expenses.Where(x => x.Type == "Guide" && x.Cruise.Code.Contains("NCL")).Select(x => { return (x.Guide?.Name ?? "") + " : " + (NumberUtil.FormatPhoneNumber(x.Guide?.Phone ?? "")); }).Where(x => x != " : ");
+                        sheet.Cells[currentRow, 9].Value = string.Join("\r\n", guides);
+                    }
+
+                    if (shortRouteName == "H N - H L " || shortRouteName == "H L - H N ")
+                    {
+                        var guides = expenses.Where(x => x.Type == "Guide" && (x.Cruise.Code.Contains("OS") || x.Cruise.Code.Contains("STL"))).Select(x => { return (x.Guide?.Name ?? "") + " : " + (NumberUtil.FormatPhoneNumber(x.Guide?.Phone ?? "")); }).Where(x => x != " : ");
+                        sheet.Cells[currentRow, 9].Value = string.Join("\r\n", guides);
+                    }
+
                     sheet.Cells[currentRow, 26].Value = name;//Work around cho cột merged name không hiển thị hết khi nội dung quá dài
                     currentRow++;
                     index++;

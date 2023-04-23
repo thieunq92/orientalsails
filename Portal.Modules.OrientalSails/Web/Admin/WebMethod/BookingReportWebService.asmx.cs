@@ -258,15 +258,15 @@ namespace Portal.Modules.OrientalSails.Web.Admin.WebMethod
                 var guideExpenseDTO = new ExpenseDTO()
                 {
                     Id = x.Id,
-                    GuideId = x.Guide != null ? x.Guide.Id : -1,
-                    GuideName = x.Guide != null ? x.Guide.Name : "",
-                    GuidePhone = x.Guide != null ? x.Guide.Phone : "",
+                    GuideId = x.Guide?.Id ?? -1,
+                    GuideName = x.Guide?.Name ?? "",
+                    GuidePhone = x.Guide?.Phone ?? "",
                     Cost = x.Cost.ToString("#,##0.##"),
                     CruiseId = cruiseId,
-                    Date = date.HasValue ? date.Value.ToString("dd/MM/yyyy") : "",
-                    Operator_FullName = x.Operator != null ? x.Operator.FullName : "",
-                    Operator_Phone = x.Operator != null ? x.Operator.Phone : "",
-                    Operator_UserId = x.Operator != null ? x.Operator.Id : -1,
+                    Date = date?.ToString("dd/MM/yyyy") ?? "",
+                    Operator_FullName = x.Operator?.FullName ?? "",
+                    Operator_Phone = x.Operator?.Phone ?? "",
+                    Operator_UserId = x.Operator?.Id ?? -1,
                     LockStatus = x.LockStatus,
                 };
                 listGuideExpenseDTO.Add(guideExpenseDTO);
@@ -458,11 +458,33 @@ namespace Portal.Modules.OrientalSails.Web.Admin.WebMethod
                     FillDriver(listBusByDate, sheet, ref templateDriverRow);
                     //--
                     //Export booking trong ngày
+                    int titleRow = templateDriverRow + 1;
                     int templateRow = templateDriverRow + 3;
                     int currentRow = templateRow + 1;
                     int totalRow = templateRow + listBooking.Count();
                     int index = 1;
                     sheet.InsertRow(currentRow, listBooking.Count, currentRow - 1);
+                    if (CanViewSpecialRequestFood && CanViewSpecialRequestFood)
+                    {
+                        sheet.Cells[titleRow, 9, titleRow + 1, 9].Merge = true;
+                        sheet.Cells[titleRow, 10, titleRow + 1, 10].Merge = true;
+                        sheet.Cells[titleRow, 9].Value = "Special Request Food";
+                        sheet.Cells[titleRow, 10].Value = "Special Request Room";
+                    }
+                    else
+                    {
+                        if (CanViewSpecialRequestFood)
+                        {
+                            sheet.Cells[titleRow, 9, titleRow + 1, 10].Merge = true;
+                            sheet.Cells[titleRow, 9].Value = "Special Request Food";
+                        }
+
+                        if (CanViewSpecialRequestRoom)
+                        {
+                            sheet.Cells[titleRow, 9, titleRow + 1, 10].Merge = true;
+                            sheet.Cells[titleRow, 9].Value = "Special Request Room";
+                        }
+                    }
                     for (int i = 0; i < listBooking.Count; i++)
                     {
                         var booking = listBooking[i] as Booking;
@@ -477,19 +499,26 @@ namespace Portal.Modules.OrientalSails.Web.Admin.WebMethod
                             sheet.Cells[currentRow, 6].Value = booking.Baby;
                             sheet.Cells[currentRow, 7].Value = booking.Trip.TripCode;
                             sheet.Cells[currentRow, 8].Value = booking.PickupAddress;
-                            sheet.Cells[currentRow, 9].Value = booking.SpecialRequest;
-                            sheet.Cells[currentRow, 10].Value = booking.SpecialRequestRoom;
                             sheet.Cells[currentRow, 11].Value = "OS" + booking.Id;
-                            sheet.Cells[currentRow, 26].Value = name;//Work around cho cột merged name không hiển thị hết khi nội dung quá dài
-                            sheet.Cells[templateRow, 9, templateRow, 10].Merge = true;
-                            if (!CanViewSpecialRequestFood)
+                            sheet.Cells[currentRow, 26].Value = name;//Work around cho cột merged name không hiển thị hết khi nội dung quá dài  
+                            if (CanViewSpecialRequestFood && CanViewSpecialRequestFood)
                             {
-                                sheet.Cells[templateRow, 9, templateRow, 10].Merge = true;
+                                sheet.Cells[currentRow, 9].Value = booking.SpecialRequest;
+                                sheet.Cells[currentRow, 10].Value = booking.SpecialRequestRoom;
                             }
-
-                            if (!CanViewSpecialRequestRoom)
+                            else
                             {
-                                sheet.Column(10).Hidden = true;
+                                if (CanViewSpecialRequestFood)
+                                {
+                                    sheet.Cells[currentRow, 9, currentRow, 10].Merge = true;
+                                    sheet.Cells[currentRow, 9].Value = booking.SpecialRequest;
+                                }
+
+                                if (CanViewSpecialRequestRoom)
+                                {
+                                    sheet.Cells[currentRow, 9, currentRow, 10].Merge = true;
+                                    sheet.Cells[currentRow, 9].Value = booking.SpecialRequestRoom;
+                                }
                             }
                             currentRow++;
                             index++;
@@ -506,11 +535,33 @@ namespace Portal.Modules.OrientalSails.Web.Admin.WebMethod
                         .Future().ToList()
                         .Where(x => x.Trip.NumberOfDay > 2)
                         .ToList();
+                    titleRow = currentRow + 2;
                     templateRow = currentRow + 4;
                     currentRow = templateRow + 1;
                     totalRow = templateRow + listBooking.Count();
                     index = 1;
                     sheet.InsertRow(currentRow, listBooking.Count, currentRow - 1);
+                    if (CanViewSpecialRequestFood && CanViewSpecialRequestFood)
+                    {
+                        sheet.Cells[titleRow, 9, titleRow + 1, 9].Merge = true;
+                        sheet.Cells[titleRow, 10, titleRow + 1, 10].Merge = true;
+                        sheet.Cells[titleRow, 9].Value = "Special Request Food";
+                        sheet.Cells[titleRow, 10].Value = "Special Request Room";
+                    }
+                    else
+                    {
+                        if (CanViewSpecialRequestFood)
+                        {
+                            sheet.Cells[titleRow, 9, titleRow + 1, 10].Merge = true;
+                            sheet.Cells[titleRow, 9].Value = "Special Request Food";
+                        }
+
+                        if (CanViewSpecialRequestRoom)
+                        {
+                            sheet.Cells[titleRow, 9, titleRow + 1, 10].Merge = true;
+                            sheet.Cells[titleRow, 9].Value = "Special Request Room";
+                        }
+                    }
                     for (int i = 0; i < listBooking.Count; i++)
                     {
                         var booking = listBooking[i] as Booking;
@@ -525,19 +576,26 @@ namespace Portal.Modules.OrientalSails.Web.Admin.WebMethod
                             sheet.Cells[currentRow, 6].Value = booking.Baby;
                             sheet.Cells[currentRow, 7].Value = booking.Trip.TripCode;
                             sheet.Cells[currentRow, 8].Value = booking.PickupAddress;
-                            sheet.Cells[currentRow, 9].Value = booking.SpecialRequest;
-                            sheet.Cells[currentRow, 10].Value = booking.SpecialRequestRoom;
                             sheet.Cells[currentRow, 11].Value = "OS" + booking.Id;
                             sheet.Cells[currentRow, 26].Value = name;//Work around cho cột merged name không hiển thị hết khi nội dung quá dài
-                            sheet.Cells[templateRow, 9, templateRow, 10].Merge = true;
-                            if (!CanViewSpecialRequestFood)
+                            if (CanViewSpecialRequestFood && CanViewSpecialRequestFood)
                             {
-                                sheet.Column(9).Hidden = true;
+                                sheet.Cells[currentRow, 9].Value = booking.SpecialRequest;
+                                sheet.Cells[currentRow, 10].Value = booking.SpecialRequestRoom;
                             }
-
-                            if (!CanViewSpecialRequestRoom)
+                            else
                             {
-                                sheet.Column(10).Hidden = true;
+                                if (CanViewSpecialRequestFood)
+                                {
+                                    sheet.Cells[currentRow, 9, currentRow, 10].Merge = true;
+                                    sheet.Cells[currentRow, 9].Value = booking.SpecialRequest;
+                                }
+
+                                if (CanViewSpecialRequestRoom)
+                                {
+                                    sheet.Cells[currentRow, 9, currentRow, 10].Merge = true;
+                                    sheet.Cells[currentRow, 9].Value = booking.SpecialRequestRoom;
+                                }
                             }
                             currentRow++;
                             index++;
@@ -665,12 +723,34 @@ namespace Portal.Modules.OrientalSails.Web.Admin.WebMethod
                         FillOpt(listOpt_Distinct, sheet, ref currentRow);
                         //--
                         //Export booking trong ngày
+                        int titleRow = currentRow;
                         currentRow = currentRow + 2;//Chuyển current row đến templaterow booking
                         int templateRow = currentRow;
                         int totalRow = templateRow + listBooking.Count();
                         int index = 1;
                         currentRow++;//Chuyển current row đến trước template row để bắt đầu coppyrow
                         sheet.InsertRow(currentRow, listBooking.Count, templateRow);
+                        if (CanViewSpecialRequestFood && CanViewSpecialRequestFood)
+                        {
+                            sheet.Cells[titleRow, 9, titleRow + 1, 9].Merge = true;
+                            sheet.Cells[titleRow, 10, titleRow + 1, 10].Merge = true;
+                            sheet.Cells[titleRow, 9].Value = "Special Request Food";
+                            sheet.Cells[titleRow, 10].Value = "Special Request Room";
+                        }
+                        else
+                        {
+                            if (CanViewSpecialRequestFood)
+                            {
+                                sheet.Cells[titleRow, 9, titleRow + 1, 10].Merge = true;
+                                sheet.Cells[titleRow, 9].Value = "Special Request Food";
+                            }
+
+                            if (CanViewSpecialRequestRoom)
+                            {
+                                sheet.Cells[titleRow, 9, titleRow + 1, 10].Merge = true;
+                                sheet.Cells[titleRow, 9].Value = "Special Request Room";
+                            }
+                        }
                         for (int i = 0; i < listBooking.Count; i++)
                         {
                             var booking = listBooking[i] as Booking;
@@ -685,19 +765,26 @@ namespace Portal.Modules.OrientalSails.Web.Admin.WebMethod
                                 sheet.Cells[currentRow, 6].Value = booking.Baby;
                                 sheet.Cells[currentRow, 7].Value = booking.Trip.TripCode;
                                 sheet.Cells[currentRow, 8].Value = booking.PickupAddress;
-                                sheet.Cells[currentRow, 9].Value = booking.SpecialRequest;
-                                sheet.Cells[currentRow, 10].Value = booking.SpecialRequestRoom;
                                 sheet.Cells[currentRow, 11].Value = "OS" + booking.Id;
                                 sheet.Cells[currentRow, 26].Value = name;//Work around cho cột merged name không hiển thị hết khi nội dung quá dài
-                                sheet.Cells[templateRow, 9, templateRow, 10].Merge = true;
-                                if (!CanViewSpecialRequestFood)
+                                if (CanViewSpecialRequestFood && CanViewSpecialRequestFood)
                                 {
-                                    sheet.Column(9).Hidden = true;
+                                    sheet.Cells[currentRow, 9].Value = booking.SpecialRequest;
+                                    sheet.Cells[currentRow, 10].Value = booking.SpecialRequestRoom;
                                 }
-
-                                if (!CanViewSpecialRequestRoom)
+                                else
                                 {
-                                    sheet.Column(10).Hidden = true;
+                                    if (CanViewSpecialRequestFood)
+                                    {
+                                        sheet.Cells[currentRow, 9, currentRow, 10].Merge = true;
+                                        sheet.Cells[currentRow, 9].Value = booking.SpecialRequest;
+                                    }
+
+                                    if (CanViewSpecialRequestRoom)
+                                    {
+                                        sheet.Cells[currentRow, 9, currentRow, 10].Merge = true;
+                                        sheet.Cells[currentRow, 9].Value = booking.SpecialRequestRoom;
+                                    }
                                 }
                                 currentRow++;
                                 index++;
@@ -715,11 +802,33 @@ namespace Portal.Modules.OrientalSails.Web.Admin.WebMethod
                             .Where(x => x.Trip.NumberOfDay > 2)
                             .ToList();
 
+                        titleRow = currentRow + 2;
                         templateRow = currentRow + 4;
                         currentRow = templateRow + 1;
                         totalRow = templateRow + listBooking.Count();
                         index = 1;
                         sheet.InsertRow(currentRow, listBooking.Count, currentRow - 1);
+                        if (CanViewSpecialRequestFood && CanViewSpecialRequestFood)
+                        {
+                            sheet.Cells[titleRow, 9, titleRow + 1, 9].Merge = true;
+                            sheet.Cells[titleRow, 10, titleRow + 1, 10].Merge = true;
+                            sheet.Cells[titleRow, 9].Value = "Special Request Food";
+                            sheet.Cells[titleRow, 10].Value = "Special Request Room";
+                        }
+                        else
+                        {
+                            if (CanViewSpecialRequestFood)
+                            {
+                                sheet.Cells[titleRow, 9, titleRow + 1, 10].Merge = true;
+                                sheet.Cells[titleRow, 9].Value = "Special Request Food";
+                            }
+
+                            if (CanViewSpecialRequestRoom)
+                            {
+                                sheet.Cells[titleRow, 9, titleRow + 1, 10].Merge = true;
+                                sheet.Cells[titleRow, 9].Value = "Special Request Room";
+                            }
+                        }
                         for (int i = 0; i < listBooking.Count; i++)
                         {
                             var booking = listBooking[i] as Booking;
@@ -734,25 +843,31 @@ namespace Portal.Modules.OrientalSails.Web.Admin.WebMethod
                                 sheet.Cells[currentRow, 6].Value = booking.Baby;
                                 sheet.Cells[currentRow, 7].Value = booking.Trip.TripCode;
                                 sheet.Cells[currentRow, 8].Value = booking.PickupAddress;
-                                sheet.Cells[currentRow, 9].Value = booking.SpecialRequest;
-                                sheet.Cells[currentRow, 10].Value = booking.SpecialRequestRoom;
                                 sheet.Cells[currentRow, 11].Value = "OS" + booking.Id;
                                 sheet.Cells[currentRow, 26].Value = name;//Work around cho cột merged name không hiển thị hết khi nội dung quá dài
-   
-                                if (!CanViewSpecialRequestFood)
+                                if (CanViewSpecialRequestFood && CanViewSpecialRequestFood)
                                 {
-                                    sheet.Cells[currentRow, 9, currentRow, 10].Merge = true;
+                                    sheet.Cells[currentRow, 9].Value = booking.SpecialRequest;
+                                    sheet.Cells[currentRow, 10].Value = booking.SpecialRequestRoom;
                                 }
-
-                                if (!CanViewSpecialRequestRoom)
+                                else
                                 {
-                                    sheet.Cells[currentRow, 10, currentRow, 9].Merge = true;
+                                    if (CanViewSpecialRequestFood)
+                                    {
+                                        sheet.Cells[currentRow, 9, currentRow, 10].Merge = true;
+                                        sheet.Cells[currentRow, 9].Value = booking.SpecialRequest;
+                                    }
+
+                                    if (CanViewSpecialRequestRoom)
+                                    {
+                                        sheet.Cells[currentRow, 9, currentRow, 10].Merge = true;
+                                        sheet.Cells[currentRow, 9].Value = booking.SpecialRequestRoom;
+                                    }
                                 }
                                 currentRow++;
                                 index++;
                             }
                         }
-                        sheet.Cells[templateRow - 1, 9, templateRow, 9].Merge = false;
                         sheet.DeleteRow(templateRow);
                         sheet.Cells[totalRow, 4].Value = listBooking.Sum(x => x.Adult);
                         sheet.Cells[totalRow, 5].Value = listBooking.Sum(x => x.Child);
