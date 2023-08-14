@@ -576,7 +576,6 @@
                 <hr />
                 <asp:Repeater ID="rptAdults" runat="server" OnItemDataBound="rptAdults_ItemDataBound" OnItemCommand="rptAdults_ItemCommand">
                     <ItemTemplate>
-                        <asp:HiddenField ID="hiddenAdultCustomerId" runat="server" Value='<%# DataBinder.Eval(Container.DataItem, "Id") %>' />
                         <div class="row">
                             <div class="col-xs-1" style="width: 6%">
                                 <label for="client1">Adult <%# Container.ItemIndex + 1 %></label>
@@ -593,7 +592,6 @@
                 <hr />
                 <asp:Repeater ID="rptChildren" runat="server" OnItemDataBound="rptChildren_ItemDataBound" OnItemCommand="rptChildren_ItemCommand">
                     <ItemTemplate>
-                        <asp:HiddenField ID="hiddenChildCustomerId" runat="server" Value='<%# DataBinder.Eval(Container.DataItem, "Id") %>' />
                         <div class="row">
                             <div class="col-xs-1" style="width: 6%">
                                 <label for="client1">Child <%# Container.ItemIndex + 1 %></label>
@@ -610,7 +608,6 @@
                 <hr />
                 <asp:Repeater ID="rptBabies" runat="server" OnItemDataBound="rptBabies_ItemDataBound" OnItemCommand="rptBabies_ItemCommand">
                     <ItemTemplate>
-                        <asp:HiddenField ID="hiddenBabyCustomerId" runat="server" Value='<%# DataBinder.Eval(Container.DataItem, "Id") %>' />
                         <div class="row">
                             <div class="col-xs-1" style="width: 6%">
                                 <label for="client1">Baby <%# Container.ItemIndex + 1 %></label>
