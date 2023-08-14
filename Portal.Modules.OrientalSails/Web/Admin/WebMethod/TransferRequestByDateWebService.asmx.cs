@@ -655,7 +655,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin.WebMethod
                         var guides = expenses.Where(x => x.Type == "Guide" && (x.Cruise.Code.Contains("OS") || x.Cruise.Code.Contains("STL"))).Select(x => { return (x.Guide?.Name ?? "") + " : " + (NumberUtil.FormatPhoneNumber(x.Guide?.Phone ?? "")); }).Where(x => x != " : ");
                         sheet.Cells[currentRow, 9].Value = string.Join("\r\n", guides);
                     }
-
+                    sheet.Cells[currentRow, 11].Value = booking.BookingIdOS;
                     sheet.Cells[currentRow, 26].Value = name;//Work around cho cột merged name không hiển thị hết khi nội dung quá dài
                     currentRow++;
                     index++;

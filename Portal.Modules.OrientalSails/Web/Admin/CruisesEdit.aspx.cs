@@ -3,11 +3,11 @@ using System.Globalization;
 using System.Web.UI.WebControls;
 using CMS.Web.Util;
 using Portal.Modules.OrientalSails.Domain;
+using Portal.Modules.OrientalSails.Web.Admin.Enums;
 using Portal.Modules.OrientalSails.Web.UI;
 
 namespace Portal.Modules.OrientalSails.Web.Admin
 {
-
     public partial class CruisesEdit : SailsAdminBase
     {
         private Cruise _cruise;
@@ -34,6 +34,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin
             if (!IsPostBack)
             {
                 BindTrips();
+                BindCruiseType();
             }
         }
 
@@ -45,6 +46,13 @@ namespace Portal.Modules.OrientalSails.Web.Admin
             ddlGroup.DataBind();
         }
 
+        private void BindCruiseType()
+        {
+            ddlCruiseType.Items.Insert(0, new ListItem(CruiseType.Cabin.ToString(), 1.ToString()));
+            ddlCruiseType.Items.Insert(1, new ListItem(CruiseType.Seating.ToString(), 2.ToString()));
+            ddlCruiseType.SelectedValue = ((int)_cruise.CruiseType).ToString();
+        }
+
         private void BindCruise()
         {
             txtCode.Text = _cruise.Code;
@@ -52,6 +60,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin
             textBoxName.Text = _cruise.Name;
             txtDescription.Text = _cruise.Description;
             txtFloor.Text = _cruise.NumberOfFloors.ToString();
+            txtNumberOfSeat.Text = _cruise.NumberOfSeat.ToString();
             if (_cruise.Group != null) ddlGroup.SelectedValue = _cruise.Group.Id.ToString();
             if (!string.IsNullOrEmpty(_cruise.RoomPlan))
             {
@@ -96,6 +105,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin
             _cruise.CruiseCode = txtCruiseCode.Text;
             _cruise.Name = textBoxName.Text;
             _cruise.Description = txtDescription.Text;
+            _cruise.NumberOfSeat = Convert.ToInt32(txtNumberOfSeat.Text);
             if (!string.IsNullOrEmpty(ddlGroup.SelectedValue)) _cruise.Group = Module.GetById<QCruiseGroup>(Convert.ToInt32(ddlGroup.SelectedValue));
             if (!string.IsNullOrWhiteSpace(txtFloor.Text)) _cruise.NumberOfFloors = Convert.ToInt32(txtFloor.Text);
             if (fileRoomPlan.HasFile)
@@ -104,6 +114,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin
             }
             _cruise.IsLock = chkLock.Checked;
             _cruise.LockType = ddlLockType.SelectedValue;
+            _cruise.CruiseType = (CruiseType)Convert.ToInt32(ddlCruiseType.SelectedValue);
             if (!string.IsNullOrEmpty(txtLockFrom.Text)) _cruise.LockFromDate = DateTime.ParseExact(txtLockFrom.Text, "dd/MM/yyyy",
                   CultureInfo.InvariantCulture);
             if (!string.IsNullOrEmpty(txtLockTo.Text)) _cruise.LockToDate = DateTime.ParseExact(txtLockTo.Text, "dd/MM/yyyy",

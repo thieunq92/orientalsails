@@ -14,18 +14,21 @@
         <div class="row">
             <div class="col-xs-1">
                 Name
+           
             </div>
             <div class="col-xs-2">
                 <asp:TextBox ID="textBoxName" runat="server" CssClass="form-control" placeholder="Name"></asp:TextBox>
             </div>
             <div class="col-xs-1">
                 Số hiệu tàu
+           
             </div>
             <div class="col-xs-2">
                 <asp:TextBox ID="txtCruiseCode" runat="server" CssClass="form-control" placeholder="Số hiệu tàu"></asp:TextBox>
             </div>
             <div class="col-xs-1">
                 Cruise code
+           
             </div>
             <div class="col-xs-2">
                 <asp:TextBox ID="txtCode" runat="server" CssClass="form-control" placeholder="Cruise code"></asp:TextBox>
@@ -37,6 +40,7 @@
         <div class="row">
             <div class="col-xs-1">
                 Number of floors
+           
             </div>
             <div class="col-xs-1">
                 <asp:TextBox ID="txtFloor" runat="server" CssClass="form-control" placeholder="Number of floors"></asp:TextBox>
@@ -50,6 +54,7 @@
             </div>
             <div class="col-xs-1">
                 Group
+           
             </div>
             <div class="col-xs-1">
                 <asp:DropDownList ID="ddlGroup" runat="server" CssClass="form-control" Width="390px">
@@ -61,6 +66,7 @@
         <div class="row">
             <div class="col-xs-1">
                 Lock (disable)
+               
                 <asp:CheckBox runat="server" ID="chkLock" />
             </div>
             <div class="col-xs-1">
@@ -74,6 +80,22 @@
             </div>
             <div class="col-xs-1">
                 <asp:TextBox runat="server" data-control="datetimepicker" autocomplete="off" placeholder="To date" ID="txtLockTo" CssClass="form-control"></asp:TextBox>
+            </div>
+            <div class="col-xs-1">
+            
+            </div>
+            <div class="col-xs-1">
+                Cruise Type
+            </div>
+            <div class="col-xs-3">
+                <asp:DropDownList ID="ddlCruiseType" runat="server" CssClass="form-control" Width="390px">
+                </asp:DropDownList>
+            </div>
+            <div class="col-xs-1">
+                Number Of Seat
+            </div>
+            <div class="col-xs-1">
+                <asp:TextBox runat="server" autocomplete="off" ID="txtNumberOfSeat" placeholder="Number Of Seat" CssClass="form-control"></asp:TextBox>
             </div>
         </div>
     </div>
@@ -101,6 +123,7 @@
         <div class="row">
             <div class="col-xs-12">
                 Description
+           
             </div>
         </div>
         <div class="row">

@@ -637,6 +637,7 @@
     <Compile Include="Web\Admin\DocumentViewer.aspx.designer.cs">
       <DependentUpon>DocumentViewer.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Web\Admin\Enums\CruiseType.cs" />
     <Compile Include="Web\Admin\ExpenseHistory.aspx.cs">
       <DependentUpon>ExpenseHistory.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1136,13 +1137,6 @@
     </Compile>
     <Compile Include="Web\Admin\DefaultSetting.aspx.designer.cs">
       <DependentUpon>DefaultSetting.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Web\Admin\EditMeeting.aspx.cs">
-      <DependentUpon>EditMeeting.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Web\Admin\EditMeeting.aspx.designer.cs">
-      <DependentUpon>EditMeeting.aspx</DependentUpon>
     </Compile>
     <Compile Include="Web\Admin\ExchangeRate.aspx.cs">
       <DependentUpon>ExchangeRate.aspx</DependentUpon>
@@ -1996,7 +1990,6 @@
     <Content Include="Web\Admin\HaiPhongExpenses.aspx" />
     <Content Include="Web\Admin\SearchOldBooking.aspx" />
     <Content Include="Web\Admin\DocumentManage.aspx" />
-    <Content Include="Web\Admin\EditMeeting.aspx" />
     <Content Include="Web\Admin\FeedbackResponse.aspx" />
     <Content Include="Web\Admin\Home.aspx" />
     <Content Include="Web\Admin\InspectionReport.aspx" />
@@ -2353,6 +2346,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />

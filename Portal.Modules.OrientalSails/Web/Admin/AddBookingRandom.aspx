@@ -6,6 +6,7 @@
         <div class="row">
             <div class="col-xs-1">
                 Start date
+           
             </div>
             <div class="col-xs-2 --no-padding-left">
                 <asp:TextBox ID="txtDate" runat="server" data-control="datetimepicker" class="form-control" placeholder="Start date (dd/mm/yyyy)" AutoPostBack="true" OnTextChanged="txtDate_TextChanged" autocomplete="off">
@@ -13,6 +14,7 @@
             </div>
             <div class="col-xs-1">
                 Trip
+           
             </div>
             <div class="col-xs-4 --no-padding-left">
                 <asp:UpdatePanel runat="server" ID="updatePanel2">
@@ -24,7 +26,7 @@
                         <asp:AsyncPostBackTrigger ControlID="txtDate" EventName="TextChanged" />
                     </Triggers>
                 </asp:UpdatePanel>
-               
+
             </div>
         </div>
     </div>
@@ -32,6 +34,7 @@
         <div class="row">
             <div class="col-xs-1">
                 Agency
+           
             </div>
             <div class="col-xs-3 --no-padding-left">
                 <input type="text" name="txtAgency" id="<%= agencySelector.ClientID %>nameid" class="form-control"
@@ -68,7 +71,7 @@
                         <tr class="active">
                             <th>Tên tàu
                             </th>
-                            <th>Số phòng trống
+                            <th>Số (phòng / ghế) trống
                             </th>
                             <th>Trong đó
                             </th>
@@ -205,6 +208,38 @@
                             </asp:Repeater>
                         </asp:PlaceHolder>
                     </asp:PlaceHolder>
+                    <asp:PlaceHolder ID="phSeatingDeclaration" runat="server" Visible="false">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-2">
+                                    <asp:Label ID="lblAdults" runat="server">Adults</asp:Label>
+                                </div>
+                                <div class="col-xs-1 nopadding-left nopadding-right">
+                                    <asp:TextBox ID="txtAdults" runat="server" type="number" CssClass="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-2">
+                                    <asp:Label ID="lblChilds" runat="server">Childs</asp:Label>
+                                </div>
+                                <div class="col-xs-1 nopadding-left nopadding-right">
+                                    <asp:TextBox ID="txtChilds" runat="server" type="number" CssClass="form-control"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-2">
+                                    <asp:Label ID="lblBabies" runat="server">Babies</asp:Label>
+                                </div>
+                                <div class="col-xs-1 nopadding-left nopadding-right">
+                                    <asp:TextBox ID="txtBabies" runat="server" type="number" CssClass="form-control"/>
+                                </div>
+                            </div>
+                        </div>
+                    </asp:PlaceHolder>
                 </ContentTemplate>
                 <Triggers>
                     <asp:AsyncPostBackTrigger ControlID="txtDate" EventName="TextChanged" />
@@ -241,9 +276,9 @@
         });
         function closePoup(refesh) {
             $("#osModal").modal('hide');
-            if (refesh===1) {
+            if (refesh === 1) {
                 var date = $('#<%=hidDateSelect.ClientID%>').val();
-                window.location.href = window.location.href +"&date=" + date + "&cruiseId=" + $('#<%=hidCruiseSelect.ClientID%>').val()
+                window.location.href = window.location.href + "&date=" + date + "&cruiseId=" + $('#<%=hidCruiseSelect.ClientID%>').val()
             }
         }
         function viewRoomPlan() {
@@ -257,40 +292,40 @@
             $("#aspnetForm").validate({
                 rules: {
                     <%=txtDate.UniqueID%>: {
-                        required: true,
-                    },
-                    txtAgency:{
-                        required: true,
-                    },
+                required: true,
+            },
+                txtAgency: {
+                required: true,
+            },
                 },
-                messages: {
+            messages: {
                     <%=txtDate.UniqueID%>: {
-                        required: "Yêu cầu chọn ngày khởi hành",
-                    },
-                    txtAgency:{
-                        required: "Yêu cầu chọn Agency",
-                    },
+            required: "Yêu cầu chọn ngày khởi hành",
+        },
+            txtAgency: {
+            required: "Yêu cầu chọn Agency",
+        },
                 },
-                errorElement: "em",
-                errorPlacement: function (error, element) {
-                    error.addClass("help-block");
+            errorElement: "em",
+            errorPlacement: function (error, element) {
+                error.addClass("help-block");
 
-                    if (element.prop("type") === "checkbox") {
-                        error.insertAfter(element.parent("label"));
-                    } else {
-                        error.insertAfter(element);
-                    }
-
-                    if (element.siblings("span").prop("class") === "input-group-addon") {
-                        error.insertAfter(element.parent()).css({ color: "#a94442" });
-                    }
-                },
-                highlight: function (element, errorClass, validClass) {
-                    $(element).closest("div").addClass("has-error").removeClass("has-success");
-                },
-                unhighlight: function (element, errorClass, validClass) {
-                    $(element).closest("div").removeClass("has-error");
+                if (element.prop("type") === "checkbox") {
+                    error.insertAfter(element.parent("label"));
+                } else {
+                    error.insertAfter(element);
                 }
+
+                if (element.siblings("span").prop("class") === "input-group-addon") {
+                    error.insertAfter(element.parent()).css({ color: "#a94442" });
+                }
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).closest("div").addClass("has-error").removeClass("has-success");
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).closest("div").removeClass("has-error");
+            }
             });
         });
     </script>

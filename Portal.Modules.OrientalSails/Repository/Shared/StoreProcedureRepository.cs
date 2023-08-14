@@ -23,19 +23,19 @@ namespace Portal.Modules.OrientalSails.Repository.Shared
             query.SetParameter("to", to);
             return query.List<object[]>().Select(o => new SalesMonthSummaryDTO
             {
-                NumberOfBookings = (int)o[0]
+                NumberOfBookings = (int?)o[0] ?? 0
                 ,
-                NumberOfPax2Days = (int)o[1]
+                NumberOfPax2Days = (int?)o[1] ?? 0
                 ,
-                NumberOfPax3Days = (int)o[2]
+                NumberOfPax3Days = (int?)o[2] ?? 0
                 ,
-                Revenue = (decimal)o[3]
+                Revenue = (decimal?)o[3] ?? 0
                 ,
-                MeetingReports = (int)o[4]
+                MeetingReports = (int?)o[4] ?? 0
                 ,
-                SalesId = (int)o[5]
+                SalesId = (int?)o[5] ?? 0
                 ,
-                SalesUserName = (string)o[6]
+                SalesUserName = (string)o[6] ?? ""
                 ,
             });
         }

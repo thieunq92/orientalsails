@@ -159,6 +159,15 @@ namespace Portal.Modules.OrientalSails.Web.Admin
         protected global::System.Web.UI.WebControls.Literal litPax;
 
         /// <summary>
+        /// plhNumberOfCabin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder plhNumberOfCabin;
+
+        /// <summary>
         /// litCabins control.
         /// </summary>
         /// <remarks>
@@ -456,6 +465,15 @@ namespace Portal.Modules.OrientalSails.Web.Admin
         protected global::System.Web.UI.WebControls.TextBox txtCustomerInfo;
 
         /// <summary>
+        /// plhCruiseCabinControlPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder plhCruiseCabinControlPanel;
+
+        /// <summary>
         /// btnAddRoom control.
         /// </summary>
         /// <remarks>
@@ -483,6 +501,51 @@ namespace Portal.Modules.OrientalSails.Web.Admin
         protected global::System.Web.UI.WebControls.Button btnDeleteRoomSelect;
 
         /// <summary>
+        /// plhCruiseSeatingControlPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder plhCruiseSeatingControlPanel;
+
+        /// <summary>
+        /// btnAddAdult control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAddAdult;
+
+        /// <summary>
+        /// btnAddChild control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAddChild;
+
+        /// <summary>
+        /// btnAddBaby control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAddBaby;
+
+        /// <summary>
+        /// plhCruiseCabinCustomer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder plhCruiseCabinCustomer;
+
+        /// <summary>
         /// rptRoomList control.
         /// </summary>
         /// <remarks>
@@ -490,6 +553,42 @@ namespace Portal.Modules.OrientalSails.Web.Admin
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptRoomList;
+
+        /// <summary>
+        /// plhCruiseSeatingCustomer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder plhCruiseSeatingCustomer;
+
+        /// <summary>
+        /// rptAdults control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptAdults;
+
+        /// <summary>
+        /// rptChildren control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptChildren;
+
+        /// <summary>
+        /// rptBabies control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptBabies;
 
         /// <summary>
         /// plhAddRoom control.

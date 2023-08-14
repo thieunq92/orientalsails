@@ -30,6 +30,8 @@ namespace CMS.Core.Service
         /// <param name="assembly"></param>
         public void AddAssembly(Assembly assembly)
         {
+
+
             Configuration nhConfiguration = this._kernel[typeof(Configuration)] as Configuration;
             nhConfiguration.AddAssembly(assembly);
             ISessionFactory newSessionFactory = nhConfiguration.BuildSessionFactory();

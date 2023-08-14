@@ -358,8 +358,15 @@ namespace Portal.Modules.OrientalSails.Repository
                 var query = QueryOver.Of<Booking>().Where(x => x.Deleted == false);
                 if (date != null)
                 {
-                    query.Where(r => (r.EndDate > date && r.StartDate > date.Value.AddDays(-1) &&
-                                      r.StartDate < date.Value.AddDays(1)) || (r.StartDate < date && r.EndDate > date));
+                    if (cruise.CruiseType == Web.Admin.Enums.CruiseType.Cabin)
+                    {
+                        query.Where(r => (r.EndDate > date && r.StartDate > date.Value.AddDays(-1) &&
+                                          r.StartDate < date.Value.AddDays(1)) || (r.StartDate < date && r.EndDate > date));
+                    }
+                    else if (cruise.CruiseType == Web.Admin.Enums.CruiseType.Seating)
+                    {
+                        query.Where(r => (r.EndDate == date && r.StartDate == date.Value));
+                    }
                 }
                 if (cruise != null)
                 {

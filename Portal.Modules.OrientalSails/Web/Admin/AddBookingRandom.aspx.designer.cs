@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Portal.Modules.OrientalSails.Web.Admin {
-    
-    
-    public partial class AddBookingRandom {
-        
+namespace Portal.Modules.OrientalSails.Web.Admin
+{
+
+
+    public partial class AddBookingRandom
+    {
+
         /// <summary>
         /// txtDate control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDate;
-        
+
         /// <summary>
         /// updatePanel2 control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel updatePanel2;
-        
+
         /// <summary>
         /// ddlTrips control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlTrips;
-        
+
         /// <summary>
         /// agencySelector control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputHidden agencySelector;
-        
+
         /// <summary>
         /// txtAgencyCode control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtAgencyCode;
-        
+
         /// <summary>
         /// rptExtraServices control.
         /// </summary>
@@ -65,7 +67,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptExtraServices;
-        
+
         /// <summary>
         /// ddlCruises control.
         /// </summary>
@@ -74,7 +76,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlCruises;
-        
+
         /// <summary>
         /// updatePanel1 control.
         /// </summary>
@@ -83,7 +85,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel updatePanel1;
-        
+
         /// <summary>
         /// rptCruises control.
         /// </summary>
@@ -92,7 +94,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptCruises;
-        
+
         /// <summary>
         /// plhPending control.
         /// </summary>
@@ -101,7 +103,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.PlaceHolder plhPending;
-        
+
         /// <summary>
         /// rptPendings control.
         /// </summary>
@@ -110,7 +112,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptPendings;
-        
+
         /// <summary>
         /// plhCruiseName control.
         /// </summary>
@@ -119,7 +121,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.PlaceHolder plhCruiseName;
-        
+
         /// <summary>
         /// litCurrentCruise control.
         /// </summary>
@@ -128,7 +130,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal litCurrentCruise;
-        
+
         /// <summary>
         /// chkCharter control.
         /// </summary>
@@ -137,7 +139,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox chkCharter;
-        
+
         /// <summary>
         /// rptClass control.
         /// </summary>
@@ -146,7 +148,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptClass;
-        
+
         /// <summary>
         /// hidCruiseSelect control.
         /// </summary>
@@ -155,7 +157,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hidCruiseSelect;
-        
+
         /// <summary>
         /// hidDateSelect control.
         /// </summary>
@@ -164,7 +166,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hidDateSelect;
-        
+
         /// <summary>
         /// phRoomAvailableNight2 control.
         /// </summary>
@@ -173,7 +175,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.PlaceHolder phRoomAvailableNight2;
-        
+
         /// <summary>
         /// rptRoomAvailableNight2 control.
         /// </summary>
@@ -182,7 +184,70 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptRoomAvailableNight2;
-        
+
+        /// <summary>
+        /// phSeatingDeclaration control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder phSeatingDeclaration;
+
+        /// <summary>
+        /// lblAdults control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAdults;
+
+        /// <summary>
+        /// txtAdults control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtAdults;
+
+        /// <summary>
+        /// lblChilds control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblChilds;
+
+        /// <summary>
+        /// txtChilds control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtChilds;
+
+        /// <summary>
+        /// lblBabies control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblBabies;
+
+        /// <summary>
+        /// txtBabies control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtBabies;
+
         /// <summary>
         /// btnSave control.
         /// </summary>

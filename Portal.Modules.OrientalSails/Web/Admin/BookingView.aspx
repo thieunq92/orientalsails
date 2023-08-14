@@ -120,14 +120,15 @@
                     <asp:Literal ID="litPax" runat="server"></asp:Literal>
                     <i class="fa fa-info-circle fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="<%= PaxGetDetails() %>"></i>
                 </div>
-                <div class="col-xs-1 nopadding-left nopadding-right">
-                    Number Of Cabin
-               
-                </div>
-                <div class="col-xs-1 nopadding-left nopadding-right" style="width: 3%">
-                    <asp:Literal ID="litCabins" runat="server"></asp:Literal>
-                    <i class="fa fa-info-circle fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="right auto" title="<%= CabinGetDetails() %>"></i>
-                </div>
+                <asp:PlaceHolder ID="plhNumberOfCabin" runat="server">
+                    <div class="col-xs-1 nopadding-left nopadding-right">
+                        Number Of Cabin           
+                    </div>
+                    <div class="col-xs-1 nopadding-left nopadding-right" style="width: 3%">
+                        <asp:Literal ID="litCabins" runat="server"></asp:Literal>
+                        <i class="fa fa-info-circle fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="right auto" title="<%= CabinGetDetails() %>"></i>
+                    </div>
+                </asp:PlaceHolder>
             </div>
         </div>
         <div class="form-group">
@@ -408,17 +409,24 @@
         <br />
         <div class="row">
             <div class="col-xs-12">
-                <% if (UserIdentity.UserName != "captain.os1")
-                    { %>
-                <%--                <a href="RoomSelector.aspx?NodeId=1&SectionId=15&bookingid=<%= Booking.Id %>" class="btn btn-primary" id="roomorganizer">Room Organizer</a>--%>
-                <asp:Button ID="btnAddRoom" runat="server" Text="Add Room"
-                    CssClass="btn btn-primary" />
-                <asp:Button ID="btnDeleteAllRoomNA" runat="server" Text="Delete all room N/A" OnClick="btnDeleteAllRoomNA_OnClick"
-                    CssClass="btn btn-warning" />
+                <asp:PlaceHolder ID="plhCruiseCabinControlPanel" runat="server">
+                    <% if (UserIdentity.UserName != "captain.os1")
+                        { %>
+                    <%--                <a href="RoomSelector.aspx?NodeId=1&SectionId=15&bookingid=<%= Booking.Id %>" class="btn btn-primary" id="roomorganizer">Room Organizer</a>--%>
+                    <asp:Button ID="btnAddRoom" runat="server" Text="Add Room"
+                        CssClass="btn btn-primary" />
+                    <asp:Button ID="btnDeleteAllRoomNA" runat="server" Text="Delete all room N/A" OnClick="btnDeleteAllRoomNA_OnClick"
+                        CssClass="btn btn-warning" />
 
-                <asp:Button ID="btnDeleteRoomSelect" runat="server" Text="Delete all room select" OnClick="btnDeleteRoomSelect_OnClick"
-                    CssClass="btn btn-danger" OnClientClick="return confirm('Bạn có chắc chắn muốn xóa các phòng đã chọn, mọi dữ liệu khách theo phòng sẽ bị xóa?')" />
-                <%} %>
+                    <asp:Button ID="btnDeleteRoomSelect" runat="server" Text="Delete all room select" OnClick="btnDeleteRoomSelect_OnClick"
+                        CssClass="btn btn-danger" OnClientClick="return confirm('Bạn có chắc chắn muốn xóa các phòng đã chọn, mọi dữ liệu khách theo phòng sẽ bị xóa?')" />
+                    <%} %>
+                </asp:PlaceHolder>
+                <asp:PlaceHolder ID="plhCruiseSeatingControlPanel" runat="server">
+                    <asp:Button ID="btnAddAdult" runat="server" Text="Add Adult" CssClass="btn btn-primary" OnClick="btnAddAdult_Click" />
+                    <asp:Button ID="btnAddChild" runat="server" Text="Add Child" CssClass="btn btn-warning" OnClick="btnAddChild_Click" />
+                    <asp:Button ID="btnAddBaby" runat="server" Text="Add Baby" CssClass="btn btn-danger" OnClick="btnAddBaby_Click" />
+                </asp:PlaceHolder>
             </div>
 
         </div>
@@ -426,141 +434,196 @@
 
     <div class="customerinfo-panel">
         <div class="panel panel-default">
-            <asp:Repeater ID="rptRoomList" runat="server" OnItemDataBound="rptRoomList_ItemDataBound"
-                OnItemCommand="rptRoomList_ItemCommand">
-                <ItemTemplate>
-                    <div class="roominfor-hiddenpanel">
-                        <asp:HiddenField ID="hiddenBookingRoomId" runat="server" Value='<%# DataBinder.Eval(Container.DataItem, "Id") %>' />
-                        <asp:HiddenField ID="hiddenRoomClassId" runat="server" />
-                        <asp:HiddenField ID="hiddenRoomTypeId" runat="server" />
-                        <asp:HiddenField ID="hiddenRoomId" runat="server" />
-                    </div>
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-xs-3 --width-auto">
-                                <label for="roomname" class="bkv-roomName">
-                                    <%--                                    <asp:Label ID="lblRoomName"  runat="server"></asp:Label>--%>
-                                    <asp:HyperLink runat="server" ID="hplRoomName" NavigateUrl="javascript:;"></asp:HyperLink>
-                                    <asp:Label ID="label_RoomId" runat="server" Style="display: none;"></asp:Label>
+            <asp:PlaceHolder ID="plhCruiseCabinCustomer" runat="server">
+                <asp:Repeater ID="rptRoomList" runat="server" OnItemDataBound="rptRoomList_ItemDataBound"
+                    OnItemCommand="rptRoomList_ItemCommand">
+                    <ItemTemplate>
+                        <div class="roominfor-hiddenpanel">
+                            <asp:HiddenField ID="hiddenBookingRoomId" runat="server" Value='<%# DataBinder.Eval(Container.DataItem, "Id") %>' />
+                            <asp:HiddenField ID="hiddenRoomClassId" runat="server" />
+                            <asp:HiddenField ID="hiddenRoomTypeId" runat="server" />
+                            <asp:HiddenField ID="hiddenRoomId" runat="server" />
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-xs-3 --width-auto">
+                                    <label for="roomname" class="bkv-roomName">
+                                        <%--                                    <asp:Label ID="lblRoomName"  runat="server"></asp:Label>--%>
+                                        <asp:HyperLink runat="server" ID="hplRoomName" NavigateUrl="javascript:;"></asp:HyperLink>
+                                        <asp:Label ID="label_RoomId" runat="server" Style="display: none;"></asp:Label>
 
-                                </label>
-                                <div class="checkbox-extrabed">
-                                    <label class="checkbox-inline">
-                                        <input id="checkboxAddExtraBed" runat="server" type="checkbox" />Add extra bed</label>
+                                    </label>
+                                    <div class="checkbox-extrabed">
+                                        <label class="checkbox-inline">
+                                            <input id="checkboxAddExtraBed" runat="server" type="checkbox" />Add extra bed</label>
+                                    </div>
+                                </div>
+                                <div class="col-xs-2">
+                                    <asp:CheckBox runat="server" ID="chkDeleteRoom" ToolTip="select for delete" data-toggle="tooltip" data-placement="top" data-original-title="select for delete" />
+                                    <asp:TextBox ID="txtRoomNumber" Visible="False" runat="server" CssClass="form-control" placeholder="Room Number" title="Room Number">
+                                    </asp:TextBox>
                                 </div>
                             </div>
-                            <div class="col-xs-2">
-                                <asp:CheckBox runat="server" ID="chkDeleteRoom" ToolTip="select for delete" data-toggle="tooltip" data-placement="top" data-original-title="select for delete" />
-                                <asp:TextBox ID="txtRoomNumber" Visible="False" runat="server" CssClass="form-control" placeholder="Room Number" title="Room Number">
-                                </asp:TextBox>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-5">
-                                <div class="checkbox" style="margin-left: 0px">
-                                    <label class="checkbox-inline">
-                                        <input id="checkBoxAddAdult" runat="server" type="checkbox" />Add Adult</label>
-                                    <label class="checkbox-inline">
-                                        <input id="checkBoxAddChild" runat="server" type="checkbox" />Add Child</label>
-                                    <label class="checkbox-inline">
-                                        <input id="checkBoxAddBaby" runat="server" type="checkbox" />Add Baby</label>
-                                    <label class="checkbox-inline">
-                                        <input id="checkBoxSingle" runat="server" type="checkbox" />Single</label>
+                            <div class="row">
+                                <div class="col-xs-5">
+                                    <div class="checkbox" style="margin-left: 0px">
+                                        <label class="checkbox-inline">
+                                            <input id="checkBoxAddAdult" runat="server" type="checkbox" />Add Adult</label>
+                                        <label class="checkbox-inline">
+                                            <input id="checkBoxAddChild" runat="server" type="checkbox" />Add Child</label>
+                                        <label class="checkbox-inline">
+                                            <input id="checkBoxAddBaby" runat="server" type="checkbox" />Add Baby</label>
+                                        <label class="checkbox-inline">
+                                            <input id="checkBoxSingle" runat="server" type="checkbox" />Single</label>
+                                    </div>
+                                </div>
+                                <div class="col-xs-offset-1 col-xs-2 text-right">
+                                    <asp:Label ID="labelRoomTypes" runat="server" Text="change room type to"></asp:Label>
+                                </div>
+                                <div class="col-xs-2 --no-padding-leftright">
+                                    <asp:DropDownList ID="ddlRoomTypes" runat="server" CssClass="form-control">
+                                    </asp:DropDownList>
+                                </div>
+                                <div class="col-xs-2">
+                                    <% if (UserIdentity.UserName != "captain.os1")
+                                        { %>
+                                    <asp:Button ID="btnDelete" runat="server" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "Id") %>'
+                                        CommandName="delete" CssClass="btn btn-primary" Text="Delete this room" OnClientClick="return confirm('All unsaved customer data (included another rooms in this book) will be lost forever. Are you sure want to delete this room?')" />
+                                    <%} %>
                                 </div>
                             </div>
-                            <div class="col-xs-offset-1 col-xs-2 text-right">
-                                <asp:Label ID="labelRoomTypes" runat="server" Text="change room type to"></asp:Label>
+                            <div class="row">
+                                <div class="col-xs-1">
+                                    <label for="client1">Client 1</label>
+                                </div>
+                                <uc:customer ID="customer1" runat="server" ChildAllowed="true"></uc:customer>
+                                <div>
+                                    <asp:Repeater ID="rptServices1" runat="server">
+                                        <ItemTemplate>
+                                            <asp:CheckBox ID="chkService" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "Name") %>'
+                                                CssClass="checkbox" /><asp:HiddenField ID="hiddenServiceId" runat="server" Value='<%# DataBinder.Eval(Container.DataItem, "Id") %>' />
+                                            <asp:HiddenField ID="hiddenId" runat="server" />
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+                                </div>
                             </div>
-                            <div class="col-xs-2 --no-padding-leftright">
-                                <asp:DropDownList ID="ddlRoomTypes" runat="server" CssClass="form-control">
-                                </asp:DropDownList>
+                            <div class="row" id="trCustomer2" runat="server">
+                                <div class="col-xs-1">
+                                    <label for="client1">Client 2</label>
+                                </div>
+                                <uc:customer ID="customer2" runat="server" ChildAllowed="true"></uc:customer>
+                                <div>
+                                    <asp:Repeater ID="rptServices2" runat="server">
+                                        <ItemTemplate>
+                                            <asp:CheckBox ID="chkService" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "Name") %>'
+                                                CssClass="checkbox" /><asp:HiddenField ID="hiddenServiceId" runat="server" Value='<%# DataBinder.Eval(Container.DataItem, "Id") %>' />
+                                            <asp:HiddenField ID="hiddenId" runat="server" />
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+                                </div>
                             </div>
-                            <div class="col-xs-2">
-                                <% if (UserIdentity.UserName != "captain.os1")
-                                    { %>
-                                <asp:Button ID="btnDelete" runat="server" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "Id") %>'
-                                    CommandName="delete" CssClass="btn btn-primary" Text="Delete this room" OnClientClick="return confirm('All unsaved customer data (included another rooms in this book) will be lost forever. Are you sure want to delete this room?')" />
-                                <%} %>
+                            <div class="row" id="trExtraBed" runat="server">
+                                <div class="col-xs-1">
+                                    <label for="client1">Add adult</label>
+                                </div>
+                                <ucextra:customer ID="customerExtraBed" runat="server"></ucextra:customer>
+                                <div>
+                                    <asp:Repeater ID="Repeater1" runat="server">
+                                        <ItemTemplate>
+                                            <asp:CheckBox ID="chkService" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "Name") %>'
+                                                CssClass="checkbox" /><asp:HiddenField ID="hiddenServiceId" runat="server" Value='<%# DataBinder.Eval(Container.DataItem, "Id") %>' />
+                                            <asp:HiddenField ID="hiddenId" runat="server" />
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+                                </div>
+                            </div>
+                            <div class="row" id="trChild" runat="server">
+                                <div class="col-xs-1">
+                                    <label for="client1">Child info</label>
+                                </div>
+                                <uc:customer ID="customerChild" runat="server"></uc:customer>
+                                <div>
+                                    <asp:Repeater ID="rptServicesChild" runat="server">
+                                        <ItemTemplate>
+                                            <asp:CheckBox ID="chkService" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "Name") %>'
+                                                CssClass="checkbox" /><asp:HiddenField ID="hiddenServiceId" runat="server" Value='<%# DataBinder.Eval(Container.DataItem, "Id") %>' />
+                                            <asp:HiddenField ID="hiddenId" runat="server" />
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+                                </div>
+                            </div>
+                            <div class="row" id="trBaby" runat="server">
+                                <div class="col-xs-1">
+                                    <label for="client1">Baby info</label>
+                                </div>
+                                <uc:customer ID="customerBaby" runat="server"></uc:customer>
+                                <div>
+                                    <asp:Repeater ID="rptServicesBaby" runat="server">
+                                        <ItemTemplate>
+                                            <asp:CheckBox ID="chkService" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "Name") %>'
+                                                CssClass="checkbox" /><asp:HiddenField ID="hiddenServiceId" runat="server" Value='<%# DataBinder.Eval(Container.DataItem, "Id") %>' />
+                                            <asp:HiddenField ID="hiddenId" runat="server" />
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+                                </div>
                             </div>
                         </div>
+                    </ItemTemplate>
+                </asp:Repeater>
+            </asp:PlaceHolder>
+            <asp:PlaceHolder ID="plhCruiseSeatingCustomer" runat="server">
+                <h3>&nbsp;&nbsp;<%= Booking.Adult %> Adult</h3>
+                <hr />
+                <asp:Repeater ID="rptAdults" runat="server" OnItemDataBound="rptAdults_ItemDataBound" OnItemCommand="rptAdults_ItemCommand">
+                    <ItemTemplate>
+                        <asp:HiddenField ID="hiddenAdultCustomerId" runat="server" Value='<%# DataBinder.Eval(Container.DataItem, "Id") %>' />
                         <div class="row">
-                            <div class="col-xs-1">
-                                <label for="client1">Client 1</label>
+                            <div class="col-xs-1" style="width: 6%">
+                                <label for="client1">Adult <%# Container.ItemIndex + 1 %></label>
                             </div>
                             <uc:customer ID="customer1" runat="server" ChildAllowed="true"></uc:customer>
-                            <div>
-                                <asp:Repeater ID="rptServices1" runat="server">
-                                    <ItemTemplate>
-                                        <asp:CheckBox ID="chkService" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "Name") %>'
-                                            CssClass="checkbox" /><asp:HiddenField ID="hiddenServiceId" runat="server" Value='<%# DataBinder.Eval(Container.DataItem, "Id") %>' />
-                                        <asp:HiddenField ID="hiddenId" runat="server" />
-                                    </ItemTemplate>
-                                </asp:Repeater>
+                            <div class="col-xs-1" style="width: 5%">
+                                <asp:Button ID="btnDelete" runat="server" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "Id") %>'
+                                    CommandName="delete" CssClass="btn btn-primary" Text="Delete" OnClientClick="return confirm('Are you sure?')" />
                             </div>
                         </div>
-                        <div class="row" id="trCustomer2" runat="server">
-                            <div class="col-xs-1">
-                                <label for="client1">Client 2</label>
+                    </ItemTemplate>
+                </asp:Repeater>
+                <h3>&nbsp;&nbsp;<%= Booking.Child %>  Children</h3>
+                <hr />
+                <asp:Repeater ID="rptChildren" runat="server" OnItemDataBound="rptChildren_ItemDataBound" OnItemCommand="rptChildren_ItemCommand">
+                    <ItemTemplate>
+                        <asp:HiddenField ID="hiddenChildCustomerId" runat="server" Value='<%# DataBinder.Eval(Container.DataItem, "Id") %>' />
+                        <div class="row">
+                            <div class="col-xs-1" style="width: 6%">
+                                <label for="client1">Child <%# Container.ItemIndex + 1 %></label>
                             </div>
-                            <uc:customer ID="customer2" runat="server" ChildAllowed="true"></uc:customer>
-                            <div>
-                                <asp:Repeater ID="rptServices2" runat="server">
-                                    <ItemTemplate>
-                                        <asp:CheckBox ID="chkService" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "Name") %>'
-                                            CssClass="checkbox" /><asp:HiddenField ID="hiddenServiceId" runat="server" Value='<%# DataBinder.Eval(Container.DataItem, "Id") %>' />
-                                        <asp:HiddenField ID="hiddenId" runat="server" />
-                                    </ItemTemplate>
-                                </asp:Repeater>
-                            </div>
-                        </div>
-                        <div class="row" id="trExtraBed" runat="server">
-                            <div class="col-xs-1">
-                                <label for="client1">Add adult</label>
-                            </div>
-                            <ucextra:customer ID="customerExtraBed" runat="server"></ucextra:customer>
-                            <div>
-                                <asp:Repeater ID="Repeater1" runat="server">
-                                    <ItemTemplate>
-                                        <asp:CheckBox ID="chkService" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "Name") %>'
-                                            CssClass="checkbox" /><asp:HiddenField ID="hiddenServiceId" runat="server" Value='<%# DataBinder.Eval(Container.DataItem, "Id") %>' />
-                                        <asp:HiddenField ID="hiddenId" runat="server" />
-                                    </ItemTemplate>
-                                </asp:Repeater>
+                            <uc:customer ID="customer1" runat="server" ChildAllowed="true"></uc:customer>
+                            <div class="col-xs-1" style="width: 5%">
+                                <asp:Button ID="btnDelete" runat="server" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "Id") %>'
+                                    CommandName="delete" CssClass="btn btn-primary" Text="Delete" OnClientClick="return confirm('Are you sure?')" />
                             </div>
                         </div>
-                        <div class="row" id="trChild" runat="server">
-                            <div class="col-xs-1">
-                                <label for="client1">Child info</label>
+                    </ItemTemplate>
+                </asp:Repeater>
+                <h3>&nbsp;&nbsp;<%= Booking.Baby %> Babies</h3>
+                <hr />
+                <asp:Repeater ID="rptBabies" runat="server" OnItemDataBound="rptBabies_ItemDataBound" OnItemCommand="rptBabies_ItemCommand">
+                    <ItemTemplate>
+                        <asp:HiddenField ID="hiddenBabyCustomerId" runat="server" Value='<%# DataBinder.Eval(Container.DataItem, "Id") %>' />
+                        <div class="row">
+                            <div class="col-xs-1" style="width: 6%">
+                                <label for="client1">Baby <%# Container.ItemIndex + 1 %></label>
                             </div>
-                            <uc:customer ID="customerChild" runat="server"></uc:customer>
-                            <div>
-                                <asp:Repeater ID="rptServicesChild" runat="server">
-                                    <ItemTemplate>
-                                        <asp:CheckBox ID="chkService" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "Name") %>'
-                                            CssClass="checkbox" /><asp:HiddenField ID="hiddenServiceId" runat="server" Value='<%# DataBinder.Eval(Container.DataItem, "Id") %>' />
-                                        <asp:HiddenField ID="hiddenId" runat="server" />
-                                    </ItemTemplate>
-                                </asp:Repeater>
-                            </div>
-                        </div>
-                        <div class="row" id="trBaby" runat="server">
-                            <div class="col-xs-1">
-                                <label for="client1">Baby info</label>
-                            </div>
-                            <uc:customer ID="customerBaby" runat="server"></uc:customer>
-                            <div>
-                                <asp:Repeater ID="rptServicesBaby" runat="server">
-                                    <ItemTemplate>
-                                        <asp:CheckBox ID="chkService" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "Name") %>'
-                                            CssClass="checkbox" /><asp:HiddenField ID="hiddenServiceId" runat="server" Value='<%# DataBinder.Eval(Container.DataItem, "Id") %>' />
-                                        <asp:HiddenField ID="hiddenId" runat="server" />
-                                    </ItemTemplate>
-                                </asp:Repeater>
+                            <uc:customer ID="customer1" runat="server" ChildAllowed="true"></uc:customer>
+                            <div class="col-xs-1" style="width: 5%">
+                                <asp:Button ID="btnDelete" runat="server" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "Id") %>'
+                                    CommandName="delete" CssClass="btn btn-primary" Text="Delete" OnClientClick="return confirm('Are you sure?')" />
                             </div>
                         </div>
-                    </div>
-                </ItemTemplate>
-            </asp:Repeater>
+                    </ItemTemplate>
+                </asp:Repeater>
+            </asp:PlaceHolder>
         </div>
     </div>
     <% if (UserIdentity.UserName != "captain.os1")

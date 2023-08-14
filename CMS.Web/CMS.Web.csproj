@@ -3510,7 +3510,6 @@
     <Content Include="Modules\Sails\Admin\DefaultSetting.aspx" />
     <Content Include="Modules\Sails\Admin\DocumentManage.aspx" />
     <Content Include="Modules\Sails\Admin\DocumentView.aspx" />
-    <Content Include="Modules\Sails\Admin\EditMeeting.aspx" />
     <Content Include="Modules\Sails\Admin\EmailTemplate\CancelledBookingNotify.txt" />
     <Content Include="Modules\Sails\Admin\EmailTemplate\CutOffBookingNotify.txt" />
     <Content Include="Modules\Sails\Admin\EmailTemplate\HappyBirthday.txt" />
@@ -4179,6 +4178,7 @@
       <HintPath>..\lib\net45\Remotion.Data.Linq.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />

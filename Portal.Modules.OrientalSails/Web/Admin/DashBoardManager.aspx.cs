@@ -326,8 +326,8 @@ namespace Portal.Modules.OrientalSails.Web.Admin
                 var defaultClassName = className;
                 foreach (var cruise in cruises)
                 {
-                    var numberOfRoom = RoomsAvaiableDTO.Where(x => DateTimeUtil.EqualsUpToSeconds(x.Date, date) && x.CruiseId == cruise.Id).First().TotalRoom;
-                    var numberOfRoomAvaiable = RoomsAvaiableDTO.Where(x => DateTimeUtil.EqualsUpToSeconds(x.Date, date) && x.CruiseId == cruise.Id).First().NoRAvaiable;
+                    var numberOfRoom = RoomsAvaiableDTO.Where(x => DateTimeUtil.EqualsUpToSeconds(x.Date, date) && x.CruiseId == cruise.Id).FirstOrDefault()?.TotalRoom??1;
+                    var numberOfRoomAvaiable = RoomsAvaiableDTO.Where(x => DateTimeUtil.EqualsUpToSeconds(x.Date, date) && x.CruiseId == cruise.Id).FirstOrDefault()?.NoRAvaiable??0;
                     double percentOfRoomAvailable = (numberOfRoomAvaiable / numberOfRoom);
                     if (percentOfRoomAvailable == 1)
                     {
