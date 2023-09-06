@@ -38,6 +38,21 @@
                         </ItemTemplate>
                     </asp:Repeater>
                 </div>
+
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-xs-12 btn-grid">
+                    <asp:Repeater ID="rptTrips" runat="server" OnItemDataBound="rptTrips_ItemDataBound">
+                        <HeaderTemplate>
+                            <asp:HyperLink ID="hplTrips" runat="server" Text="All" CssClass="btn btn-default" Target="_self" Style="padding: 3px 10px"></asp:HyperLink>
+                        </HeaderTemplate>
+                        <ItemTemplate>
+                            <asp:HyperLink ID="hplTrips" runat="server" CssClass="btn btn-default" data-cruiseid='<%# Eval("Id")%>' Target="_self" Style="width: auto; padding: 3px 3px"></asp:HyperLink>
+                        </ItemTemplate>
+                    </asp:Repeater>
+                </div>
             </div>
         </div>
         <!---->
@@ -114,13 +129,13 @@
                                 <%# ((Booking)(Container.DataItem)).CustomerName %>
                             </td>
                             <td>
-                                <%# ((Booking)Container.DataItem).BookingRooms.Sum(x=>x.Adult)%>
+                                <%# ((Booking)Container.DataItem).Adult%>
                             </td>
                             <td>
-                                <%# ((Booking)Container.DataItem).BookingRooms.Sum(x=>x.Child)%>
+                                <%# ((Booking)Container.DataItem).Child%>
                             </td>
                             <td>
-                                <%# ((Booking)Container.DataItem).BookingRooms.Sum(x=>x.Baby)%>
+                                <%# ((Booking)Container.DataItem).Baby%>
                             </td>
                             <td>
                                 <%# ((Booking)(Container.DataItem)).Trip != null 
@@ -182,15 +197,15 @@
                             </td>
                             <td>
                                 <strong>
-                                    <%= ((IEnumerable<Booking>)rptBookingList.DataSource).Sum(x=>x.BookingRooms.Sum(y=>y.Adult))%></strong>
+                                    <%= ((IEnumerable<Booking>)rptBookingList.DataSource).Sum(x=>x.Adult)%></strong>
                             </td>
                             <td>
                                 <strong>
-                                    <%= ((IEnumerable<Booking>)rptBookingList.DataSource).Sum(x=>x.BookingRooms.Sum(y=>y.Child)) %></strong>
+                                    <%= ((IEnumerable<Booking>)rptBookingList.DataSource).Sum(x=>x.Child) %></strong>
                             </td>
                             <td>
                                 <strong>
-                                    <%= ((IEnumerable<Booking>)rptBookingList.DataSource).Sum(x=>x.BookingRooms.Sum(y=>y.Baby)) %></strong>
+                                    <%= ((IEnumerable<Booking>)rptBookingList.DataSource).Sum(x=>x.Baby) %></strong>
                             </td>
                             <td></td>
                             <td></td>

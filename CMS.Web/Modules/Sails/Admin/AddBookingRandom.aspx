@@ -215,7 +215,7 @@
                                     <asp:Label ID="lblAdults" runat="server">Adults</asp:Label>
                                 </div>
                                 <div class="col-xs-1 nopadding-left nopadding-right">
-                                    <asp:TextBox ID="txtAdults" runat="server" type="number" CssClass="form-control" />
+                                    <asp:TextBox ID="txtAdults" runat="server" type="number" CssClass="form-control" Text="0" />
                                 </div>
                             </div>
                         </div>
@@ -225,7 +225,7 @@
                                     <asp:Label ID="lblChilds" runat="server">Childs</asp:Label>
                                 </div>
                                 <div class="col-xs-1 nopadding-left nopadding-right">
-                                    <asp:TextBox ID="txtChilds" runat="server" type="number" CssClass="form-control"/>
+                                    <asp:TextBox ID="txtChilds" runat="server" type="number" CssClass="form-control" Text="0" />
                                 </div>
                             </div>
                         </div>
@@ -235,7 +235,7 @@
                                     <asp:Label ID="lblBabies" runat="server">Babies</asp:Label>
                                 </div>
                                 <div class="col-xs-1 nopadding-left nopadding-right">
-                                    <asp:TextBox ID="txtBabies" runat="server" type="number" CssClass="form-control"/>
+                                    <asp:TextBox ID="txtBabies" runat="server" type="number" CssClass="form-control" Text="0" />
                                 </div>
                             </div>
                         </div>

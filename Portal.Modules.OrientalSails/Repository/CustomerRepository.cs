@@ -73,16 +73,33 @@ namespace Portal.Modules.OrientalSails.Repository
             var query = _session.QueryOver<Customer>();
             query = query.Where(x => x.Type == CustomerType.Adult || x.Type == CustomerType.Children);
             BookingRoom bookingRoomAlias = null;
-            query = query.JoinAlias(x => x.BookingRooms, () => bookingRoomAlias);
             Booking bookingAlias = null;
-            query = query.JoinAlias(() => bookingRoomAlias.Book, () => bookingAlias);
+            if (cruise.CruiseType == Web.Admin.Enums.CruiseType.Cabin)
+            {
+                query = query.JoinAlias(x => x.BookingRooms, () => bookingRoomAlias);
+                query = query.JoinAlias(() => bookingRoomAlias.Book, () => bookingAlias);
+            }
+            else if (cruise.CruiseType == Web.Admin.Enums.CruiseType.Seating)
+            {
+                query = query.JoinAlias(x => x.Booking, () => bookingAlias);
+            }
+
+
             if (cruise != null)
             {
                 query = query.Where(() => bookingAlias.Cruise == cruise);
             }
+
             if (date != null)
             {
-                query = query.Where(() => (bookingAlias.EndDate > date && bookingAlias.StartDate > date.Value.AddDays(-1) && bookingAlias.StartDate < date.Value.AddDays(1)) || (bookingAlias.StartDate < date && bookingAlias.EndDate > date));
+                if (cruise.CruiseType == Web.Admin.Enums.CruiseType.Cabin)
+                {
+                    query = query.Where(() => (bookingAlias.EndDate > date && bookingAlias.StartDate > date.Value.AddDays(-1) && bookingAlias.StartDate < date.Value.AddDays(1)) || (bookingAlias.StartDate < date && bookingAlias.EndDate > date));
+                }
+                else if (cruise.CruiseType == Web.Admin.Enums.CruiseType.Seating)
+                {
+                    query = query.Where(() => bookingAlias.EndDate == date && bookingAlias.StartDate == date);
+                }
             }
             query = query.Where(() => bookingAlias.Deleted == false);
             query = query.Where(() => bookingAlias.Status != StatusType.Cancelled && bookingAlias.Status != StatusType.CutOff);
