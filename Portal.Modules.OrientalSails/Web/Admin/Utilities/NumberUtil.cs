@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
 
-namespace Portal.Modules.OrientalSails.Web.Admin.Utility
+namespace Portal.Modules.OrientalSails.Web.Admin.Utilities
 {
     public static class NumberUtil
     {

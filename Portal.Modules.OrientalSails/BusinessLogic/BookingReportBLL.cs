@@ -216,10 +216,11 @@ namespace Portal.Modules.OrientalSails.BusinessLogic
             return BookingHistoryRepository.BookingHistoryGetByBooking(booking);
         }
 
-        public IEnumerable<Booking> ShadowBookingGetByDate(DateTime Date)
+        public IEnumerable<Booking> ShadowBookingGetByDate(User user, DateTime date)
         {
-            return BookingRepository.ShadowBookingGetByDate(Date);
+            return BookingRepository.ShadowBookingGetByDate(user, date);
         }
+
         public IEnumerable<BookingRoom> BookingRoomGetAllByBooking(Booking booking)
         {
             return BookingRoomRepository.BookingRoomGetAllByBooking(booking);

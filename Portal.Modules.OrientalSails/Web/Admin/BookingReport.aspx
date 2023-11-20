@@ -355,7 +355,7 @@
          getListAllCruiseExpenseDTO();
          getListCruiseExpenseDTO();
          LockingExpense = <%=LockingExpenseString %>">
-        <div ng-repeat="cruiseExpense in $root.listCruiseExpenseDTO">
+        <div ng-repeat="cruiseExpense in $root.listCruiseExpenseDTO" ng-show="isShowCruiseExpense('<%= CruiseIdAllow %>',cruiseExpense.Id.toString())">
             <div ng-show="cruiseExpense.ListGuideExpenseDTO.length == 0 && cruiseExpense.ListOthersExpenseDTO.length == 0">
                 <div class="form-group">
                     <div class="row">

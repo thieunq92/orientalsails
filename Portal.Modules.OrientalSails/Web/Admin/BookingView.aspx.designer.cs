@@ -357,6 +357,15 @@ namespace Portal.Modules.OrientalSails.Web.Admin
         protected global::System.Web.UI.WebControls.Repeater rptExtraServices;
 
         /// <summary>
+        /// ddlTransferLocation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlTransferLocation;
+
+        /// <summary>
         /// rptBusType control.
         /// </summary>
         /// <remarks>
@@ -445,6 +454,15 @@ namespace Portal.Modules.OrientalSails.Web.Admin
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtSpecialRequest;
+
+        /// <summary>
+        /// chkAnChay control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox chkAnChay;
 
         /// <summary>
         /// txtSpecialRequestRoom control.

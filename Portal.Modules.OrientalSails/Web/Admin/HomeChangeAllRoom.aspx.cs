@@ -152,7 +152,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin
 
         private void LoadDropdowData()
         {
-            var trips = Module.TripGetByDateNotLock(_nextDate);
+            var trips = Module.TripGetByDateNotLock(_nextDate, UserIdentity);
             //foreach (SailsTrip trip in trips)
             //{
             ddlTrips.Items.Clear();

@@ -2,6 +2,13 @@
     CodeBehind="AddBookingRandom.aspx.cs" Inherits="Portal.Modules.OrientalSails.Web.Admin.AddBookingRandom" Title="Booking Adding Random" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="AdminContent" runat="server">
+    <asp:UpdateProgress ID="updateProgress" runat="server">
+        <ProgressTemplate>
+            <div style="position: fixed; text-align: center; height: 100%; width: 100%; top: 0; right: 0; left: 0; z-index: 9999999; background-color: #000000; opacity: 0.7;">
+                <asp:Image ID="imgUpdateProgress" runat="server" ImageUrl="~/images/ajax-loader.gif" AlternateText="Loading ..." ToolTip="Loading ..." Style="padding: 10px; position: fixed; top: 45%; left: 50%;" />
+            </div>
+        </ProgressTemplate>
+    </asp:UpdateProgress>
     <div class="form-group">
         <div class="row">
             <div class="col-xs-1">
@@ -13,8 +20,7 @@
                 </asp:TextBox>
             </div>
             <div class="col-xs-1">
-                Trip
-           
+                Trip  
             </div>
             <div class="col-xs-4 --no-padding-left">
                 <asp:UpdatePanel runat="server" ID="updatePanel2">
@@ -26,7 +32,6 @@
                         <asp:AsyncPostBackTrigger ControlID="txtDate" EventName="TextChanged" />
                     </Triggers>
                 </asp:UpdatePanel>
-
             </div>
         </div>
     </div>

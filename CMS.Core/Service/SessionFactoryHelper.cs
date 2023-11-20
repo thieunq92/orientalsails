@@ -30,8 +30,6 @@ namespace CMS.Core.Service
         /// <param name="assembly"></param>
         public void AddAssembly(Assembly assembly)
         {
-
-
             Configuration nhConfiguration = this._kernel[typeof(Configuration)] as Configuration;
             nhConfiguration.AddAssembly(assembly);
             ISessionFactory newSessionFactory = nhConfiguration.BuildSessionFactory();
@@ -43,7 +41,7 @@ namespace CMS.Core.Service
         /// </summary>
         public void ConfigureLegacySessionFactory()
         {
-            // TODO: get rid of this solution as soon as possible!
+            // TODO: get rid of this solution as soon as possible!ol,
             this._kernel.AddComponent("core.legacysessionfactory", typeof(SessionFactory));
             SessionFactory cuyahogaSessionFactory = this._kernel[typeof(SessionFactory)] as SessionFactory;
             // We can't auto-wire the ISessionFactory via the constructor because it's

@@ -108,16 +108,23 @@ function displayOptionItemsByClass(selectElement, className) {
 
         protected override void OnDataBinding(EventArgs e)
         {
-            base.OnDataBinding(e);
-            if (DataSource != null)
+            try
             {
-                string dataValueField = DataValueField;
-                IEnumerable dataSource = (IEnumerable)DataSource;
-                foreach (object obj2 in dataSource)
+                base.OnDataBinding(e);
+                if (DataSource != null)
                 {
-                    string value = DataBinder.GetPropertyValue(obj2, dataValueField, null);
-                    Items.FindByValue(value).Attributes.Add("class", DataBinder.GetPropertyValue(obj2, dataParentField, null));
+                    string dataValueField = DataValueField;
+                    IEnumerable dataSource = (IEnumerable)DataSource;
+                    foreach (object obj2 in dataSource)
+                    {
+                        string value = DataBinder.GetPropertyValue(obj2, dataValueField, null);
+                        Items.FindByValue(value).Attributes.Add("class", DataBinder.GetPropertyValue(obj2, dataParentField, null));
+                    }
                 }
+            }
+            catch(Exception ex)
+            {
+                SelectedIndex = 0;
             }
         }
 

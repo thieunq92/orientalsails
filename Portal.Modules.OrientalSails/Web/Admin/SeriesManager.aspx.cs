@@ -58,6 +58,14 @@ namespace Portal.Modules.OrientalSails.Web.Admin
             }
         }
 
+        public User CurrentUser
+        {
+            get
+            {
+                return UserBLL.UserGetCurrent();
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -116,7 +124,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin
         public void SeriesLoadData()
         {
             int count = 0;
-            var listSeries = SeriesManagerBLL.SeriesBookingGetAllByQueryString(Request.QueryString, pagerSeries.PageSize,
+            var listSeries = SeriesManagerBLL.SeriesBookingGetAllByQueryString(CurrentUser, Request.QueryString, pagerSeries.PageSize,
                 pagerSeries.CurrentPageIndex, out count).OrderByDescending(x => x.CreatedDate);
             rptListSeries.DataSource = listSeries;
             pagerSeries.AllowCustomPaging = true;

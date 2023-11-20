@@ -23,14 +23,15 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-6">
+        <div class="col-xs-9">
             <div class="row">
                 <div class="col-xs-12 --no-padding-leftright">
                     <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
                             <h4 class="--text-bold" style="margin-bottom: 0">Month summary 
-                        <asp:DropDownList runat="server" ID="ddlMonthSearching" AutoPostBack="true" CssClass="form-control --dropdown-inline" OnSelectedIndexChanged="ddlMonthSearching_SelectedIndexChanged">
-                        </asp:DropDownList>
+                       
+                                <asp:DropDownList runat="server" ID="ddlMonthSearching" AutoPostBack="true" CssClass="form-control --dropdown-inline" OnSelectedIndexChanged="ddlMonthSearching_SelectedIndexChanged">
+                                </asp:DropDownList>
                                 <asp:DropDownList runat="server" ID="ddlYearSearching" AutoPostBack="true" CssClass="form-control --dropdown-inline" OnSelectedIndexChanged="ddlYearSearching_SelectedIndexChanged">
                                 </asp:DropDownList></h4>
                             <table class="table table-bordered table-common table__total ">
@@ -98,7 +99,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-12 --no-padding-leftright">
+                <div class="col-xs-7 --no-padding-leftright">
                     <asp:UpdatePanel runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
                             <h4 class="--text-bold --inline-block">Booking report</h4>
@@ -138,7 +139,7 @@
                                         {
                                             if (((List<Booking>)rptNewBookings.DataSource).Count <= 0)
                                             {
-                                            
+
                                     %>
                                     <tr>
                                         <td colspan="100%">No records found</td>
@@ -152,11 +153,7 @@
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>
-            </div>
-        </div>
-        <div class="col-xs-6 --no-padding-left">
-            <div class="row">
-                <div class="col-xs-7 --no-padding-left">
+                <div class="col-xs-5">
                     <asp:UpdatePanel runat="server">
                         <ContentTemplate>
                             <h4 class="--text-bold" style="display: inline-block">Cruise availability</h4>
@@ -185,7 +182,12 @@
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>
-                <div class="col-xs-5 --no-padding-leftright">
+            </div>
+        </div>
+        <div class="col-xs-3 --no-padding-left">
+            <div class="row">
+
+                <div class="col-xs-12 --no-padding-leftright">
                     <div class="row">
                         <div class="col-xs-12 col__golden-day col__golden-day-dashboard-manager --no-padding-leftright">
                             <h4 class="golden-day__header --text-bold --no-margin-bottom">Golden days</h4>

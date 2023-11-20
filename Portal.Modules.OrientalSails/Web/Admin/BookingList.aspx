@@ -96,13 +96,6 @@
                             </th>
                             <th>Customer Name
                             </th>
-                            <% if (CanViewTotal)
-                                { %>
-                            <th>Partner
-                            </th>
-                            <th>TA Code
-                            </th>
-                            <%} %>
                             <th>Status
                             </th>
                             <th>Last Edit
@@ -120,23 +113,16 @@
                                             <%# DataBinder.Eval(Container.DataItem,"Id","{0:OS00000}") %></a>
                                         <asp:HyperLink ID="hlCode" runat="server"></asp:HyperLink>
                                     </td>
-                                    <td>
+                                    <td style="text-align:left!important">
                                         <%#Eval("Trip.Name")%>
                                     </td>
-                                    <td>
+                                    <td style="text-align:left!important">
                                         <%#Eval("Cruise.Name")%>
                                     </td>
                                     <td>
                                         <asp:Literal ID="ltrNumberPax" runat="server"></asp:Literal></td>
                                     <td>
                                         <asp:Literal ID="ltrCustomerName" runat="server"></asp:Literal>
-                                    </td>
-
-                                    <td id="tdAgencyName">
-                                        <%# Eval("Agency.Name") %>
-                                    </td>
-                                    <td id="tdAgencyCode">
-                                        <%#Eval("AgencyCode") %>
                                     </td>
 
                                     <td>

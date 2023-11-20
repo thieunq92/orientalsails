@@ -223,7 +223,7 @@
                                         <asp:HyperLink ID="hlDocumentManage" runat="server">Document Management</asp:HyperLink></li>
                                 </ul>
                             </li>
-                            <li class="dropdown">
+                            <li class="dropdown" id="tabStorage" runat="server">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">QL kho <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li class="dropdown-submenu">
@@ -332,8 +332,6 @@
             <a href="OrderReport.aspx?NodeId=1&SectionId=15">My booking pending</a><br />
             <asp:HyperLink runat="server" ID="hlAllPending" Text="All pending"></asp:HyperLink>
         </div>
-        <footer>
-        </footer>
         <a href="javascript:" id="return-to-top"><i class="fas fa-angle-double-up"></i></a>
     </form>
     <%: Scripts.Render("~/bundles/allscript/") %>

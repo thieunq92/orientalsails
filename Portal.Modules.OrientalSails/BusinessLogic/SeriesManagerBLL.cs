@@ -1,4 +1,5 @@
-﻿using Portal.Modules.OrientalSails.BusinessLogic.Share;
+﻿using CMS.Core.Domain;
+using Portal.Modules.OrientalSails.BusinessLogic.Share;
 using Portal.Modules.OrientalSails.Domain;
 using Portal.Modules.OrientalSails.Enums;
 using Portal.Modules.OrientalSails.Repository;
@@ -59,7 +60,7 @@ namespace Portal.Modules.OrientalSails.BusinessLogic
             }
         }
 
-        public IList<Series> SeriesBookingGetAllByQueryString(System.Collections.Specialized.NameValueCollection nvcQueryString, int pageSize, int currentPageIndex, out int count)
+        public IList<Series> SeriesBookingGetAllByQueryString(User user, System.Collections.Specialized.NameValueCollection nvcQueryString, int pageSize, int currentPageIndex, out int count)
         {
             string partnerName = null;
             try
@@ -95,7 +96,7 @@ namespace Portal.Modules.OrientalSails.BusinessLogic
                 salesInCharge = UserBLL.UserGetCurrent().Id;
             }
 
-            return SeriesRepository.SeriesGetByQueryString(partnerName, seriesCode, agencyId, salesInCharge, pageSize, currentPageIndex, out count);
+            return SeriesRepository.SeriesGetByQueryString(user,partnerName, seriesCode, agencyId, salesInCharge, pageSize, currentPageIndex, out count);
         }
 
         public Series SeriesGetById(int seriesId)

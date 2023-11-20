@@ -8,16 +8,15 @@
 <%@ Register TagPrefix="ucextra" TagName="customer" Src="../Controls/CustomerExtraInfoRowInput.ascx" %>
 <%@ Register Assembly="Portal.Modules.OrientalSails" Namespace="Portal.Modules.OrientalSails.Web.Controls"
     TagPrefix="orc" %>
+<%@ Import Namespace="Portal.Modules.OrientalSails.Web.Admin.Utilities" %>
+<%@ Import Namespace="Portal.Modules.OrientalSails.Web.Admin.Enums" %>
 <asp:Content ID="AdminContent" ContentPlaceHolderID="AdminContent" runat="server">
     <div class="row">
-        <div class="col-md-12">
-            <% if (UserIdentity.UserName != "captain.os1")
-                { %>
+        <div class="col-md-12" runat="server" visible='<%# UserIdentity.UserName != "captain.os1" %>'>
             <asp:Button ID="buttonSubmit" runat="server" CssClass="btn btn-primary" OnClientClick="screenCapture.capture();return false" disabled="disabled" />
             <asp:Button ID="button1" runat="server" CssClass="btn btn-primary hidden" OnClick="buttonSubmit_Click" />
             <a href="SendEmail.aspx?NodeId=1&SectionId=15&BookingId=<%= Booking.Id %>" class="btn btn-primary" id="sendemail">SendEmail</a>
             <a href="BookingHistories.aspx?NodeId=1&SectionId=15&BookingId=<%= Booking.Id %>" class="btn btn-primary">View History</a>
-            <% } %>
         </div>
     </div>
     <label id="screencapture_status" class="hidden"></label>
@@ -25,8 +24,7 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-xs-1 ">
-                    Booking code
-               
+                    Booking code        
                 </div>
                 <div class="col-xs-1">
                     <asp:Label ID="lblBookingId" runat="server"></asp:Label>
@@ -52,8 +50,7 @@
                     </asp:UpdatePanel>
                 </div>
                 <div class="col-xs-1 --no-padding-left">
-                    Trip
-               
+                    Trip          
                 </div>
                 <div class="col-xs-2">
                     <asp:PlaceHolder runat="server" ID="plhTripReadonly" Visible="false">
@@ -66,26 +63,18 @@
                         <asp:ListItem>Option 2</asp:ListItem>
                     </asp:DropDownList>
                 </div>
-                <div class="col-xs-1 --no-padding-left">
-                    <% if (UserIdentity.UserName != "captain.os1")
-                        { %>
+                <div class="col-xs-1 --no-padding-left" runat="server" visible='<%# UserIdentity.UserName != "captain.os1" %>'>
                     <button class="btn btn-success" onclick="return changeTrip()">Change trip</button>
-                    <%} %>
                 </div>
                 <div class="col-xs-1 --text-right">
-                    Cruise
-               
+                    Cruise      
                 </div>
                 <div class="col-xs-2 --no-padding-left">
                     <asp:DropDownList ID="ddlCruises" Enabled="False" runat="server" CssClass="form-control">
                     </asp:DropDownList>
                 </div>
-                <div class="col-xs-1 --no-padding-left">
-                    <% if (UserIdentity.UserName != "captain.os1")
-                        { %>
-                    <%--                <a href="RoomSelector.aspx?NodeId=1&SectionId=15&bookingid=<%= Booking.Id %>" class="btn btn-primary" id="roomorganizer">Room Organizer</a>--%>
+                <div class="col-xs-1 --no-padding-left" runat="server" visible='<%# UserIdentity.UserName != "captain.os1" %>'>
                     <button class="btn btn-success" onclick="return changeBoat()">Change boat</button>
-                    <%} %>
                 </div>
             </div>
         </div>
@@ -147,7 +136,7 @@
                     <asp:TextBox runat="server" ID="txtSeriesCode" CssClass="form-control" placeholder="Series code" data-toggle="tooltip" title="Series code" data-placement="top"></asp:TextBox>
                 </div>
                 <div class="col-xs-2 --no-padding-left">
-                    <svc:CascadingDropDown ID="cddlBooker" runat="server" CssClass="form-control">
+                    <svc:CascadingDropDown ID="cddlBooker" runat="server" CssClass="form-control" AppendDataBoundItems="true">
                     </svc:CascadingDropDown>
                 </div>
             </div>
@@ -166,9 +155,7 @@
                         <asp:ListItem Value="0">VND</asp:ListItem>
                     </asp:DropDownList>
                 </div>
-                <div class="col-xs-2 nopadding-left --width-auto">
-                    <% if (UserIdentity.UserName != "captain.os1")
-                        { %>
+                <div class="col-xs-2 nopadding-left --width-auto" runat="server" visible='<%# UserIdentity.UserName != "captain.os1" %>'>
                     <asp:Button ID="lbtCalculate" CssClass="btn btn-primary" runat="server" OnClick="lbtCalculate_Click" Text="Calculate"
                         Style="width: auto"></asp:Button>
                     <asp:Button runat="server" ID="btnLockIncome" CssClass="btn btn-primary" Visible="false" Text="Lock this booking"
@@ -176,8 +163,6 @@
                     <asp:Button runat="server" ID="btnUnlockIncome" Visible="false" CssClass="btn btn-primary"
                         Text="Unlock" OnClick="btnUnlockIncome_Click" />
                     <i class="fa fa-info-circle fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="right" title="<%= UserGetUserLockIncomeDetails() %>"></i>
-                    <% 
-                        }%>
                 </div>
                 <div class="col-xs-5 nopadding-left">
                     <div class="checkbox">
@@ -191,9 +176,9 @@
                        
                         </label>
                         <label class="checkbox-inline">
-                            <input runat="server" id="chkEarlyBird" type="checkbox" />Early Bird
-                       
+                            <input runat="server" id="chkEarlyBird" type="checkbox" />Early Bird                
                         </label>
+
                     </div>
                 </div>
             </div>
@@ -228,17 +213,13 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-xs-1 --no-padding-right">
-                    Voucher Code
-               
+                    Voucher Code           
                 </div>
                 <div class="col-xs-4 nopadding-right">
                     <div class="input-group" style="width: 97%">
                         <asp:TextBox ID="txtAllVoucher" placeholder="Voucher code" runat="server" CssClass="form-control"></asp:TextBox>
-                        <span class="input-group-btn">
-                            <% if (UserIdentity.UserName != "captain.os1")
-                                { %>
+                        <span class="input-group-btn" runat="server" visible='<%# UserIdentity.UserName != "captain.os1" %>'>
                             <input type="button" class="btn btn-primary" value="Check Code" id="checkvoucher" style="height: 25px" />
-                            <%} %>
                         </span>
                     </div>
                 </div>
@@ -266,12 +247,12 @@
                             </ItemTemplate>
                         </asp:Repeater>
                     </asp:PlaceHolder>
+                    <asp:DropDownList ID="ddlTransferLocation" runat="server" CssClass="form-control" Visible="<%# IsSeatingCruise %>" DataSource='<%# Enumeration.GetAll<TransferLocationType>() %>' DataTextField="Value" DataValueField="Key" AppendDataBoundItems="true" Style="margin-top: 10px" ng-class="{'ng-hide':Transfers == false}"></asp:DropDownList>
                 </div>
                 <div class="col-xs-10" id="transfer-service-details" ng-class="{'ng-hide':Transfers == false}">
                     <div class="row">
                         <div class="col-xs-1 nopadding-right --width-auto">
-                            Bus type
-                       
+                            Bus type                   
                         </div>
                         <div class="col-xs-2" style="margin-top: -8px; width: 10%">
                             <asp:Repeater ID="rptBusType" runat="server">
@@ -356,31 +337,22 @@
         <div class="row">
             <div class="col-xs-3">
                 <label for="pickupaddress">
-                    Pickup Address
-               
+                    Pickup Address        
                 </label>
             </div>
             <div class="col-xs-1">
                 <label for="pickupaddress">
                     Pickup time
-               
                 </label>
             </div>
-            <%if (CanViewSpecialRequestFood)
-                { %>
-            <div class="col-xs-4 --no-padding-left">
+            <div class="col-xs-4 --no-padding-left" runat="server" visible='<%# CanViewSpecialRequestFood %>'>
                 Special Request Food
             </div>
-            <% } %>
-            <%if (CanViewSpecialRequestRoom)
-                { %>
-            <div class="col-xs-4 --no-padding-left">
+            <div class="col-xs-4 --no-padding-left" runat="server" visible="<%# CanViewSpecialRequestRoom && !IsSeatingCruise %>">
                 Special Request Room
             </div>
-            <% } %>
             <div class="col-xs-4 --no-padding-left" style="display: none">
                 Customer Info              
-           
             </div>
         </div>
         <div class="row">
@@ -390,18 +362,15 @@
             <div class="col-xs-1">
                 <asp:TextBox ID="txtPickupTime" runat="server" CssClass="form-control" autocomplete="off" placeholder="(hh:mm)" data-control="timepicker"></asp:TextBox>
             </div>
-            <%if (CanViewSpecialRequestFood)
-                { %>
-            <div class="col-xs-4 --no-padding-left">
-                <asp:TextBox ID="txtSpecialRequest" runat="server" CssClass="form-control" TextMode="MultiLine" placeholder="Special Request Food"></asp:TextBox>
+            <div class="col-xs-4 --no-padding-left" runat="server" visible="<%# CanViewSpecialRequestFood %>">
+                <asp:TextBox ID="txtSpecialRequest" runat="server" CssClass="form-control" TextMode="MultiLine" placeholder="Special Request Food" Style="display: inline; width: 70%; float: left"></asp:TextBox>
+                <label class="checkbox-inline" style="float: left; margin-left: 10px">
+                    <input runat="server" id="chkAnChay" type="checkbox" />Ăn Chay                       
+                </label>
             </div>
-            <% }%>
-            <%if (CanViewSpecialRequestRoom)
-                { %>
-            <div class="col-xs-4 --no-padding-left">
+            <div class="col-xs-4 --no-padding-left" runat="server" visible="<%# CanViewSpecialRequestRoom && !IsSeatingCruise %>">
                 <asp:TextBox ID="txtSpecialRequestRoom" runat="server" CssClass="form-control" TextMode="MultiLine" placeholder="Special Request Room"></asp:TextBox>
             </div>
-            <% }%>
             <div class="col-xs-4 --no-padding-left">
                 <asp:TextBox ID="txtCustomerInfo" runat="server" CssClass="form-control" TextMode="MultiLine" placeholder="Customer Info" Visible="false"></asp:TextBox>
             </div>
@@ -410,17 +379,14 @@
         <div class="row">
             <div class="col-xs-12">
                 <asp:PlaceHolder ID="plhCruiseCabinControlPanel" runat="server">
-                    <% if (UserIdentity.UserName != "captain.os1")
-                        { %>
-                    <%--                <a href="RoomSelector.aspx?NodeId=1&SectionId=15&bookingid=<%= Booking.Id %>" class="btn btn-primary" id="roomorganizer">Room Organizer</a>--%>
-                    <asp:Button ID="btnAddRoom" runat="server" Text="Add Room"
-                        CssClass="btn btn-primary" />
-                    <asp:Button ID="btnDeleteAllRoomNA" runat="server" Text="Delete all room N/A" OnClick="btnDeleteAllRoomNA_OnClick"
-                        CssClass="btn btn-warning" />
-
-                    <asp:Button ID="btnDeleteRoomSelect" runat="server" Text="Delete all room select" OnClick="btnDeleteRoomSelect_OnClick"
-                        CssClass="btn btn-danger" OnClientClick="return confirm('Bạn có chắc chắn muốn xóa các phòng đã chọn, mọi dữ liệu khách theo phòng sẽ bị xóa?')" />
-                    <%} %>
+                    <div runat="server" visible='<%# UserIdentity.UserName != "captain.os1" %>'>
+                        <asp:Button ID="btnAddRoom" runat="server" Text="Add Room"
+                            CssClass="btn btn-primary" />
+                        <asp:Button ID="btnDeleteAllRoomNA" runat="server" Text="Delete all room N/A" OnClick="btnDeleteAllRoomNA_OnClick"
+                            CssClass="btn btn-warning" />
+                        <asp:Button ID="btnDeleteRoomSelect" runat="server" Text="Delete all room select" OnClick="btnDeleteRoomSelect_OnClick"
+                            CssClass="btn btn-danger" OnClientClick="return confirm('Bạn có chắc chắn muốn xóa các phòng đã chọn, mọi dữ liệu khách theo phòng sẽ bị xóa?')" />
+                    </div>
                 </asp:PlaceHolder>
                 <asp:PlaceHolder ID="plhCruiseSeatingControlPanel" runat="server">
                     <asp:Button ID="btnAddAdult" runat="server" Text="Add Adult" CssClass="btn btn-primary" OnClick="btnAddAdult_Click" />
@@ -448,7 +414,6 @@
                             <div class="row">
                                 <div class="col-xs-3 --width-auto">
                                     <label for="roomname" class="bkv-roomName">
-                                        <%--                                    <asp:Label ID="lblRoomName"  runat="server"></asp:Label>--%>
                                         <asp:HyperLink runat="server" ID="hplRoomName" NavigateUrl="javascript:;"></asp:HyperLink>
                                         <asp:Label ID="label_RoomId" runat="server" Style="display: none;"></asp:Label>
 
@@ -484,12 +449,9 @@
                                     <asp:DropDownList ID="ddlRoomTypes" runat="server" CssClass="form-control">
                                     </asp:DropDownList>
                                 </div>
-                                <div class="col-xs-2">
-                                    <% if (UserIdentity.UserName != "captain.os1")
-                                        { %>
+                                <div class="col-xs-2" runat="server" visible='<%# UserIdentity.UserName != "captain.os1" %>'>
                                     <asp:Button ID="btnDelete" runat="server" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "Id") %>'
                                         CommandName="delete" CssClass="btn btn-primary" Text="Delete this room" OnClientClick="return confirm('All unsaved customer data (included another rooms in this book) will be lost forever. Are you sure want to delete this room?')" />
-                                    <%} %>
                                 </div>
                             </div>
                             <div class="row">
@@ -580,7 +542,7 @@
                             <div class="col-xs-1" style="width: 6%">
                                 <label for="client1">Adult <%# Container.ItemIndex + 1 %></label>
                             </div>
-                            <uc:customer ID="customer1" runat="server" ChildAllowed="true"></uc:customer>
+                            <uc:customer ID="customer1" runat="server" ChildAllowed="true" SeatingCruise="true"></uc:customer>
                             <div class="col-xs-1" style="width: 5%">
                                 <asp:Button ID="btnDelete" runat="server" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "Id") %>'
                                     CommandName="delete" CssClass="btn btn-primary" Text="Delete" OnClientClick="return confirm('Are you sure?')" />
@@ -596,7 +558,7 @@
                             <div class="col-xs-1" style="width: 6%">
                                 <label for="client1">Child <%# Container.ItemIndex + 1 %></label>
                             </div>
-                            <uc:customer ID="customer1" runat="server" ChildAllowed="true"></uc:customer>
+                            <uc:customer ID="customer1" runat="server" ChildAllowed="true" SeatingCruise="true"></uc:customer>
                             <div class="col-xs-1" style="width: 5%">
                                 <asp:Button ID="btnDelete" runat="server" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "Id") %>'
                                     CommandName="delete" CssClass="btn btn-primary" Text="Delete" OnClientClick="return confirm('Are you sure?')" />
@@ -612,7 +574,7 @@
                             <div class="col-xs-1" style="width: 6%">
                                 <label for="client1">Baby <%# Container.ItemIndex + 1 %></label>
                             </div>
-                            <uc:customer ID="customer1" runat="server" ChildAllowed="true"></uc:customer>
+                            <uc:customer ID="customer1" runat="server" ChildAllowed="true" SeatingCruise="true"></uc:customer>
                             <div class="col-xs-1" style="width: 5%">
                                 <asp:Button ID="btnDelete" runat="server" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "Id") %>'
                                     CommandName="delete" CssClass="btn btn-primary" Text="Delete" OnClientClick="return confirm('Are you sure?')" />
@@ -623,23 +585,21 @@
             </asp:PlaceHolder>
         </div>
     </div>
-    <% if (UserIdentity.UserName != "captain.os1")
-        { %>
-    <asp:PlaceHolder ID="plhAddRoom" runat="server">
-        <div class="row">
-            <div class="col-xs-12">
-                <asp:DropDownList ID="ddlRoomTypes" Visible="False" CssClass="form-control" runat="server">
-                </asp:DropDownList>
+    <div runat="server" visible='<%# UserIdentity.UserName != "captain.os1" %>'>
+        <asp:PlaceHolder ID="plhAddRoom" runat="server">
+            <div class="row">
+                <div class="col-xs-12">
+                    <asp:DropDownList ID="ddlRoomTypes" Visible="False" CssClass="form-control" runat="server">
+                    </asp:DropDownList>
+                </div>
             </div>
-        </div>
-    </asp:PlaceHolder>
-    <%} %>
+        </asp:PlaceHolder>
+    </div>
     <asp:HiddenField ID="ScreenCapture" runat="server"></asp:HiddenField>
     <div class="modal fade" id="addBookingModal" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" data-backdrop="true" data-keyboard="true">
         <div class="modal-dialog" role="document" style="width: 100%">
             <div class="modal-content">
                 <div class="modal-header">
-                    <%--                    <span>Add booking</span>--%>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">

@@ -71,7 +71,14 @@ namespace Portal.Modules.OrientalSails.Repository
         public int CustomerGetRowCountByCriterion(Cruise cruise, DateTime? date)
         {
             var query = _session.QueryOver<Customer>();
-            query = query.Where(x => x.Type == CustomerType.Adult || x.Type == CustomerType.Children);
+            if (cruise.CruiseType == Web.Admin.Enums.CruiseType.Cabin)
+            {
+                query = query.Where(x => x.Type == CustomerType.Adult || x.Type == CustomerType.Children);
+            }
+            else if (cruise.CruiseType == Web.Admin.Enums.CruiseType.Seating)
+            {
+                query = query.Where(x => x.Type == CustomerType.Adult || x.Type == CustomerType.Children || x.Type == CustomerType.Baby);
+            }
             BookingRoom bookingRoomAlias = null;
             Booking bookingAlias = null;
             if (cruise.CruiseType == Web.Admin.Enums.CruiseType.Cabin)

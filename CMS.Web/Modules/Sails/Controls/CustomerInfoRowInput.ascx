@@ -11,14 +11,37 @@
         <asp:ListItem>Female</asp:ListItem>
     </asp:DropDownList>
 </div>
+
+<%  
+    if (!SeatingCruise)
+    {
+%>
 <div class="col-xs-1 nopadding custom-col-xs-1" title="Birthday">
     <asp:TextBox ID="txtBirthDay" runat="server" placeholder="Birthday" CssClass="form-control txtBirthday" data-control="datepicker"></asp:TextBox>
     <i class="fa fa-lg fa-calendar datetimepicker-trigger" aria-hidden="true"></i>
 </div>
+<%
+    }
+%>
+<%  
+    if (SeatingCruise)
+    {
+%>
+<div class="col-xs-1 nopadding" style="width: 6%" title="Birthday">
+    <asp:DropDownList ID="ddlBirthDay" runat="server" CssClass="form-control ddlBirthday" AppendDataBoundItems="true"></asp:DropDownList>
+</div>
+<%
+    }
+%>
+
+
 <div class="col-xs-1 nopadding custom-col-xs-1" title="Nationality">
     <asp:DropDownList ID="ddlNationalities" runat="server" CssClass="form-control ddlNationality" AppendDataBoundItems="true">
     </asp:DropDownList>
 </div>
+<%         
+    if (!SeatingCruise)
+    {  %>
 <div class="col-xs-1 nopadding custom-col-xs-1" title="Visa No">
     <asp:TextBox ID="txtVisaNo" runat="server" CssClass="form-control txtVisaNo" placeholder="Visa No"></asp:TextBox>
 </div>
@@ -32,12 +55,14 @@
 <div class="col-xs-1 nopadding custom-col-xs-1" title="Nguyên Quán">
     <asp:TextBox ID="txtNguyenQuan" runat="server" CssClass="form-control txtNguyenQuan" placeholder="Nguyên Quán"></asp:TextBox>
 </div>
+<% } %>
 <div class="col-xs-1 nopadding custom-col-xs-1">
     <div class="checkbox">
         <label>
             <input id="chkVietKieu" runat="server" type="checkbox" cssclass="chkVietKieu" />Viet Kieu
-            <input id="chkBaBy" runat="server" visible="False" type="checkbox" cssclass="chkVietKieu" value="Baby"/>
-            <input id="chkChild" runat="server" visible="False" type="checkbox" cssclass="chkVietKieu" value="Child"/>
+           
+            <input id="chkBaBy" runat="server" visible="False" type="checkbox" cssclass="chkVietKieu" value="Baby" />
+            <input id="chkChild" runat="server" visible="False" type="checkbox" cssclass="chkVietKieu" value="Child" />
         </label>
     </div>
 </div>

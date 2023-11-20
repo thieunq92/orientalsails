@@ -1,4 +1,5 @@
-﻿using Portal.Modules.OrientalSails.Domain;
+﻿using CMS.Core.Domain;
+using Portal.Modules.OrientalSails.Domain;
 using Portal.Modules.OrientalSails.Repository;
 using Portal.Modules.OrientalSails.Web.Util;
 using System;
@@ -50,9 +51,9 @@ namespace Portal.Modules.OrientalSails.BusinessLogic
             }
         }
 
-        public int BookingCountByStatusAndDate(StatusType statusType, DateTime date)
+        public int BookingCountByStatusAndDate(User user, StatusType statusType, DateTime date)
         {
-            return BookingRepository.BookingCountByStatusAndDate(statusType, date);
+            return BookingRepository.BookingCountByStatusAndDate(user, statusType, date);
         }
 
         public IEnumerable<Cruise> CruiseGetAll()
@@ -66,7 +67,7 @@ namespace Portal.Modules.OrientalSails.BusinessLogic
         }
 
 
-        public IList<Booking> BookingGetByQueryString(NameValueCollection nvcQueryString, int pageSize, int currentPageIndex, out int count)
+        public IList<Booking> BookingGetByQueryString(User user, NameValueCollection nvcQueryString, int pageSize, int currentPageIndex, out int count)
         {
             var bookingId = -1;
             try
@@ -134,7 +135,7 @@ namespace Portal.Modules.OrientalSails.BusinessLogic
             }
             catch { }
 
-            return BookingRepository.BookingListBLL_BookingSearchBy(bookingId, tripId, cruiseId, status, startDate, customerName, agencyId
+            return BookingRepository.BookingListBLL_BookingSearchBy(user, bookingId, tripId, cruiseId, status, startDate, customerName, agencyId
                 , batchId, pageSize, currentPageIndex, out count);
         }
 

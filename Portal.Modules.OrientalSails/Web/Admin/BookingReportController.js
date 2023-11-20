@@ -331,4 +331,7 @@
                 alert("Request failed. Please reload and try again. Message:" + response.data.Message);
             })
         }
+        $scope.isShowCruiseExpense = function (listCruiseShow, cruiseExpense) {
+            return listCruiseShow.split(/\s*,\s*/).indexOf(cruiseExpense) > -1
+        }
     }])

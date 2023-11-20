@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Portal.Modules.OrientalSails.Web.Controls {
-    
-    
-    public partial class CustomerInfoRowInput {
-        
+namespace Portal.Modules.OrientalSails.Web.Controls
+{
+
+
+    public partial class CustomerInfoRowInput
+    {
+
         /// <summary>
         /// hiddenId control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace Portal.Modules.OrientalSails.Web.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputHidden hiddenId;
-        
+
         /// <summary>
         /// txtName control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace Portal.Modules.OrientalSails.Web.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtName;
-        
+
         /// <summary>
         /// ddlGender control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace Portal.Modules.OrientalSails.Web.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlGender;
-        
+
         /// <summary>
         /// txtBirthDay control.
         /// </summary>
@@ -47,7 +49,16 @@ namespace Portal.Modules.OrientalSails.Web.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtBirthDay;
-        
+
+        /// <summary>
+        /// ddlBirthDay control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlBirthDay;
+
         /// <summary>
         /// ddlNationalities control.
         /// </summary>
@@ -56,7 +67,7 @@ namespace Portal.Modules.OrientalSails.Web.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlNationalities;
-        
+
         /// <summary>
         /// txtVisaNo control.
         /// </summary>
@@ -65,7 +76,7 @@ namespace Portal.Modules.OrientalSails.Web.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtVisaNo;
-        
+
         /// <summary>
         /// txtPassport control.
         /// </summary>
@@ -74,7 +85,7 @@ namespace Portal.Modules.OrientalSails.Web.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtPassport;
-        
+
         /// <summary>
         /// txtVisaExpired control.
         /// </summary>
@@ -83,7 +94,7 @@ namespace Portal.Modules.OrientalSails.Web.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtVisaExpired;
-        
+
         /// <summary>
         /// txtNguyenQuan control.
         /// </summary>
@@ -92,7 +103,7 @@ namespace Portal.Modules.OrientalSails.Web.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNguyenQuan;
-        
+
         /// <summary>
         /// chkVietKieu control.
         /// </summary>
@@ -101,7 +112,7 @@ namespace Portal.Modules.OrientalSails.Web.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox chkVietKieu;
-        
+
         /// <summary>
         /// chkBaBy control.
         /// </summary>
@@ -110,7 +121,7 @@ namespace Portal.Modules.OrientalSails.Web.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox chkBaBy;
-        
+
         /// <summary>
         /// chkChild control.
         /// </summary>
@@ -119,7 +130,7 @@ namespace Portal.Modules.OrientalSails.Web.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox chkChild;
-        
+
         /// <summary>
         /// txtCode control.
         /// </summary>
@@ -128,7 +139,7 @@ namespace Portal.Modules.OrientalSails.Web.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtCode;
-        
+
         /// <summary>
         /// txtTotal control.
         /// </summary>

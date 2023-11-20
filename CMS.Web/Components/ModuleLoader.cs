@@ -133,8 +133,9 @@ namespace CMS.Web.Components
 
         public void ActivateModule(ModuleType moduleType)
         {
+      
             //only one thread at a time
-            System.Threading.Monitor.Enter(lockObject);
+            //System.Threading.Monitor.Enter(lockObject);
 
             string assemblyQualifiedName = moduleType.ClassName + ", " + moduleType.AssemblyName;
             if (log.IsDebugEnabled)
@@ -147,8 +148,10 @@ namespace CMS.Web.Components
             {
                 throw new Exception("Could not find module: " + assemblyQualifiedName);
             }
+            
             try
             {
+              
                 // double check, if we should continue
                 if (this._kernel.HasComponent(moduleTypeType))
                 {
@@ -186,6 +189,7 @@ namespace CMS.Web.Components
                 }
 
                 //Register the module
+
                 this._kernel.AddComponent("module." + moduleTypeType.FullName, moduleTypeType);
 
                 //Configure NHibernate mappings and make sure we haven't already added this assembly to the NHibernate config
@@ -204,7 +208,7 @@ namespace CMS.Web.Components
             }
             finally
             {
-                System.Threading.Monitor.Exit(lockObject);
+                //System.Threading.Monitor.Exit(lockObject);
             }
 
         }//end method

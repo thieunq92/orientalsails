@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using NHibernate.Linq;
+using CMS.Core.Domain;
 
 namespace Portal.Modules.OrientalSails.Repository
 {
@@ -21,7 +22,7 @@ namespace Portal.Modules.OrientalSails.Repository
             return _session.QueryOver<Series>().Where(x => x.Id == seriesId).FutureValue().Value;
         }
 
-        public IList<Series> SeriesGetByQueryString(string partnerName, string seriesCode, int agencyId, int salesInChargeId, int pageSize, int currentPageIndex, out int count)
+        public IList<Series> SeriesGetByQueryString(User user, string partnerName, string seriesCode, int agencyId, int salesInChargeId, int pageSize, int currentPageIndex, out int count)
         {
             var query = QueryOver.Of<Series>();
 
@@ -46,6 +47,16 @@ namespace Portal.Modules.OrientalSails.Repository
             {
                 query = query.Where(x => agencyAlias.Sale.Id == salesInChargeId);
             }
+
+            Booking bookingAlias = null;
+            query = query.JoinAlias(x => x.ListBooking, () => bookingAlias);
+            Cruise cruiseAlias = null;
+            query.JoinAlias(() => bookingAlias.Cruise, () => cruiseAlias);
+            IvRoleCruise roleCruiseAlias = null;
+            query.JoinAlias(() => cruiseAlias.ListRoleCruises, () => roleCruiseAlias);
+            User userRoleCruiseAlias = null;
+            query.JoinAlias(() => roleCruiseAlias.User, () => userRoleCruiseAlias);
+            query = query.Where(() => userRoleCruiseAlias.Id == user.Id);
 
             //Booking bookingAlias = null;
             //query.JoinAlias(x => x.ListBooking, () => bookingAlias);

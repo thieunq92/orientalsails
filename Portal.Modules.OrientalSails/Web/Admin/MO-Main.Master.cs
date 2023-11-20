@@ -268,6 +268,9 @@ namespace Portal.Modules.OrientalSails.Web.Admin
             pExpensePeriod.Visible = PermissionBLL.UserCheckPermission(CurrentUser.Id, (int)PermissionEnum.FORM_EXPENSEPERIOD);
             pCostTypes.Visible = PermissionBLL.UserCheckPermission(CurrentUser.Id, (int)PermissionEnum.FORM_COSTTYPES);
             pUSDRate.Visible = PermissionBLL.UserCheckPermission(CurrentUser.Id, (int)PermissionEnum.FORM_EXCHANGERATE);
+            pVoucherTemplates.Visible = PermissionBLL.UserCheckPermission(CurrentUser.Id, (int)PermissionEnum.FORM_VOUCHERTEMPLATES);
+            pDebtReceivable.Visible = PermissionBLL.UserCheckPermission(CurrentUser.Id, (int)PermissionEnum.REPORT_REPORT_DEBT_RECEIVABLE_VIEW);
+            pInspection.Visible = PermissionBLL.UserCheckPermission(CurrentUser.Id, (int)PermissionEnum.REPORT_REPORT_DEBT_RECEIVABLE_VIEW);
 
             if (pAddBooking.Visible || pAddSeriesBookings.Visible || pBookingList.Visible || pSerialManager.Visible || pOrders.Visible || pBookingDate.Visible || pBookingReport.Visible)
             {
@@ -334,6 +337,9 @@ namespace Portal.Modules.OrientalSails.Web.Admin
             hlHaiPhongExpenseReport.Visible = PermissionBLL.UserCheckPermission(CurrentUser.Id, (int)PermissionEnum.FORM_HAIPHONGEXPENSEREPORT);
             hlAddQuestion.Visible = PermissionBLL.UserCheckPermission(CurrentUser.Id, (int)PermissionEnum.FORM_QUESTIONGROUPEDIT);
             hlQuestionList.Visible = PermissionBLL.UserCheckPermission(CurrentUser.Id, (int)PermissionEnum.FORM_QUESTIONVIEW);
+
+            tabStorage.Visible = PermissionBLL.UserCheckPermission(CurrentUser.Id, (int)PermissionEnum.FORM_IVSTORAGELIST);
+            tabSetting.Visible = PermissionBLL.UserCheckRole(CurrentUser.Id, (int)Roles.Administrator);
 
         }
 

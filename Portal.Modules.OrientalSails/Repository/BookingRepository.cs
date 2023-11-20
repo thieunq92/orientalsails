@@ -21,12 +21,20 @@ namespace Portal.Modules.OrientalSails.Repository
 
         public BookingRepository(ISession session) : base(session) { }
 
-        public int BookingCountByStatusAndDate(Web.Util.StatusType statusType, DateTime date)
+        public int BookingCountByStatusAndDate(User user, Web.Util.StatusType statusType, DateTime date)
         {
-            return _session.QueryOver<Booking>()
-                .Where(x => x.Deleted == false)
+            var query = _session.QueryOver<Booking>();
+            Cruise cruiseAlias = null;
+            query.JoinAlias(x => x.Cruise, () => cruiseAlias);
+            IvRoleCruise roleCruiseAlias = null;
+            query.JoinAlias(() => cruiseAlias.ListRoleCruises, () => roleCruiseAlias);
+            User userRoleCruiseAlias = null;
+            query.JoinAlias(() => roleCruiseAlias.User, () => userRoleCruiseAlias);
+            query = query.Where(() => userRoleCruiseAlias.Id == user.Id);
+            query = query.Where(x => x.Deleted == false)
                 .Where(x => x.Status == statusType && x.StartDate > date)
-                .Select(Projections.RowCount()).FutureValue<int>().Value;
+                .Select(Projections.RowCount());
+            return query.FutureValue<int>().Value;
         }
 
         public int MyBookingPendingCount()
@@ -58,7 +66,7 @@ namespace Portal.Modules.OrientalSails.Repository
                 .Select(Projections.RowCount()).FutureValue<int>().Value;
         }
 
-        public IList<Booking> BookingListBLL_BookingSearchBy(int bookingId, int tripId, int cruiseId, int status,
+        public IList<Booking> BookingListBLL_BookingSearchBy(User user, int bookingId, int tripId, int cruiseId, int status,
             DateTime? startDate, string customerName, int agencyId, int batchId,
             int pageSize, int currentPageIndex, out int count)
         {
@@ -115,6 +123,13 @@ namespace Portal.Modules.OrientalSails.Repository
             query = query.Select(Projections.Distinct(Projections.Property<Booking>(x => x.Id)));
 
             var mainQuery = _session.QueryOver<Booking>().WithSubquery.WhereProperty(x => x.Id).In(query);
+            Cruise cruiseAlias1 = null;
+            mainQuery = mainQuery.JoinAlias(x => x.Cruise, () => cruiseAlias1);
+            IvRoleCruise roleCruiseAlias = null;
+            mainQuery.JoinAlias(() => cruiseAlias1.ListRoleCruises, () => roleCruiseAlias);
+            User userRoleCruiseAlias = null;
+            mainQuery.JoinAlias(() => roleCruiseAlias.User, () => userRoleCruiseAlias);
+            mainQuery = mainQuery.Where(() => userRoleCruiseAlias.Id == user.Id);
             mainQuery = mainQuery.OrderBy(x => x.StartDate).Desc;
             count = mainQuery.RowCount();
             return mainQuery.Skip(currentPageIndex * pageSize).Take(pageSize).Future<Booking>().ToList();
@@ -352,6 +367,7 @@ namespace Portal.Modules.OrientalSails.Repository
 
         public IEnumerable<Booking> BookingGetAllByCriterion(User user, DateTime? date, Cruise cruise, IEnumerable<StatusType> listStatus)
         {
+
             var cruises = CruiseGetByUser(user);
             if (cruises.Count > 0)
             {
@@ -382,6 +398,14 @@ namespace Portal.Modules.OrientalSails.Repository
                 var bookingQuery = _session.QueryOver<Booking>().WithSubquery.WhereProperty(x => x.Id)
                     .In<Booking>(query.Select(x => x.Id))
                     .Fetch(x => x.BookingRooms).Eager;
+                Cruise cruiseAlias = null;
+                bookingQuery.JoinAlias(x => x.Cruise, () => cruiseAlias);
+                IvRoleCruise roleCruiseAlias = null;
+                bookingQuery.JoinAlias(() => cruiseAlias.ListRoleCruises, () => roleCruiseAlias);
+                User userRoleCruiseAlias = null;
+                bookingQuery.JoinAlias(() => roleCruiseAlias.User, () => userRoleCruiseAlias);
+
+                bookingQuery = bookingQuery.Where(() => userRoleCruiseAlias.Id == user.Id);
                 bookingQuery = bookingQuery.TransformUsing(
                     Transformers.DistinctRootEntity);
                 return bookingQuery.Future();
@@ -409,7 +433,7 @@ namespace Portal.Modules.OrientalSails.Repository
                 return query.TransformUsing(Transformers.DistinctRootEntity).List();
             }
         }
-        public IEnumerable<Booking> ShadowBookingGetByDate(DateTime Date)
+        public IEnumerable<Booking> ShadowBookingGetByDate(User user, DateTime date)
         {
             var query = QueryOver.Of<BookingHistory>();
             Booking bookingAlias = null;
@@ -418,7 +442,7 @@ namespace Portal.Modules.OrientalSails.Repository
                 Restrictions.Where<BookingHistory>(x => x.StartDate != bookingAlias.StartDate),
                 Restrictions.Where<BookingHistory>(x => x.Status == StatusType.Cancelled && bookingAlias.Status == StatusType.Cancelled)));
             query = query.Where(() => bookingAlias.Deleted == false);
-            query = query.Where(x => x.StartDate == Date);
+            query = query.Where(x => x.StartDate == date);
             query.Select(Projections.Distinct(Projections.Property<BookingHistory>(x => x.Booking.Id)));
 
             var mainQuery = _session.QueryOver<Booking>().WithSubquery.WhereProperty(x => x.Id).In<BookingHistory>(query);
@@ -426,6 +450,13 @@ namespace Portal.Modules.OrientalSails.Repository
             mainQuery = mainQuery.Fetch(x => x.BookingRooms.First().Book).Eager;
             mainQuery = mainQuery.Fetch(x => x.Trip).Eager;
             mainQuery = mainQuery.Fetch(x => x.Agency).Eager;
+            Cruise cruiseAlias = null;
+            mainQuery.JoinAlias(x => x.Cruise, () => cruiseAlias);
+            IvRoleCruise roleCruiseAlias = null;
+            mainQuery.JoinAlias(() => cruiseAlias.ListRoleCruises, () => roleCruiseAlias);
+            User userRoleCruiseAlias = null;
+            mainQuery.JoinAlias(() => roleCruiseAlias.User, () => userRoleCruiseAlias);
+            mainQuery = mainQuery.Where(() => userRoleCruiseAlias.Id == user.Id);
             mainQuery = mainQuery.TransformUsing(
                  Transformers.DistinctRootEntity);
             var list = mainQuery.Future().ToList();

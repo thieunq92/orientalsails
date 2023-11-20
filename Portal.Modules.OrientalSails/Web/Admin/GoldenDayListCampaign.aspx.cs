@@ -3,7 +3,7 @@ using Aspose.Words.Tables;
 using OfficeOpenXml;
 using Portal.Modules.OrientalSails.BusinessLogic;
 using Portal.Modules.OrientalSails.Domain;
-using Portal.Modules.OrientalSails.Web.Admin.Utility;
+using Portal.Modules.OrientalSails.Web.Admin.Utilities;
 using System;
 using System.Collections.Generic;
 using System.IO;

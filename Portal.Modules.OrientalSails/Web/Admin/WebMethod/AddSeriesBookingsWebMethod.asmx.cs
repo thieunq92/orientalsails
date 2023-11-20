@@ -765,7 +765,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin.WebMethod
                 var modifiedName = "";
                 try
                 {
-                    modifiedName = booking.ModifiedBy.FullName;
+                    modifiedName = booking.ModifiedBy?.FullName;
                 }
                 catch { }
 

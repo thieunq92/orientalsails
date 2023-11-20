@@ -10,10 +10,17 @@ namespace Portal.Modules.OrientalSails.Web.Controls
     public partial class CustomerInfoRowInput : System.Web.UI.UserControl
     {
         private bool _childAllowed;
+        private bool _seatingCruise;
         public bool ChildAllowed
         {
             get { return _childAllowed; }
             set { _childAllowed = value; }
+        }
+
+        public bool SeatingCruise
+        {
+            get { return _seatingCruise; }
+            set { _seatingCruise = value; }
         }
 
         private CustomerInforRowInputBLL customerInforRowInputBLL;
@@ -46,6 +53,16 @@ namespace Portal.Modules.OrientalSails.Web.Controls
                 if (string.IsNullOrEmpty(txtBirthDay.Text))
                 {
                     txtBirthDay.Text = DateTime.Now.ToString("dd/MM/yyyy");
+                }
+
+                if (SeatingCruise)
+                {
+                    ddlBirthDay.Items.Insert(0, new ListItem("--Birthday--", "-1"));
+                    foreach (var year in Enumerable.Range(DateTime.Now.Year - 100, 101))
+                    {
+                        ddlBirthDay.Items.Insert(1, new ListItem(year.ToString(), year.ToString()));
+                    }
+                    ddlBirthDay.DataBind();
                 }
             }
         }
@@ -111,14 +128,30 @@ namespace Portal.Modules.OrientalSails.Web.Controls
             }
             customer.Passport = txtPassport.Text;
             customer.VisaNo = txtVisaNo.Text;
-            DateTime birthdate;
-            if (DateTime.TryParseExact(txtBirthDay.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out birthdate))
+
+            if (!SeatingCruise)
             {
-                customer.Birthday = birthdate;
+                DateTime birthdate;
+                if (DateTime.TryParseExact(txtBirthDay.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out birthdate))
+                {
+                    customer.Birthday = birthdate;
+                }
+                else
+                {
+                    customer.Birthday = DateTime.Now;
+                }
             }
-            else
+
+            if (SeatingCruise)
             {
-                customer.Birthday = DateTime.Now;
+                if (ddlBirthDay.SelectedValue != "-1")
+                {
+                    customer.Birthday = DateTime.ParseExact("01/01/" + ddlBirthDay.SelectedValue.ToString(), "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None);
+                }
+                else
+                {
+                    customer.Birthday = null;
+                }
             }
 
             DateTime expired;
@@ -134,7 +167,6 @@ namespace Portal.Modules.OrientalSails.Web.Controls
             customer.IsChild = chkChild.Checked;
             customer.IsBaBy = chkBaBy.Checked;
             customer.Code = txtCode.Text;
-
             if (ddlNationalities.SelectedValue == "-1")
                 customer.Nationality = null;
             else
@@ -173,13 +205,29 @@ namespace Portal.Modules.OrientalSails.Web.Controls
             }
             txtPassport.Text = customer.Passport;
             txtVisaNo.Text = customer.VisaNo;
-            if (customer.Birthday.HasValue)
+
+            if (!SeatingCruise)
             {
-                txtBirthDay.Text = customer.Birthday.Value.ToString("dd/MM/yyyy");
+                if (customer.Birthday.HasValue)
+                {
+                    txtBirthDay.Text = customer.Birthday.Value.ToString("dd/MM/yyyy");
+                }
+                else
+                {
+                    txtBirthDay.Text = DateTime.Now.ToString("dd/MM/yyyy");
+                }
             }
-            else
+
+            if (SeatingCruise)
             {
-                txtBirthDay.Text = DateTime.Now.ToString("dd/MM/yyyy");
+                if (customer.Birthday.HasValue)
+                {
+                    ddlBirthDay.SelectedValue = customer.Birthday.Value.ToString("yyyy");
+                }
+                else
+                {
+                    ddlBirthDay.SelectedValue = "-1";
+                }
             }
 
             if (customer.VisaExpired.HasValue)

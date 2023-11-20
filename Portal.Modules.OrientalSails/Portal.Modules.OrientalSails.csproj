@@ -638,6 +638,7 @@
       <DependentUpon>DocumentViewer.aspx</DependentUpon>
     </Compile>
     <Compile Include="Web\Admin\Enums\CruiseType.cs" />
+    <Compile Include="Web\Admin\Enums\TransferLocationType.cs" />
     <Compile Include="Web\Admin\ExpenseHistory.aspx.cs">
       <DependentUpon>ExpenseHistory.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -645,6 +646,8 @@
     <Compile Include="Web\Admin\ExpenseHistory.aspx.designer.cs">
       <DependentUpon>ExpenseHistory.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Web\Admin\Extensions\EnumExtension.cs" />
+    <Compile Include="Web\Admin\Utilities\Enumeration.cs" />
     <Compile Include="Web\Admin\FacilitieList.aspx.cs">
       <DependentUpon>FacilitieList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1514,8 +1517,8 @@
     <Compile Include="Web\Admin\TripConfigPriceList.aspx.designer.cs">
       <DependentUpon>TripConfigPriceList.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Web\Admin\Utility\DateTimeUtil.cs" />
-    <Compile Include="Web\Admin\Utility\NumberUtil.cs" />
+    <Compile Include="Web\Admin\Utilities\DateTimeUtil.cs" />
+    <Compile Include="Web\Admin\Utilities\NumberUtil.cs" />
     <Compile Include="Web\Admin\User.aspx.cs">
       <DependentUpon>User.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1530,7 +1533,7 @@
     <Compile Include="Web\Admin\DocumentView.aspx.designer.cs">
       <DependentUpon>DocumentView.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Web\Admin\Utility\StringUtil.cs" />
+    <Compile Include="Web\Admin\Utilities\StringUtil.cs" />
     <Compile Include="Web\Admin\ViewActivities.aspx.cs">
       <DependentUpon>ViewActivities.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2199,9 +2202,7 @@
     <Content Include="Web\Admin\Handler\FileUpload\FileTransferHandler.ashx" />
     <Content Include="Web\Admin\Handler\FileUpload\Thumbnail.ashx" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Web\Controls\NewFolder1\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Reference Include="AjaxControlToolkit, Version=1.0.20229.20821, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

@@ -40,14 +40,23 @@ namespace Portal.Modules.OrientalSails
             queryOver.Where(x => x.ReviewType == type.ToUpper() && x.ObjectId == id);
             return queryOver.List<Reviews>();
         }
-        public IList<SailsTrip> TripGetByDateNotLock(DateTime date)
+        public IList<SailsTrip> TripGetByDateNotLock(DateTime date, User user)
         {
+            var cruiseRoleQuery = _commonDao.OpenSession().QueryOver<IvRoleCruise>();
+            cruiseRoleQuery = cruiseRoleQuery.Where(x => x.User.Id == user.Id);
+            var cruiseRoles = cruiseRoleQuery.List().ToList();
+            var cruiseTripQuery = _commonDao.OpenSession().QueryOver<CruiseTrip>();
+            var cruiseTrips = cruiseTripQuery.List().ToList();
+            cruiseTrips = cruiseTrips.Where(x => cruiseRoles.Select(y => y.Cruise).Contains(x.Cruise)).ToList();
+            var trips = cruiseTrips.Select(x => x.Trip);
+
             var query = _commonDao.OpenSession().QueryOver<SailsTrip>();
             query = query.Where(x => x.Deleted == false);
             query = query.Where(x => x.IsLock == false || (x.IsLock && x.LockType == "From" && x.LockFromDate > date)
                                      || (x.IsLock && x.LockType == "FromTo" &&
                                          (x.LockFromDate > date || x.LockToDate < date)));
-            return query.List<SailsTrip>();
+            var tripsByCruiseRole = query.List().ToList().Where(x => trips.Select(y => y.Id).Contains(x.Id));
+            return tripsByCruiseRole.ToList();
         }
         public IList<TripConfigPrice> GetTripPriceConfig(int pageSize, int pageIndex, out int total)
         {

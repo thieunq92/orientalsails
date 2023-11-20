@@ -58,6 +58,8 @@
 		<property name="Transfer_DateTo"/>
 		<property name="Transfer_DateBack"/>
 		<property name="Transfer_Note"/>
+		<property name="CO_AN_CHAY"/>
+		<property name="DIA_DIEM_TRANSFER" type="Portal.Modules.OrientalSails.Web.Admin.Enums.TransferLocationType, Portal.Modules.OrientalSails"/>
 		<many-to-one name="CreatedBy" column="CreatedBy" class="CMS.Core.Domain.User, CMS.Core" not-found="ignore"/>
 		<many-to-one name="ModifiedBy" column="ModifiedBy" class="CMS.Core.Domain.User, CMS.Core" not-found="ignore"/>
 		<many-to-one name="ConfirmedBy" column="ConfirmedBy" class="CMS.Core.Domain.User, CMS.Core" not-found="ignore"/>

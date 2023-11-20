@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Portal.Modules.OrientalSails.Web.Admin {
-    
-    
-    public partial class MO_Main {
-        
+namespace Portal.Modules.OrientalSails.Web.Admin
+{
+
+
+    public partial class MO_Main
+    {
+
         /// <summary>
         /// Head1 control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlHead Head1;
-        
+
         /// <summary>
         /// HeadMain control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ContentPlaceHolder HeadMain;
-        
+
         /// <summary>
         /// form1 control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-        
+
         /// <summary>
         /// ScriptManagerMain control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ContentPlaceHolder ScriptManagerMain;
-        
+
         /// <summary>
         /// hlUserPanel control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hlUserPanel;
-        
+
         /// <summary>
         /// lbLogout control.
         /// </summary>
@@ -65,7 +67,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lbLogout;
-        
+
         /// <summary>
         /// tabBooking control.
         /// </summary>
@@ -74,7 +76,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl tabBooking;
-        
+
         /// <summary>
         /// pAddBooking control.
         /// </summary>
@@ -83,7 +85,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl pAddBooking;
-        
+
         /// <summary>
         /// hlAddBooking control.
         /// </summary>
@@ -92,7 +94,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hlAddBooking;
-        
+
         /// <summary>
         /// pBookingList control.
         /// </summary>
@@ -101,7 +103,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl pBookingList;
-        
+
         /// <summary>
         /// hlBookingList control.
         /// </summary>
@@ -110,7 +112,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hlBookingList;
-        
+
         /// <summary>
         /// pAddSeriesBookings control.
         /// </summary>
@@ -119,7 +121,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl pAddSeriesBookings;
-        
+
         /// <summary>
         /// hlAddSerialBookings control.
         /// </summary>
@@ -128,7 +130,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hlAddSerialBookings;
-        
+
         /// <summary>
         /// pSerialManager control.
         /// </summary>
@@ -137,7 +139,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl pSerialManager;
-        
+
         /// <summary>
         /// hplSeriesManager control.
         /// </summary>
@@ -146,7 +148,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hplSeriesManager;
-        
+
         /// <summary>
         /// pOrders control.
         /// </summary>
@@ -155,7 +157,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl pOrders;
-        
+
         /// <summary>
         /// hlOrders control.
         /// </summary>
@@ -164,7 +166,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hlOrders;
-        
+
         /// <summary>
         /// pBookingDate control.
         /// </summary>
@@ -173,7 +175,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl pBookingDate;
-        
+
         /// <summary>
         /// hlBookingDate control.
         /// </summary>
@@ -182,7 +184,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hlBookingDate;
-        
+
         /// <summary>
         /// pBookingReport control.
         /// </summary>
@@ -191,7 +193,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl pBookingReport;
-        
+
         /// <summary>
         /// hlBookingPeriod control.
         /// </summary>
@@ -200,7 +202,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hlBookingPeriod;
-        
+
         /// <summary>
         /// tabReports control.
         /// </summary>
@@ -209,7 +211,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl tabReports;
-        
+
         /// <summary>
         /// pIncomeReport control.
         /// </summary>
@@ -218,7 +220,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl pIncomeReport;
-        
+
         /// <summary>
         /// hlIncomeReport control.
         /// </summary>
@@ -227,7 +229,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hlIncomeReport;
-        
+
         /// <summary>
         /// pReceivable control.
         /// </summary>
@@ -236,7 +238,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl pReceivable;
-        
+
         /// <summary>
         /// hlIncomeOwn control.
         /// </summary>
@@ -245,7 +247,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hlIncomeOwn;
-        
+
         /// <summary>
         /// Li5 control.
         /// </summary>
@@ -254,7 +256,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl Li5;
-        
+
         /// <summary>
         /// hplPaymentHistory control.
         /// </summary>
@@ -263,7 +265,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hplPaymentHistory;
-        
+
         /// <summary>
         /// pDebtReceivable control.
         /// </summary>
@@ -272,7 +274,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl pDebtReceivable;
-        
+
         /// <summary>
         /// hplDebtReceivable control.
         /// </summary>
@@ -281,7 +283,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hplDebtReceivable;
-        
+
         /// <summary>
         /// pExpenseReport control.
         /// </summary>
@@ -290,7 +292,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl pExpenseReport;
-        
+
         /// <summary>
         /// hlExpenseReport control.
         /// </summary>
@@ -299,7 +301,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hlExpenseReport;
-        
+
         /// <summary>
         /// pHaiPhongExpenseReport control.
         /// </summary>
@@ -308,7 +310,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl pHaiPhongExpenseReport;
-        
+
         /// <summary>
         /// hlHaiPhongExpenseReport control.
         /// </summary>
@@ -317,7 +319,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hlHaiPhongExpenseReport;
-        
+
         /// <summary>
         /// pPayable control.
         /// </summary>
@@ -326,7 +328,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl pPayable;
-        
+
         /// <summary>
         /// hlExpenseDebt control.
         /// </summary>
@@ -335,7 +337,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hlExpenseDebt;
-        
+
         /// <summary>
         /// pBalance control.
         /// </summary>
@@ -344,7 +346,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl pBalance;
-        
+
         /// <summary>
         /// hlBalance control.
         /// </summary>
@@ -353,7 +355,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hlBalance;
-        
+
         /// <summary>
         /// pSummary control.
         /// </summary>
@@ -362,7 +364,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl pSummary;
-        
+
         /// <summary>
         /// hlReceiablePayable control.
         /// </summary>
@@ -371,7 +373,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hlReceiablePayable;
-        
+
         /// <summary>
         /// pInspection control.
         /// </summary>
@@ -380,7 +382,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl pInspection;
-        
+
         /// <summary>
         /// hlInspection control.
         /// </summary>
@@ -389,7 +391,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hlInspection;
-        
+
         /// <summary>
         /// pReportDebtReceivables control.
         /// </summary>
@@ -398,7 +400,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl pReportDebtReceivables;
-        
+
         /// <summary>
         /// hplReportDebtReceivables control.
         /// </summary>
@@ -407,7 +409,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hplReportDebtReceivables;
-        
+
         /// <summary>
         /// tabConfiguration control.
         /// </summary>
@@ -416,7 +418,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl tabConfiguration;
-        
+
         /// <summary>
         /// pAgencyEdit control.
         /// </summary>
@@ -425,7 +427,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl pAgencyEdit;
-        
+
         /// <summary>
         /// hlAgencyEdit control.
         /// </summary>
@@ -434,7 +436,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hlAgencyEdit;
-        
+
         /// <summary>
         /// pAgencyList control.
         /// </summary>
@@ -443,7 +445,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl pAgencyList;
-        
+
         /// <summary>
         /// hlAgencyList control.
         /// </summary>
@@ -452,7 +454,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hlAgencyList;
-        
+
         /// <summary>
         /// pAgencyPolicies control.
         /// </summary>
@@ -461,7 +463,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl pAgencyPolicies;
-        
+
         /// <summary>
         /// hlAgentList control.
         /// </summary>
@@ -470,7 +472,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hlAgentList;
-        
+
         /// <summary>
         /// pVoucherEdit control.
         /// </summary>
@@ -479,7 +481,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl pVoucherEdit;
-        
+
         /// <summary>
         /// hlVoucherEdit control.
         /// </summary>
@@ -488,7 +490,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hlVoucherEdit;
-        
+
         /// <summary>
         /// pVoucherList control.
         /// </summary>
@@ -497,7 +499,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl pVoucherList;
-        
+
         /// <summary>
         /// hlVoucherList control.
         /// </summary>
@@ -506,7 +508,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hlVoucherList;
-        
+
         /// <summary>
         /// pVoucherTemplates control.
         /// </summary>
@@ -515,7 +517,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl pVoucherTemplates;
-        
+
         /// <summary>
         /// hlVoucherTemplates control.
         /// </summary>
@@ -524,7 +526,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hlVoucherTemplates;
-        
+
         /// <summary>
         /// pAgencyViewMeetings control.
         /// </summary>
@@ -533,7 +535,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl pAgencyViewMeetings;
-        
+
         /// <summary>
         /// hlViewMeetings control.
         /// </summary>
@@ -542,7 +544,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hlViewMeetings;
-        
+
         /// <summary>
         /// pAgencyLocation control.
         /// </summary>
@@ -551,7 +553,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl pAgencyLocation;
-        
+
         /// <summary>
         /// hlAgencyLocation control.
         /// </summary>
@@ -560,7 +562,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hlAgencyLocation;
-        
+
         /// <summary>
         /// hlQuotationManagement control.
         /// </summary>
@@ -569,7 +571,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hlQuotationManagement;
-        
+
         /// <summary>
         /// hlContractManagement control.
         /// </summary>
@@ -578,7 +580,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hlContractManagement;
-        
+
         /// <summary>
         /// tabTrips control.
         /// </summary>
@@ -587,7 +589,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl tabTrips;
-        
+
         /// <summary>
         /// pTripEdit control.
         /// </summary>
@@ -596,7 +598,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl pTripEdit;
-        
+
         /// <summary>
         /// hlTripEdit control.
         /// </summary>
@@ -605,7 +607,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hlTripEdit;
-        
+
         /// <summary>
         /// pTripList control.
         /// </summary>
@@ -614,7 +616,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl pTripList;
-        
+
         /// <summary>
         /// hlTripList control.
         /// </summary>
@@ -623,7 +625,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hlTripList;
-        
+
         /// <summary>
         /// pCruiseEdit control.
         /// </summary>
@@ -632,7 +634,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl pCruiseEdit;
-        
+
         /// <summary>
         /// hlCruiseEdit control.
         /// </summary>
@@ -641,7 +643,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hlCruiseEdit;
-        
+
         /// <summary>
         /// pCruiseList control.
         /// </summary>
@@ -650,7 +652,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl pCruiseList;
-        
+
         /// <summary>
         /// hlCruiseList control.
         /// </summary>
@@ -659,7 +661,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hlCruiseList;
-        
+
         /// <summary>
         /// hplKeepRoomStatus control.
         /// </summary>
@@ -668,7 +670,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hplKeepRoomStatus;
-        
+
         /// <summary>
         /// hplTripPriceConfig control.
         /// </summary>
@@ -677,7 +679,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hplTripPriceConfig;
-        
+
         /// <summary>
         /// hplAgencyTripPriceConfig control.
         /// </summary>
@@ -686,7 +688,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hplAgencyTripPriceConfig;
-        
+
         /// <summary>
         /// tabRoom control.
         /// </summary>
@@ -695,7 +697,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl tabRoom;
-        
+
         /// <summary>
         /// pRoomClass control.
         /// </summary>
@@ -704,7 +706,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl pRoomClass;
-        
+
         /// <summary>
         /// hlRoomClass control.
         /// </summary>
@@ -713,7 +715,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hlRoomClass;
-        
+
         /// <summary>
         /// pRoomType control.
         /// </summary>
@@ -722,7 +724,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl pRoomType;
-        
+
         /// <summary>
         /// hlRoomType control.
         /// </summary>
@@ -731,7 +733,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hlRoomType;
-        
+
         /// <summary>
         /// pRoomEdit control.
         /// </summary>
@@ -740,7 +742,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl pRoomEdit;
-        
+
         /// <summary>
         /// hlRoomEdit control.
         /// </summary>
@@ -749,7 +751,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hlRoomEdit;
-        
+
         /// <summary>
         /// pRoomList control.
         /// </summary>
@@ -758,7 +760,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl pRoomList;
-        
+
         /// <summary>
         /// hlRoomList control.
         /// </summary>
@@ -767,7 +769,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hlRoomList;
-        
+
         /// <summary>
         /// tabCost control.
         /// </summary>
@@ -776,7 +778,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl tabCost;
-        
+
         /// <summary>
         /// pExtraService control.
         /// </summary>
@@ -785,7 +787,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl pExtraService;
-        
+
         /// <summary>
         /// hlExtraOption control.
         /// </summary>
@@ -794,7 +796,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hlExtraOption;
-        
+
         /// <summary>
         /// pCostingConfig control.
         /// </summary>
@@ -803,7 +805,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl pCostingConfig;
-        
+
         /// <summary>
         /// hlCosting control.
         /// </summary>
@@ -812,7 +814,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hlCosting;
-        
+
         /// <summary>
         /// pDailyManualCost control.
         /// </summary>
@@ -821,7 +823,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl pDailyManualCost;
-        
+
         /// <summary>
         /// hlExpenseDate control.
         /// </summary>
@@ -830,7 +832,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hlExpenseDate;
-        
+
         /// <summary>
         /// pExpensePeriod control.
         /// </summary>
@@ -839,7 +841,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl pExpensePeriod;
-        
+
         /// <summary>
         /// hlExpensePeriod control.
         /// </summary>
@@ -848,7 +850,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hlExpensePeriod;
-        
+
         /// <summary>
         /// pHaiPhong control.
         /// </summary>
@@ -857,7 +859,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl pHaiPhong;
-        
+
         /// <summary>
         /// hlHaiPhong control.
         /// </summary>
@@ -866,7 +868,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hlHaiPhong;
-        
+
         /// <summary>
         /// pCostTypes control.
         /// </summary>
@@ -875,7 +877,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl pCostTypes;
-        
+
         /// <summary>
         /// hlCostTypes control.
         /// </summary>
@@ -884,7 +886,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hlCostTypes;
-        
+
         /// <summary>
         /// pUSDRate control.
         /// </summary>
@@ -893,7 +895,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl pUSDRate;
-        
+
         /// <summary>
         /// hlUSDRate control.
         /// </summary>
@@ -902,7 +904,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hlUSDRate;
-        
+
         /// <summary>
         /// hplKeepRoomConfig control.
         /// </summary>
@@ -911,7 +913,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hplKeepRoomConfig;
-        
+
         /// <summary>
         /// hplFacilitieList control.
         /// </summary>
@@ -920,7 +922,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hplFacilitieList;
-        
+
         /// <summary>
         /// tabSetting control.
         /// </summary>
@@ -929,7 +931,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl tabSetting;
-        
+
         /// <summary>
         /// hlPermissions control.
         /// </summary>
@@ -938,7 +940,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hlPermissions;
-        
+
         /// <summary>
         /// hlAddQuestion control.
         /// </summary>
@@ -947,7 +949,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hlAddQuestion;
-        
+
         /// <summary>
         /// hlQuestionList control.
         /// </summary>
@@ -956,7 +958,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hlQuestionList;
-        
+
         /// <summary>
         /// hlFeedbackReport control.
         /// </summary>
@@ -965,7 +967,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hlFeedbackReport;
-        
+
         /// <summary>
         /// hlFeedbackResponse control.
         /// </summary>
@@ -974,7 +976,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hlFeedbackResponse;
-        
+
         /// <summary>
         /// hlViewDocument control.
         /// </summary>
@@ -983,7 +985,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hlViewDocument;
-        
+
         /// <summary>
         /// pDocumentManage control.
         /// </summary>
@@ -992,7 +994,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl pDocumentManage;
-        
+
         /// <summary>
         /// hlDocumentManage control.
         /// </summary>
@@ -1001,7 +1003,16 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hlDocumentManage;
-        
+
+        /// <summary>
+        /// tabStorage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl tabStorage;
+
         /// <summary>
         /// hplBookingSale control.
         /// </summary>
@@ -1010,7 +1021,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hplBookingSale;
-        
+
         /// <summary>
         /// hplIvCategory control.
         /// </summary>
@@ -1019,7 +1030,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hplIvCategory;
-        
+
         /// <summary>
         /// Li1 control.
         /// </summary>
@@ -1028,7 +1039,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl Li1;
-        
+
         /// <summary>
         /// hplIvUnit control.
         /// </summary>
@@ -1037,7 +1048,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hplIvUnit;
-        
+
         /// <summary>
         /// Li2 control.
         /// </summary>
@@ -1046,7 +1057,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl Li2;
-        
+
         /// <summary>
         /// hplIvStorage control.
         /// </summary>
@@ -1055,7 +1066,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hplIvStorage;
-        
+
         /// <summary>
         /// Li3 control.
         /// </summary>
@@ -1064,7 +1075,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl Li3;
-        
+
         /// <summary>
         /// hplIvProduct control.
         /// </summary>
@@ -1073,7 +1084,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hplIvProduct;
-        
+
         /// <summary>
         /// Li6 control.
         /// </summary>
@@ -1082,7 +1093,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl Li6;
-        
+
         /// <summary>
         /// hplIvProductImportList control.
         /// </summary>
@@ -1091,7 +1102,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hplIvProductImportList;
-        
+
         /// <summary>
         /// Li8 control.
         /// </summary>
@@ -1100,7 +1111,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl Li8;
-        
+
         /// <summary>
         /// hplIvProductExportList control.
         /// </summary>
@@ -1109,7 +1120,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hplIvProductExportList;
-        
+
         /// <summary>
         /// Li9 control.
         /// </summary>
@@ -1118,7 +1129,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl Li9;
-        
+
         /// <summary>
         /// hplIvProductInStock control.
         /// </summary>
@@ -1127,7 +1138,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hplIvProductInStock;
-        
+
         /// <summary>
         /// hplIvReportProductWarningLimit control.
         /// </summary>
@@ -1136,7 +1147,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hplIvReportProductWarningLimit;
-        
+
         /// <summary>
         /// Li4 control.
         /// </summary>
@@ -1145,7 +1156,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl Li4;
-        
+
         /// <summary>
         /// hplImportReport control.
         /// </summary>
@@ -1154,7 +1165,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hplImportReport;
-        
+
         /// <summary>
         /// Li7 control.
         /// </summary>
@@ -1163,7 +1174,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl Li7;
-        
+
         /// <summary>
         /// hplExportReport control.
         /// </summary>
@@ -1172,7 +1183,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hplExportReport;
-        
+
         /// <summary>
         /// Li19 control.
         /// </summary>
@@ -1181,7 +1192,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl Li19;
-        
+
         /// <summary>
         /// hplIvExportProductReportList control.
         /// </summary>
@@ -1190,7 +1201,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hplIvExportProductReportList;
-        
+
         /// <summary>
         /// lblTitle control.
         /// </summary>
@@ -1199,7 +1210,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblTitle;
-        
+
         /// <summary>
         /// AdminContentMain control.
         /// </summary>
@@ -1208,7 +1219,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ContentPlaceHolder AdminContentMain;
-        
+
         /// <summary>
         /// rptBirthday control.
         /// </summary>
@@ -1217,7 +1228,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptBirthday;
-        
+
         /// <summary>
         /// hlAllPending control.
         /// </summary>
@@ -1226,7 +1237,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hlAllPending;
-        
+
         /// <summary>
         /// ScriptsMain control.
         /// </summary>

@@ -3812,6 +3812,7 @@
     <Content Include="dist\app.bundle.js.map" />
     <Content Include="dist\sw.bundle.js.map" />
     <Content Include="sw.bundle.js.map" />
+    <Content Include="Modules\Sails\Admin\ExportTemplates\DanhSachKhachTauNgay.xlsx" />
     <None Include="_sass\_footer.scss" />
     <EmbeddedResource Include="Admin\ConnectionEdit.aspx.resx">
       <DependentUpon>ConnectionEdit.aspx.cs</DependentUpon>
