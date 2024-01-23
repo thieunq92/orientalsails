@@ -201,9 +201,9 @@ namespace Portal.Modules.OrientalSails.BusinessLogic
             return AgencyRepository.AgencyGetById(guideId);
         }
 
-        public IQueryOver<Booking, Booking> BookingGetByCriterion(DateTime? date, Cruise cruise)
+        public IQueryOver<Booking, Booking> BookingGetByCriterion(DateTime? date, Cruise cruise, User user)
         {
-            return BookingRepository.BookingGetByCriterion(date, cruise);
+            return BookingRepository.BookingGetByCriterion(date, cruise, user);
         }
 
         public IEnumerable<Booking> BookingGetAllByCriterion(User user,DateTime? date, Cruise cruise, IEnumerable<StatusType> listStatus)

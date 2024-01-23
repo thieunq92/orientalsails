@@ -238,9 +238,9 @@ namespace Portal.Modules.OrientalSails.Web.Admin
             }
 
             pAddBooking.Visible = PermissionBLL.UserCheckPermission(CurrentUser.Id, (int)PermissionEnum.FORM_ADDBOOKING);
-            pAddSeriesBookings.Visible = PermissionBLL.UserCheckPermission(CurrentUser.Id, (int)PermissionEnum.FORM_ADDBOOKING);
+            pAddSeriesBookings.Visible = PermissionBLL.UserCheckPermission(CurrentUser.Id, (int)PermissionEnum.ADDSERIES);
             pBookingList.Visible = PermissionBLL.UserCheckPermission(CurrentUser.Id, (int)PermissionEnum.FORM_BOOKINGLIST);
-            pSerialManager.Visible = PermissionBLL.UserCheckPermission(CurrentUser.Id, (int)PermissionEnum.FORM_BOOKINGLIST);
+            pSerialManager.Visible = PermissionBLL.UserCheckPermission(CurrentUser.Id, (int)PermissionEnum.VIEWALLSERIES);
             pOrders.Visible = PermissionBLL.UserCheckPermission(CurrentUser.Id, (int)PermissionEnum.FORM_ORDERREPORT);
             pBookingDate.Visible = PermissionBLL.UserCheckPermission(CurrentUser.Id, (int)PermissionEnum.FORM_BOOKINGREPORT);
             pBookingReport.Visible = PermissionBLL.UserCheckPermission(CurrentUser.Id, (int)PermissionEnum.FORM_BOOKINGREPORTPERIOD);

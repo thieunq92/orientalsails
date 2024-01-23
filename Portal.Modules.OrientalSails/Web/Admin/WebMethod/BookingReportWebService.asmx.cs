@@ -425,7 +425,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin.WebMethod
             }
             var operationName = ob;
             var operationPhone = op;
-            var listBooking = BookingReportBLL.BookingGetByCriterion(date, cruise).Where(x => x.Status == StatusType.Approved)
+            var listBooking = BookingReportBLL.BookingGetByCriterion(date, cruise, CurrentUser).Where(x => x.Status == StatusType.Approved)
                 .Future().ToList();
             using (var memoryStream = new MemoryStream())
             {
@@ -530,7 +530,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin.WebMethod
                     sheet.Cells[totalRow, 6].Value = listBooking.Sum(x => x.Baby);
                     //--
                     //Export booking đi 2 ngày bắt đầu từ ngày hôm trước
-                    listBooking = BookingReportBLL.BookingGetByCriterion(date.Value.AddDays(-1), cruise)
+                    listBooking = BookingReportBLL.BookingGetByCriterion(date.Value.AddDays(-1), cruise, CurrentUser)
                         .Where(x => x.Status == StatusType.Approved)
                         .Future().ToList()
                         .Where(x => x.Trip.NumberOfDay > 2)
@@ -677,217 +677,271 @@ namespace Portal.Modules.OrientalSails.Web.Admin.WebMethod
             }
             using (var memoryStream = new MemoryStream())
             {
-                using (var excelPackage = new ExcelPackage(new FileInfo(Server.MapPath("/Modules/Sails/Admin/ExportTemplates/TourCommand.xlsx"))))
+                var excelPackage = new ExcelPackage(new FileInfo(Server.MapPath("/Modules/Sails/Admin/ExportTemplates/TourCommand.xlsx")));
+                var listCruise = BookingReportBLL.CruiseGetAll();
+                foreach (var cruise in listCruise)
                 {
-                    var listCruise = BookingReportBLL.CruiseGetAll();
-                    foreach (var cruise in listCruise)
+                    if (cruise.Code != "VD")
                     {
-                        var sheet = excelPackage.Workbook.Worksheets.Copy("Tour Command", "TC" + "-" + cruise.Code);
-                        sheet.Cells["I1"].Value = cruise.Name;
-                        sheet.Cells["E1"].Value = (date.HasValue ? date.Value.ToLongDateString() : "");
-                        var listBooking = BookingReportBLL.BookingGetByCriterion(date, cruise)
-                            .Where(x => x.Status == StatusType.Approved)
-                            .Future().ToList();
-                        //Điền guide vào lệnh điều tour
-                        var startRow = 3;
-                        var currentRow = startRow;
-                        var templateGuideRow = currentRow;
-                        var listGuideExpense = BookingReportBLL.ExpenseGetAllByCriterion(cruise.Id, date)
-                            .Where(x => x.Type == "Guide")
-                            .Future().ToList(); //Lấy danh sách GuideExpense theo tàu
-                        var listGuide = listGuideExpense.Select(x => x.Guide).ToList();//Lấy danh sách Guide từ danh sách GuideExpense
-                        var listGuide_Distinct = listGuide.Distinct().ToList();//Lấy danh sách Guide không bị lặp
-                        sheet.InsertRow(currentRow, listGuide_Distinct.Count - 1, templateGuideRow);//Copy số row guide = với số guide
-                        FillGuide(listGuide_Distinct, sheet, ref currentRow);
-                        //--
-                        //Điền driver vào lệnh điều tour
-                        var templateDriverRow = currentRow;
-                        //Lấy danh sách BusByDate mà đang có booking cần export
-                        var listBusByDate = new List<BusByDate>();
-                        foreach (var booking in listBooking)
-                        {
-                            var busByDate = booking.ListBookingBusByDate.Where(x => x.BusByDate.Date == date)
-                                .Select(x => x.BusByDate).ToList().FirstOrDefault();
-                            if (busByDate != null) { listBusByDate.Add(busByDate); }
-                        }
-                        //--
-                        sheet.InsertRow(currentRow, listBusByDate.Count - 1, templateDriverRow);//Copy số row driver = với số bus
-                        FillDriver(listBusByDate, sheet, ref currentRow);
-                        //--
-                        //Điền opt vào lệnh điều tour
-                        var templateOptRow = currentRow;
-                        //Lấy danh sách opt
-                        var listOpt = listGuideExpense.Select(x => x.Operator);
-                        var listOpt_Distinct = listOpt.Distinct().ToList();//Lấy danh sách Opt không lặp
-                        sheet.InsertRow(currentRow, listOpt_Distinct.Count - 1, templateOptRow);
-                        FillOpt(listOpt_Distinct, sheet, ref currentRow);
-                        //--
-                        //Export booking trong ngày
-                        int titleRow = currentRow;
-                        currentRow = currentRow + 2;//Chuyển current row đến templaterow booking
-                        int templateRow = currentRow;
-                        int totalRow = templateRow + listBooking.Count();
-                        int index = 1;
-                        currentRow++;//Chuyển current row đến trước template row để bắt đầu coppyrow
-                        sheet.InsertRow(currentRow, listBooking.Count, templateRow);
-                        if (CanViewSpecialRequestFood && CanViewSpecialRequestFood)
-                        {
-                            sheet.Cells[titleRow, 9, titleRow + 1, 9].Merge = true;
-                            sheet.Cells[titleRow, 10, titleRow + 1, 10].Merge = true;
-                            sheet.Cells[titleRow, 9].Value = "Special Request Food";
-                            sheet.Cells[titleRow, 10].Value = "Special Request Room";
-                        }
-                        else
-                        {
-                            if (CanViewSpecialRequestFood)
-                            {
-                                sheet.Cells[titleRow, 9, titleRow + 1, 10].Merge = true;
-                                sheet.Cells[titleRow, 9].Value = "Special Request Food";
-                            }
-
-                            if (CanViewSpecialRequestRoom)
-                            {
-                                sheet.Cells[titleRow, 9, titleRow + 1, 10].Merge = true;
-                                sheet.Cells[titleRow, 9].Value = "Special Request Room";
-                            }
-                        }
-                        for (int i = 0; i < listBooking.Count; i++)
-                        {
-                            var booking = listBooking[i] as Booking;
-                            if (booking != null)
-                            {
-                                var name = booking.CustomerNameFull.Replace("<br/>", "\r\n").ToUpper();
-                                sheet.Cells[currentRow, 1].Value = index;
-                                sheet.Cells[currentRow, 2, currentRow, 3].Merge = true;
-                                sheet.Cells[currentRow, 2].Value = name;
-                                sheet.Cells[currentRow, 4].Value = booking.Adult;
-                                sheet.Cells[currentRow, 5].Value = booking.Child;
-                                sheet.Cells[currentRow, 6].Value = booking.Baby;
-                                sheet.Cells[currentRow, 7].Value = booking.Trip.TripCode;
-                                sheet.Cells[currentRow, 8].Value = booking.PickupAddress;
-                                sheet.Cells[currentRow, 11].Value = "OS" + booking.Id;
-                                sheet.Cells[currentRow, 26].Value = name;//Work around cho cột merged name không hiển thị hết khi nội dung quá dài
-                                if (CanViewSpecialRequestFood && CanViewSpecialRequestFood)
-                                {
-                                    sheet.Cells[currentRow, 9].Value = booking.SpecialRequest;
-                                    sheet.Cells[currentRow, 10].Value = booking.SpecialRequestRoom;
-                                }
-                                else
-                                {
-                                    if (CanViewSpecialRequestFood)
-                                    {
-                                        sheet.Cells[currentRow, 9, currentRow, 10].Merge = true;
-                                        sheet.Cells[currentRow, 9].Value = booking.SpecialRequest;
-                                    }
-
-                                    if (CanViewSpecialRequestRoom)
-                                    {
-                                        sheet.Cells[currentRow, 9, currentRow, 10].Merge = true;
-                                        sheet.Cells[currentRow, 9].Value = booking.SpecialRequestRoom;
-                                    }
-                                }
-                                currentRow++;
-                                index++;
-                            }
-                        }
-                        sheet.DeleteRow(templateRow);
-                        sheet.Cells[totalRow, 4].Value = listBooking.Sum(x => x.Adult);
-                        sheet.Cells[totalRow, 5].Value = listBooking.Sum(x => x.Child);
-                        sheet.Cells[totalRow, 6].Value = listBooking.Sum(x => x.Baby);
-                        //--
-                        //Export booking đi 2 ngày bắt đầu từ ngày hôm trước
-                        listBooking = BookingReportBLL.BookingGetByCriterion(date.Value.AddDays(-1), cruise)
-                            .Where(x => x.Status == StatusType.Approved)
-                            .Future().ToList()
-                            .Where(x => x.Trip.NumberOfDay > 2)
-                            .ToList();
-
-                        titleRow = currentRow + 2;
-                        templateRow = currentRow + 4;
-                        currentRow = templateRow + 1;
-                        totalRow = templateRow + listBooking.Count();
-                        index = 1;
-                        sheet.InsertRow(currentRow, listBooking.Count, currentRow - 1);
-                        if (CanViewSpecialRequestFood && CanViewSpecialRequestFood)
-                        {
-                            sheet.Cells[titleRow, 9, titleRow + 1, 9].Merge = true;
-                            sheet.Cells[titleRow, 10, titleRow + 1, 10].Merge = true;
-                            sheet.Cells[titleRow, 9].Value = "Special Request Food";
-                            sheet.Cells[titleRow, 10].Value = "Special Request Room";
-                        }
-                        else
-                        {
-                            if (CanViewSpecialRequestFood)
-                            {
-                                sheet.Cells[titleRow, 9, titleRow + 1, 10].Merge = true;
-                                sheet.Cells[titleRow, 9].Value = "Special Request Food";
-                            }
-
-                            if (CanViewSpecialRequestRoom)
-                            {
-                                sheet.Cells[titleRow, 9, titleRow + 1, 10].Merge = true;
-                                sheet.Cells[titleRow, 9].Value = "Special Request Room";
-                            }
-                        }
-                        for (int i = 0; i < listBooking.Count; i++)
-                        {
-                            var booking = listBooking[i] as Booking;
-                            if (booking != null)
-                            {
-                                var name = booking.CustomerNameFull.Replace("<br/>", "\r\n").ToUpper();
-                                sheet.Cells[currentRow, 1].Value = index;
-                                sheet.Cells[currentRow, 2, currentRow, 3].Merge = true;
-                                sheet.Cells[currentRow, 3].Value = name;
-                                sheet.Cells[currentRow, 4].Value = booking.Adult;
-                                sheet.Cells[currentRow, 5].Value = booking.Child;
-                                sheet.Cells[currentRow, 6].Value = booking.Baby;
-                                sheet.Cells[currentRow, 7].Value = booking.Trip.TripCode;
-                                sheet.Cells[currentRow, 8].Value = booking.PickupAddress;
-                                sheet.Cells[currentRow, 11].Value = "OS" + booking.Id;
-                                sheet.Cells[currentRow, 26].Value = name;//Work around cho cột merged name không hiển thị hết khi nội dung quá dài
-                                if (CanViewSpecialRequestFood && CanViewSpecialRequestFood)
-                                {
-                                    sheet.Cells[currentRow, 9].Value = booking.SpecialRequest;
-                                    sheet.Cells[currentRow, 10].Value = booking.SpecialRequestRoom;
-                                }
-                                else
-                                {
-                                    if (CanViewSpecialRequestFood)
-                                    {
-                                        sheet.Cells[currentRow, 9, currentRow, 10].Merge = true;
-                                        sheet.Cells[currentRow, 9].Value = booking.SpecialRequest;
-                                    }
-
-                                    if (CanViewSpecialRequestRoom)
-                                    {
-                                        sheet.Cells[currentRow, 9, currentRow, 10].Merge = true;
-                                        sheet.Cells[currentRow, 9].Value = booking.SpecialRequestRoom;
-                                    }
-                                }
-                                currentRow++;
-                                index++;
-                            }
-                        }
-                        sheet.DeleteRow(templateRow);
-                        sheet.Cells[totalRow, 4].Value = listBooking.Sum(x => x.Adult);
-                        sheet.Cells[totalRow, 5].Value = listBooking.Sum(x => x.Child);
-                        sheet.Cells[totalRow, 6].Value = listBooking.Sum(x => x.Baby);
-                        //--
+                        ExportTourAllCabinCruise(ref excelPackage, date, cruise);
                     }
-                    excelPackage.Workbook.Worksheets.Delete("Tour Command");
-                    excelPackage.SaveAs(memoryStream);
-                    HttpContext.Current.Response.Clear();
-                    HttpContext.Current.Response.ContentEncoding = System.Text.Encoding.UTF8;
-                    HttpContext.Current.Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                    HttpContext.Current.Response.BinaryWrite(memoryStream.ToArray());
-                    HttpContext.Current.Response.Flush();
-                    HttpContext.Current.Response.SuppressContent = true;
-                    HttpContext.Current.ApplicationInstance.CompleteRequest();
+                    else
+                    {
+                        ExportTourAllVDreamCruise(ref excelPackage, date, cruise);
+                    }
                 }
+
+                excelPackage.Workbook.Worksheets.Delete("Tour Command");
+                excelPackage.SaveAs(memoryStream);
+                excelPackage = null;
+                HttpContext.Current.Response.Clear();
+                HttpContext.Current.Response.ContentEncoding = System.Text.Encoding.UTF8;
+                HttpContext.Current.Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                HttpContext.Current.Response.BinaryWrite(memoryStream.ToArray());
+                HttpContext.Current.Response.Flush();
+                HttpContext.Current.Response.SuppressContent = true;
+                HttpContext.Current.ApplicationInstance.CompleteRequest();
+
                 Dispose();
             }
         }
 
+
+        public void ExportTourAllCabinCruise(ref ExcelPackage excelPackage, DateTime? date, Cruise cruise)
+        {
+            var sheet = excelPackage.Workbook.Worksheets.Copy("Tour Command", "TC" + "-" + cruise.Code);
+            sheet.Cells["I1"].Value = cruise.Name;
+            sheet.Cells["E1"].Value = (date.HasValue ? date.Value.ToLongDateString() : "");
+            var listBooking = BookingReportBLL.BookingGetByCriterion(date, cruise, CurrentUser)
+                .Where(x => x.Status == StatusType.Approved)
+                .Future().ToList();
+            //Điền guide vào lệnh điều tour
+            var startRow = 3;
+            var currentRow = startRow;
+            var templateGuideRow = currentRow;
+            var listGuideExpense = BookingReportBLL.ExpenseGetAllByCriterion(cruise.Id, date)
+                .Where(x => x.Type == "Guide")
+                .Future().ToList(); //Lấy danh sách GuideExpense theo tàu
+            var listGuide = listGuideExpense.Select(x => x.Guide).ToList();//Lấy danh sách Guide từ danh sách GuideExpense
+            var listGuide_Distinct = listGuide.Distinct().ToList();//Lấy danh sách Guide không bị lặp
+            sheet.InsertRow(currentRow, listGuide_Distinct.Count - 1, templateGuideRow);//Copy số row guide = với số guide
+            FillGuide(listGuide_Distinct, sheet, ref currentRow);
+            //--
+            //Điền driver vào lệnh điều tour
+            var templateDriverRow = currentRow;
+            //Lấy danh sách BusByDate mà đang có booking cần export
+            var listBusByDate = new List<BusByDate>();
+            foreach (var booking in listBooking)
+            {
+                var busByDate = booking.ListBookingBusByDate.Where(x => x.BusByDate.Date == date)
+                    .Select(x => x.BusByDate).ToList().FirstOrDefault();
+                if (busByDate != null) { listBusByDate.Add(busByDate); }
+            }
+            //--
+            sheet.InsertRow(currentRow, listBusByDate.Count - 1, templateDriverRow);//Copy số row driver = với số bus
+            FillDriver(listBusByDate, sheet, ref currentRow);
+            //--
+            //Điền opt vào lệnh điều tour
+            var templateOptRow = currentRow;
+            //Lấy danh sách opt
+            var listOpt = listGuideExpense.Select(x => x.Operator);
+            var listOpt_Distinct = listOpt.Distinct().ToList();//Lấy danh sách Opt không lặp
+            sheet.InsertRow(currentRow, listOpt_Distinct.Count - 1, templateOptRow);
+            FillOpt(listOpt_Distinct, sheet, ref currentRow);
+            //--
+            //Export booking trong ngày
+            int titleRow = currentRow;
+            currentRow = currentRow + 2;//Chuyển current row đến templaterow booking
+            int templateRow = currentRow;
+            int totalRow = templateRow + listBooking.Count();
+            int index = 1;
+            currentRow++;//Chuyển current row đến trước template row để bắt đầu coppyrow
+            sheet.InsertRow(currentRow, listBooking.Count, templateRow);
+            if (CanViewSpecialRequestFood && CanViewSpecialRequestFood)
+            {
+                sheet.Cells[titleRow, 9, titleRow + 1, 9].Merge = true;
+                sheet.Cells[titleRow, 10, titleRow + 1, 10].Merge = true;
+                sheet.Cells[titleRow, 9].Value = "Special Request Food";
+                sheet.Cells[titleRow, 10].Value = "Special Request Room";
+            }
+            else
+            {
+                if (CanViewSpecialRequestFood)
+                {
+                    sheet.Cells[titleRow, 9, titleRow + 1, 10].Merge = true;
+                    sheet.Cells[titleRow, 9].Value = "Special Request Food";
+                }
+
+                if (CanViewSpecialRequestRoom)
+                {
+                    sheet.Cells[titleRow, 9, titleRow + 1, 10].Merge = true;
+                    sheet.Cells[titleRow, 9].Value = "Special Request Room";
+                }
+            }
+            for (int i = 0; i < listBooking.Count; i++)
+            {
+                var booking = listBooking[i] as Booking;
+                if (booking != null)
+                {
+                    var name = booking.CustomerNameFull.Replace("<br/>", "\r\n").ToUpper();
+                    sheet.Cells[currentRow, 1].Value = index;
+                    sheet.Cells[currentRow, 2, currentRow, 3].Merge = true;
+                    sheet.Cells[currentRow, 2].Value = name;
+                    sheet.Cells[currentRow, 4].Value = booking.Adult;
+                    sheet.Cells[currentRow, 5].Value = booking.Child;
+                    sheet.Cells[currentRow, 6].Value = booking.Baby;
+                    sheet.Cells[currentRow, 7].Value = booking.Trip.TripCode;
+                    sheet.Cells[currentRow, 8].Value = booking.PickupAddress;
+                    sheet.Cells[currentRow, 11].Value = "OS" + booking.Id;
+                    sheet.Cells[currentRow, 26].Value = name;//Work around cho cột merged name không hiển thị hết khi nội dung quá dài
+                    if (CanViewSpecialRequestFood && CanViewSpecialRequestFood)
+                    {
+                        sheet.Cells[currentRow, 9].Value = booking.SpecialRequest;
+                        sheet.Cells[currentRow, 10].Value = booking.SpecialRequestRoom;
+                    }
+                    else
+                    {
+                        if (CanViewSpecialRequestFood)
+                        {
+                            sheet.Cells[currentRow, 9, currentRow, 10].Merge = true;
+                            sheet.Cells[currentRow, 9].Value = booking.SpecialRequest;
+                        }
+
+                        if (CanViewSpecialRequestRoom)
+                        {
+                            sheet.Cells[currentRow, 9, currentRow, 10].Merge = true;
+                            sheet.Cells[currentRow, 9].Value = booking.SpecialRequestRoom;
+                        }
+                    }
+                    currentRow++;
+                    index++;
+                }
+            }
+            sheet.DeleteRow(templateRow);
+            sheet.Cells[totalRow, 4].Value = listBooking.Sum(x => x.Adult);
+            sheet.Cells[totalRow, 5].Value = listBooking.Sum(x => x.Child);
+            sheet.Cells[totalRow, 6].Value = listBooking.Sum(x => x.Baby);
+            //--
+            //Export booking đi 2 ngày bắt đầu từ ngày hôm trước
+            listBooking = BookingReportBLL.BookingGetByCriterion(date.Value.AddDays(-1), cruise, CurrentUser)
+                .Where(x => x.Status == StatusType.Approved)
+                .Future().ToList()
+                .Where(x => x.Trip.NumberOfDay > 2)
+                .ToList();
+
+            titleRow = currentRow + 2;
+            templateRow = currentRow + 4;
+            currentRow = templateRow + 1;
+            totalRow = templateRow + listBooking.Count();
+            index = 1;
+            sheet.InsertRow(currentRow, listBooking.Count, currentRow - 1);
+            if (CanViewSpecialRequestFood && CanViewSpecialRequestFood)
+            {
+                sheet.Cells[titleRow, 9, titleRow + 1, 9].Merge = true;
+                sheet.Cells[titleRow, 10, titleRow + 1, 10].Merge = true;
+                sheet.Cells[titleRow, 9].Value = "Special Request Food";
+                sheet.Cells[titleRow, 10].Value = "Special Request Room";
+            }
+            else
+            {
+                if (CanViewSpecialRequestFood)
+                {
+                    sheet.Cells[titleRow, 9, titleRow + 1, 10].Merge = true;
+                    sheet.Cells[titleRow, 9].Value = "Special Request Food";
+                }
+
+                if (CanViewSpecialRequestRoom)
+                {
+                    sheet.Cells[titleRow, 9, titleRow + 1, 10].Merge = true;
+                    sheet.Cells[titleRow, 9].Value = "Special Request Room";
+                }
+            }
+            for (int i = 0; i < listBooking.Count; i++)
+            {
+                var booking = listBooking[i] as Booking;
+                if (booking != null)
+                {
+                    var name = booking.CustomerNameFull.Replace("<br/>", "\r\n").ToUpper();
+                    sheet.Cells[currentRow, 1].Value = index;
+                    sheet.Cells[currentRow, 2, currentRow, 3].Merge = true;
+                    sheet.Cells[currentRow, 3].Value = name;
+                    sheet.Cells[currentRow, 4].Value = booking.Adult;
+                    sheet.Cells[currentRow, 5].Value = booking.Child;
+                    sheet.Cells[currentRow, 6].Value = booking.Baby;
+                    sheet.Cells[currentRow, 7].Value = booking.Trip.TripCode;
+                    sheet.Cells[currentRow, 8].Value = booking.PickupAddress;
+                    sheet.Cells[currentRow, 11].Value = "OS" + booking.Id;
+                    sheet.Cells[currentRow, 26].Value = name;//Work around cho cột merged name không hiển thị hết khi nội dung quá dài
+                    if (CanViewSpecialRequestFood && CanViewSpecialRequestFood)
+                    {
+                        sheet.Cells[currentRow, 9].Value = booking.SpecialRequest;
+                        sheet.Cells[currentRow, 10].Value = booking.SpecialRequestRoom;
+                    }
+                    else
+                    {
+                        if (CanViewSpecialRequestFood)
+                        {
+                            sheet.Cells[currentRow, 9, currentRow, 10].Merge = true;
+                            sheet.Cells[currentRow, 9].Value = booking.SpecialRequest;
+                        }
+
+                        if (CanViewSpecialRequestRoom)
+                        {
+                            sheet.Cells[currentRow, 9, currentRow, 10].Merge = true;
+                            sheet.Cells[currentRow, 9].Value = booking.SpecialRequestRoom;
+                        }
+                    }
+                    currentRow++;
+                    index++;
+                }
+            }
+            sheet.DeleteRow(templateRow);
+            sheet.Cells[totalRow, 4].Value = listBooking.Sum(x => x.Adult);
+            sheet.Cells[totalRow, 5].Value = listBooking.Sum(x => x.Child);
+            sheet.Cells[totalRow, 6].Value = listBooking.Sum(x => x.Baby);
+            //--
+        }
+
+        public void ExportTourAllVDreamCruise(ref ExcelPackage excelPackage, DateTime? date, Cruise cruise)
+        {
+            var sheet = excelPackage.Workbook.Worksheets["TC-VD"];
+            sheet.Cells["D1"].Value = (date.HasValue ? date.Value.ToLongDateString() : "");
+            var listBooking = BookingReportBLL.BookingGetByCriterion(date, cruise, CurrentUser)
+                .Where(x => x.Status == StatusType.Approved)
+                .Future().ToList();
+            sheet.Cells["B2"].Value = listBooking[0].Trip.Name;
+            var startRow = 5;
+            var currentRow = startRow;
+            int templateRow = currentRow;
+            int totalRow = templateRow + listBooking.Count();
+            int index = 1;
+            currentRow++;//Chuyển current row đến trước template row để bắt đầu coppyrow
+            sheet.InsertRow(currentRow, listBooking.Count, templateRow);
+            for (int i = 0; i < listBooking.Count; i++)
+            {
+                var booking = listBooking[i] as Booking;
+                if (booking != null)
+                {
+                    var name = booking.CustomerNameFull.Replace("<br/>", "\r\n").ToUpper();
+                    sheet.Cells[currentRow, 1].Value = index;
+                    sheet.Cells[currentRow, 2].Value = name;
+                    sheet.Cells[currentRow, 3].Value = booking.Adult;
+                    sheet.Cells[currentRow, 4].Value = booking.Child;
+                    sheet.Cells[currentRow, 5].Value = booking.Baby;
+                    sheet.Cells[currentRow, 6].Value = booking.Trip.TripCode;
+                    sheet.Cells[currentRow, 7].Value = booking.PickupAddress;
+                    sheet.Cells[currentRow, 8].Value = booking.SpecialRequest;
+                    sheet.Cells[currentRow, 9].Value = "OS" + booking.Id;
+                    sheet.Cells[currentRow, 26].Value = name;//Work around cho cột merged name không hiển thị hết khi nội dung quá dài
+                    currentRow++;
+                    index++;
+                }
+            }
+            sheet.DeleteRow(templateRow);
+            sheet.Cells[totalRow, 3].Value = listBooking.Sum(x => x.Adult);
+            sheet.Cells[totalRow, 4].Value = listBooking.Sum(x => x.Child);
+            sheet.Cells[totalRow, 5].Value = listBooking.Sum(x => x.Baby);
+        }
 
     }
 }

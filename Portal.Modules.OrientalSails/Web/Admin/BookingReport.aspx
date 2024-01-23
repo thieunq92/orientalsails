@@ -82,6 +82,11 @@
                     <% } %>
                     <th rowspan="2">Booking code
                     </th>
+                    <% if (CanViewAgency)
+                        { %>
+                    <th rowspan="2">Sales In Charge
+                    </th>
+                    <% } %>
                     <% if (CanViewTotal)
                         { %>
                     <th rowspan="2">Total
@@ -163,6 +168,12 @@
                                     <%#((Booking)(Container.DataItem)).BookingIdOS%>
                                 </a>
                             </td>
+                            <% if (CanViewAgency)
+                                { %>
+                            <td>
+                                <%# ((Booking)(Container.DataItem)).Agency.Sale != null ? ((Booking)(Container.DataItem)).Agency.Sale.FullName + (!String.IsNullOrEmpty(((Booking)(Container.DataItem)).Agency.Sale.Website) ? "-" : "" ) + ((Booking)(Container.DataItem)).Agency.Sale.Website : ""%>
+                            </td>
+                            <% } %>
                             <% if (CanViewTotal)
                                 { %>
                             <td><%# ((Booking)(Container.DataItem)).Total.ToString("#,##0.##") %></td>

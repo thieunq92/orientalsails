@@ -35,7 +35,18 @@ namespace Portal.Modules.OrientalSails.Repository
         public int CustomerCountPaxByBookingId(int bookingId)
         {
             BookingRoom bookingRoomAlias = null;
-            var customerCounting = _session.QueryOver<Customer>()
+            Booking bookingAlias = null;
+            var booking = _session.QueryOver<Booking>().Where(x => x.Id == bookingId).FutureValue().Value;
+            var customerCounting = 0;
+            if (booking.Cruise.CruiseType == Web.Admin.Enums.CruiseType.Seating)
+            {
+                customerCounting = _session.QueryOver<Customer>().Fetch(x => x.Booking).Eager
+                .JoinAlias(x => x.Booking, () => bookingAlias).Where(() => bookingAlias.Id == bookingId).Select(Projections.RowCount())
+                .FutureValue<int>().Value;
+            }
+            else if (booking.Cruise.CruiseType == Web.Admin.Enums.CruiseType.Cabin)
+            {
+                customerCounting = _session.QueryOver<Customer>()
                 .Fetch(x => x.BookingRooms).Eager
                 .JoinAlias(x => x.BookingRooms, () => bookingRoomAlias)
                 .Fetch(x => bookingRoomAlias.Book).Eager
@@ -43,6 +54,7 @@ namespace Portal.Modules.OrientalSails.Repository
                 .Where(x => x.Id == bookingId)
                 .Select(Projections.RowCount())
                 .FutureValue<int>().Value;
+            }
 
             return customerCounting;
         }

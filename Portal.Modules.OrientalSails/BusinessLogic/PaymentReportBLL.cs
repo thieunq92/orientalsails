@@ -1,4 +1,5 @@
-﻿using Portal.Modules.OrientalSails.Domain;
+﻿using CMS.Core.Domain;
+using Portal.Modules.OrientalSails.Domain;
 using Portal.Modules.OrientalSails.Repository;
 using Portal.Modules.OrientalSails.Utils;
 using System;
@@ -52,7 +53,7 @@ namespace Portal.Modules.OrientalSails.BusinessLogic
 
 
 
-        public IList<Booking> BookingGetByRequestString(NameValueCollection nvcQueryString)
+        public IList<Booking> BookingGetByRequestString(NameValueCollection nvcQueryString, User user)
         {
             DateTime? from = DateTimeUtil.DateGetDefaultFromDate();
             try
@@ -121,7 +122,7 @@ namespace Portal.Modules.OrientalSails.BusinessLogic
             }
             catch (Exception) { }
             
-            return BookingRepository.PaymentReportBLL_BookingSearchBy(nvcQueryString["spay"],from, to, agencyName, cruiseId, tripId, agencyId, bookingId, salesId);
+            return BookingRepository.PaymentReportBLL_BookingSearchBy(nvcQueryString["spay"],from, to, agencyName, cruiseId, tripId, agencyId, bookingId, salesId,user);
         }
 
         public int CustomerCountAdult(int bookingId)

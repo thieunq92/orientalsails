@@ -136,7 +136,7 @@ namespace Portal.Modules.OrientalSails.Repository
         }
 
         public IList<Booking> PaymentReportBLL_BookingSearchBy(string spay, DateTime? from, DateTime? to,
-            string agencyName, int cruiseId, int tripId, int agencyId, int bookingId, int salesId)
+            string agencyName, int cruiseId, int tripId, int agencyId, int bookingId, int salesId, User user)
         {
 
             var query = _session.QueryOver<Booking>().Where(x => x.Deleted == false)
@@ -187,6 +187,14 @@ namespace Portal.Modules.OrientalSails.Repository
             {
                 query = query.Where(x => x.Agency.Id == agencyId);
             }
+
+            Cruise cruiseAlias = null;
+            query.JoinAlias(x => x.Cruise, () => cruiseAlias);
+            IvRoleCruise roleCruiseAlias = null;
+            query.JoinAlias(() => cruiseAlias.ListRoleCruises, () => roleCruiseAlias);
+            User userRoleCruiseAlias = null;
+            query.JoinAlias(() => roleCruiseAlias.User, () => userRoleCruiseAlias);
+            query = query.Where(() => userRoleCruiseAlias.Id == user.Id);
 
             return query.OrderBy(x => x.StartDate).Asc.List<Booking>();
         }
@@ -350,7 +358,7 @@ namespace Portal.Modules.OrientalSails.Repository
             return BookingGetAllByCriterionTransfer(busType, route, way, date);
         }
 
-        public IQueryOver<Booking, Booking> BookingGetByCriterion(DateTime? date, Cruise cruise)
+        public IQueryOver<Booking, Booking> BookingGetByCriterion(DateTime? date, Cruise cruise, User user)
         {
             var query = _session.QueryOver<Booking>().Where(x => x.Deleted == false);
             if (date != null)
@@ -362,6 +370,13 @@ namespace Portal.Modules.OrientalSails.Repository
                 query = query.Where(x => x.Cruise == cruise);
             }
             query = query.Where(x => x.Deleted == false);
+            Cruise cruiseAlias1 = null;
+            query = query.JoinAlias(x => x.Cruise, () => cruiseAlias1);
+            IvRoleCruise roleCruiseAlias = null;
+            query.JoinAlias(() => cruiseAlias1.ListRoleCruises, () => roleCruiseAlias);
+            User userRoleCruiseAlias = null;
+            query.JoinAlias(() => roleCruiseAlias.User, () => userRoleCruiseAlias);
+            query = query.Where(() => userRoleCruiseAlias.Id == user.Id);
             return query;
         }
 

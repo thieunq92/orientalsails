@@ -41,7 +41,7 @@
 								display="Dynamic" cssclass="validator" errormessage="Email không hợp lệ" validationexpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:regularexpressionvalidator></td>
 					</tr>
 					<tr>
-						<td>Website</td>
+						<td>Số điện thoại</td>
 						<td>
 							<asp:textbox id="txtWebsite" runat="server" width="200px"></asp:textbox></td>
 					</tr>
