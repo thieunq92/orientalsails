@@ -46,7 +46,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin
                 {      
                     foreach (Booking booking in bookingUsedBatchVoucher)
                     {
-                        countVoucherUsed = countVoucherUsed + booking.VoucherCode.Split(new char[]{';'}).Length;
+                        countVoucherUsed = countVoucherUsed + booking.VoucherCode.Split(new char[]{';'}, StringSplitOptions.RemoveEmptyEntries).Length;
                     }
                 }
                 ValueBinder.BindLiteral(e.Item, "litRemain", batch.Quantity - countVoucherUsed);

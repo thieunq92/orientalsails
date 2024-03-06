@@ -9,6 +9,6 @@
     </id>
     <property name="ModifiedDate"/>
     <many-to-one name="BusByDate" column="BusByDateId" class="BusByDate"/>
-    <many-to-one name="Guide" column="AgencyId" class="Guide"/>
+    <many-to-one name="Guide" column="AgencyId" class="Guide" not-found="ignore"/>
   </class>
 </hibernate-mapping>

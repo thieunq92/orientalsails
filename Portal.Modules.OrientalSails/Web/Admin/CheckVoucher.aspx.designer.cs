@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Portal.Modules.OrientalSails.Web.Admin {
-    
-    
-    public partial class CheckVoucher {
-        
+namespace Portal.Modules.OrientalSails.Web.Admin
+{
+
+
+    public partial class CheckVoucher
+    {
+
         /// <summary>
         /// txtVoucherCode control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtVoucherCode;
-        
+
         /// <summary>
         /// btnCheck control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCheck;
-        
+
         /// <summary>
         /// rptVoucher control.
         /// </summary>

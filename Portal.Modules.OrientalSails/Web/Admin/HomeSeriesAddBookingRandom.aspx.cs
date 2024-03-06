@@ -791,10 +791,8 @@ namespace Portal.Modules.OrientalSails.Web.Admin
         /// </summary>
         public void BindTrips()
         {
-            _trips.RemoveAt(4);
-            _trips.RemoveAt(4);
-            _trips.RemoveAt(4);
-            _trips.RemoveAt(4);
+            _trips.RemoveAt(2);
+            _trips.RemoveAt(2);
             ddlTrips.DataSource = _trips; // Danh sách trip luôn được get về trước khi gọi tới hàm bind trips
             ddlTrips.DataTextField = "Name";
             ddlTrips.DataValueField = "Id";

@@ -103,7 +103,7 @@ namespace Portal.Modules.OrientalSails.Utils
         /// </summary>
         /// <param name="value">Value to encrypt.</param>
         /// <returns>Encrypted value.</returns>
-        public UInt32 Encrypt(UInt32 value)
+        public UInt32 Encrypt(UInt64 value)
         {
             byte[] input = BitConverter.GetBytes(value);
             if (IsNeedReverse())
@@ -317,7 +317,7 @@ namespace Portal.Modules.OrientalSails.Utils
         private const string key = "12345678901234567890";
         private static Skip32Cipher cipher = new Skip32Cipher(key, Skip32CipherKeyFormat.HexString);
 
-        public static uint Encrypt(uint code)
+        public static UInt32 Encrypt(UInt32 code)
         {
             var result = cipher.Encrypt(code);
             return result;
@@ -328,7 +328,7 @@ namespace Portal.Modules.OrientalSails.Utils
             //return Convert.ToInt32("0" + Math.Abs(result));
         }
 
-        public static void Decrypt(uint code, out int batchid)
+        public static void Decrypt(UInt32 code, out int batchid)
         {
             //var abs = Convert.ToInt32(code.ToString().Substring(1));
 

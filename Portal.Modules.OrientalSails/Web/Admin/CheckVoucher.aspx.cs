@@ -141,6 +141,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin
 
             var litVoucherCode = e.Item.FindControl("litVoucherCode") as Literal;
             var litStatus = e.Item.FindControl("litStatus") as Literal;
+            var litUsed = e.Item.FindControl("litUsed") as Literal;
             var litProgramName = e.Item.FindControl("litProgramName") as Literal;
             var litAgency = e.Item.FindControl("litAgency") as Literal;
             var litQuantity = e.Item.FindControl("litQuantity") as Literal;
@@ -169,6 +170,11 @@ namespace Portal.Modules.OrientalSails.Web.Admin
                 if (count > 0)
                 {
                     litStatus.Text = "Used!";
+                    var bookingUsed = Module.GetBookingVoucherByCode((String)e.Item.DataItem);
+                    if (bookingUsed != null && bookingUsed.Count > 0)
+                    {
+                        litUsed.Text = "(<a target='_blank' href='./BookingView.aspx?bi=" + bookingUsed[0].Booking.Id + "'>" + bookingUsed[0].Booking.BookingIdOS + "</a>)";
+                    }
                 }
                 else if (batch.ValidUntil >= date)
                 {
