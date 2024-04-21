@@ -87,9 +87,9 @@
                     <em>Click vào tên tàu để bắt đầu nhập thông tin phòng</em>
                     <table class="table table-bordered table-hover">
                         <tr class="active">
-                            <th>Tên tàu
+                             <th>Tên tàu
                             </th>
-                            <th>Số phòng trống
+                            <th>Số (phòng / ghế) trống
                             </th>
                             <th>Trong đó
                             </th>
@@ -226,7 +226,38 @@
                             </asp:Repeater>
                         </asp:PlaceHolder>
                     </asp:PlaceHolder>
-
+                    <asp:PlaceHolder ID="phSeatingDeclaration" runat="server" Visible="false">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-2">
+                                    <asp:Label ID="lblAdults" runat="server">Adults</asp:Label>
+                                </div>
+                                <div class="col-xs-1 nopadding-left nopadding-right">
+                                    <asp:TextBox ID="txtAdults" runat="server" type="number" CssClass="form-control" Text="0" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-2">
+                                    <asp:Label ID="lblChilds" runat="server">Childs</asp:Label>
+                                </div>
+                                <div class="col-xs-1 nopadding-left nopadding-right">
+                                    <asp:TextBox ID="txtChilds" runat="server" type="number" CssClass="form-control" Text="0" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-2">
+                                    <asp:Label ID="lblBabies" runat="server">Babies</asp:Label>
+                                </div>
+                                <div class="col-xs-1 nopadding-left nopadding-right">
+                                    <asp:TextBox ID="txtBabies" runat="server" type="number" CssClass="form-control" Text="0" />
+                                </div>
+                            </div>
+                        </div>
+                    </asp:PlaceHolder>
                 </ContentTemplate>
                 <Triggers>
                     <asp:AsyncPostBackTrigger ControlID="txtDate" EventName="TextChanged" />

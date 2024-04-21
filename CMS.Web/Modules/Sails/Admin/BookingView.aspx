@@ -169,7 +169,7 @@
                         <label class="checkbox-inline">
                             <input runat="server" id="chkSpecial" type="checkbox" />Upgrade/Special price</label>
                         <label class="checkbox-inline">
-                            <input type="checkbox" runat="server" id="chkInvoice">Invoice</label>
+                            <input type="checkbox" runat="server" id="chkInvoice">VAT</label>
                         <label class="checkbox-inline">
                             <input id="chkIsPaymentNeeded" runat="server" type="checkbox" />
                             Pay Before Tour
@@ -373,6 +373,51 @@
             </div>
             <div class="col-xs-4 --no-padding-left">
                 <asp:TextBox ID="txtCustomerInfo" runat="server" CssClass="form-control" TextMode="MultiLine" placeholder="Customer Info" Visible="false"></asp:TextBox>
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-xs-12">
+                <asp:Repeater ID="rptSalesPriceInput" runat="server" OnItemDataBound="rptSalesPriceInput_ItemDataBound">
+                    <ItemTemplate>
+                        <asp:HiddenField ID="hiddenRoomClassId" runat="server" Value='<%#DataBinder.Eval(Container.DataItem, "RoomClassId") %>'/>
+                        <asp:HiddenField ID="hiddenRoomTypeId" runat="server" Value='<%#DataBinder.Eval(Container.DataItem, "RoomTypeId") %>'/>
+                        <table class="table" style="display: inline-block; width:auto; border: 1px solid #ccc; padding: 10px; margin-right:10px">
+                            <thead>
+                                <tr>
+                                    <th><%#DataBinder.Eval(Container.DataItem, "RoomClassName") %> <%#DataBinder.Eval(Container.DataItem, "RoomTypeName") %></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="border-top:none; padding:4px"><%#DataBinder.Eval(Container.DataItem, "NumberOfRooms") %> Room(s)</td>
+                                    <td style="border-top:none; padding:4px">
+                                        <asp:TextBox ID="txtNumberOfRoomsPrice" runat="server" CssClass="form-control" /></td>
+                                </tr>
+                                <tr>
+                                    <td style="border-top:none; padding:4px"><%#DataBinder.Eval(Container.DataItem, "NumberOfAddAdult") %> Room(s) Of Add Adult</td>
+                                    <td style="border-top:none; padding:4px">
+                                        <asp:TextBox ID="txtNumberOfAddAdultPrice" runat="server" CssClass="form-control"/></td>
+                                </tr>
+                                <tr>
+                                    <td style="border-top:none; padding:4px"><%#DataBinder.Eval(Container.DataItem, "NumberOfAddChild") %> Room(s) Of Add Child </td>
+                                    <td style="border-top:none; padding:4px">
+                                        <asp:TextBox ID="txtNumberOfAddChildPrice" runat="server" CssClass="form-control"/></td>
+                                </tr>
+                                <tr>
+                                    <td style="border-top:none; padding:4px"><%#DataBinder.Eval(Container.DataItem, "NumberOfAddBaby") %> Room(s) Of Add Baby</td>
+                                    <td style="border-top:none; padding:4px">
+                                        <asp:TextBox ID="txtNumberOfAddBabyPrice" runat="server" CssClass="form-control"/></td>
+                                </tr>
+                                <tr>
+                                    <td style="border-top:none; padding:4px"><%#DataBinder.Eval(Container.DataItem, "NumberOfExtrabed") %> Room(s) Of Add Extrabed</td>
+                                    <td style="border-top:none; padding:4px">
+                                        <asp:TextBox ID="txtNumberOfExtrabedPrice" runat="server" CssClass="form-control"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </ItemTemplate>
+                </asp:Repeater>
             </div>
         </div>
         <br />

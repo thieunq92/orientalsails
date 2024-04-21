@@ -106,5 +106,9 @@
 			<key column="BookingId"/>
 			<one-to-many class="BookingHistory"/>
 		</bag>
+		<bag name="BookingRoomPrices" inverse ="true" batch-size="10" cascade="none" lazy="extra">
+			<key column="BookingId" />
+			<one-to-many class="BookingRoomPrice" />
+		</bag>
 	</class>
 </hibernate-mapping>

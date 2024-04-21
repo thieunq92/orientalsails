@@ -7,6 +7,26 @@
 <%@ Register Assembly="CMS.ServerControls" Namespace="CMS.ServerControls" TagPrefix="svc" %>
 <asp:Content ID="Head" ContentPlaceHolderID="Head" runat="server">
     <title>Booking by date</title>
+    <style>
+        .star {
+            color: #ff8d00;
+            animation-name: blink;
+            animation-duration: 2s;
+            animation-iteration-count: infinite;
+            display: inline-block;
+            font-size: 20px
+        }
+
+        @keyframes blink {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="AdminContent" ContentPlaceHolderID="AdminContent" runat="server">
     <div class="sticky" style="z-index: 999; background-color: #ffffff">
@@ -167,6 +187,7 @@
                                 <a href="BookingView.aspx?NodeId=1&SectionId=15&bi=<%#((Booking)(Container.DataItem)).Id%>">
                                     <%#((Booking)(Container.DataItem)).BookingIdOS%>
                                 </a>
+                                <%#  ((Booking)(Container.DataItem)).HasInvoice ? "<div class='star' title='VAT'>*</div>" : "" %>
                             </td>
                             <% if (CanViewAgency)
                                 { %>

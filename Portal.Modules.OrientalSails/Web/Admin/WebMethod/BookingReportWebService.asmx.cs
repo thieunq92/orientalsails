@@ -909,7 +909,10 @@ namespace Portal.Modules.OrientalSails.Web.Admin.WebMethod
             var listBooking = BookingReportBLL.BookingGetByCriterion(date, cruise, CurrentUser)
                 .Where(x => x.Status == StatusType.Approved)
                 .Future().ToList();
-            sheet.Cells["B2"].Value = listBooking[0].Trip.Name;
+            if (listBooking != null && listBooking.Count > 0)
+            {
+                sheet.Cells["B2"].Value = listBooking[0].Trip.Name;
+            }
             var startRow = 5;
             var currentRow = startRow;
             int templateRow = currentRow;

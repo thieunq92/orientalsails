@@ -136,6 +136,7 @@
     <Compile Include="DataTransferObject\TransferRequestDTO.cs" />
     <Compile Include="DataTransferObject\TripDTO.cs" />
     <Compile Include="DataTransferObject\UserDTO.cs" />
+    <Compile Include="Domain\BookingRoomPrice.cs" />
     <Compile Include="Domain\CruiseConfigPrice.cs" />
     <Compile Include="Domain\ImageGallery.cs" />
     <Compile Include="Domain\FacilitieMap.cs" />
@@ -1821,6 +1822,7 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Domain\CruiseConfigPrice.hbm.xml" />
+    <EmbeddedResource Include="Domain\BookingRoomPrice.hbm.xml" />
     <Content Include="Domain\Transfer.hbm.xml" />
     <EmbeddedResource Include="Domain\TripConfigPrice.hbm.xml" />
     <Content Include="Domain\vBookingRoomNull.hbm.xml" />

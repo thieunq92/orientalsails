@@ -73,7 +73,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin
             }
         }
 
-        private IList _trips;
+        private IList<SailsTrip> _trips;
         private AddBookingBLL addBookingBLL;
         public AddBookingBLL AddBookingBLL
         {
@@ -88,7 +88,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin
         protected void Page_Load(object sender, EventArgs e)
         {
             // Lấy tất cả các hành trình để lọc ra các hành trình có nhiều option, phục vụ cho việc ẩn/hiện hộp chọn option
-            _trips = Module.TripGetAll(true);
+            _trips = Module.TripGetByDateNotLock(DateTime.Now, UserIdentity);
             string visibleIds = string.Empty;
             foreach (SailsTrip trip in _trips)
             {
@@ -296,27 +296,37 @@ namespace Portal.Modules.OrientalSails.Web.Admin
 
                 int total = 0;
                 string detail = string.Empty;
-                for (int i = 0; i < AllRoomClasses.Count; i++)
+                if (cruise.CruiseType == Enums.CruiseType.Cabin)
                 {
-                    var rclass = AllRoomClasses[i] as RoomClass;
-                    for (int j = 0; j < AllRoomTypes.Count; j++)
+                    for (int i = 0; i < AllRoomClasses.Count; i++)
                     {
-                        var rtype = AllRoomTypes[j] as RoomTypex;
-                        int avail;
-                        if (TripBased)
+                        var rclass = AllRoomClasses[i] as RoomClass;
+                        for (int j = 0; j < AllRoomTypes.Count; j++)
                         {
-                            avail = Module.RoomCount(rclass, rtype, cruise, Date.Value, Trip.NumberOfDay, Trip.HalfDay);
-                        }
-                        else
-                        {
-                            avail = Module.RoomCount(rclass, rtype, cruise, Date.Value, Trip.NumberOfDay, Trip.HalfDay);
-                        }
-                        if (avail > 0)
-                        {
-                            total += avail;
-                            detail += string.Format("{0} {2} {1} ", avail, rtype.Name, rclass.Name);
+                            var rtype = AllRoomTypes[j] as RoomTypex;
+                            int avail;
+
+                            if (TripBased)
+                            {
+                                avail = Module.RoomCount(rclass, rtype, cruise, Date.Value, Trip.NumberOfDay, Trip.HalfDay);
+                            }
+                            else
+                            {
+                                avail = Module.RoomCount(rclass, rtype, cruise, Date.Value, Trip.NumberOfDay, Trip.HalfDay);
+                            }
+
+                            if (avail > 0)
+                            {
+                                total += avail;
+                                detail += string.Format("{0} {2} {1} ", avail, rtype.Name, rclass.Name);
+                            }
                         }
                     }
+                }
+                else if (cruise.CruiseType == Enums.CruiseType.Seating)
+                {
+                    total = Module.AvaiableSeatCount(cruise, Date.Value, Trip);
+                    detail = total + " ghế";
                 }
 
                 var lbtCruiseName = (LinkButton)e.Item.FindControl("lbtCruiseName");
@@ -331,7 +341,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin
                 {
                     var cruiseIdViewState = (int)ViewState["cruiseId"];
                     //if (cruise.Id == cruiseIdViewState)
-                        //chkCharter.Visible = CheckCruiseForCharter(cruise, total);
+                    //chkCharter.Visible = CheckCruiseForCharter(cruise, total);
                 }
 
                 var litRoomCount = e.Item.FindControl("litRoomCount") as Literal;
@@ -411,48 +421,80 @@ namespace Portal.Modules.OrientalSails.Web.Admin
         {
             LinkButton lbtCruiseName = (LinkButton)sender;
             if (sender != null)
+            {
                 _cruise = Module.CruiseGetById(Convert.ToInt32(lbtCruiseName.CommandArgument));
-            else _cruise = Module.GetById<Cruise>(Convert.ToInt32(Request["cruiseId"]));
-            rptClass.DataSource = AllRoomClasses;
-            rptClass.DataBind();
+            }
+            else
+            {
+                _cruise = Module.GetById<Cruise>(Convert.ToInt32(Request["cruiseId"]));
+            }
+
+
             litCurrentCruise.Text = _cruise.Name;
-            ddlCruises.SelectedValue = _cruise.Id.ToString();
             plhCruiseName.Visible = true;
 
-            //---------------------------------------------------
             ViewState["cruiseId"] = _cruise.Id;
             hidCruiseSelect.Value = _cruise.Id.ToString();
             hidDateSelect.Value = Date.Value.ToString("dd/MM/yyyy");
-            _roomCruises = Module.RoomGetAll2(_cruise);
-            var _currentDayBookings = Module.GetBookingByDate(Date.Value, _cruise);
-            var _nextDayBookings = Module.GetBookingByDate(Date.Value.AddDays(1), _cruise);
-            var list = new List<Room>();
-            var listAvailable = new List<Room>();
 
-            foreach (Room room in _roomCruises)
+            if (_cruise.CruiseType == Enums.CruiseType.Cabin)
             {
-                var booking = FindBooking(room, Date.Value, _currentDayBookings);
-                if (booking != null && booking.Id > 0)
+                rptClass.DataSource = AllRoomClasses;
+                rptClass.DataBind();
+                ddlCruises.SelectedValue = _cruise.Id.ToString();
+                //---------------------------------------------------   
+                _roomCruises = Module.RoomGetAll2(_cruise);
+
+                var _currentDayBookings = Module.GetBookingByDate(Date.Value, _cruise);
+                var _nextDayBookings = Module.GetBookingByDate(Date.Value.AddDays(1), _cruise);
+                var list = new List<Room>();
+                var listAvailable = new List<Room>();
+
+                foreach (Room room in _roomCruises)
                 {
-                    var nextBk = FindBooking(room, Date.Value.AddDays(1), _nextDayBookings);
-                    if (nextBk == null)
+                    var booking = FindBooking(room, Date.Value, _currentDayBookings);
+
+                    if (booking != null && booking.Id > 0)
                     {
-                        list.Add(room);
+                        var nextBk = FindBooking(room, Date.Value.AddDays(1), _nextDayBookings);
+                        if (nextBk == null)
+                        {
+                            list.Add(room);
+                        }
+                    }
+                    else
+                    {
+                        listAvailable.Add(room);
                     }
                 }
-                else listAvailable.Add(room);
+
+                if (list.Count > 0)
+
+                {
+                    phRoomAvailableNight2.Visible = true;
+                    rptRoomAvailableNight2.DataSource = list;
+                    rptRoomAvailableNight2.DataBind();
+                }
+                else
+                {
+                    phRoomAvailableNight2.Visible = false;
+                }
+                var total = 0;
+                if (lbtCruiseName != null)
+                    total = Convert.ToInt32(lbtCruiseName.Attributes["totalAvaiable"]);
+                else total = listAvailable.Count;
+                //Kiểm tra tàu nếu còn trống tất cả các phòng thì hiện nút charter
+                //còn nếu tàu đã có booking thì ẩn nút charter 
+                chkCharter.Visible = CheckCruiseForCharter(_cruise, total);
             }
-            if (list.Count > 0)
+            else if (_cruise.CruiseType == Enums.CruiseType.Seating)
             {
-                phRoomAvailableNight2.Visible = true;
-                rptRoomAvailableNight2.DataSource = list;
-                rptRoomAvailableNight2.DataBind();
+                plhPending.Visible = false;
+                phRoomAvailableNight2.Visible = false;
+                phSeatingDeclaration.Visible = true;
+                chkCharter.Visible = false;
             }
-            else phRoomAvailableNight2.Visible = false;
-            var total = 0;
-            if (lbtCruiseName != null)
-                total = Convert.ToInt32(lbtCruiseName.Attributes["totalAvaiable"]);
-            else total = listAvailable.Count;
+
             //Kiểm tra tàu nếu còn trống tất cả các phòng thì hiện nút charter
             //còn nếu tàu đã có booking thì ẩn nút charter 
             //chkCharter.Visible = CheckCruiseForCharter(_cruise, total);
@@ -493,6 +535,11 @@ namespace Portal.Modules.OrientalSails.Web.Admin
         }
         public void RoomCheckAvaiable()
         {
+            if (Date == null)
+            {
+                return;
+            }
+
             rptCruises.DataSource = Module.CruiseGetAllNotLock(Date.Value);
             rptCruises.DataBind();
 
@@ -502,8 +549,10 @@ namespace Portal.Modules.OrientalSails.Web.Admin
             criterion = Expression.And(criterion, Expression.Eq("Deleted", false));
             criterion = Module.AddDateExpression(criterion, Date.Value);
 
-            var list = Module.BookingGetByCriterion(criterion, null, 0, 0);
-            if (list.Count > 0)
+            var list = Module.BookingGetByCriterion(criterion, null, 0, 0).Cast<Booking>();
+            var cruiseRoles = Module.CruisePermissionsGetByUser(UserIdentity);
+            list = list.Where(x => cruiseRoles.Select(y => y.Cruise.Id).Contains(x.Cruise.Id));
+            if (list.Count() > 0)
             {
                 plhPending.Visible = true;
                 rptPendings.DataSource = list;
@@ -523,11 +572,22 @@ namespace Portal.Modules.OrientalSails.Web.Admin
                 return;
             }
 
-            // Kiểm tra số phòng đã chọn, nếu chưa chọn phòng nào thì thông báo yêu cầu
-            if (_bookingRooms.Count <= 0 && !chkCharter.Checked)
+            var cruise = null as Cruise;
+            if (ViewState["cruiseId"] != null)
             {
-                ShowErrors("Hãy chọn ít nhất một phòng");
-                return;
+                var cruiseIdViewState = (int)ViewState["cruiseId"];
+                cruise = Module.GetObject<Cruise>(cruiseIdViewState);
+            }
+
+            if (cruise.CruiseType == Enums.CruiseType.Cabin)
+            {
+                // Kiểm tra số phòng đã chọn, nếu chưa chọn phòng nào thì thông báo yêu cầu
+
+                if (_bookingRooms.Count <= 0 && !chkCharter.Checked)
+                {
+                    ShowErrors("Hãy chọn ít nhất một phòng");
+                    return;
+                }
             }
 
             //2. Lưu thông tin phòng như thế nào
@@ -541,6 +601,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin
             booking.CreatedBy = Page.User.Identity as User;
             booking.CreatedDate = DateTime.Now;
             booking.ModifiedDate = DateTime.Now;
+            booking.ModifiedBy = Page.User.Identity as User;
             booking.Partner = null;
             booking.Sale = booking.CreatedBy;
             booking.StartDate = Date.Value;
@@ -565,12 +626,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin
             {
                 booking.Trip = null;
             }
-            var cruise = null as Cruise;
-            if (ViewState["cruiseId"] != null)
-            {
-                var cruiseIdViewState = (int)ViewState["cruiseId"];
-                cruise = Module.GetObject<Cruise>(cruiseIdViewState);
-            }
+
             booking.Cruise = cruise;
             booking.IsCharter = chkCharter.Checked;
             booking.Total = 0;
@@ -616,74 +672,110 @@ namespace Portal.Modules.OrientalSails.Web.Admin
             Module.Save(booking, UserIdentity);
             #endregion
 
-            // Sau đó mới có thể lưu thông tin phòng
-            // Đối với phòng có baby và child theo phân bố từ trước sẽ thêm child, baby
-            _roomCruises = Module.RoomGetAll2(booking.Cruise);
-            var currentDayBookings = Module.GetBookingByDate(booking.StartDate, booking.Cruise);
-            var nextDayBookings = Module.GetBookingByDate(booking.StartDate.AddDays(1), booking.Cruise);
-
-            var listRoomAvailable = new List<Room>();
-
-            foreach (Room room in _roomCruises)
+            if (cruise.CruiseType == Enums.CruiseType.Cabin)
             {
-                var bk = FindBooking(room, booking.StartDate, currentDayBookings);
-                if (bk == null)
+                // Sau đó mới có thể lưu thông tin phòng
+                // Đối với phòng có baby và child theo phân bố từ trước sẽ thêm child, baby
+                _roomCruises = Module.RoomGetAll2(booking.Cruise);
+                var currentDayBookings = Module.GetBookingByDate(booking.StartDate, booking.Cruise);
+                var nextDayBookings = Module.GetBookingByDate(booking.StartDate.AddDays(1), booking.Cruise);
+
+                var listRoomAvailable = new List<Room>();
+                foreach (Room room in _roomCruises)
                 {
-                    if (booking.Trip != null && booking.Trip.NumberOfDay > 2)
+                    var bk = FindBooking(room, booking.StartDate, currentDayBookings);
+                    if (bk == null)
                     {
-                        var nextBk = FindBooking(room, booking.StartDate.AddDays(1), nextDayBookings);
-                        if (nextBk == null)
+                        if (booking.Trip != null && booking.Trip.NumberOfDay > 2)
                         {
-                            listRoomAvailable.Add(room);
+                            var nextBk = FindBooking(room, booking.StartDate.AddDays(1), nextDayBookings);
+                            if (nextBk == null)
+                            {
+                                listRoomAvailable.Add(room);
+                            }
                         }
+                        else listRoomAvailable.Add(room);
                     }
-                    else listRoomAvailable.Add(room);
+                }
+                #region -- Booking Room --
+                foreach (BookingRoom room in _bookingRooms)
+                {
+                    var getRandomRoom = listRoomAvailable.First(r => r.RoomClass.Id == room.RoomClass.Id);
+                    room.Room = getRandomRoom;
+                    room.Book = booking;
+                    Module.Save(room);
+                    listRoomAvailable.Remove(getRandomRoom);
+                    // Ngoài ra còn phải lưu thông tin khách hàng
+
+                    #region -- Thông tin khách hàng, suy ra từ thông tin phòng --
+
+                    for (int ii = 1; ii <= room.Booked; ii++)
+                    {
+                        Customer customer = new Customer();
+                        customer.BookingRoom = room;
+                        customer.Type = CustomerType.Adult;
+                        customer.Booking = booking;
+                        if (CustomerPrice)
+                        {
+                            customer.Total = room.Total / 2;
+                        }
+                        Module.Save(customer);
+                        room.Customers.Add(customer);
+                    }
+
+                    if (room.HasBaby)
+                    {
+                        Customer customer = new Customer();
+                        customer.BookingRoom = room;
+                        customer.Type = CustomerType.Baby;
+                        customer.Booking = booking;
+                        Module.Save(customer);
+                        room.Customers.Add(customer);
+                    }
+
+                    if (room.HasChild)
+                    {
+                        Customer customer = new Customer();
+                        customer.BookingRoom = room;
+                        customer.Type = CustomerType.Children;
+                        customer.Booking = booking;
+                        Module.Save(customer);
+                        room.Customers.Add(customer);
+                    }
+                    Module.Save(room);
+
+                    #endregion
                 }
             }
-            #region -- Booking Room --
-            foreach (BookingRoom room in _bookingRooms)
+            else if (cruise.CruiseType == Enums.CruiseType.Seating)
             {
-                var getRandomRoom = listRoomAvailable.First(r => r.RoomType.Id == room.RoomType.Id);
-                room.Room = getRandomRoom;
-                room.Book = booking;
-                Module.Save(room);
-                listRoomAvailable.Remove(getRandomRoom);
-                // Ngoài ra còn phải lưu thông tin khách hàng
-
-                #region -- Thông tin khách hàng, suy ra từ thông tin phòng --
-
-                for (int ii = 1; ii <= room.Booked; ii++)
+                var numberOfAdults = Convert.ToInt32(txtAdults.Text);
+                var numberOfChilds = Convert.ToInt32(txtChilds.Text);
+                var numberOfBabies = Convert.ToInt32(txtBabies.Text);
+                for (var i = 0; i < numberOfAdults; i++)
                 {
                     Customer customer = new Customer();
-                    customer.BookingRoom = room;
                     customer.Type = CustomerType.Adult;
-                    if (CustomerPrice)
-                    {
-                        customer.Total = room.Total / 2;
-                    }
+                    customer.Booking = booking;
                     Module.Save(customer);
-                    room.Customers.Add(customer);
                 }
 
-                if (room.HasBaby)
+                for (var i = 0; i < numberOfChilds; i++)
                 {
                     Customer customer = new Customer();
-                    customer.BookingRoom = room;
-                    customer.Type = CustomerType.Baby;
-                    Module.Save(customer);
-                    room.Customers.Add(customer);
-                }
-
-                if (room.HasChild)
-                {
-                    Customer customer = new Customer();
-                    customer.BookingRoom = room;
                     customer.Type = CustomerType.Children;
+                    customer.Booking = booking;
                     Module.Save(customer);
-                    room.Customers.Add(customer);
                 }
-                Module.Save(room);
-                #endregion
+
+                for (var i = 0; i < numberOfBabies; i++)
+                {
+                    Customer customer = new Customer();
+                    customer.Type = CustomerType.Baby;
+                    customer.Booking = booking;
+                    Module.Save(customer);
+                }
+
             }
 
             #endregion
@@ -791,8 +883,6 @@ namespace Portal.Modules.OrientalSails.Web.Admin
         /// </summary>
         public void BindTrips()
         {
-            _trips.RemoveAt(2);
-            _trips.RemoveAt(2);
             ddlTrips.DataSource = _trips; // Danh sách trip luôn được get về trước khi gọi tới hàm bind trips
             ddlTrips.DataTextField = "Name";
             ddlTrips.DataValueField = "Id";
@@ -804,7 +894,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin
         /// </summary>
         public void BindCruises()
         {
-            ddlCruises.DataSource = Module.CruiseGetAllNotLock(Date.HasValue?Date.Value:DateTime.Now);
+            ddlCruises.DataSource = Module.CruiseGetAll();
             ddlCruises.DataTextField = "Name";
             ddlCruises.DataValueField = "Id";
             ddlCruises.DataBind();
@@ -989,6 +1079,10 @@ namespace Portal.Modules.OrientalSails.Web.Admin
 
         protected void txtDate_TextChanged(object sender, EventArgs e)
         {
+            var selectedTrips = ddlTrips.SelectedValue;
+            _trips = Module.TripGetByDateNotLock(Date.Value, UserIdentity);
+            BindTrips();
+            ddlTrips.SelectedValue = selectedTrips;
             RoomCheckAvaiable();
         }
 
