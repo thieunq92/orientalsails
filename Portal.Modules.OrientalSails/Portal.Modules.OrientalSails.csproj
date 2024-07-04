@@ -86,6 +86,7 @@
     <Compile Include="BusinessLogic\SailsMasterBLL.cs" />
     <Compile Include="BusinessLogic\SeriesManagerBLL.cs" />
     <Compile Include="BusinessLogic\SeriesViewBLL.cs" />
+    <Compile Include="BusinessLogic\Share\BookingBLL.cs" />
     <Compile Include="BusinessLogic\SurveyInputBLL.cs" />
     <Compile Include="BusinessLogic\TransferRequestByDateBLL.cs" />
     <Compile Include="BusinessLogic\ViewActivitiesBLL.cs" />
@@ -108,6 +109,7 @@
     <Compile Include="DataTransferObject\BusTypeDTO.cs" />
     <Compile Include="DataTransferObject\CampaignDTO.cs" />
     <Compile Include="DataTransferObject\CheckRoomResultDTO.cs" />
+    <Compile Include="DataTransferObject\ComissionDTO.cs" />
     <Compile Include="DataTransferObject\ContractDTO.cs" />
     <Compile Include="DataTransferObject\CruiseDTO.cs" />
     <Compile Include="DataTransferObject\DocumentCategoryDTO.cs" />
@@ -132,11 +134,14 @@
     <Compile Include="DataTransferObject\RouteDTO.cs" />
     <Compile Include="DataTransferObject\SalesMonthSummaryDTO.cs" />
     <Compile Include="DataTransferObject\SeriesDTO.cs" />
+    <Compile Include="DataTransferObject\ServiceOutsideDetailDTO.cs" />
+    <Compile Include="DataTransferObject\ServiceOutsideDTO.cs" />
     <Compile Include="DataTransferObject\Top10AgenciesDTO.cs" />
     <Compile Include="DataTransferObject\TransferRequestDTO.cs" />
     <Compile Include="DataTransferObject\TripDTO.cs" />
     <Compile Include="DataTransferObject\UserDTO.cs" />
     <Compile Include="Domain\BookingRoomPrice.cs" />
+    <Compile Include="Domain\Commission.cs" />
     <Compile Include="Domain\CruiseConfigPrice.cs" />
     <Compile Include="Domain\ImageGallery.cs" />
     <Compile Include="Domain\FacilitieMap.cs" />
@@ -222,6 +227,8 @@
     <Compile Include="Domain\Reviews.cs" />
     <Compile Include="Domain\Route.cs" />
     <Compile Include="Domain\Series.cs" />
+    <Compile Include="Domain\ServiceOutside.cs" />
+    <Compile Include="Domain\ServiceOutsideDetail.cs" />
     <Compile Include="Domain\TransactionGroup.cs" />
     <Compile Include="Domain\Transfer.cs" />
     <Compile Include="Domain\TripConfigPrice.cs" />
@@ -314,6 +321,7 @@
     <Compile Include="Repository\BusByDateRepository.cs" />
     <Compile Include="Repository\BusTypeRepository.cs" />
     <Compile Include="Repository\CampaignRepository.cs" />
+    <Compile Include="Repository\CommissionRepository.cs" />
     <Compile Include="Repository\ContractPriceRepository.cs" />
     <Compile Include="Repository\ContractRepository.cs" />
     <Compile Include="Repository\ContractValidRepository.cs" />
@@ -341,6 +349,8 @@
     <Compile Include="Repository\RoomTypeRepository.cs" />
     <Compile Include="Repository\RouteRepository.cs" />
     <Compile Include="Repository\SeriesRepository.cs" />
+    <Compile Include="Repository\ServiceOutsideDetailRepository.cs" />
+    <Compile Include="Repository\ServiceOutsideRepository.cs" />
     <Compile Include="Repository\Shared\StoreProcedureRepository.cs" />
     <Compile Include="Repository\SpecialPermissionRepository.cs" />
     <Compile Include="Repository\TransactionRepository.cs" />
@@ -1597,6 +1607,10 @@
       <DependentUpon>BookingReportWebService.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Web\Admin\WebMethod\BookingViewWebMethod.asmx.cs">
+      <DependentUpon>BookingViewWebMethod.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Web\Admin\WebMethod\ContractCreateWebMethod.asmx.cs">
       <DependentUpon>ContractCreateWebMethod.asmx</DependentUpon>
       <SubType>Component</SubType>
@@ -1823,6 +1837,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Domain\CruiseConfigPrice.hbm.xml" />
     <EmbeddedResource Include="Domain\BookingRoomPrice.hbm.xml" />
+    <EmbeddedResource Include="Domain\Commission.hbm.xml" />
+    <EmbeddedResource Include="Domain\ServiceOutside.hbm.xml" />
+    <EmbeddedResource Include="Domain\ServiceOutsideDetail.hbm.xml" />
     <Content Include="Domain\Transfer.hbm.xml" />
     <EmbeddedResource Include="Domain\TripConfigPrice.hbm.xml" />
     <Content Include="Domain\vBookingRoomNull.hbm.xml" />
@@ -1926,6 +1943,7 @@
     <Content Include="Web\Admin\WebMethod\AddSeriesBookingsWebMethod.asmx" />
     <Content Include="Web\Admin\WebMethod\AgencyViewWebService.asmx" />
     <Content Include="Web\Admin\WebMethod\BookingReportWebService.asmx" />
+    <Content Include="Web\Admin\WebMethod\BookingViewWebMethod.asmx" />
     <Content Include="Web\Admin\WebMethod\ContractCreateWebMethod.asmx" />
     <Content Include="Web\Admin\WebMethod\DashBoardWebService.asmx" />
     <Content Include="Web\Admin\WebMethod\DocumentViewWebMethod.asmx" />

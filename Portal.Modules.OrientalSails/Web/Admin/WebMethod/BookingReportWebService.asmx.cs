@@ -98,6 +98,10 @@ namespace Portal.Modules.OrientalSails.Web.Admin.WebMethod
                 userBLL.Dispose();
                 userBLL = null;
             }
+            if(permissionBLL != null) { 
+                permissionBLL.Dispose();
+                permissionBLL = null;
+            }
         }
         [WebMethod]
         public void Save(List<CruiseDTO> listCruiseExpenseDTO)

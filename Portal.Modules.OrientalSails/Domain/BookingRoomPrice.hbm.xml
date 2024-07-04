@@ -8,10 +8,14 @@
 		</id>
 
 		<property name="PriceOfRoom"/>
+		<property name="PriceOfRoomSingle"/>
 		<property name="PriceOfAddAdult"/>
 		<property name="PriceOfAddChild"/>
 		<property name="PriceOfAddBaby"/>
 		<property name="PriceOfExtrabed"/>
+		<property name="PriceOfAdult"/>
+		<property name="PriceOfChild"/>
+		<property name="PriceOfBaby"/>
 
 		<many-to-one name="Booking" column="BookingId" class="Booking"/>
 		<many-to-one name="RoomClass" column="RoomClassId" class="RoomClass"/>

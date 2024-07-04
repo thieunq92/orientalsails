@@ -206,9 +206,9 @@ namespace Portal.Modules.OrientalSails.BusinessLogic
             return BookingRepository.BookingGetByCriterion(date, cruise, user);
         }
 
-        public IEnumerable<Booking> BookingGetAllByCriterion(User user,DateTime? date, Cruise cruise, IEnumerable<StatusType> listStatus)
+        public IEnumerable<Booking> BookingGetAllByCriterion(User user, DateTime? date, Cruise cruise, IEnumerable<StatusType> listStatus)
         {
-            return BookingRepository.BookingGetAllByCriterion(user,date, cruise, listStatus);
+            return BookingRepository.BookingGetAllByCriterion(user, date, cruise, listStatus);
         }
 
         public IEnumerable<BookingHistory> BookingHistoryGetAllByBooking(Booking booking)
@@ -236,14 +236,24 @@ namespace Portal.Modules.OrientalSails.BusinessLogic
             return BookingRoomRepository.BookingRoomGetRowCountByCriterion(cruise, date);
         }
 
+        public int BookingRoomGetRowCountByCriterion(SailsTrip trip, DateTime? date)
+        {
+            return BookingRoomRepository.BookingRoomGetRowCountByCriterion(trip, date);
+        }
+
         public int CustomerGetRowCountByCriterion(Cruise cruise, DateTime date)
         {
             return CustomerRepository.CustomerGetRowCountByCriterion(cruise, date);
         }
 
-        public IEnumerable<Booking> BookingGetAllByByCriterion(User user,DateTime date, Cruise cruise, List<StatusType> listStatusType)
+        public int CustomerGetRowCountByCriterion(SailsTrip trip, DateTime date)
         {
-            return BookingRepository.BookingGetAllByCriterion(user,date, cruise, listStatusType);
+            return CustomerRepository.CustomerGetRowCountByCriterion(trip, date);
+        }
+
+        public IEnumerable<Booking> BookingGetAllByByCriterion(User user, DateTime date, Cruise cruise, List<StatusType> listStatusType)
+        {
+            return BookingRepository.BookingGetAllByCriterion(user, date, cruise, listStatusType);
         }
 
         public IEnumerable<Booking> BookingGetAllStartInDate(DateTime date, Cruise cruise)

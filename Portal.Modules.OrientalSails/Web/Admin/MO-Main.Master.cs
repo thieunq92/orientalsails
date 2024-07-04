@@ -18,6 +18,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin
         private PermissionBLL permissionBLL;
         private UserBLL userBLL;
         private User currentUser;
+        private BookingBLL bookingBLL;
 
         public SailsMasterBLL SailsMasterBLL
         {
@@ -61,6 +62,17 @@ namespace Portal.Modules.OrientalSails.Web.Admin
                     currentUser = UserBLL.UserGetCurrent();
                 }
                 return currentUser;
+            }
+        }
+        public BookingBLL BookingBLL
+        {
+            get
+            {
+                if (bookingBLL == null)
+                {
+                    bookingBLL = new BookingBLL();
+                }
+                return bookingBLL;
             }
         }
         public string Title
@@ -116,6 +128,12 @@ namespace Portal.Modules.OrientalSails.Web.Admin
             {
                 userBLL.Dispose();
                 userBLL = null;
+            }
+
+            if (bookingBLL != null)
+            {
+                bookingBLL.Dispose();
+                bookingBLL = null;
             }
 
             if (!Page.IsPostBack)
@@ -356,6 +374,11 @@ namespace Portal.Modules.OrientalSails.Web.Admin
         public int MyTodayBookingPendingCount()
         {
             return MyBookingPendingCount();
+        }
+
+        public void UpdatePendingBooking()
+        {
+            BookingBLL.UpdatePendingBooking();
         }
 
         public string UserCurrentGetName()

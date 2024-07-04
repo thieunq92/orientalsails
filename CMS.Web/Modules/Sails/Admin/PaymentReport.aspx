@@ -209,7 +209,7 @@
                                 <a class="payment" href='BookingPayment.aspx?NodeId=1&SectionId=15&bi=<%# Eval("Id") %>'>Payment</a>
                             </td>
                             <td>
-                                <%# (!((bool)Eval("IsPaid")) && ((double)Eval("MoneyLeft")) >0)? "<input type='checkbox' data-id='chkPay' data-restaurantbookingid='"+Eval("Id")+"' />":"" %>
+                                <%# (!((bool)Eval("IsPaid")) && ((double)Eval("MoneyLeft")) >0)? "<input type='checkbox' data-id='chkPay' data-bookingid='"+Eval("Id")+"' />":"" %>
 
                             </td>
                             <td>
@@ -298,21 +298,21 @@
 </asp:Content>
 <asp:Content ID="Scripts" ContentPlaceHolderID="Scripts" runat="server">
     <script>
-        var listSelectedRestaurantBooking = [];
+        var listSelectedBooking = [];
         $("#chkTemplate").change(function () {
             $("[data-id='chkPay']").prop("checked", $(this).prop("checked"));
         })
         $("#btnSelectedPayment").click(function () {
-            listSelectedRestaurantBooking = [];
+            listSelectedBooking = [];
             $("[data-id='chkPay']").each(function (i, e) {
-                var restaurantBookingId = $(this).attr("data-restaurantbookingid");
+                var bookingId = $(this).attr("data-bookingid");
                 if ($(this).is(":checked")) {
-                    listSelectedRestaurantBooking.push(restaurantBookingId);
+                    listSelectedBooking.push(bookingId);
                 }
             })
         })
         $('a[data-target = ".modal-bookingselectedpayment"]').click(function () {
-            $(".modal-bookingselectedpayment iframe").attr('src', 'BookingSelectedPayment.aspx?NodeId=1&SectionId=15&lbi=' + listSelectedRestaurantBooking);
+            $(".modal-bookingselectedpayment iframe").attr('src', 'BookingSelectedPayment.aspx?NodeId=1&SectionId=15&lbi=' + listSelectedBooking);
         })
     </script>
     <script>

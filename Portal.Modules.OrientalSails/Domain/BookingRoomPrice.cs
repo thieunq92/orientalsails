@@ -12,10 +12,14 @@ namespace Portal.Modules.OrientalSails.Domain
         public virtual RoomClass RoomClass { get; set; }
         public virtual RoomTypex RoomType { get; set; }
         public virtual double PriceOfRoom { get; set; }
+        public virtual double PriceOfRoomSingle { get; set; }
         public virtual double PriceOfAddAdult { get; set; }
         public virtual double PriceOfAddChild { get; set; }
         public virtual double PriceOfAddBaby { get; set; }
         public virtual double PriceOfExtrabed { get; set; }
+        public virtual double PriceOfAdult { get; set; }
+        public virtual double PriceOfChild { get; set; }
+        public virtual double PriceOfBaby { get; set; }
 
     }
 }

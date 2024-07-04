@@ -23,6 +23,9 @@ namespace Portal.Modules.OrientalSails.BusinessLogic
         public UserBLL UserBLL { get; set; }
         public SeriesRepository SeriesRepository { get; set; }
         public BusTypeRepository BusTypeRepository { get; set; }
+        public CommissionRepository CommissionRepository { get; set; }
+        public ServiceOutsideRepository ServiceOutsideRepository { get; set; }
+        public ServiceOutsideDetailRepository ServiceOutsideDetailRepository { get; set; }
 
         public BookingViewBLL()
         {
@@ -37,6 +40,9 @@ namespace Portal.Modules.OrientalSails.BusinessLogic
             UserBLL = new UserBLL();
             SeriesRepository = new SeriesRepository();
             BusTypeRepository = new BusTypeRepository();
+            CommissionRepository = new CommissionRepository();
+            ServiceOutsideRepository = new ServiceOutsideRepository();
+            ServiceOutsideDetailRepository = new ServiceOutsideDetailRepository();
         }
 
         public void Dispose()
@@ -96,11 +102,35 @@ namespace Portal.Modules.OrientalSails.BusinessLogic
                 BusTypeRepository.Dispose();
                 BusTypeRepository = null;
             }
+            if (CommissionRepository != null)
+            {
+                CommissionRepository.Dispose();
+                CommissionRepository = null;
+            }
+            if (ServiceOutsideRepository != null)
+            {
+                ServiceOutsideRepository.Dispose();
+                ServiceOutsideRepository = null;
+            }
+            if (ServiceOutsideDetailRepository != null)
+            {
+                ServiceOutsideDetailRepository.Dispose();
+                ServiceOutsideDetailRepository = null;
+            }
         }
 
         public Booking BookingGetById(int bookingId)
         {
             return BookingRepository.BookingGetById(bookingId);
+        }
+
+        public ServiceOutside ServiceOutsideGetById(int serviceOutsideId)
+        {
+            return ServiceOutsideRepository.GetById(serviceOutsideId);
+        }
+        public Commission CommissionGetById(int commissionId)
+        {
+            return CommissionRepository.GetById(commissionId);
         }
 
         public IList<SailsTrip> TripGetAll()
@@ -118,20 +148,22 @@ namespace Portal.Modules.OrientalSails.BusinessLogic
             return AgencyRepository.AgencyGetAll();
         }
 
-        public void BookingSaveOrUpdate(Booking Booking)
+        public void BookingSaveOrUpdate(Booking booking)
         {
-            if (Booking.Id > 0)
+            if (booking.Id > 0)
             {
-                Booking.ModifiedBy = UserBLL.UserGetCurrent();
-                Booking.ModifiedDate = DateTime.Now;
+                booking.ModifiedBy = UserBLL.UserGetCurrent();
+                booking.ModifiedDate = DateTime.Now;
             }
             else
             {
-                Booking.CreatedBy = UserBLL.UserGetCurrent();
-                Booking.CreatedDate = DateTime.Now;
+                booking.CreatedBy = UserBLL.UserGetCurrent();
+                booking.CreatedDate = DateTime.Now;
             }
+            booking.RoomCount = booking.BookingRooms.Count();
+            booking.CustomerCount = booking.Customers.Count();         
 
-            BookingRepository.SaveOrUpdate(Booking);
+            BookingRepository.SaveOrUpdate(booking);
         }
 
         public void BookingRoomSaveOrUpdate(BookingRoom bookingRoom)
@@ -187,6 +219,56 @@ namespace Portal.Modules.OrientalSails.BusinessLogic
         public BusType BusTypeGetById(int busTypeId)
         {
             return BusTypeRepository.BusTypeGetById(busTypeId);
+        }
+
+        public void CommissionSaveOrUpdate(Commission commission)
+        {
+            CommissionRepository.SaveOrUpdate(commission);
+        }
+
+        public IList<Commission> CommissionGetAllByBookingId(int restaurantBookingId)
+        {
+            return CommissionRepository.CommissionGetAllByBookingId(restaurantBookingId);
+        }
+
+        public void CommissionDelete(Commission commission)
+        {
+            CommissionRepository.Delete(commission);
+        }
+
+        public void ServiceOutsideSaveOrUpdate(ServiceOutside serviceOutside)
+        {
+            ServiceOutsideRepository.SaveOrUpdate(serviceOutside);
+        }
+
+        public IList<ServiceOutside> ServiceOutsideGetAllByBookingId(int restaurantBookingId)
+        {
+            return ServiceOutsideRepository.ServiceOutsideGetAllByBookingId(restaurantBookingId);
+        }
+
+        public void ServiceOutsideDelete(ServiceOutside serviceOutside)
+        {
+            ServiceOutsideRepository.Delete(serviceOutside);
+        }
+
+        public ServiceOutsideDetail ServiceOutsideDetailGetById(int serviceOutsideDetailId)
+        {
+            return ServiceOutsideDetailRepository.GetById(serviceOutsideDetailId);
+        }
+
+        public void ServiceOutsideDetailSaveOrUpdate(ServiceOutsideDetail serviceOutsideDetail)
+        {
+            ServiceOutsideDetailRepository.SaveOrUpdate(serviceOutsideDetail);
+        }
+
+        public IList<ServiceOutsideDetail> ServiceOutsideDetailGetAllByServiceOutsideId(int serviceOutsideId)
+        {
+            return ServiceOutsideDetailRepository.ServiceOutsideDetailGetAllByServiceOutsideId(serviceOutsideId);
+        }
+
+        public void ServiceOutsideDetailDelete(ServiceOutsideDetail serviceOutsideDetail)
+        {
+            ServiceOutsideDetailRepository.Delete(serviceOutsideDetail);
         }
     }
 }

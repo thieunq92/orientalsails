@@ -126,6 +126,48 @@ namespace Portal.Modules.OrientalSails.Repository
             return query.FutureValue<int>().Value;
         }
 
+        public int CustomerGetRowCountByCriterion(SailsTrip trip, DateTime? date)
+        {
+
+            var bookingQuery = _session.QueryOver<Booking>();
+            bookingQuery = bookingQuery.Where((x) => ((x.EndDate > date && x.StartDate > date.Value.AddDays(-1) && x.StartDate < date.Value.AddDays(1)) || (x.StartDate < date && x.EndDate > date)) || (x.EndDate == date && x.StartDate == date));
+            if (trip != null)
+            {
+                bookingQuery = bookingQuery.Where((x) => x.Trip == trip);
+            }
+            bookingQuery = bookingQuery.Where((x) => x.Deleted == false);
+            bookingQuery = bookingQuery.Where((x) => x.Status != StatusType.Cancelled && x.Status != StatusType.CutOff);
+
+            int numberOfCustomers = 0;
+
+            foreach (var booking in bookingQuery.List())
+            {
+                var query = _session.QueryOver<Customer>();
+                if (booking.Cruise.CruiseType == Web.Admin.Enums.CruiseType.Cabin)
+                {
+                    query = query.Where(x => x.Type == CustomerType.Adult || x.Type == CustomerType.Children);
+                }
+                else if (booking.Cruise.CruiseType == Web.Admin.Enums.CruiseType.Seating)
+                {
+                    query = query.Where(x => x.Type == CustomerType.Adult || x.Type == CustomerType.Children || x.Type == CustomerType.Baby);
+                }
+                BookingRoom bookingRoomAlias = null;
+                Booking bookingAlias = null;
+                if (booking.Cruise.CruiseType == Web.Admin.Enums.CruiseType.Cabin)
+                {
+                    query = query.JoinAlias(x => x.BookingRooms, () => bookingRoomAlias);
+                    query = query.Where((x) => bookingRoomAlias.Book == booking);
+                }
+                else if (booking.Cruise.CruiseType == Web.Admin.Enums.CruiseType.Seating)
+                {
+                    query = query.Where(x => x.Booking == booking);
+                }
+                query = query.Select(Projections.RowCount());
+                numberOfCustomers += query.FutureValue<int>().Value;
+            }
+            return numberOfCustomers;
+        }
+
         public int CustomerGetNumberOfCustomersInMonth(int month, int year, User user)
         {
             var firstDateOfMonth = new DateTime(year, month, 1);

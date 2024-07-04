@@ -135,7 +135,7 @@ namespace CMS.Web.Components
         {
       
             //only one thread at a time
-            //System.Threading.Monitor.Enter(lockObject);
+           System.Threading.Monitor.Enter(lockObject);
 
             string assemblyQualifiedName = moduleType.ClassName + ", " + moduleType.AssemblyName;
             if (log.IsDebugEnabled)
@@ -208,7 +208,7 @@ namespace CMS.Web.Components
             }
             finally
             {
-                //System.Threading.Monitor.Exit(lockObject);
+                System.Threading.Monitor.Exit(lockObject);
             }
 
         }//end method

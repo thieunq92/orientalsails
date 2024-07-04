@@ -82,6 +82,7 @@ namespace Portal.Modules.OrientalSails.Enums
         SPECIALREQUEST_ROOM = 90,
         SPECIALREQUEST_FOOD = 91,
         REPORT_REPORT_DEBT_RECEIVABLE_VIEW = 92,
-        REPORT_INSPECTION_REPORT_VIEW = 93
+        REPORT_INSPECTION_REPORT_VIEW = 93,
+        EDIT_TOTAL_DETAILS = 94
     }
 }

@@ -69,5 +69,24 @@ namespace Portal.Modules.OrientalSails.Repository
             query = query.Select(Projections.RowCount());
             return query.FutureValue<int>().Value;
         }
+        public int BookingRoomGetRowCountByCriterion(SailsTrip trip, DateTime? date)
+        {
+            var query = _session.QueryOver<BookingRoom>();
+            Booking bookingAlias = null;
+            query = query.JoinAlias(x => x.Book, () => bookingAlias);
+
+            if (trip != null)
+            {
+                query = query.Where(() => bookingAlias.Trip == trip);
+            }
+            if (date != null)
+            {
+                query = query.Where(() => (bookingAlias.EndDate > date && bookingAlias.StartDate > date.Value.AddDays(-1) && bookingAlias.StartDate < date.Value.AddDays(1)) || (bookingAlias.StartDate < date && bookingAlias.EndDate > date));
+            }
+            query = query.Where(() => bookingAlias.Deleted == false);
+            query = query.Where(() => bookingAlias.Status != StatusType.Cancelled && bookingAlias.Status != StatusType.CutOff);
+            query = query.Select(Projections.RowCount());
+            return query.FutureValue<int>().Value;
+        }
     }
 }

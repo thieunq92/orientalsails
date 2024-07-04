@@ -15,22 +15,22 @@ namespace Portal.Modules.OrientalSails.Web.Admin
     {
 
         /// <summary>
-        /// buttonSubmit control.
+        /// bookingViewController control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button buttonSubmit;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl bookingViewController;
 
         /// <summary>
-        /// button1 control.
+        /// btnSave control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button button1;
+        protected global::System.Web.UI.WebControls.Button btnSave;
 
         /// <summary>
         /// lblBookingId control.
@@ -492,6 +492,33 @@ namespace Portal.Modules.OrientalSails.Web.Admin
         protected global::System.Web.UI.WebControls.Repeater rptSalesPriceInput;
 
         /// <summary>
+        /// txtNumberOfAdultsPrice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtNumberOfAdultsPrice;
+
+        /// <summary>
+        /// txtNumberOfChildsPrice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtNumberOfChildsPrice;
+
+        /// <summary>
+        /// txtNumberOfBabysPrice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtNumberOfBabysPrice;
+
+        /// <summary>
         /// plhCruiseCabinControlPanel control.
         /// </summary>
         /// <remarks>
@@ -634,14 +661,5 @@ namespace Portal.Modules.OrientalSails.Web.Admin
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlRoomTypes;
-
-        /// <summary>
-        /// ScreenCapture control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField ScreenCapture;
     }
 }
