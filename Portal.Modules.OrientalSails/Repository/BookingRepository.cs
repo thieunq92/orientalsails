@@ -404,8 +404,6 @@ namespace Portal.Modules.OrientalSails.Repository
                 }
                 query = query.WhereRestrictionOn(x => x.Status).IsIn(listStatus.ToArray());
                 query = query.Where(x => x.Deleted == false);
-                query = query.Fetch(x => x.Trip).Eager;
-                query = query.Fetch(x => x.Agency).Eager;
                 //                var bookingRoomQuery = _session.QueryOver<BookingRoom>().WithSubquery.WhereProperty(x => x.Book)
                 //                    .In<Booking>(query)
                 //                    .Fetch(x => x.Customers).Eager
@@ -413,6 +411,11 @@ namespace Portal.Modules.OrientalSails.Repository
                 var bookingQuery = _session.QueryOver<Booking>().WithSubquery.WhereProperty(x => x.Id)
                     .In<Booking>(query.Select(x => x.Id))
                     .Fetch(x => x.BookingRooms).Eager;
+                bookingQuery = bookingQuery.Fetch(x => x.Trip).Eager;
+                bookingQuery = bookingQuery.Fetch(x => x.Agency).Eager;
+                bookingQuery = bookingQuery.Fetch(x => x.Cruise).Eager;
+                bookingQuery = bookingQuery.Fetch(x => x.BookingSale).Eager;
+                bookingQuery = bookingQuery.Fetch(x => x.Customers).Eager;
                 Cruise cruiseAlias = null;
                 bookingQuery.JoinAlias(x => x.Cruise, () => cruiseAlias);
                 IvRoleCruise roleCruiseAlias = null;
@@ -423,7 +426,7 @@ namespace Portal.Modules.OrientalSails.Repository
                 bookingQuery = bookingQuery.Where(() => userRoleCruiseAlias.Id == user.Id);
                 bookingQuery = bookingQuery.TransformUsing(
                     Transformers.DistinctRootEntity);
-                return bookingQuery.Future();
+                return bookingQuery.List();
             }
             else return new List<Booking>();
 
