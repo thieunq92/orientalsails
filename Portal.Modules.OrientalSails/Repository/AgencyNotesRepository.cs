@@ -16,7 +16,7 @@ namespace Portal.Modules.OrientalSails.Repository
         public IEnumerable<AgencyNotes> AgencyNotesGetAllByAgency(Agency agency)
         {
             var query = _session.QueryOver<AgencyNotes>().Where(an => an.Agency == agency);
-            return query.Future().ToList();
+            return query.List();
         }
 
         public AgencyNotes AgencyNotesGetById(int agencyNotesId)

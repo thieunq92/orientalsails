@@ -287,7 +287,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin.WebMethod
                 date = DateTime.ParseExact(d, "dd/MM/yyyy", CultureInfo.InvariantCulture);
             }
             catch { }
-            var listExpense = BookingReportBLL.ExpenseGetAllByCriterion(cruiseId, date).Future().ToList();
+            var listExpense = BookingReportBLL.ExpenseGetAllByCriterion(cruiseId, date).List();
             var listOthersExpense = listExpense.Where(x => x.Type == "Others").ToList();
             var listOthersExpenseDTO = new List<ExpenseDTO>();
             listOthersExpense.ForEach(x =>

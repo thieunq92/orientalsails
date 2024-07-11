@@ -409,13 +409,17 @@ namespace Portal.Modules.OrientalSails.Repository
                 //                    .Fetch(x => x.Customers).Eager
                 //                    .Future();
                 var bookingQuery = _session.QueryOver<Booking>().WithSubquery.WhereProperty(x => x.Id)
-                    .In<Booking>(query.Select(x => x.Id))
-                    .Fetch(x => x.BookingRooms).Eager;
+                    .In<Booking>(query.Select(x => x.Id));
+
+                bookingQuery = bookingQuery.Fetch(x => x.BookingRooms).Eager;
                 bookingQuery = bookingQuery.Fetch(x => x.Trip).Eager;
                 bookingQuery = bookingQuery.Fetch(x => x.Agency).Eager;
                 bookingQuery = bookingQuery.Fetch(x => x.Cruise).Eager;
                 bookingQuery = bookingQuery.Fetch(x => x.BookingSale).Eager;
-                bookingQuery = bookingQuery.Fetch(x => x.Customers).Eager;
+                bookingQuery = bookingQuery.Fetch(x => x.Agency.Sale).Eager;
+                bookingQuery = bookingQuery.Fetch(x => x.CreatedBy).Eager;
+                bookingQuery = bookingQuery.Fetch(x => x.ModifiedBy).Eager;
+
                 Cruise cruiseAlias = null;
                 bookingQuery.JoinAlias(x => x.Cruise, () => cruiseAlias);
                 IvRoleCruise roleCruiseAlias = null;
@@ -468,6 +472,10 @@ namespace Portal.Modules.OrientalSails.Repository
             mainQuery = mainQuery.Fetch(x => x.BookingRooms.First().Book).Eager;
             mainQuery = mainQuery.Fetch(x => x.Trip).Eager;
             mainQuery = mainQuery.Fetch(x => x.Agency).Eager;
+            mainQuery = mainQuery.Fetch(x => x.BookingSale).Eager;
+            mainQuery = mainQuery.Fetch(x => x.Agency.Sale).Eager;
+            mainQuery = mainQuery.Fetch(x => x.CreatedBy).Eager;
+            mainQuery = mainQuery.Fetch(x => x.ModifiedBy).Eager;
             Cruise cruiseAlias = null;
             mainQuery.JoinAlias(x => x.Cruise, () => cruiseAlias);
             IvRoleCruise roleCruiseAlias = null;
@@ -477,7 +485,7 @@ namespace Portal.Modules.OrientalSails.Repository
             mainQuery = mainQuery.Where(() => userRoleCruiseAlias.Id == user.Id);
             mainQuery = mainQuery.TransformUsing(
                  Transformers.DistinctRootEntity);
-            var list = mainQuery.Future().ToList();
+            var list = mainQuery.List();
             return list;
         }
 

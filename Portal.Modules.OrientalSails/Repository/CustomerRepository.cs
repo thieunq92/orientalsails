@@ -123,7 +123,7 @@ namespace Portal.Modules.OrientalSails.Repository
             query = query.Where(() => bookingAlias.Deleted == false);
             query = query.Where(() => bookingAlias.Status != StatusType.Cancelled && bookingAlias.Status != StatusType.CutOff);
             query = query.Select(Projections.RowCount());
-            return query.FutureValue<int>().Value;
+            return query.SingleOrDefault<int>();
         }
 
         public int CustomerGetRowCountByCriterion(SailsTrip trip, DateTime? date)

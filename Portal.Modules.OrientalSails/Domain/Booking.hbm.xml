@@ -77,7 +77,7 @@
 		<many-to-one name="Series" column="SeriesId" class="Series"/>
 		<many-to-one name="Transfer_BusType" column="Transfer_BusTypeId"/>
 
-		<bag name="Customers" inverse="true" cascade="none" where="type!=4" batch-size="10" lazy="extra">
+		<bag name="Customers" inverse="true" cascade="none" where="type!=4" batch-size="10">
 			<key column="BookingId"/>
 			<one-to-many class="Customer"/>
 		</bag>
