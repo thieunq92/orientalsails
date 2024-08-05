@@ -1,5 +1,5 @@
 ﻿moduleBookingReport.controller("bookingReportController", ["$rootScope", "$scope", "$http", "$location", "$filter", "$timeout", "$interval"
-    , function ($rootScope, $scope, $http, $location, $filter, $timeout, $interval) {
+    , function ($rootScope, $scope, $http, $location, $filter, $timeout, $interval ) {
         $scope.listAllCruiseExpenseDTO = [];
         $scope.getListAllCruiseExpenseDTO = function () {
             $http({
@@ -345,8 +345,15 @@
                 }
             }).then(function (response) {
                 $scope.listBooking = JSON.parse(response.data.d);
+                $scope.totalAdult = $scope.listBooking.reduce((n, { Adult }) => n + Adult, 0);
+                $scope.totalChild = $scope.listBooking.reduce((n, { Child }) => n + Child, 0);
+                $scope.totalBaby = $scope.listBooking.reduce((n, { Baby }) => n + Baby, 0);
             }, function (response) {
                 alert("Request failed. Please reload and try again. Message:" + response.data.Message);
             })
-        }      
+        }
+
+        $scope.openPopupFeedback = function (bookingId) {
+            window.openPopup('SurveyInput.aspx?NodeId=1&SectionId=15&bi=' + bookingId, 'Surveyinput', 600, 800)
+        }
     }])

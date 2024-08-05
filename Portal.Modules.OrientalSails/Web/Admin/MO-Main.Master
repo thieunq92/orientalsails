@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="shortcut icon" href="/favicon.gif" />
     <%: Styles.Render("~/bundles/allcss/") %>
-      <link rel="stylesheet" href="~/css/fontawesome/v5.9.14/css/all.min.css"/>
+    <link rel="stylesheet" href="~/css/fontawesome/v5.9.14/css/all.min.css" />
     <asp:ContentPlaceHolder ID="HeadMain" runat="server">
     </asp:ContentPlaceHolder>
     <script>
@@ -153,7 +153,7 @@
                                         <asp:HyperLink ID="hplTripPriceConfig" runat="server">Cấu hình giá trip</asp:HyperLink></li>
                                     <li>
                                         <asp:HyperLink ID="hplAgencyTripPriceConfig" runat="server">Cấu hình giá theo cấp đại lý</asp:HyperLink></li>
-                                   
+
                                 </ul>
                             </li>
                             <li class="dropdown" id="tabRoom" runat="server">
@@ -324,9 +324,11 @@
         <div id="bookingpending-panel" class="hidden">
             <p>
                 You have <strong>(<%= MyBookingPendingCount() %>)</strong> booking(s) pending
+           
             </p>
             <p>
                 You have <strong style="color: red;">(<%= MyTodayBookingPendingCount() %>)</strong> booking(s) pending need confirm in 36h
+           
             </p>
             <p><%= SystemBookingPendingMessaging() %></p>
             <a href="OrderReport.aspx?NodeId=1&SectionId=15">My booking pending</a><br />
@@ -335,6 +337,7 @@
         <a href="javascript:" id="return-to-top"><i class="fas fa-angle-double-up"></i></a>
     </form>
     <%: Scripts.Render("~/bundles/allscript/") %>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-sanitize.js"></script>
     <script src="https://trello.com/1/client.js?key=109c105f2853829fe3c2ea1f8c9111bf&token=d6142b8a255d5454ad55c46fe4889e2cd208759942e98d3f2b67f4c20c1eb6db"></script>
     <script>
         var tooltip = {

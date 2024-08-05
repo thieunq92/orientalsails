@@ -91,8 +91,8 @@
             <div class="col-xs-12">
                 <table class="table table-bordered table-common">
                     <tr class="header active">
-                        <th rowspan="2" <%= SetStyle() %>
-                            <%= SetColsPan()%>></th>
+                        <th rowspan="2"></th>
+                        <th rowspan="2"></th>
                         <th rowspan="2">No
                         </th>
                         <th rowspan="2">Name of pax
@@ -105,27 +105,17 @@
                         </th>
                         <th rowspan="2">Special request
                         </th>
-                        <% if (CanViewAgency)
-                            {  %>
                         <th rowspan="2">Agency
                         </th>
-                        <% } %>
                         <th rowspan="2">Booking code
                         </th>
-                        <% if (CanViewAgency)
-                            { %>
                         <th rowspan="2">Sales In Charge
                         </th>
-                        <% } %>
-                        <% if (CanViewTotal)
-                            { %>
                         <th rowspan="2">Total
                         </th>
-                        <% } %>
                         <th rowspan="2">Feedback</th>
                         <th rowspan="2">P/u time
-                       
-                        <br />
+                            <br />
                             <asp:Button runat="server" ID="btnSavePickupTime" Text="update" CssClass="btn btn-primary" OnClick="btnSavePickupTime_OnClick" />
                         </th>
                     </tr>
@@ -137,8 +127,47 @@
                         <th>Baby
                         </th>
                     </tr>
-                    <tr ng-repeat="booking in listBooking">
-                        <td>{{booking.BookingId}}</td>
+                    <tr ng-repeat="booking in listBooking" ng-class="{'custom-warning': booking.IsWarningBooking, 'custom-info': booking.IsPendingBooking}">
+                        <td><i ng-show="booking.Inspection" class="fa fa-lg fa-clipboard-list text-disabled "
+                            data-toggle="tooltip" title="Inspection"></i></td>
+                        <td>
+                            <i ng-show="booking.HaveBirthdayBooking" class="fa fa-lg fa-birthday-cake"
+                                style="color: hotpink" data-toggle="tooltip" title="Birthday"></i>
+                        </td>
+                        <td>{{$index + 1}}</td>
+                        <td class="--text-left"><span ng-bind-html="booking.CustomerName"></span></td>
+                        <td>{{booking.Adult}}</td>
+                        <td>{{booking.Child}}</td>
+                        <td>{{booking.Baby}}</td>
+                        <td>{{booking.TripCode}}</td>
+                        <td class="--text-left">{{booking.PickupAddress}}</td>
+                        <td class="--text-left">{{booking.SpecialRequest}}<br />
+                            {{booking.SpecialRequestRoom}}</td>
+                        <td>
+                            <% if (CanViewAgency)
+                                { %>
+                            <a ng-show="booking.AgencyNotes != ''" href="" data-toggle="tooltip" title="{{booking.AgencyNotes}}">
+                                <i class="fa fa-lg fa-comment-dots icon icon__note"></i>
+                            </a>
+                            <br />
+                            <a href="AgencyView.aspx?NodeId=1&SectionId=15&agencyid={{booking.AgencyId}}">{{booking.AgencyName}}</a>
+                            <% } %>
+                        </td>
+                        <td>
+                            <a href="BookingView.aspx?NodeId=1&SectionId=15&bi={{booking.Id}}">{{booking.BookingId}}</a>
+                            <div ng-show="booking.HasInvoice" class="star" title="VAT">*</div>
+                        </td>
+                        <td>
+                            <% if (CanViewAgency)
+                                { %>
+                            {{booking.SalesInChargeName}} <span ng-show="booking.SalesInChargePhone != ''">-</span> {{booking.SalesInChargePhone}}
+                            <% } %>
+                        </td>
+                        <td><% if (CanViewTotal)
+                                {%>
+                            {{booking.Total}} 
+                            <% } %></td>
+                        <td><a href="" ng-click="openPopupFeedback(booking.Id)">Feedback</a></td>
                     </tr>
 
                     <asp:Repeater ID="rptBookingList" runat="server" OnItemDataBound="rptBookingList_OnItemDataBound">
@@ -225,33 +254,20 @@
                         </ItemTemplate>
                         <FooterTemplate>
                             <tr class="item">
-                                <%
-                                    int colspan = 4;
-
-                                    if (!((List<Booking>)(rptBookingList.DataSource)).Any(x => x.Inspection == true) || !((List<Booking>)(rptBookingList.DataSource)).Any(x => x.Customers.Any(y => y.Birthday != null && y.Birthday.Value.Day == Date.Day && y.Birthday.Value.Month == Date.Month)))
-                                    {
-                                        colspan = 3;
-                                    }
-
-                                    if (!((List<Booking>)(rptBookingList.DataSource)).Any(x => x.Inspection == true) && !((List<Booking>)(rptBookingList.DataSource)).Any(x => x.Customers.Any(y => y.Birthday != null && y.Birthday.Value.Day == Date.Day && y.Birthday.Value.Month == Date.Month)))
-                                    {
-                                        colspan = 2;
-                                    }
-                                %>
-                                <td colspan="<%= colspan %>">
+                                <td colspan="6">
                                     <strong>Grand total</strong>
                                 </td>
                                 <td>
                                     <strong>
-                                        <%= ((IEnumerable<Booking>)rptBookingList.DataSource).Sum(x=>x.Adult)%></strong>
+                                       {{totalAdult}}</strong>
                                 </td>
                                 <td>
                                     <strong>
-                                        <%= ((IEnumerable<Booking>)rptBookingList.DataSource).Sum(x=>x.Child) %></strong>
+                                        {{totalChild}}</strong>
                                 </td>
                                 <td>
                                     <strong>
-                                        <%= ((IEnumerable<Booking>)rptBookingList.DataSource).Sum(x=>x.Baby) %></strong>
+                                        {{totalBaby}}</strong>
                                 </td>
                                 <td></td>
                                 <td></td>
@@ -570,6 +586,7 @@
                             data-uniqueid="<%= btnLockDate.UniqueID %>"
                             ng-click="lockDate()" ng-show="!LockingExpense">
                             Lock date
+                       
                        
                         </button>
                         <asp:Button ID="btnLockDate" runat="server" OnClick="btnLockDate_Click" ng-show="false"></asp:Button>

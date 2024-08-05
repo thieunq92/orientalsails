@@ -306,7 +306,6 @@
       <DependentUpon>Home.ascx</DependentUpon>
     </Compile>
     <Compile Include="Modules\Sails\Resources\Strings.Designer.cs" />
-    <Compile Include="obj\Debug\.NETFramework,Version=v4.5.AssemblyAttributes.cs" />
     <Compile Include="Server\ApplicationEventLog.aspx.cs">
       <DependentUpon>ApplicationEventLog.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

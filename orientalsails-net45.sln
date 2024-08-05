@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35122.118
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portal.Modules.OrientalSails", "Portal.Modules.OrientalSails\Portal.Modules.OrientalSails.csproj", "{FD7FE756-D7C3-4D99-9814-C52838D8F4DF}"
 EndProject
@@ -15,6 +15,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portal.Modules.OrientalSails.Service.Share", "Portal.Modules.OrientalSails.Service.Share\Portal.Modules.OrientalSails.Service.Share.csproj", "{73363D45-1515-416B-B845-10CDE91F150F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portal.Modules.Orientalsails.API", "Portal.Modules.Orientalsails.API\Portal.Modules.Orientalsails.API.csproj", "{73D6A45E-11E6-48C9-80F3-078F0868E42F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMS.Modules.TourManagement", "CMS.Modules.TourManagement\CMS.Modules.TourManagement.csproj", "{958B8344-FCCE-4F04-AE30-881555ADCB79}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMS.Modules.Gallery", "CMS.Modules.Gallery\CMS.Modules.Gallery.csproj", "{F9BB3C77-A644-4353-BAEA-33D7E23B774D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,6 +54,14 @@ Global
 		{73D6A45E-11E6-48C9-80F3-078F0868E42F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73D6A45E-11E6-48C9-80F3-078F0868E42F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73D6A45E-11E6-48C9-80F3-078F0868E42F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{958B8344-FCCE-4F04-AE30-881555ADCB79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{958B8344-FCCE-4F04-AE30-881555ADCB79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{958B8344-FCCE-4F04-AE30-881555ADCB79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{958B8344-FCCE-4F04-AE30-881555ADCB79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9BB3C77-A644-4353-BAEA-33D7E23B774D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9BB3C77-A644-4353-BAEA-33D7E23B774D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9BB3C77-A644-4353-BAEA-33D7E23B774D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9BB3C77-A644-4353-BAEA-33D7E23B774D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

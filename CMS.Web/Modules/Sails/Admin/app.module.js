@@ -27,7 +27,7 @@ var moduleContractCreate = angular.module("moduleContractCreate", [])
         }
     };
 });
-var moduleBookingReport = angular.module("moduleBookingReport", []);
+var moduleBookingReport = angular.module("moduleBookingReport", ['ngSanitize']);
 var moduleTransferRequestByDate = angular.module("moduleTransferRequestByDate", []);
 moduleTransferRequestByDate.directive('convertToNumber', function () {
     return {
