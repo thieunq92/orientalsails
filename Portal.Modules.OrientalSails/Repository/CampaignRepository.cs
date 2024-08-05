@@ -19,21 +19,21 @@ namespace Portal.Modules.OrientalSails.Repository
         public IEnumerable<Campaign> CampaignGetAll()
         {
             var query = _session.QueryOver<Campaign>();
-            return query.Future().ToList();
+            return query.List();
         }
 
         public IEnumerable<Campaign> CampaignGetAllPaged(int pageSize, int pageIndex, out int count)
         {
             var query = _session.QueryOver<Campaign>();
             count = query.RowCount();
-            return query.Skip(pageSize * pageIndex).Take(pageSize).Future().ToList();
+            return query.Skip(pageSize * pageIndex).Take(pageSize).List();
         }
 
         public Campaign CampaignGetByMonthAndYear(int month, int year)
         {
             var query = _session.QueryOver<Campaign>();
             query = query.Where(x => x.Month == month && x.Year == year);
-            return query.FutureValue().Value;
+            return query.SingleOrDefault();
         }
     }
 }

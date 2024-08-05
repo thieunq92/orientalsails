@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Voucher Template" Language="C#" MasterPageFile="MO.Master" AutoEventWireup="true"
+﻿<%@ Page Title="Voucher Template" Async="true" Language="C#" MasterPageFile="MO.Master" AutoEventWireup="true"
     CodeBehind="VoucherTemplates.aspx.cs" Inherits="Portal.Modules.OrientalSails.Web.Admin.VoucherTemplates" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="AdminContent" runat="server">

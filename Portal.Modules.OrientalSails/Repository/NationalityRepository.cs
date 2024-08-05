@@ -15,7 +15,7 @@ namespace Portal.Modules.OrientalSails.Repository
 
         public IList<Nationality> NationalityGetAll()
         {
-            return _session.QueryOver<Nationality>().Where(x=>x.Deleted == false).Future<Nationality>().ToList();
+            return _session.QueryOver<Nationality>().Where(x=>x.Deleted == false).List();
         }
     }
 }

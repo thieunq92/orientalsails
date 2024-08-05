@@ -18,13 +18,13 @@ namespace Portal.Modules.OrientalSails.Repository
 
         public IList<Agency> AgencyGetAll()
         {
-            return _session.QueryOver<Agency>().Where(x => x.Deleted == false).Future().ToList();
+            return _session.QueryOver<Agency>().Where(x => x.Deleted == false).List();
         }
 
         public Agency AgencyGetById(int agencyId)
         {
             return _session.QueryOver<Agency>().Where(x => x.Deleted == false)
-                .Where(x => x.Id == agencyId).FutureValue().Value;
+                .Where(x => x.Id == agencyId).SingleOrDefault();
         }
 
         public IList<Agency> ViewActivitiesBLL_AgencyGetAllBy(int userId, DateTime? from, DateTime? to)
@@ -45,7 +45,7 @@ namespace Portal.Modules.OrientalSails.Repository
                 query = query.Where(x => x.CreatedDate <= to || x.ModifiedDate <= from);
             }
 
-            return query.Future().ToList();
+            return query.List();
         }
         public IQueryOver<Agency, Agency> AgencyGetAllByRole(Role role)
         {
@@ -90,7 +90,7 @@ namespace Portal.Modules.OrientalSails.Repository
                 .WithSubquery.WhereProperty(x => x.Agency.Id).In(agenciesSendNoBookingsLast3Month)
                 .WithSubquery.WhereValue(1).Gt(findLastestSendBookingQuery)
                 .OrderBy(x => x.CreatedDate).Desc;
-            return query.Future().ToList();
+            return query.List();
         }
 
         public object AgencyGetAllAgenciesNotVisitedInLast2Month(User user)
@@ -110,11 +110,11 @@ namespace Portal.Modules.OrientalSails.Repository
                 .Where(x => x.Sale == user)
                 .WithSubquery.WhereProperty(x => x.Id).NotIn(agenciesNotVisitedInLast2MonthQuery)
                 .WithSubquery.WhereProperty(x => x.Id).NotIn(agenciesVisitedInLast2MonthQuery)
-                .Future().ToList();
+                .List();
             var activitiesOfAgenciesNotVisitedInLast2Month = _session.QueryOver<Activity>(() => activityAlias).Where(x => x.DateMeeting <= last2month && x.User == user)
                 .WithSubquery.WhereValue(1).Gt(findLastestVisitedQuery)
                 .OrderBy(x => x.DateMeeting).Asc
-                .Future().ToList();
+                .List();
             var agenciesNotUpdateOrNotVisitedAnyTime = new List<object>();
             foreach (var agencyNotVisitedAnyTime in agenciesNotVisitedAnyTime)
             {
@@ -134,7 +134,7 @@ namespace Portal.Modules.OrientalSails.Repository
                     agencyId = Int32.Parse(activityOfAgencyNotVisitedInLast2Month.Params);
                 }
                 catch { }
-                var agency = _session.QueryOver<Agency>().Where(x => x.Id == agencyId).FutureValue().Value;
+                var agency = _session.QueryOver<Agency>().Where(x => x.Id == agencyId).SingleOrDefault();
                 var agencyNotUpdate = new
                 {
                     AgencyId = agencyId,
@@ -176,7 +176,7 @@ namespace Portal.Modules.OrientalSails.Repository
                     Projections.Group(()=>agencyAlias.Id),
                     Projections.Group(()=>agencyAlias.Name)
                 );
-            return query.OrderBy(Projections.RowCount()).Desc.Take(10).Future<object[]>().ToList()
+            return query.OrderBy(Projections.RowCount()).Desc.Take(10).List<object[]>()
                 .Select(x=> new { AgencyId = x[0], AgencyName = x[1], NumberOfPax = x[2] });
         }
     }

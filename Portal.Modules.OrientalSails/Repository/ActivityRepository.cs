@@ -30,7 +30,7 @@ namespace Portal.Modules.OrientalSails.Repository
                 query = query.Where(x => x.UpdateTime <= to);
             }
 
-            return query.Future().ToList();
+            return query.List();
         }
 
         public IEnumerable<Activity> ActivityGetAllRecentMeetings(User user)
@@ -40,7 +40,7 @@ namespace Portal.Modules.OrientalSails.Repository
             {
                 query = query.Where(x => x.User == user);
             }
-            return query.OrderBy(x => x.UpdateTime).Desc.Take(10).Future().ToList();
+            return query.OrderBy(x => x.UpdateTime).Desc.Take(10).List();
         }
 
         public IEnumerable<Activity> ActivityGetAllActivityInMonth(int month, int year, User user)
@@ -50,7 +50,7 @@ namespace Portal.Modules.OrientalSails.Repository
             var query = _session.QueryOver<Activity>();
             query = query.Where(x => x.DateMeeting >= firstDateOfMonth && x.DateMeeting <= lastDateOfMonth)
                 .Where(x => x.User == user);
-            return query.Future().ToList();
+            return query.List();
         }
 
         public IEnumerable<Activity> ActivityGetAllRecentMeetings()
@@ -67,7 +67,7 @@ namespace Portal.Modules.OrientalSails.Repository
             {
                 query = query.Where(x => x.User.Id == salesId);
             }
-            return query.Future().ToList();
+            return query.List();
         }
         public IEnumerable<Activity> ActivityGetAllRecentMeetingsInDateRange(int salesId, DateTime from, DateTime to)
         {
@@ -79,7 +79,7 @@ namespace Portal.Modules.OrientalSails.Repository
                 query = query.Where(x => x.User.Id == salesId);
             }
             query = query.Where(a => a.DateMeeting >= from && a.DateMeeting <= to);
-            return query.Future().ToList();
+            return query.List();
         }
 
         public IEnumerable<Activity> ActivityGetAllRecentMeetingsInDateRange(User sales, DateTime from, DateTime to)
@@ -90,7 +90,7 @@ namespace Portal.Modules.OrientalSails.Repository
                 query = query.Where(x => x.User == sales);
             }
             query = query.Where(a => a.DateMeeting >= from && a.DateMeeting <= to);
-            return query.Future().ToList();
+            return query.List();
         }
     }
 }

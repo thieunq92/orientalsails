@@ -15,18 +15,18 @@ namespace Portal.Modules.OrientalSails.Repository
 
         public IList<SailsTrip> TripGetAll()
         {
-            return _session.QueryOver<SailsTrip>().Where(x => x.Deleted == false).Future<SailsTrip>().ToList();
+            return _session.QueryOver<SailsTrip>().Where(x => x.Deleted == false).List();
         }
 
         public SailsTrip TripGetById(int tripId)
         {
             return _session.QueryOver<SailsTrip>().Where(x => x.Deleted == false)
-                .Where(x => x.Id == tripId).FutureValue().Value;
+                .Where(x => x.Id == tripId).SingleOrDefault();
         }
 
         public IList<SailsTrip> TripGetAllByNoOfDays(int noOfDays){
             return _session.QueryOver<SailsTrip>().Where(x => x.Deleted == false)
-                    .Where(x=>x.NumberOfDay == noOfDays).Future().ToList();
+                    .Where(x=>x.NumberOfDay == noOfDays).List();
         }
     }
 }

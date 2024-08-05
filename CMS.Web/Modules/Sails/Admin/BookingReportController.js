@@ -1,4 +1,4 @@
-﻿moduleBookingReport.controller("expenseController", ["$rootScope", "$scope", "$http", "$location", "$filter", "$timeout", "$interval"
+﻿moduleBookingReport.controller("bookingReportController", ["$rootScope", "$scope", "$http", "$location", "$filter", "$timeout", "$interval"
     , function ($rootScope, $scope, $http, $location, $filter, $timeout, $interval) {
         $scope.listAllCruiseExpenseDTO = [];
         $scope.getListAllCruiseExpenseDTO = function () {
@@ -334,4 +334,19 @@
         $scope.isShowCruiseExpense = function (listCruiseShow, cruiseExpense) {
             return listCruiseShow.split(/\s*,\s*/).indexOf(cruiseExpense) > -1
         }
+
+        $scope.bookingGetAllByCriterion = function () {
+            $http({
+                method: "POST",
+                url: "WebMethod/BookingReportWebService.asmx/BookingGetAllByCriterion",
+                data: {
+                    "date": $scope.date,
+                    "cruiseId": $scope.cruiseId,
+                }
+            }).then(function (response) {
+                $scope.listBooking = JSON.parse(response.data.d);
+            }, function (response) {
+                alert("Request failed. Please reload and try again. Message:" + response.data.Message);
+            })
+        }      
     }])

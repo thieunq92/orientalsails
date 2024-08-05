@@ -14,7 +14,7 @@ namespace Portal.Modules.OrientalSails.Repository
         public IEnumerable<GoldenDay> GoldenDayGetAllByDateRange(DateTime from, DateTime to)
         {
             var query = _session.QueryOver<GoldenDay>().Where(gd => gd.Date >= from && gd.Date <= to);
-            return query.Future().ToList();
+            return query.List();
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Portal.Modules.OrientalSails.Repository
 
         public IList<ServiceOutside> ServiceOutsideGetAllByBookingId(int bookingId)
         {
-            return _session.QueryOver<ServiceOutside>().Where(x => x.Booking.Id == bookingId).Future().ToList();
+            return _session.QueryOver<ServiceOutside>().Where(x => x.Booking.Id == bookingId).List();
         }
     }
 }

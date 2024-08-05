@@ -16,12 +16,12 @@ namespace Portal.Modules.OrientalSails.Repository
 
         public IList<RoomTypex> RoomTypeGetAll()
         {
-            return _session.QueryOver<RoomTypex>().Future().ToList();
+            return _session.QueryOver<RoomTypex>().List();
         }
 
         public RoomTypex RoomTypeGetById(int roomTypeId)
         {
-            return _session.QueryOver<RoomTypex>().Where(x => x.Id == roomTypeId).FutureValue().Value;
+            return _session.QueryOver<RoomTypex>().Where(x => x.Id == roomTypeId).SingleOrDefault();
         }
     }
 }

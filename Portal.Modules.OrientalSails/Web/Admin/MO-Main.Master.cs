@@ -14,66 +14,28 @@ namespace Portal.Modules.OrientalSails.Web.Admin
 {
     public partial class MO_Main : System.Web.UI.MasterPage
     {
-        private SailsMasterBLL sailsMasterBLL;
-        private PermissionBLL permissionBLL;
-        private UserBLL userBLL;
         private User currentUser;
         private BookingBLL bookingBLL;
 
         public SailsMasterBLL SailsMasterBLL
         {
-            get
-            {
-                if (sailsMasterBLL == null)
-                {
-                    sailsMasterBLL = new SailsMasterBLL();
-                }
-                return sailsMasterBLL;
-            }
+            get; set;
         }
         public PermissionBLL PermissionBLL
         {
-            get
-            {
-                if (permissionBLL == null)
-                {
-                    permissionBLL = new PermissionBLL();
-                }
-                return permissionBLL;
-            }
+            get; set;
         }
         public UserBLL UserBLL
         {
-            get
-            {
-                if (userBLL == null)
-                {
-                    userBLL = new UserBLL();
-                }
-                return userBLL;
-            }
+            get; set;
         }
         public User CurrentUser
         {
-            get
-            {
-                if (currentUser == null)
-                {
-                    currentUser = UserBLL.UserGetCurrent();
-                }
-                return currentUser;
-            }
+            get; set;
         }
         public BookingBLL BookingBLL
         {
-            get
-            {
-                if (bookingBLL == null)
-                {
-                    bookingBLL = new BookingBLL();
-                }
-                return bookingBLL;
-            }
+            get; set;
         }
         public string Title
         {
@@ -89,6 +51,13 @@ namespace Portal.Modules.OrientalSails.Web.Admin
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            SailsMasterBLL = new SailsMasterBLL();
+            PermissionBLL = new PermissionBLL();
+            UserBLL = new UserBLL();
+            CurrentUser = UserBLL.UserGetCurrent();
+            BookingBLL = new BookingBLL(); 
+
             var fromLogin = false;
             try
             {
@@ -112,28 +81,28 @@ namespace Portal.Modules.OrientalSails.Web.Admin
 
         protected void Page_Unload(object sender, EventArgs e)
         {
-            if (sailsMasterBLL != null)
+            if (SailsMasterBLL != null)
             {
-                sailsMasterBLL.Dispose();
-                sailsMasterBLL = null;
+                SailsMasterBLL.Dispose();
+                SailsMasterBLL = null;
             }
 
-            if (permissionBLL != null)
+            if (PermissionBLL != null)
             {
-                permissionBLL.Dispose();
-                permissionBLL = null;
+                PermissionBLL.Dispose();
+                PermissionBLL = null;
             }
 
-            if (userBLL != null)
+            if (UserBLL != null)
             {
-                userBLL.Dispose();
-                userBLL = null;
+                UserBLL.Dispose();
+                UserBLL = null;
             }
 
-            if (bookingBLL != null)
+            if (BookingBLL != null)
             {
-                bookingBLL.Dispose();
-                bookingBLL = null;
+                BookingBLL.Dispose();
+                BookingBLL = null;
             }
 
             if (!Page.IsPostBack)

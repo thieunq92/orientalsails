@@ -13,12 +13,12 @@ namespace Portal.Modules.OrientalSails.Repository
         public ContractRepository(ISession session) : base(session) { }
         public IList<Contracts> ContractGetAll()
         {
-            return _session.QueryOver<Contracts>().Future().ToList();
+            return _session.QueryOver<Contracts>().List();
         }
 
         public Contracts ContractGetById(int contractId)
         {
-            return _session.QueryOver<Contracts>().Where(x => x.Id == contractId).FutureValue().Value;
+            return _session.QueryOver<Contracts>().Where(x => x.Id == contractId).SingleOrDefault();
         }
     }
 }

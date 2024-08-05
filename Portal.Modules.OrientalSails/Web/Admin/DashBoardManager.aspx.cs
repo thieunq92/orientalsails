@@ -18,53 +18,21 @@ namespace Portal.Modules.OrientalSails.Web.Admin
 {
     public partial class DashBoardManager : System.Web.UI.Page
     {
-        private UserBLL userBLL;
-        private User currentUser;
-        private DashBoardManagerBLL dashBoardManagerBLL;
-        private PermissionBLL permissionBLL;
         public UserBLL UserBLL
         {
-            get
-            {
-                if (userBLL == null)
-                {
-                    userBLL = new UserBLL();
-                }
-                return userBLL;
-            }
+            get; set;
         }
         public User CurrentUser
         {
-            get
-            {
-                if (currentUser == null)
-                {
-                    currentUser = UserBLL.UserGetCurrent();
-                }
-                return currentUser;
-            }
+            get; set;
         }
         public DashBoardManagerBLL DashBoardManagerBLL
         {
-            get
-            {
-                if (dashBoardManagerBLL == null)
-                {
-                    dashBoardManagerBLL = new DashBoardManagerBLL();
-                }
-                return dashBoardManagerBLL;
-            }
+            get; set;
         }
         public PermissionBLL PermissionBLL
         {
-            get
-            {
-                if (permissionBLL == null)
-                {
-                    permissionBLL = new PermissionBLL();
-                }
-                return permissionBLL;
-            }
+            get; set;
         }
         public IEnumerable<RoomsAvaiableDTO> RoomsAvaiableDTO { get; set; }
         public void Redirect()
@@ -85,7 +53,13 @@ namespace Portal.Modules.OrientalSails.Web.Admin
         }
         protected void Page_Load(object sender, EventArgs e)
         {
+            UserBLL = new UserBLL();
+            CurrentUser = UserBLL.UserGetCurrent();
+            DashBoardManagerBLL = new DashBoardManagerBLL();
+            PermissionBLL = new PermissionBLL();
+
             Redirect();
+
             if (!IsPostBack)
             {
                 var from = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
@@ -263,20 +237,20 @@ namespace Portal.Modules.OrientalSails.Web.Admin
         }
         protected void Page_Unload(object sender, EventArgs e)
         {
-            if (userBLL != null)
+            if (UserBLL != null)
             {
-                userBLL.Dispose();
-                userBLL = null;
+                UserBLL.Dispose();
+                UserBLL = null;
             }
-            if (dashBoardManagerBLL != null)
+            if (DashBoardManagerBLL != null)
             {
-                dashBoardManagerBLL.Dispose();
-                dashBoardManagerBLL = null;
+                DashBoardManagerBLL.Dispose();
+                DashBoardManagerBLL = null;
             }
-            if (permissionBLL != null)
+            if (PermissionBLL != null)
             {
-                permissionBLL.Dispose();
-                permissionBLL = null;
+                PermissionBLL.Dispose();
+                PermissionBLL = null;
             }
         }
 
@@ -326,8 +300,8 @@ namespace Portal.Modules.OrientalSails.Web.Admin
                 var defaultClassName = className;
                 foreach (var cruise in cruises)
                 {
-                    var numberOfRoom = RoomsAvaiableDTO.Where(x => DateTimeUtil.EqualsUpToSeconds(x.Date, date) && x.CruiseId == cruise.Id).FirstOrDefault()?.TotalRoom??1;
-                    var numberOfRoomAvaiable = RoomsAvaiableDTO.Where(x => DateTimeUtil.EqualsUpToSeconds(x.Date, date) && x.CruiseId == cruise.Id).FirstOrDefault()?.NoRAvaiable??0;
+                    var numberOfRoom = RoomsAvaiableDTO.Where(x => DateTimeUtil.EqualsUpToSeconds(x.Date, date) && x.CruiseId == cruise.Id).FirstOrDefault()?.TotalRoom ?? 1;
+                    var numberOfRoomAvaiable = RoomsAvaiableDTO.Where(x => DateTimeUtil.EqualsUpToSeconds(x.Date, date) && x.CruiseId == cruise.Id).FirstOrDefault()?.NoRAvaiable ?? 0;
                     double percentOfRoomAvailable = (numberOfRoomAvaiable / numberOfRoom);
                     if (percentOfRoomAvailable == 1)
                     {

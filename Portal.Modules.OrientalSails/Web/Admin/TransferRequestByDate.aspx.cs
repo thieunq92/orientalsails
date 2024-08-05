@@ -72,7 +72,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin
                 var route = TransferRequestByDateBLL.RouteGetById(routeId);
                 if (route == null || route.Id <= 0)
                 {
-                    var listRoute = TransferRequestByDateBLL.RouteGetAll().Future().ToList();
+                    var listRoute = TransferRequestByDateBLL.RouteGetAll().List();
                     return listRoute.Where(x => x.Way == "To").FirstOrDefault();
                 }
                 return route;
@@ -82,7 +82,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin
         {
             get
             {
-                return TransferRequestByDateBLL.LockingTransferGetAllByCriterion(Date).Future().ToList().FirstOrDefault(); ;
+                return TransferRequestByDateBLL.LockingTransferGetAllByCriterion(Date).List().ToList().FirstOrDefault(); ;
             }
         }
         public string LockingTransferString
@@ -126,9 +126,9 @@ namespace Portal.Modules.OrientalSails.Web.Admin
             if (!IsPostBack)
             {
                 txtDate.Text = Date.HasValue ? Date.Value.ToString("dd/MM/yyyy") : DateTime.Now.Date.ToString("dd/MM/yyyy");
-                rptRoute.DataSource = TransferRequestByDateBLL.RouteGetAll().Where(x => x.Way == "To").Future().ToList();
+                rptRoute.DataSource = TransferRequestByDateBLL.RouteGetAll().Where(x => x.Way == "To").List();
                 rptRoute.DataBind();
-                rptBusType.DataSource = TransferRequestByDateBLL.BusTypeGetAll().Future().ToList();
+                rptBusType.DataSource = TransferRequestByDateBLL.BusTypeGetAll().List();
                 rptBusType.DataBind();
                 if (LockingTransfer == null)
                 {
@@ -140,14 +140,13 @@ namespace Portal.Modules.OrientalSails.Web.Admin
                     btnUnlockDate.Visible = true;
                     btnLockDate.Visible = false;
                 }
-                rptRouteByWay.DataSource = TransferRequestByDateBLL.RouteGetAllById(Route.Id).Future().ToList();
+                rptRouteByWay.DataSource = TransferRequestByDateBLL.RouteGetAllById(Route.Id).List();
                 rptRouteByWay.DataBind();
             }
         }
         public string TableRowColorGetByGroup(Booking booking, Route route)
         {
-            var bookingBusByDate = TransferRequestByDateBLL.BookingBusByDateGetAllByCriterion(booking).Future()
-                  .ToList().Where(x => x.BusByDate.Route.Id == route.Id).ToList().FirstOrDefault();
+            var bookingBusByDate = TransferRequestByDateBLL.BookingBusByDateGetAllByCriterion(booking).List().Where(x => x.BusByDate.Route.Id == route.Id).ToList().FirstOrDefault();
             var group = 0;
             if (bookingBusByDate != null && bookingBusByDate.Id > 0)
             {
@@ -262,7 +261,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin
                     var rptTransportBooking = (Repeater)repeaterItemBusType.FindControl("rptTransportBooking");
                     //Xóa hết các liên kết BookingBusByDate cũ
                     var listBusByDate = TransferRequestByDateBLL.BusByDateGetAllByCriterion(Date, busType, route, route.Way)
-                     .Future().ToList();
+                     .List();
                     ClearOldBookingBusByDate(listBusByDate);
                     //--
                     foreach (RepeaterItem repeaterItemBooking in rptTransportBooking.Items)
@@ -291,7 +290,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin
                         if (group != -1)
                         {
                             var busByDate = TransferRequestByDateBLL.BusByDateGetAllByCriterion(Date, busType, route, route.Way, group)
-                                .Future().ToList().FirstOrDefault();
+                                .List().ToList().FirstOrDefault();
                             var bookingBusByDate = new BookingBusByDate()
                             {
                                 Booking = booking,
@@ -312,7 +311,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin
             foreach (var busByDate in listBusByDate)
             {
                 var listBookingBusByDate = TransferRequestByDateBLL
-                    .BookingBusByDateGetAllByCriterion(busByDate).Future().ToList();
+                    .BookingBusByDateGetAllByCriterion(busByDate).List().ToList();
                 listBookingBusByDate.ForEach(x =>
                 {
                     TransferRequestByDateBLL.BookingBusByDateDelete(x);
@@ -368,14 +367,14 @@ namespace Portal.Modules.OrientalSails.Web.Admin
                 var route = (Route)((RepeaterItem)e.Item.Parent.Parent.Parent.Parent).DataItem;
                 var ddlGroup = (DropDownList)e.Item.FindControl("ddlGroup");
                 var listBusByDate = TransferRequestByDateBLL.BusByDateGetAllByCriterion(Date, busType, route, route.Way)
-                    .Future().ToList();
+                    .List();
                 var listGroup = listBusByDate.Select(x => x.Group).Distinct().OrderBy(x => x).ToList();
                 listGroup.ForEach(noOfGroup =>
                 {
                     ddlGroup.Items.Add(new ListItem(busType.Name[0].ToString().ToUpper() + noOfGroup.ToString()
                         , noOfGroup.ToString()));
                 });
-                var bookingBusByDate = TransferRequestByDateBLL.BookingBusByDateGetAllByCriterion(booking).Future()
+                var bookingBusByDate = TransferRequestByDateBLL.BookingBusByDateGetAllByCriterion(booking).List()
                     .ToList().Where(x => x.BusByDate.Route.Id == route.Id).ToList().FirstOrDefault();
                 var group = "--";
                 if (bookingBusByDate != null && bookingBusByDate.Id > 0)
@@ -384,7 +383,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin
                 }
                 ddlGroup.SelectedValue = group;
                 var lblGroup = (Label)e.Item.FindControl("lblGroup");
-                if (bookingBusByDate != null 
+                if (bookingBusByDate != null
                     && bookingBusByDate.BusByDate != null
                     && bookingBusByDate.BusByDate.BusType != null)
                     lblGroup.Text = bookingBusByDate.BusByDate.BusType.Name.First().ToString().ToUpper() + group;
@@ -398,7 +397,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {
                 var rptBusType = (Repeater)e.Item.FindControl("rptBusType");
-                var listBusType = TransferRequestByDateBLL.BusTypeGetAll().Future().ToList();
+                var listBusType = TransferRequestByDateBLL.BusTypeGetAll().List();
                 if (BusType != null && BusType.Id > 0)
                 {
                     listBusType = listBusType.Where(x => x.Id == BusType.Id).ToList();
@@ -417,8 +416,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin
                 var rptTransportBooking = (Repeater)e.Item.FindControl("rptTransportBooking");
                 var listTransportBooking = TransferRequestByDateBLL
                     .BookingGetAllByCriterionTransfer(busType, route, route.Way, Date)
-                    .Future()
-                    .ToList();
+                    .List().ToList();
                 if (busType.Name == "Standard")
                 {
                     var listBookingUpgraded = new List<Booking>();
@@ -436,13 +434,11 @@ namespace Portal.Modules.OrientalSails.Web.Admin
                 if (busType.Name == "Limousine")
                 {
                     var standardBusType = TransferRequestByDateBLL.BusTypeGetAll()
-                        .Future()
-                        .ToList()
+                        .List()
                         .Where(x => x.Name == "Standard")
                         .SingleOrDefault();
                     var listStandardTransportBooking = TransferRequestByDateBLL.BookingGetAllByCriterionTransfer(standardBusType, route, route.Way, Date)
-                        .Future()
-                        .ToList()
+                        .List()
                         .Where(x => x
                             .ListBookingBusByDate
                             .Where(y => y.BusByDate != null && y.BusByDate.BusType.Name == "Limousine"

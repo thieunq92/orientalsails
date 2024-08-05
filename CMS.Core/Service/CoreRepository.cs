@@ -677,7 +677,7 @@ namespace CMS.Core.Service
             {
                 return this.ActiveSession.QueryOver<User>()
                     .Where(x=>x.IsActive)
-                    .Where(x=>x.UserName == userName).FutureValue().Value;
+                    .Where(x=>x.UserName == userName).SingleOrDefault();
             }
             else
             {

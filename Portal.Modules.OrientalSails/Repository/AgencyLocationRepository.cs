@@ -18,9 +18,7 @@ namespace Portal.Modules.OrientalSails.Repository
 
         public IList<AgencyLocation> AgencyLocationGetAll()
         {
-            return _session.QueryOver<AgencyLocation>().Where(x => x.Deleted == false)
-                .Future()
-                .ToList();
+            return _session.QueryOver<AgencyLocation>().Where(x => x.Deleted == false).List();
         }
     }
 }

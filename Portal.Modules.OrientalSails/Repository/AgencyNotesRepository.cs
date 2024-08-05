@@ -22,13 +22,13 @@ namespace Portal.Modules.OrientalSails.Repository
         public AgencyNotes AgencyNotesGetById(int agencyNotesId)
         {
             var query = _session.QueryOver<AgencyNotes>().Where(an => an.Id == agencyNotesId);
-            return query.FutureValue().Value;
+            return query.SingleOrDefault();
         }
 
         public IEnumerable<AgencyNotes> AgencyNotesGetAllByAgencyAndRole(Agency agency, Role role)
         {
             var query = _session.QueryOver<AgencyNotes>().Where(an => an.Agency == agency && an.Role == role);
-            return query.Future().ToList();
+            return query.List();
         }
     }
 }

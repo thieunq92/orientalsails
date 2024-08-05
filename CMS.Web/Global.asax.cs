@@ -96,7 +96,7 @@ namespace CMS.Web
 
         protected virtual void Application_EndRequest()
         {
-
+            GC.Collect();
         }
 
         protected void Application_AuthenticateRequest(Object sender, EventArgs e)

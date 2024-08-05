@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="MO.Master" AutoEventWireup="true" EnableViewState="true"
+﻿<%@ Page Language="C#" Async="true" MasterPageFile="MO.Master" AutoEventWireup="true"
     CodeBehind="BookingReport.aspx.cs" Inherits="Portal.Modules.OrientalSails.Web.Admin.BookingReport" %>
 
 <%@ MasterType VirtualPath="MO.Master" %>
@@ -29,356 +29,7 @@
     </style>
 </asp:Content>
 <asp:Content ID="AdminContent" ContentPlaceHolderID="AdminContent" runat="server">
-    <div class="sticky" style="z-index: 999; background-color: #ffffff">
-        <!--Phần chọn ngày xem booking-->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-xs-2 nopadding-right">
-                    <div class="input-group">
-                        <asp:TextBox ID="txtDate" runat="server" CssClass="form-control" data-control="datetimepicker" autocomplete="off"></asp:TextBox>
-                        <span class="input-group-btn">
-                            <asp:Button ID="btnDisplay" runat="server" Text="Display" OnClick="btnDisplay_Click"
-                                CssClass="btn btn-primary" />
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!---->
-        <!--Các tab cruise-->
-        <div class="form-group">
-            <div class="row">
-                <div class="col-xs-12 btn-grid" id="cruiseTab">
-                    <asp:Repeater ID="rptCruises" runat="server" OnItemDataBound="rptCruises_ItemDataBound">
-                        <HeaderTemplate>
-                            <asp:HyperLink ID="hplCruises" runat="server" Text="All" CssClass="btn btn-default" Target="_self" Style="padding: 3px 10px"></asp:HyperLink>
-                        </HeaderTemplate>
-                        <ItemTemplate>
-                            <asp:HyperLink ID="hplCruises" runat="server" CssClass="btn btn-default" data-cruiseid='<%# Eval("Id")%>' Target="_self" Style="width: auto; padding: 3px 3px"></asp:HyperLink>
-                        </ItemTemplate>
-                    </asp:Repeater>
-                </div>
-
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="row">
-                <div class="col-xs-12 btn-grid">
-                    <asp:Repeater ID="rptTrips" runat="server" OnItemDataBound="rptTrips_ItemDataBound">
-                        <HeaderTemplate>
-                            <asp:HyperLink ID="hplTrips" runat="server" Text="All" CssClass="btn btn-default" Target="_self" Style="padding: 3px 10px"></asp:HyperLink>
-                        </HeaderTemplate>
-                        <ItemTemplate>
-                            <asp:HyperLink ID="hplTrips" runat="server" CssClass="btn btn-default" data-cruiseid='<%# Eval("Id")%>' Target="_self" Style="width: auto; padding: 3px 3px"></asp:HyperLink>
-                        </ItemTemplate>
-                    </asp:Repeater>
-                </div>
-            </div>
-        </div>
-        <!---->
-    </div>
-    <div class="row">
-        <div class="col-xs-12">
-            <table class="table table-bordered table-common">
-                <tr class="header active">
-                    <th rowspan="2" <%= SetStyle() %>
-                        <%= SetColsPan()%>></th>
-                    <th rowspan="2">No
-                    </th>
-                    <th rowspan="2">Name of pax
-                    </th>
-                    <th colspan="3">Number of pax
-                    </th>
-                    <th rowspan="2">Trip
-                    </th>
-                    <th rowspan="2">Pickup address
-                    </th>
-                    <th rowspan="2">Special request
-                    </th>
-                    <% if (CanViewAgency)
-                        {  %>
-                    <th rowspan="2">Agency
-                    </th>
-                    <% } %>
-                    <th rowspan="2">Booking code
-                    </th>
-                    <% if (CanViewAgency)
-                        { %>
-                    <th rowspan="2">Sales In Charge
-                    </th>
-                    <% } %>
-                    <% if (CanViewTotal)
-                        { %>
-                    <th rowspan="2">Total
-                    </th>
-                    <% } %>
-                    <th rowspan="2">Feedback</th>
-                    <th rowspan="2">P/u time
-                       
-                        <br />
-                        <asp:Button runat="server" ID="btnSavePickupTime" Text="update" CssClass="btn btn-primary" OnClick="btnSavePickupTime_OnClick" />
-                    </th>
-                </tr>
-                <tr class="active">
-                    <th>Adult
-                    </th>
-                    <th>Child
-                    </th>
-                    <th>Baby
-                    </th>
-                </tr>
-                <asp:Repeater ID="rptBookingList" runat="server" OnItemDataBound="rptBookingList_OnItemDataBound">
-
-                    <ItemTemplate>
-                        <tr class="
-                            <%# ((Booking)(Container.DataItem)).StartDate < Date ? "custom-warning":""%>
-                            <%-- 06082023Bo Bo to mau chuc nang booking owner--%>
-                            <%--<%# IsBookingOwner((Booking)(Container.DataItem)) ? "custom-bookingowner":""%>--%>
-                            <%# ((Booking)(Container.DataItem)).Status == StatusType.Pending ? "custom-info":""%>
-                            ">
-                            <td <%= ((List<Booking>)(rptBookingList.DataSource)).Any(x=>x.Inspection == true) ? "" : "class='hide'" %>>
-                                <i class="fa fa-lg fa-clipboard-list text-disabled 
-                                    <%# ((Booking)(Container.DataItem)).Inspection == true ? "":"hide"%>"
-                                    data-toggle="tooltip" title="Inspection"></i>
-                            </td>
-                            <td <%=((List<Booking>)(rptBookingList.DataSource)).Any(x=>x.Customers.Any(y => y.Birthday != null && y.Birthday.Value.Day == Date.Day && y.Birthday.Value.Month == Date.Month)) 
-                                ? "" : "class='hide'" %>>
-                                <i class="fa fa-lg fa-birthday-cake
-                                     <%# ((Booking)(Container.DataItem)).BookingRooms.Any(x=>x.Customers.Any(y=> y.Birthday!= null && y.Birthday.Value.Day == Date.Day && y.Birthday.Value.Month == Date.Month)) ? "":"hide"%>"
-                                    style="color: hotpink" data-toggle="tooltip" title="Birthday"></i>
-                            </td>
-                            <td>
-                                <%# Container.ItemIndex + 1 %>
-                            </td>
-                            <td class="--text-left">
-                                <%# ((Booking)(Container.DataItem)).CustomerName %>
-                            </td>
-                            <td>
-                                <%# ((Booking)Container.DataItem).Adult%>
-                            </td>
-                            <td>
-                                <%# ((Booking)Container.DataItem).Child%>
-                            </td>
-                            <td>
-                                <%# ((Booking)Container.DataItem).Baby%>
-                            </td>
-                            <td>
-                                <%# ((Booking)(Container.DataItem)).Trip != null 
-                                ? ((Booking)(Container.DataItem)).Trip.TripCode : "" %>
-                            </td>
-                            <td class="--text-left">
-                                <%# ((Booking)(Container.DataItem)).PickupAddress != null ? ((Booking)(Container.DataItem)).PickupAddress.Replace(Environment.NewLine,"<br/>") :"" %>
-                            </td>
-                            <td class="--text-left">
-                                <%# CanViewSpecialRequestFood && ((Booking)(Container.DataItem)).SpecialRequest != null ? ((Booking)(Container.DataItem)).SpecialRequest.Replace(Environment.NewLine,"<br/>") :"" %>
-                                <%# CanViewSpecialRequestRoom && ((Booking)(Container.DataItem)).SpecialRequestRoom != null ? ((Booking)(Container.DataItem)).SpecialRequestRoom.Replace(Environment.NewLine,"<br/>") :"" %>
-                            </td>
-                            <% if (CanViewAgency)
-                                { %>
-                            <td>
-                                <a href="" data-toggle="tooltip" title="<%# GetAgencyNotes(((Booking)Container.DataItem).Agency) %>">
-                                    <i class="fa fa-lg fa-comment-dots icon icon__note"></i>
-                                </a>
-                                <br />
-                                <a href="AgencyView.aspx?NodeId=1&SectionId=15&agencyid=<%# ((Booking)(Container.DataItem)).Agency != null ? ((Booking)(Container.DataItem)).Agency.Id :-1%>"><%# ((Booking)(Container.DataItem)).Agency != null ? ((Booking)(Container.DataItem)).Agency.Name : "" %></a>
-                            </td>
-                            <% } %>
-                            <td>
-                                <a href="BookingView.aspx?NodeId=1&SectionId=15&bi=<%#((Booking)(Container.DataItem)).Id%>">
-                                    <%#((Booking)(Container.DataItem)).BookingIdOS%>
-                                </a>
-                                <%#  ((Booking)(Container.DataItem)).HasInvoice ? "<div class='star' title='VAT'>*</div>" : "" %>
-                            </td>
-                            <% if (CanViewAgency)
-                                { %>
-                            <td>
-                                <%# ((Booking)(Container.DataItem)).Agency.Sale != null ? ((Booking)(Container.DataItem)).Agency.Sale.FullName + (!String.IsNullOrEmpty(((Booking)(Container.DataItem)).Agency.Sale.Website) ? "-" : "" ) + ((Booking)(Container.DataItem)).Agency.Sale.Website : ""%>
-                            </td>
-                            <% } %>
-                            <% if (CanViewTotal)
-                                { %>
-                            <td><%# ((Booking)(Container.DataItem)).Total.ToString("#,##0.##") %></td>
-                            <% } %>
-                            <td>
-                                <a href="" onclick="openPopup('SurveyInput.aspx?NodeId=1&SectionId=15&bi=<%# ((Booking)Container.DataItem).Id %>','Surveyinput', 600,800)">Feedback</a>
-                            </td>
-                            <td>
-                                <asp:HiddenField runat="server" ID="hidId" Value='<%#Eval("Id") %>' />
-                                <asp:Literal runat="server" ID="litPickupTime"></asp:Literal>
-                                <asp:TextBox ID="txtPickupTime" autocomplete="off" runat="server" CssClass="form-control timepicker" Style="width: 65px" placeholder="hh:mm" data-control="timepicker"></asp:TextBox>
-                            </td>
-                        </tr>
-                    </ItemTemplate>
-                    <FooterTemplate>
-                        <tr class="item">
-                            <%
-                                int colspan = 4;
-
-                                if (!((List<Booking>)(rptBookingList.DataSource)).Any(x => x.Inspection == true) || !((List<Booking>)(rptBookingList.DataSource)).Any(x => x.Customers.Any(y => y.Birthday != null && y.Birthday.Value.Day == Date.Day && y.Birthday.Value.Month == Date.Month)))
-                                {
-                                    colspan = 3;
-                                }
-
-                                if (!((List<Booking>)(rptBookingList.DataSource)).Any(x => x.Inspection == true) && !((List<Booking>)(rptBookingList.DataSource)).Any(x => x.Customers.Any(y => y.Birthday != null && y.Birthday.Value.Day == Date.Day && y.Birthday.Value.Month == Date.Month)))
-                                {
-                                    colspan = 2;
-                                }
-                            %>
-                            <td colspan="<%= colspan %>">
-                                <strong>Grand total</strong>
-                            </td>
-                            <td>
-                                <strong>
-                                    <%= ((IEnumerable<Booking>)rptBookingList.DataSource).Sum(x=>x.Adult)%></strong>
-                            </td>
-                            <td>
-                                <strong>
-                                    <%= ((IEnumerable<Booking>)rptBookingList.DataSource).Sum(x=>x.Child) %></strong>
-                            </td>
-                            <td>
-                                <strong>
-                                    <%= ((IEnumerable<Booking>)rptBookingList.DataSource).Sum(x=>x.Baby) %></strong>
-                            </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <% if (CanViewTotal)
-                                { %>
-                            <td>
-                                <strong><%= ((List<Booking>)rptBookingList.DataSource).Sum(x=>x.Total).ToString("#,##0.##")%></strong>
-                            </td>
-                            <% } %>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </FooterTemplate>
-                </asp:Repeater>
-                <asp:Repeater runat="server" ID="rptShadows">
-                    <HeaderTemplate>
-                        <tr>
-                            <td colspan="100%" class="custom-danger">Booking moved (to another date) or cancelled need attention (within 7 days if <
-                                    6 cabins and within 45 days if >=6 cabins)
-                            </td>
-                        </tr>
-                    </HeaderTemplate>
-                    <ItemTemplate>
-                        <tr>
-                            <td <%= ((List<Booking>)(rptBookingList.DataSource)).Any(x=>x.Inspection == true) ? "" : "class='hide'" %>></td>
-                            <td <%=((List<Booking>)(rptBookingList.DataSource)).Any(x=>x.Customers.Any(y => y.Birthday != null && y.Birthday.Value.Day == Date.Day && y.Birthday.Value.Month == Date.Month)) 
-                                ? "" : "class='hide'" %>></td>
-                            <td>
-                                <%# Container.ItemIndex + 1 %>
-                            </td>
-                            <td class="--text-left">
-                                <%# ((Booking)(Container.DataItem)).CustomerName %>
-                            </td>
-                            <td>
-                                <%# ((Booking)Container.DataItem).BookingRooms.Sum(x=>x.Adult)%>
-                            </td>
-                            <td>
-                                <%# ((Booking)Container.DataItem).BookingRooms.Sum(x=>x.Child)%>
-                            </td>
-                            <td>
-                                <%# ((Booking)Container.DataItem).BookingRooms.Sum(x=>x.Baby)%>
-                            </td>
-                            <td>
-                                <%# ((Booking)(Container.DataItem)).Trip != null 
-                                ? ((Booking)(Container.DataItem)).Trip.TripCode : "" %>
-                            </td>
-                            <td class="--text-left">
-                                <%# ((Booking)(Container.DataItem)).PickupAddress != null ? ((Booking)(Container.DataItem)).PickupAddress.Replace(Environment.NewLine, "<br/>"):"" %>
-                            </td>
-                            <td class="--text-left">
-                                <%# ((Booking)(Container.DataItem)).SpecialRequest != null ? ((Booking)(Container.DataItem)).SpecialRequest.Replace(Environment.NewLine, "<br/>"):"" %>
-                            </td>
-                            <td>
-                                <a href="AgencyView.aspx?NodeId=1&SectionId=15&agencyid=<%# ((Booking)(Container.DataItem)).Agency != null ? ((Booking)(Container.DataItem)).Agency.Id :-1%>"><%# ((Booking)(Container.DataItem)).Agency != null ? ((Booking)(Container.DataItem)).Agency.Name : "" %></a>
-                            </td>
-                            <td>
-                                <a href="BookingView.aspx?NodeId=1&SectionId=15&bi=<%#((Booking)(Container.DataItem)).Id%>">
-                                    <%#((Booking)(Container.DataItem)).BookingIdOS%>
-                                </a>
-                            </td>
-                            <td>
-                                <%# ((Booking)(Container.DataItem)).Total.ToString("#,##0.##") %>
-                            </td>
-                            <td>
-                                <a href="BookingReport.aspx?NodeId=1&SectionId=15&date=<%# ((Booking)Container.DataItem).StartDate.ToString("dd/MM/yyyy") %>">
-                                    <%# ((Booking)Container.DataItem).ModifiedDate.ToString("dd/MM/yyyy")%>
-                                </a>
-                            </td>
-                        </tr>
-                    </ItemTemplate>
-                </asp:Repeater>
-            </table>
-        </div>
-    </div>
-    <%-- Need remove --%>
-    <div class="row" style="display: none">
-        <div class="col-xs-12">
-            <asp:PlaceHolder ID="plhDailyExpenses" runat="server">
-                <table class="table borderless table-expense">
-                    <asp:Repeater ID="rptCruiseExpense" runat="server" OnItemDataBound="rptCruiseExpense_ItemDataBound">
-                        <ItemTemplate>
-                            <asp:PlaceHolder runat="server" ID="plhCruiseExpense">
-                                <tr>
-                                    <td colspan="7" style="padding-top: 10px">
-                                        <asp:HiddenField ID="hiddenId" runat="server" Value='<%# DataBinder.Eval(Container.DataItem,"Id") %>' />
-                                        <strong><%# DataBinder.Eval(Container.DataItem,"Name") %></strong>
-                                    </td>
-                                </tr>
-                                <asp:Repeater ID="rptServices" runat="server" OnItemDataBound="rptServices_ItemDataBound">
-                                    <ItemTemplate>
-                                        <tr id="seperator" runat="server" class="seperator" visible="false">
-                                            <td colspan="8" style="border-top: solid 1px #eee">&nbsp
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td>
-                                                <asp:HiddenField ID="hiddenId" runat="server" />
-                                                <asp:HiddenField ID="hiddenType" runat="server" />
-                                                <asp:Literal ID="litType" runat="server"></asp:Literal>
-                                            </td>
-                                            <td>
-                                                <asp:TextBox ID="txtName" runat="server" CssClass="form-control" placeholder="Name"></asp:TextBox>
-                                                <asp:DropDownList ID="ddlGuides" runat="server" CssClass="form-control">
-                                                </asp:DropDownList>
-                                            </td>
-                                            <td>
-                                                <asp:TextBox ID="txtPhone" runat="server" CssClass="form-control" placeholder="Phone"></asp:TextBox>
-                                            </td>
-                                            <td>
-                                                <asp:DropDownList ID="ddlSuppliers" runat="server" CssClass="form-control">
-                                                </asp:DropDownList>
-                                            </td>
-                                            <td>
-                                                <asp:TextBox ID="txtCost" runat="server" CssClass="form-control" input-mask="{'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': true, 'rightAlign':false}"></asp:TextBox>
-                                            </td>
-                                        </tr>
-                                    </ItemTemplate>
-                                </asp:Repeater>
-                            </asp:PlaceHolder>
-                        </ItemTemplate>
-                        <FooterTemplate>
-                            <tr>
-                                <td colspan="5">Tổng
-                                </td>
-                                <td>
-                                    <strong>
-                                        <asp:Literal ID="litTotal" runat="server"></asp:Literal></strong>
-                                </td>
-                            </tr>
-                        </FooterTemplate>
-                    </asp:Repeater>
-                </table>
-            </asp:PlaceHolder>
-        </div>
-    </div>
-    <%-- /Need remove --%>
-    <div id="expenseController" ng-controller="expenseController" ng-init="
+    <div ng-controller="bookingReportController" ng-init="
          newExpense_OperatedName = '<%= CurrentUser.FullName %>';
          newExpense_OperatedId = <%= CurrentUser.Id%>;
          newExpense_OperatedPhone = '<%= CurrentUser.Phone %>';
@@ -386,7 +37,362 @@
          cruiseId = <%= Cruise != null ? Cruise.Id : -1%>;
          getListAllCruiseExpenseDTO();
          getListCruiseExpenseDTO();
+         bookingGetAllByCriterion();
          LockingExpense = <%=LockingExpenseString %>">
+        <div class="sticky" style="z-index: 999; background-color: #ffffff">
+            <!--Phần chọn ngày xem booking-->
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-xs-2 nopadding-right">
+                        <div class="input-group">
+                            <asp:TextBox ID="txtDate" runat="server" CssClass="form-control" data-control="datetimepicker" autocomplete="off"></asp:TextBox>
+                            <span class="input-group-btn">
+                                <asp:Button ID="btnDisplay" runat="server" Text="Display" OnClick="btnDisplay_Click"
+                                    CssClass="btn btn-primary" />
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!---->
+            <!--Các tab cruise-->
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-xs-12 btn-grid" id="cruiseTab">
+                        <asp:Repeater ID="rptCruises" runat="server" OnItemDataBound="rptCruises_ItemDataBound">
+                            <HeaderTemplate>
+                                <asp:HyperLink ID="hplCruises" runat="server" Text="All" CssClass="btn btn-default" Target="_self" Style="padding: 3px 10px"></asp:HyperLink>
+                            </HeaderTemplate>
+                            <ItemTemplate>
+                                <asp:HyperLink ID="hplCruises" runat="server" CssClass="btn btn-default" data-cruiseid='<%# Eval("Id")%>' Target="_self" Style="width: auto; padding: 3px 3px"></asp:HyperLink>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                    </div>
+
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-xs-12 btn-grid">
+                        <asp:Repeater ID="rptTrips" runat="server" OnItemDataBound="rptTrips_ItemDataBound">
+                            <HeaderTemplate>
+                                <asp:HyperLink ID="hplTrips" runat="server" Text="All" CssClass="btn btn-default" Target="_self" Style="padding: 3px 10px"></asp:HyperLink>
+                            </HeaderTemplate>
+                            <ItemTemplate>
+                                <asp:HyperLink ID="hplTrips" runat="server" CssClass="btn btn-default" data-cruiseid='<%# Eval("Id")%>' Target="_self" Style="width: auto; padding: 3px 3px"></asp:HyperLink>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                    </div>
+                </div>
+            </div>
+            <!---->
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <table class="table table-bordered table-common">
+                    <tr class="header active">
+                        <th rowspan="2" <%= SetStyle() %>
+                            <%= SetColsPan()%>></th>
+                        <th rowspan="2">No
+                        </th>
+                        <th rowspan="2">Name of pax
+                        </th>
+                        <th colspan="3">Number of pax
+                        </th>
+                        <th rowspan="2">Trip
+                        </th>
+                        <th rowspan="2">Pickup address
+                        </th>
+                        <th rowspan="2">Special request
+                        </th>
+                        <% if (CanViewAgency)
+                            {  %>
+                        <th rowspan="2">Agency
+                        </th>
+                        <% } %>
+                        <th rowspan="2">Booking code
+                        </th>
+                        <% if (CanViewAgency)
+                            { %>
+                        <th rowspan="2">Sales In Charge
+                        </th>
+                        <% } %>
+                        <% if (CanViewTotal)
+                            { %>
+                        <th rowspan="2">Total
+                        </th>
+                        <% } %>
+                        <th rowspan="2">Feedback</th>
+                        <th rowspan="2">P/u time
+                       
+                        <br />
+                            <asp:Button runat="server" ID="btnSavePickupTime" Text="update" CssClass="btn btn-primary" OnClick="btnSavePickupTime_OnClick" />
+                        </th>
+                    </tr>
+                    <tr class="active">
+                        <th>Adult
+                        </th>
+                        <th>Child
+                        </th>
+                        <th>Baby
+                        </th>
+                    </tr>
+                    <tr ng-repeat="booking in listBooking">
+                        <td>{{booking.BookingId}}</td>
+                    </tr>
+
+                    <asp:Repeater ID="rptBookingList" runat="server" OnItemDataBound="rptBookingList_OnItemDataBound">
+
+                        <ItemTemplate>
+                            <tr class="
+                            <%# ((Booking)(Container.DataItem)).StartDate < Date ? "custom-warning":""%>
+                            <%-- 06082023Bo Bo to mau chuc nang booking owner--%>
+                            <%--<%# IsBookingOwner((Booking)(Container.DataItem)) ? "custom-bookingowner":""%>--%>
+                            <%# ((Booking)(Container.DataItem)).Status == StatusType.Pending ? "custom-info":""%>
+                            ">
+                                <td <%= ((List<Booking>)(rptBookingList.DataSource)).Any(x=>x.Inspection == true) ? "" : "class='hide'" %>>
+                                    <i class="fa fa-lg fa-clipboard-list text-disabled 
+                                    <%# ((Booking)(Container.DataItem)).Inspection == true ? "":"hide"%>"
+                                        data-toggle="tooltip" title="Inspection"></i>
+                                </td>
+                                <td <%=((List<Booking>)(rptBookingList.DataSource)).Any(x=>x.Customers.Any(y => y.Birthday != null && y.Birthday.Value.Day == Date.Day && y.Birthday.Value.Month == Date.Month)) 
+                                ? "" : "class='hide'" %>>
+                                    <i class="fa fa-lg fa-birthday-cake
+                                     <%# ((Booking)(Container.DataItem)).BookingRooms.Any(x=>x.Customers.Any(y=> y.Birthday!= null && y.Birthday.Value.Day == Date.Day && y.Birthday.Value.Month == Date.Month)) ? "":"hide"%>"
+                                        style="color: hotpink" data-toggle="tooltip" title="Birthday"></i>
+                                </td>
+                                <td>
+                                    <%# Container.ItemIndex + 1 %>
+                                </td>
+                                <td class="--text-left">
+                                    <%# ((Booking)(Container.DataItem)).CustomerName %>
+                                </td>
+                                <td>
+                                    <%# ((Booking)Container.DataItem).Adult%>
+                                </td>
+                                <td>
+                                    <%# ((Booking)Container.DataItem).Child%>
+                                </td>
+                                <td>
+                                    <%# ((Booking)Container.DataItem).Baby%>
+                                </td>
+                                <td>
+                                    <%# ((Booking)(Container.DataItem)).Trip != null 
+                                ? ((Booking)(Container.DataItem)).Trip.TripCode : "" %>
+                                </td>
+                                <td class="--text-left">
+                                    <%# ((Booking)(Container.DataItem)).PickupAddress != null ? ((Booking)(Container.DataItem)).PickupAddress.Replace(Environment.NewLine,"<br/>") :"" %>
+                                </td>
+                                <td class="--text-left">
+                                    <%# CanViewSpecialRequestFood && ((Booking)(Container.DataItem)).SpecialRequest != null ? ((Booking)(Container.DataItem)).SpecialRequest.Replace(Environment.NewLine,"<br/>") :"" %>
+                                    <%# CanViewSpecialRequestRoom && ((Booking)(Container.DataItem)).SpecialRequestRoom != null ? ((Booking)(Container.DataItem)).SpecialRequestRoom.Replace(Environment.NewLine,"<br/>") :"" %>
+                                </td>
+                                <% if (CanViewAgency)
+                                    { %>
+                                <td>
+                                    <a href="" data-toggle="tooltip" title="<%# GetAgencyNotes(((Booking)Container.DataItem).Agency) %>">
+                                        <i class="fa fa-lg fa-comment-dots icon icon__note"></i>
+                                    </a>
+                                    <br />
+                                    <a href="AgencyView.aspx?NodeId=1&SectionId=15&agencyid=<%# ((Booking)(Container.DataItem)).Agency != null ? ((Booking)(Container.DataItem)).Agency.Id :-1%>"><%# ((Booking)(Container.DataItem)).Agency != null ? ((Booking)(Container.DataItem)).Agency.Name : "" %></a>
+                                </td>
+                                <% } %>
+                                <td>
+                                    <a href="BookingView.aspx?NodeId=1&SectionId=15&bi=<%#((Booking)(Container.DataItem)).Id%>">
+                                        <%#((Booking)(Container.DataItem)).BookingIdOS%>
+                                    </a>
+                                    <%#  ((Booking)(Container.DataItem)).HasInvoice ? "<div class='star' title='VAT'>*</div>" : "" %>
+                                </td>
+                                <% if (CanViewAgency)
+                                    { %>
+                                <td>
+                                    <%# ((Booking)(Container.DataItem)).Agency.Sale != null ? ((Booking)(Container.DataItem)).Agency.Sale.FullName + (!String.IsNullOrEmpty(((Booking)(Container.DataItem)).Agency.Sale.Website) ? "-" : "" ) + ((Booking)(Container.DataItem)).Agency.Sale.Website : ""%>
+                                </td>
+                                <% } %>
+                                <% if (CanViewTotal)
+                                    { %>
+                                <td><%# ((Booking)(Container.DataItem)).Total.ToString("#,##0.##") %></td>
+                                <% } %>
+                                <td>
+                                    <a href="" onclick="openPopup('SurveyInput.aspx?NodeId=1&SectionId=15&bi=<%# ((Booking)Container.DataItem).Id %>','Surveyinput', 600,800)">Feedback</a>
+                                </td>
+                                <td>
+                                    <asp:HiddenField runat="server" ID="hidId" Value='<%#Eval("Id") %>' />
+                                    <asp:Literal runat="server" ID="litPickupTime"></asp:Literal>
+                                    <asp:TextBox ID="txtPickupTime" autocomplete="off" runat="server" CssClass="form-control timepicker" Style="width: 65px" placeholder="hh:mm" data-control="timepicker"></asp:TextBox>
+                                </td>
+                            </tr>
+                        </ItemTemplate>
+                        <FooterTemplate>
+                            <tr class="item">
+                                <%
+                                    int colspan = 4;
+
+                                    if (!((List<Booking>)(rptBookingList.DataSource)).Any(x => x.Inspection == true) || !((List<Booking>)(rptBookingList.DataSource)).Any(x => x.Customers.Any(y => y.Birthday != null && y.Birthday.Value.Day == Date.Day && y.Birthday.Value.Month == Date.Month)))
+                                    {
+                                        colspan = 3;
+                                    }
+
+                                    if (!((List<Booking>)(rptBookingList.DataSource)).Any(x => x.Inspection == true) && !((List<Booking>)(rptBookingList.DataSource)).Any(x => x.Customers.Any(y => y.Birthday != null && y.Birthday.Value.Day == Date.Day && y.Birthday.Value.Month == Date.Month)))
+                                    {
+                                        colspan = 2;
+                                    }
+                                %>
+                                <td colspan="<%= colspan %>">
+                                    <strong>Grand total</strong>
+                                </td>
+                                <td>
+                                    <strong>
+                                        <%= ((IEnumerable<Booking>)rptBookingList.DataSource).Sum(x=>x.Adult)%></strong>
+                                </td>
+                                <td>
+                                    <strong>
+                                        <%= ((IEnumerable<Booking>)rptBookingList.DataSource).Sum(x=>x.Child) %></strong>
+                                </td>
+                                <td>
+                                    <strong>
+                                        <%= ((IEnumerable<Booking>)rptBookingList.DataSource).Sum(x=>x.Baby) %></strong>
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <% if (CanViewTotal)
+                                    { %>
+                                <td>
+                                    <strong><%= ((List<Booking>)rptBookingList.DataSource).Sum(x=>x.Total).ToString("#,##0.##")%></strong>
+                                </td>
+                                <% } %>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </FooterTemplate>
+                    </asp:Repeater>
+                    <asp:Repeater runat="server" ID="rptShadows">
+                        <HeaderTemplate>
+                            <tr>
+                                <td colspan="100%" class="custom-danger">Booking moved (to another date) or cancelled need attention (within 7 days if <
+                                    6 cabins and within 45 days if >=6 cabins)
+                                </td>
+                            </tr>
+                        </HeaderTemplate>
+                        <ItemTemplate>
+                            <tr>
+                                <td <%= ((List<Booking>)(rptBookingList.DataSource)).Any(x=>x.Inspection == true) ? "" : "class='hide'" %>></td>
+                                <td <%=((List<Booking>)(rptBookingList.DataSource)).Any(x=>x.Customers.Any(y => y.Birthday != null && y.Birthday.Value.Day == Date.Day && y.Birthday.Value.Month == Date.Month)) 
+                                ? "" : "class='hide'" %>></td>
+                                <td>
+                                    <%# Container.ItemIndex + 1 %>
+                                </td>
+                                <td class="--text-left">
+                                    <%# ((Booking)(Container.DataItem)).CustomerName %>
+                                </td>
+                                <td>
+                                    <%# ((Booking)Container.DataItem).BookingRooms.Sum(x=>x.Adult)%>
+                                </td>
+                                <td>
+                                    <%# ((Booking)Container.DataItem).BookingRooms.Sum(x=>x.Child)%>
+                                </td>
+                                <td>
+                                    <%# ((Booking)Container.DataItem).BookingRooms.Sum(x=>x.Baby)%>
+                                </td>
+                                <td>
+                                    <%# ((Booking)(Container.DataItem)).Trip != null 
+                                ? ((Booking)(Container.DataItem)).Trip.TripCode : "" %>
+                                </td>
+                                <td class="--text-left">
+                                    <%# ((Booking)(Container.DataItem)).PickupAddress != null ? ((Booking)(Container.DataItem)).PickupAddress.Replace(Environment.NewLine, "<br/>"):"" %>
+                                </td>
+                                <td class="--text-left">
+                                    <%# ((Booking)(Container.DataItem)).SpecialRequest != null ? ((Booking)(Container.DataItem)).SpecialRequest.Replace(Environment.NewLine, "<br/>"):"" %>
+                                </td>
+                                <td>
+                                    <a href="AgencyView.aspx?NodeId=1&SectionId=15&agencyid=<%# ((Booking)(Container.DataItem)).Agency != null ? ((Booking)(Container.DataItem)).Agency.Id :-1%>"><%# ((Booking)(Container.DataItem)).Agency != null ? ((Booking)(Container.DataItem)).Agency.Name : "" %></a>
+                                </td>
+                                <td>
+                                    <a href="BookingView.aspx?NodeId=1&SectionId=15&bi=<%#((Booking)(Container.DataItem)).Id%>">
+                                        <%#((Booking)(Container.DataItem)).BookingIdOS%>
+                                    </a>
+                                </td>
+                                <td>
+                                    <%# ((Booking)(Container.DataItem)).Total.ToString("#,##0.##") %>
+                                </td>
+                                <td>
+                                    <a href="BookingReport.aspx?NodeId=1&SectionId=15&date=<%# ((Booking)Container.DataItem).StartDate.ToString("dd/MM/yyyy") %>">
+                                        <%# ((Booking)Container.DataItem).ModifiedDate.ToString("dd/MM/yyyy")%>
+                                    </a>
+                                </td>
+                            </tr>
+                        </ItemTemplate>
+                    </asp:Repeater>
+                </table>
+            </div>
+        </div>
+        <%-- Need remove --%>
+        <div class="row" style="display: none">
+            <div class="col-xs-12">
+                <asp:PlaceHolder ID="plhDailyExpenses" runat="server">
+                    <table class="table borderless table-expense">
+                        <asp:Repeater ID="rptCruiseExpense" runat="server" OnItemDataBound="rptCruiseExpense_ItemDataBound">
+                            <ItemTemplate>
+                                <asp:PlaceHolder runat="server" ID="plhCruiseExpense">
+                                    <tr>
+                                        <td colspan="7" style="padding-top: 10px">
+                                            <asp:HiddenField ID="hiddenId" runat="server" Value='<%# DataBinder.Eval(Container.DataItem,"Id") %>' />
+                                            <strong><%# DataBinder.Eval(Container.DataItem,"Name") %></strong>
+                                        </td>
+                                    </tr>
+                                    <asp:Repeater ID="rptServices" runat="server" OnItemDataBound="rptServices_ItemDataBound">
+                                        <ItemTemplate>
+                                            <tr id="seperator" runat="server" class="seperator" visible="false">
+                                                <td colspan="8" style="border-top: solid 1px #eee">&nbsp
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td>
+                                                    <asp:HiddenField ID="hiddenId" runat="server" />
+                                                    <asp:HiddenField ID="hiddenType" runat="server" />
+                                                    <asp:Literal ID="litType" runat="server"></asp:Literal>
+                                                </td>
+                                                <td>
+                                                    <asp:TextBox ID="txtName" runat="server" CssClass="form-control" placeholder="Name"></asp:TextBox>
+                                                    <asp:DropDownList ID="ddlGuides" runat="server" CssClass="form-control">
+                                                    </asp:DropDownList>
+                                                </td>
+                                                <td>
+                                                    <asp:TextBox ID="txtPhone" runat="server" CssClass="form-control" placeholder="Phone"></asp:TextBox>
+                                                </td>
+                                                <td>
+                                                    <asp:DropDownList ID="ddlSuppliers" runat="server" CssClass="form-control">
+                                                    </asp:DropDownList>
+                                                </td>
+                                                <td>
+                                                    <asp:TextBox ID="txtCost" runat="server" CssClass="form-control" input-mask="{'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': true, 'rightAlign':false}"></asp:TextBox>
+                                                </td>
+                                            </tr>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+                                </asp:PlaceHolder>
+                            </ItemTemplate>
+                            <FooterTemplate>
+                                <tr>
+                                    <td colspan="5">Tổng
+                                    </td>
+                                    <td>
+                                        <strong>
+                                            <asp:Literal ID="litTotal" runat="server"></asp:Literal></strong>
+                                    </td>
+                                </tr>
+                            </FooterTemplate>
+                        </asp:Repeater>
+                    </table>
+                </asp:PlaceHolder>
+            </div>
+        </div>
+        <%-- /Need remove --%>
+
         <div ng-repeat="cruiseExpense in $root.listCruiseExpenseDTO" ng-show="isShowCruiseExpense('<%= CruiseIdAllow %>',cruiseExpense.Id.toString())">
             <div ng-show="cruiseExpense.ListGuideExpenseDTO.length == 0 && cruiseExpense.ListOthersExpenseDTO.length == 0">
                 <div class="form-group">
@@ -577,37 +583,38 @@
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="modal fade modal-selectGuide" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
-        <div class="modal-dialog" role="document" style="width: 1230px">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h3 class="modal-title">Select guide</h3>
-                </div>
-                <div class="modal-body">
-                    <iframe frameborder="0" width="1200" scrolling="no" onload="resizeIframe(this)" src=""></iframe>
+
+        <div class="modal fade modal-selectGuide" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+            <div class="modal-dialog" role="document" style="width: 1230px">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h3 class="modal-title">Select guide</h3>
+                    </div>
+                    <div class="modal-body">
+                        <iframe frameborder="0" width="1200" scrolling="no" onload="resizeIframe(this)" src=""></iframe>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="modal fade modal-expenseHistory" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
-        <div class="modal-dialog" role="document" style="width: 1230px">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h3 class="modal-title">Expense history</h3>
-                </div>
-                <div class="modal-body">
-                    <iframe frameborder="0" width="1200" scrolling="no" onload="resizeIframe(this)" src=""></iframe>
+        <div class="modal fade modal-expenseHistory" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+            <div class="modal-dialog" role="document" style="width: 1230px">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h3 class="modal-title">Expense history</h3>
+                    </div>
+                    <div class="modal-body">
+                        <iframe frameborder="0" width="1200" scrolling="no" onload="resizeIframe(this)" src=""></iframe>
+                    </div>
                 </div>
             </div>
         </div>
+        <svc:Popup runat="server" ID="popupManager">
+        </svc:Popup>
     </div>
-    <svc:Popup runat="server" ID="popupManager">
-    </svc:Popup>
 </asp:Content>
 <asp:Content ID="Scripts" ContentPlaceHolderID="Scripts" runat="server">
     <script type="text/javascript" src="/modules/sails/admin/bookingreportcontroller.js">

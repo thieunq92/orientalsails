@@ -51,7 +51,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin
             var listExpenseHistory = new List<Domain.ExpenseHistory>();
             if (Expense != null)
             {
-                listExpenseHistory = ExpenseHistoryBLL.ExpenseHistoryGetAllByCriterion(Expense.Id).Future().ToList();     
+                listExpenseHistory = ExpenseHistoryBLL.ExpenseHistoryGetAllByCriterion(Expense.Id).List().ToList();     
             }
             
             if (!IsPostBack)

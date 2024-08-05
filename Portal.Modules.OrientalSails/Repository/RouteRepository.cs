@@ -19,14 +19,14 @@ namespace Portal.Modules.OrientalSails.Repository
 
         public Route RouteGetById(int routeId)
         {
-            return _session.QueryOver<Route>().Where(x => x.Id == routeId).FutureValue().Value;
+            return _session.QueryOver<Route>().Where(x => x.Id == routeId).SingleOrDefault();
         }
 
         public Route RouteBackGetByRouteTo(Route route)
         {
             if (route != null && route.Id > 0)
             {
-                return _session.QueryOver<Route>().Where(x => x.Group == route.Group).Where(x => x.Way == "Back").FutureValue().Value;
+                return _session.QueryOver<Route>().Where(x => x.Group == route.Group).Where(x => x.Way == "Back").SingleOrDefault();
             }
             return null;
         }
@@ -45,7 +45,7 @@ namespace Portal.Modules.OrientalSails.Repository
         {
             if (route != null && route.Id > 0)
             {
-                return _session.QueryOver<Route>().Where(x => x.Group == route.Group).Where(x => x.Way == "To").FutureValue().Value;
+                return _session.QueryOver<Route>().Where(x => x.Group == route.Group).Where(x => x.Way == "To").SingleOrDefault();
             }
             return null;
         }

@@ -16,13 +16,13 @@ namespace Portal.Modules.OrientalSails.Repository
         public IList<AgencyContract> AgencyContractGetAllByAgency(int agencyId)
         {
             return _session.QueryOver<AgencyContract>()
-                .Where(x => x.Agency.Id == agencyId).Future().ToList();
+                .Where(x => x.Agency.Id == agencyId).List();
         }
 
         public AgencyContract AgencyContractGetById(int agencyContractId)
         {
             return _session.QueryOver<AgencyContract>()
-                .Where(x => x.Id == agencyContractId).FutureValue().Value;
+                .Where(x => x.Id == agencyContractId).SingleOrDefault();
         }
     }
 }

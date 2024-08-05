@@ -18,7 +18,7 @@ namespace Portal.Modules.OrientalSails.Repository
 
         public BusType BusTypeGetById(int busTypeId)
         {
-            return _session.QueryOver<BusType>().Where(x => x.Id == busTypeId).FutureValue().Value;
+            return _session.QueryOver<BusType>().Where(x => x.Id == busTypeId).SingleOrDefault();
         }
 
         public IQueryOver<BusType, BusType> BusTypeGetAllById(int busTypeId)

@@ -24,7 +24,7 @@ namespace Portal.Modules.OrientalSails.Repository
 
         public ExpenseService ExpenseServiceGetByExpenseId(int expenseId)
         {
-            return _session.QueryOver<ExpenseService>().Where(x => x.ExpenseIdRef == expenseId).FutureValue().Value;
+            return _session.QueryOver<ExpenseService>().Where(x => x.ExpenseIdRef == expenseId).SingleOrDefault();
         }
     }
 }

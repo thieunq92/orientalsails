@@ -26,7 +26,7 @@ namespace Portal.Modules.OrientalSails.Repository
             if (cruiseId > -1)
                 query = query.Where(x => x.Cruise.Id == cruiseId);
 
-            return query.Future().ToList();
+            return query.List();
         }
     }
 }

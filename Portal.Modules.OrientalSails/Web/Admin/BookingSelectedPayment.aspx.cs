@@ -89,7 +89,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin
                         var bookingIds = Request.QueryString["lbi"].Split(new char[] { ',' });
                         var listBookingId = bookingIds.Select(x => Int32.Parse(x)).ToList();
                         _listBooking = BookingPaymentBLL.BookingGetAllByListId(listBookingId)
-                            .Future()
+                            .List()
                             .Where(b => b.MoneyLeft > 0)
                             .OrderBy(x => x.CreatedDate)
                             .ToList();
@@ -395,7 +395,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin
                             totalbooking += 1;
                             payUsd = payUsd - money;
                         }
-                      
+
                     }
                     if (!booking.IsTotalUsd)
                     {

@@ -15,7 +15,7 @@ namespace Portal.Modules.OrientalSails.Repository
 
         public IList<DocumentCategory> DocumentGetAll()
         {
-            return _session.QueryOver<DocumentCategory>().Future().ToList();
+            return _session.QueryOver<DocumentCategory>().List();
         }
     }
 }

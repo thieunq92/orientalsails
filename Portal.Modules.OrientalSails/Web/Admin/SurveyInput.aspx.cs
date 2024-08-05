@@ -98,7 +98,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin
                     txtDriver.Visible = false;
                     ddlGuide.Items.Clear();
                     ddlDrivers.Items.Clear();
-                    var expenses = SurveyInputBLL.ExpenseGetAllByCriterion(booking.Cruise.Id, booking.StartDate).Future().ToList();
+                    var expenses = SurveyInputBLL.ExpenseGetAllByCriterion(booking.Cruise.Id, booking.StartDate).List();
                     var guideExpense = expenses.FirstOrDefault(x => x.Type == "Guide");
                     if(guideExpense != null && guideExpense.Guide != null )
                         ddlGuide.Items.Add(guideExpense.Guide.Name);

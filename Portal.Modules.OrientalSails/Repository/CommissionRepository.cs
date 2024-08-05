@@ -14,7 +14,7 @@ namespace Portal.Modules.OrientalSails.Repository
 
         public IList<Commission> CommissionGetAllByBookingId(int bookingId)
         {
-            return _session.QueryOver<Commission>().Where(x => x.Booking.Id == bookingId).Future().ToList();
+            return _session.QueryOver<Commission>().Where(x => x.Booking.Id == bookingId).List();
         }
     }
 }

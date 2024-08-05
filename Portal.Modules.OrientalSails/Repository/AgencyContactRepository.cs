@@ -31,17 +31,17 @@ namespace Portal.Modules.OrientalSails.Repository
 
         public IList<AgencyContact> AgencyContactGetAllByAgency(Agency agency)
         {
-            return _session.QueryOver<AgencyContact>().Where(x => x.Agency == agency).Future().ToList();
+            return _session.QueryOver<AgencyContact>().Where(x => x.Agency == agency).List();
         }
         public IList<AgencyContact> AgencyContactGetAllByAgency(int agencyId)
         {
-            return _session.QueryOver<AgencyContact>().Where(x => x.Agency.Id == agencyId).Future().ToList();
+            return _session.QueryOver<AgencyContact>().Where(x => x.Agency.Id == agencyId).List();
         }
 
 
         public AgencyContact AgencyContactGetById(int bookerId)
         {
-            return _session.QueryOver<AgencyContact>().Where(x => x.Id == bookerId).FutureValue().Value;
+            return _session.QueryOver<AgencyContact>().Where(x => x.Id == bookerId).SingleOrDefault();
         }
     }
 }

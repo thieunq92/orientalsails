@@ -51,6 +51,7 @@ namespace Portal.Modules.OrientalSails.Repository
             _session.Close();
             _session.Dispose();
             _session = null;
+            GC.SuppressFinalize(this);
         }
 
         public virtual void SaveOrUpdate(TEntity obj)

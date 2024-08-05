@@ -19,7 +19,7 @@ namespace Portal.Modules.OrientalSails.Repository
                 .Where(x => x.ValidFrom <= date)
                 .OrderBy(x => x.ValidFrom).Desc
                 .Take(1)
-                .FutureValue().Value;
+                .SingleOrDefault();
         }
     }
 }

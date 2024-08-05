@@ -22,7 +22,7 @@ namespace Portal.Modules.OrientalSails.BusinessLogic
                 QuotationRepository = null;
             }
         }
-        public List<Quotation> QuotationGetAll()
+        public IList<Quotation> QuotationGetAll()
         {
             return QuotationRepository.QuotationGetAll();
         }

@@ -15,14 +15,14 @@ namespace Portal.Modules.OrientalSails.Repository
         {
         }
 
-        public List<Quotation> QuotationGetAll()
+        public IList<Quotation> QuotationGetAll()
         {
-            return _session.QueryOver<Quotation>().Future().ToList();
+            return _session.QueryOver<Quotation>().List();
         }
 
         public Quotation QuotationGetById(int quotationId)
         {
-            return _session.QueryOver<Quotation>().Where(x => x.Id == quotationId).FutureValue().Value;
+            return _session.QueryOver<Quotation>().Where(x => x.Id == quotationId).SingleOrDefault();
         }
     }
 }

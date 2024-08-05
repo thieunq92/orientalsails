@@ -20,53 +20,21 @@ namespace Portal.Modules.OrientalSails.Web.Admin
 {
     public partial class DashBoard : System.Web.UI.Page
     {
-        private DashBoardBLL dashBoardBLL;
-        private PermissionBLL permissionBLL;
-        private UserBLL userBLL;
-        private User currentUser;
         public DashBoardBLL DashBoardBLL
         {
-            get
-            {
-                if (dashBoardBLL == null)
-                {
-                    dashBoardBLL = new DashBoardBLL();
-                }
-                return dashBoardBLL;
-            }
+            get; set;
         }
         public UserBLL UserBLL
         {
-            get
-            {
-                if (userBLL == null)
-                {
-                    userBLL = new UserBLL();
-                }
-                return userBLL;
-            }
+            get; set;
         }
         public User CurrentUser
         {
-            get
-            {
-                if (currentUser == null)
-                {
-                    currentUser = UserBLL.UserGetCurrent();
-                }
-                return currentUser;
-            }
+            get; set;
         }
         public PermissionBLL PermissionBLL
         {
-            get
-            {
-                if (permissionBLL == null)
-                {
-                    permissionBLL = new PermissionBLL();
-                }
-                return permissionBLL;
-            }
+            get; set;
         }
         public IEnumerable<RoomsAvaiableDTO> RoomsAvaiableDTO { get; set; }
         public void Redirect()
@@ -88,6 +56,10 @@ namespace Portal.Modules.OrientalSails.Web.Admin
         protected void Page_Load(object sender, EventArgs e)
         {
             Redirect();
+            DashBoardBLL = new DashBoardBLL();
+            UserBLL = new UserBLL();
+            CurrentUser = UserBLL.UserGetCurrent();
+            PermissionBLL = new PermissionBLL();
             if (!IsPostBack)
             {
                 var todayBookings = DashBoardBLL.BookingGetAllTodayBookings(CurrentUser);
@@ -193,20 +165,20 @@ namespace Portal.Modules.OrientalSails.Web.Admin
         }
         protected void Page_Unload(object sender, EventArgs e)
         {
-            if (dashBoardBLL != null)
+            if (DashBoardBLL != null)
             {
-                dashBoardBLL.Dispose();
-                dashBoardBLL = null;
+                DashBoardBLL.Dispose();
+                DashBoardBLL = null;
             }
-            if (permissionBLL != null)
+            if (PermissionBLL != null)
             {
-                permissionBLL.Dispose();
-                permissionBLL = null;
+                PermissionBLL.Dispose();
+                PermissionBLL = null;
             }
-            if (userBLL != null)
+            if (UserBLL != null)
             {
-                userBLL.Dispose();
-                userBLL = null;
+                UserBLL.Dispose();
+                UserBLL = null;
             }
         }
 

@@ -16,14 +16,14 @@ namespace Portal.Modules.OrientalSails.Repository
 
         public IList<BookingHistory> BookingHistoryGetByBookingId(int bookingId)
         {
-            return _session.QueryOver<BookingHistory>().Where(x => x.Booking.Id == bookingId).Future().ToList();
+            return _session.QueryOver<BookingHistory>().Where(x => x.Booking.Id == bookingId).List();
         }
 
         public IEnumerable<BookingHistory> BookingHistoryGetByBooking(Booking booking)
         {
             var query = _session.QueryOver<BookingHistory>();
             query = query.Where(x => x.Booking == booking);
-            var list = query.Future().ToList();
+            var list = query.List();
             return list;
         }
     }

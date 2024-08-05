@@ -77,7 +77,7 @@ namespace Portal.Modules.OrientalSails.Repository
         }
         public BusByDate BusByDateGetById(int busByDateId)
         {
-            return _session.QueryOver<BusByDate>().Where(x => x.Id == busByDateId).FutureValue().Value;
+            return _session.QueryOver<BusByDate>().Where(x => x.Id == busByDateId).SingleOrDefault();
         }
 
         public IQueryOver<BusByDate, BusByDate> BusByDateGetAllByCriterion(DateTime? date, BusType busType, Route route, string way)
@@ -98,7 +98,7 @@ namespace Portal.Modules.OrientalSails.Repository
         public IQueryOver<BusByDate, BusByDate> BusByDateGetAllByCriterionAndAllWay(DateTime? date, BusType busType, Route route)
         {
             var query = _session.QueryOver<BusByDate>();
-            var listRoute = RouteRepository.RouteGetAllById(route.Id).Future().ToList();
+            var listRoute = RouteRepository.RouteGetAllById(route.Id).List();
             var listRouteId = listRoute.Select(x => x.Id).ToList();
             if (date.HasValue)
             {
@@ -158,9 +158,9 @@ namespace Portal.Modules.OrientalSails.Repository
                     Date = busByDate.Date.Value,
                 };
                 ExpenseRepository.SaveOrUpdate(driverExpense);
-                var listCostType = CostTypeRepository.CostTypeGetAll().Future().ToList();
-                var expenseTypeNull = ExpenseRepository.ExpenseGetAllByCriterion(-1, busByDate.Date).Where(z => z.Type == null).FutureValue().Value;
-                var expenseService = ExpenseServiceRepository.ExpenseServiceGetAllByCriterion(driverExpense.Id).FutureValue().Value;
+                var listCostType = CostTypeRepository.CostTypeGetAll().List();
+                var expenseTypeNull = ExpenseRepository.ExpenseGetAllByCriterion(-1, busByDate.Date).Where(z => z.Type == null).SingleOrDefault();
+                var expenseService = ExpenseServiceRepository.ExpenseServiceGetAllByCriterion(driverExpense.Id).SingleOrDefault();
                 if (expenseService == null || expenseService.Id <= 0)
                 {
                     expenseService = new ExpenseService();
@@ -178,7 +178,7 @@ namespace Portal.Modules.OrientalSails.Repository
         {
             var busByDateRouteBackRef = busByDate.BusByDateRouteBackRef;
             var busByDateRouteTo_HaveBusByDateRouteBackRef =
-                _session.QueryOver<BusByDate>().Where(x => x.BusByDateRouteBackRef.Id == busByDate.Id).FutureValue().Value;
+                _session.QueryOver<BusByDate>().Where(x => x.BusByDateRouteBackRef.Id == busByDate.Id).SingleOrDefault();
             if (busByDateRouteTo_HaveBusByDateRouteBackRef != null && busByDateRouteTo_HaveBusByDateRouteBackRef.Id > 0)
             {
                 busByDateRouteTo_HaveBusByDateRouteBackRef.BusByDateRouteBackRef = null;

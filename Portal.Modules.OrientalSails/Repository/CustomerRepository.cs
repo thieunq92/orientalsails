@@ -24,7 +24,7 @@ namespace Portal.Modules.OrientalSails.Repository
                 .JoinAlias(x => x.BookingRooms, () => bookingRoomAlias)
                 .JoinQueryOver(() => bookingRoomAlias.Book)
                 .Where(x => x.Id == bookingId)
-                .Take(1).FutureValue<Customer>().Value;
+                .Take(1).SingleOrDefault<Customer>();
 
             if (customer == null)
                 return "";
@@ -36,13 +36,13 @@ namespace Portal.Modules.OrientalSails.Repository
         {
             BookingRoom bookingRoomAlias = null;
             Booking bookingAlias = null;
-            var booking = _session.QueryOver<Booking>().Where(x => x.Id == bookingId).FutureValue().Value;
+            var booking = _session.QueryOver<Booking>().Where(x => x.Id == bookingId).SingleOrDefault();
             var customerCounting = 0;
             if (booking.Cruise.CruiseType == Web.Admin.Enums.CruiseType.Seating)
             {
                 customerCounting = _session.QueryOver<Customer>().Fetch(x => x.Booking).Eager
                 .JoinAlias(x => x.Booking, () => bookingAlias).Where(() => bookingAlias.Id == bookingId).Select(Projections.RowCount())
-                .FutureValue<int>().Value;
+                .SingleOrDefault<int>();
             }
             else if (booking.Cruise.CruiseType == Web.Admin.Enums.CruiseType.Cabin)
             {
@@ -53,7 +53,7 @@ namespace Portal.Modules.OrientalSails.Repository
                 .JoinQueryOver(() => bookingRoomAlias.Book)
                 .Where(x => x.Id == bookingId)
                 .Select(Projections.RowCount())
-                .FutureValue<int>().Value;
+                .SingleOrDefault<int>();
             }
 
             return customerCounting;
@@ -70,7 +70,7 @@ namespace Portal.Modules.OrientalSails.Repository
                 .JoinQueryOver(() => bookingRoomAlias.Book)
                 .Where(x => x.Id == bookingId)
                 .Select(Projections.RowCount())
-                .FutureValue<int>().Value;
+                .SingleOrDefault<int>();
 
             return customerAdultCounting;
         }
@@ -163,7 +163,7 @@ namespace Portal.Modules.OrientalSails.Repository
                     query = query.Where(x => x.Booking == booking);
                 }
                 query = query.Select(Projections.RowCount());
-                numberOfCustomers += query.FutureValue<int>().Value;
+                numberOfCustomers += query.SingleOrDefault<int>();
             }
             return numberOfCustomers;
         }
@@ -188,7 +188,7 @@ namespace Portal.Modules.OrientalSails.Repository
             query = query.Where(() => bookingAlias.StartDate >= firstDateOfMonth && bookingAlias.StartDate <= lastDateOfMonth);
             query = query.Where(() => bookingAlias.Status == StatusType.Approved);
             query = query.Select(Projections.RowCount());
-            return query.FutureValue<int>().Value;
+            return query.SingleOrDefault<int>();
         }
     }
 }

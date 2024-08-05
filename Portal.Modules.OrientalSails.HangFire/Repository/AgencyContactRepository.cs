@@ -21,7 +21,7 @@ namespace Portal.Modules.OrientalSails.HangFire.Repository
         {
             return _session.Query<AgencyContact>()
              .Where(x => x.Birthday.Value.Day == DateTime.Today.Day && x.Birthday.Value.Month == DateTime.Today.Month)
-             .ToFuture().ToList();
+             .ToList();
         }
     }
 }

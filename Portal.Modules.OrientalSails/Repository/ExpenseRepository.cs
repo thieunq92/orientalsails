@@ -30,7 +30,7 @@ namespace Portal.Modules.OrientalSails.Repository
 
         public Expense ExpenseGetById(int expenseId)
         {
-            return _session.QueryOver<Expense>().Where(x => x.Id == expenseId).FutureValue().Value;
+            return _session.QueryOver<Expense>().Where(x => x.Id == expenseId).SingleOrDefault();
         }
 
         public IQueryOver<Expense, Expense> ExpenseGetAllByCriterion(Agency guide, DateTime? date, Route route)

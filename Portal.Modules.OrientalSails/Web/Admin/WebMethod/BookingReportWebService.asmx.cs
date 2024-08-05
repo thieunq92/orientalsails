@@ -98,7 +98,8 @@ namespace Portal.Modules.OrientalSails.Web.Admin.WebMethod
                 userBLL.Dispose();
                 userBLL = null;
             }
-            if(permissionBLL != null) { 
+            if (permissionBLL != null)
+            {
                 permissionBLL.Dispose();
                 permissionBLL = null;
             }
@@ -149,9 +150,9 @@ namespace Portal.Modules.OrientalSails.Web.Admin.WebMethod
                     {
                         expense.Operator = CurrentUser;
                     }
-                    var listCostType = BookingReportBLL.CostTypeGetAll().Future().ToList();
-                    var expenseTypeNull = BookingReportBLL.ExpenseGetAllByCriterion(cruise.Id, date).Where(z => z.Type == null).FutureValue().Value;
-                    var expenseService = BookingReportBLL.ExpenseServiceGetAllByCriterion(expense.Id).FutureValue().Value;
+                    var listCostType = BookingReportBLL.CostTypeGetAll().List();
+                    var expenseTypeNull = BookingReportBLL.ExpenseGetAllByCriterion(cruise.Id, date).Where(z => z.Type == null).SingleOrDefault();
+                    var expenseService = BookingReportBLL.ExpenseServiceGetAllByCriterion(expense.Id).SingleOrDefault();
                     if (expenseService == null || expenseService.Id <= 0)
                     {
                         expenseService = new ExpenseService();
@@ -205,9 +206,9 @@ namespace Portal.Modules.OrientalSails.Web.Admin.WebMethod
                     {
                         expense.Operator = CurrentUser;
                     }
-                    var listCostType = BookingReportBLL.CostTypeGetAll().Future().ToList();
-                    var expenseTypeNull = BookingReportBLL.ExpenseGetAllByCriterion(cruise.Id, date).Where(z => z.Type == null).FutureValue().Value;
-                    var expenseService = BookingReportBLL.ExpenseServiceGetAllByCriterion(expense.Id).FutureValue().Value;
+                    var listCostType = BookingReportBLL.CostTypeGetAll().List();
+                    var expenseTypeNull = BookingReportBLL.ExpenseGetAllByCriterion(cruise.Id, date).Where(z => z.Type == null).SingleOrDefault();
+                    var expenseService = BookingReportBLL.ExpenseServiceGetAllByCriterion(expense.Id).SingleOrDefault();
                     if (expenseService == null || expenseService.Id <= 0)
                     {
                         expenseService = new ExpenseService();
@@ -254,7 +255,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin.WebMethod
                 date = DateTime.ParseExact(d, "dd/MM/yyyy", CultureInfo.InvariantCulture);
             }
             catch { }
-            var listExpense = BookingReportBLL.ExpenseGetAllByCriterion(cruiseId, date).Future().ToList();
+            var listExpense = BookingReportBLL.ExpenseGetAllByCriterion(cruiseId, date).List();
             var listGuideExpense = listExpense.Where(x => x.Type == "Guide").ToList();
             var listGuideExpenseDTO = new List<ExpenseDTO>();
             listGuideExpense.ForEach(x =>
@@ -275,6 +276,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin.WebMethod
                 };
                 listGuideExpenseDTO.Add(guideExpenseDTO);
             });
+            Dispose();
             return listGuideExpenseDTO;
         }
 
@@ -307,6 +309,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin.WebMethod
                 };
                 listOthersExpenseDTO.Add(guideExpenseDTO);
             });
+            Dispose();
             return listOthersExpenseDTO;
         }
 
@@ -430,7 +433,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin.WebMethod
             var operationName = ob;
             var operationPhone = op;
             var listBooking = BookingReportBLL.BookingGetByCriterion(date, cruise, CurrentUser).Where(x => x.Status == StatusType.Approved)
-                .Future().ToList();
+                .List();
             using (var memoryStream = new MemoryStream())
             {
                 using (var excelPackage = new ExcelPackage(new FileInfo(Server.MapPath("/Modules/Sails/Admin/ExportTemplates/TourCommand.xlsx"))))
@@ -536,7 +539,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin.WebMethod
                     //Export booking đi 2 ngày bắt đầu từ ngày hôm trước
                     listBooking = BookingReportBLL.BookingGetByCriterion(date.Value.AddDays(-1), cruise, CurrentUser)
                         .Where(x => x.Status == StatusType.Approved)
-                        .Future().ToList()
+                        .List()
                         .Where(x => x.Trip.NumberOfDay > 2)
                         .ToList();
                     titleRow = currentRow + 2;
@@ -718,14 +721,14 @@ namespace Portal.Modules.OrientalSails.Web.Admin.WebMethod
             sheet.Cells["E1"].Value = (date.HasValue ? date.Value.ToLongDateString() : "");
             var listBooking = BookingReportBLL.BookingGetByCriterion(date, cruise, CurrentUser)
                 .Where(x => x.Status == StatusType.Approved)
-                .Future().ToList();
+                .List();
             //Điền guide vào lệnh điều tour
             var startRow = 3;
             var currentRow = startRow;
             var templateGuideRow = currentRow;
             var listGuideExpense = BookingReportBLL.ExpenseGetAllByCriterion(cruise.Id, date)
                 .Where(x => x.Type == "Guide")
-                .Future().ToList(); //Lấy danh sách GuideExpense theo tàu
+                .List(); //Lấy danh sách GuideExpense theo tàu
             var listGuide = listGuideExpense.Select(x => x.Guide).ToList();//Lấy danh sách Guide từ danh sách GuideExpense
             var listGuide_Distinct = listGuide.Distinct().ToList();//Lấy danh sách Guide không bị lặp
             sheet.InsertRow(currentRow, listGuide_Distinct.Count - 1, templateGuideRow);//Copy số row guide = với số guide
@@ -829,7 +832,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin.WebMethod
             //Export booking đi 2 ngày bắt đầu từ ngày hôm trước
             listBooking = BookingReportBLL.BookingGetByCriterion(date.Value.AddDays(-1), cruise, CurrentUser)
                 .Where(x => x.Status == StatusType.Approved)
-                .Future().ToList()
+                .List()
                 .Where(x => x.Trip.NumberOfDay > 2)
                 .ToList();
 
@@ -912,7 +915,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin.WebMethod
             sheet.Cells["D1"].Value = (date.HasValue ? date.Value.ToLongDateString() : "");
             var listBooking = BookingReportBLL.BookingGetByCriterion(date, cruise, CurrentUser)
                 .Where(x => x.Status == StatusType.Approved)
-                .Future().ToList();
+                .List();
             if (listBooking != null && listBooking.Count > 0)
             {
                 sheet.Cells["B2"].Value = listBooking[0].Trip.Name;
@@ -948,6 +951,41 @@ namespace Portal.Modules.OrientalSails.Web.Admin.WebMethod
             sheet.Cells[totalRow, 3].Value = listBooking.Sum(x => x.Adult);
             sheet.Cells[totalRow, 4].Value = listBooking.Sum(x => x.Child);
             sheet.Cells[totalRow, 5].Value = listBooking.Sum(x => x.Baby);
+        }
+
+        [WebMethod]
+        public string BookingGetAllByCriterion(string date, int cruiseId)
+        {
+            var cruise = BookingReportBLL.CruiseGetById(cruiseId);
+            if (!DateTime.TryParseExact(date, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime dateAsDateTime))
+            {
+                throw new Exception();
+            }
+            var bookingList = BookingReportBLL.BookingGetAllByByCriterion(CurrentUser, dateAsDateTime, cruise, new List<StatusType>() { StatusType.Approved, StatusType.Pending });
+            var listBookingDTO = new List<BookingDTO>();
+            foreach (var booking in bookingList)
+            {
+                var bookingDTO = new BookingDTO()
+                {
+                    Id = booking.Id,
+                    BookingId = "OS" + booking.Id.ToString(),
+                    StartDate = booking.StartDate.ToString("dd/MM/yyyy"),
+                    TripName = booking.Trip.Name,
+                    CruiseName = booking.Cruise.Name,
+                    NoOfRoom = booking.BookingRooms.Count,
+                    NoOfPax = booking.Pax,
+                    Pax = string.Format("Adults : {0}</br> Childs : {1}<br/> Baby : {2}", booking.Adult, booking.Child, booking.Baby),
+                    Room = booking.RoomName,
+                    TACode = booking.AgencyCode,
+                    SpecialRequest = booking.SpecialRequest,
+                    Status = booking.Status.ToString(),
+                    CutoffDate = booking.Series.CutoffDate + " day(s)",
+                    TripCode = booking.Trip.TripCode,
+                };
+                listBookingDTO.Add(bookingDTO);
+            }
+            Dispose();
+            return JsonConvert.SerializeObject(listBookingDTO);
         }
 
     }

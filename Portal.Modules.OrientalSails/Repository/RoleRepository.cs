@@ -21,12 +21,12 @@ namespace Portal.Modules.OrientalSails.Repository
 
         public IList<Role> RoleGetAll()
         {
-            return _session.QueryOver<Role>().Future().ToList();
+            return _session.QueryOver<Role>().List();
         }
 
         public Role RoleGetByName(string name)
         {
-            return _session.QueryOver<Role>().Where(x => x.Name == name).FutureValue().Value;
+            return _session.QueryOver<Role>().Where(x => x.Name == name).SingleOrDefault();
         }
     }
 }

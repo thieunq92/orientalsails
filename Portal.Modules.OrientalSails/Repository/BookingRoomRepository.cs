@@ -19,7 +19,7 @@ namespace Portal.Modules.OrientalSails.Repository
 
         public BookingRoom BookingRoomGetById(int bookingRoomId)
         {
-            return _session.QueryOver<BookingRoom>().Where(x => x.Id == bookingRoomId).FutureValue().Value;
+            return _session.QueryOver<BookingRoom>().Where(x => x.Id == bookingRoomId).SingleOrDefault();
         }
 
         public IEnumerable<BookingRoom> BookingRoomGetAllByBooking(Booking booking)
@@ -29,7 +29,7 @@ namespace Portal.Modules.OrientalSails.Repository
             {
                 query = query.Where(x => x.Book == booking);
             }
-            return query.Future().ToList();
+            return query.List();
         }
 
         public IEnumerable<BookingRoom> BookingRoomGetAllByCriterion(Cruise cruise, DateTime? date)
@@ -48,7 +48,7 @@ namespace Portal.Modules.OrientalSails.Repository
             }
             query = query.Where(() => bookingAlias.Deleted == false);
             query = query.Where(() => bookingAlias.Status != StatusType.Cancelled && bookingAlias.Status != StatusType.CutOff);
-            return query.Future().ToList();
+            return query.List();
         }
 
         public int BookingRoomGetRowCountByCriterion(Cruise cruise, DateTime? date) {
@@ -67,7 +67,7 @@ namespace Portal.Modules.OrientalSails.Repository
             query = query.Where(() => bookingAlias.Deleted == false);
             query = query.Where(() => bookingAlias.Status != StatusType.Cancelled && bookingAlias.Status != StatusType.CutOff);
             query = query.Select(Projections.RowCount());
-            return query.FutureValue<int>().Value;
+            return query.SingleOrDefault<int>();
         }
         public int BookingRoomGetRowCountByCriterion(SailsTrip trip, DateTime? date)
         {
@@ -86,7 +86,7 @@ namespace Portal.Modules.OrientalSails.Repository
             query = query.Where(() => bookingAlias.Deleted == false);
             query = query.Where(() => bookingAlias.Status != StatusType.Cancelled && bookingAlias.Status != StatusType.CutOff);
             query = query.Select(Projections.RowCount());
-            return query.FutureValue<int>().Value;
+            return query.SingleOrDefault<int>();
         }
     }
 }

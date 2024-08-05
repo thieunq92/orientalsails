@@ -20,7 +20,7 @@ namespace Portal.Modules.OrientalSails.Repository
         {
             var query = _session.QueryOver<Cruise>();
             query = query.Where(x => x.Deleted == false);
-            var list = query.Future().ToList();
+            var list = query.List();
             return list.OrderBy(c=>c.Order);
         }
 
@@ -32,15 +32,13 @@ namespace Portal.Modules.OrientalSails.Repository
         public IList<Cruise> CruiseGetAllByTrip(SailsTrip trip)
         {
             return _session.Query<Cruise>().Where(x => x.Deleted == false)
-                .Where(x => x.Trips.Contains(trip)).ToFuture().ToList();
+                .Where(x => x.Trips.Contains(trip)).ToList();
         }
 
         public Cruise CruiseGetById(int cruiseId)
         {
             return _session.QueryOver<Cruise>().Where(x => x.Deleted == false)
-                .Where(x => x.Id == cruiseId)
-                .FutureValue()
-                .Value;
+                .Where(x => x.Id == cruiseId).SingleOrDefault();
         }
 
         public IEnumerable<RoomsAvaiableDTO> CruiseGetRoomsAvaiableInDateRange(DateTime from, DateTime to)

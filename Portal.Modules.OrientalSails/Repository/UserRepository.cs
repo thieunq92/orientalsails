@@ -18,7 +18,7 @@ namespace Portal.Modules.OrientalSails.Repository
         {
             return _session.QueryOver<User>()
                 .Where(x => x.IsActive == true)
-                .Where(x => x.Id == userId).Take(1).FutureValue<User>().Value;
+                .Where(x => x.Id == userId).Take(1).SingleOrDefault();
         }
 
         public string UserGetName(int userId)
@@ -32,7 +32,7 @@ namespace Portal.Modules.OrientalSails.Repository
             return _session.QueryOver<User>()
                 .Where(x => x.IsActive == true)
                 .JoinAlias(x => x.Roles, () => roleAlias)
-                .Where(x => roleAlias.Id == roleId).Future<User>().ToList();
+                .Where(x => roleAlias.Id == roleId).List();
         }
 
         public IEnumerable<User> SalesGetAll()
@@ -41,7 +41,7 @@ namespace Portal.Modules.OrientalSails.Repository
             return _session.QueryOver<User>()
                 .Where(x => x.IsActive == true)
                 .JoinAlias(x => x.Roles, () => roleAlias)
-                .Where(x => roleAlias.Name == "Sales").Future<User>().ToList();
+                .Where(x => roleAlias.Name == "Sales").List();
         }
     }
 }

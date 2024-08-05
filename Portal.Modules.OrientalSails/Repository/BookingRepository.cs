@@ -34,7 +34,7 @@ namespace Portal.Modules.OrientalSails.Repository
             query = query.Where(x => x.Deleted == false)
                 .Where(x => x.Status == statusType && x.StartDate > date)
                 .Select(Projections.RowCount());
-            return query.FutureValue<int>().Value;
+            return query.SingleOrDefault<int>();
         }
 
         public int MyBookingPendingCount()
@@ -44,7 +44,7 @@ namespace Portal.Modules.OrientalSails.Repository
                 .Where(x => x.Deleted == false)
                 .Where(x => x.Status == StatusType.Pending && x.Deadline >= DateTime.Now)
                 .Where(x => x.CreatedBy.Id == userId || x.Sale.Id == userId)
-                .Select(Projections.RowCount()).FutureValue<int>().Value;
+                .Select(Projections.RowCount()).SingleOrDefault<int>();
         }
 
         public int MyTodayBookingPendingCount()
@@ -55,7 +55,7 @@ namespace Portal.Modules.OrientalSails.Repository
                 .Where(x => x.Status == StatusType.Pending && x.Deadline >= DateTime.Now)
                 .Where(x => x.CreatedBy.Id == userId || x.Sale.Id == userId)
                 .Where(x => x.Deadline >= DateTime.Now && x.Deadline <= DateTime.Now.AddHours(36))
-                .Select(Projections.RowCount()).FutureValue<int>().Value;
+                .Select(Projections.RowCount()).SingleOrDefault<int>();
         }
 
         public int SystemBookingPendingCount()
@@ -63,7 +63,7 @@ namespace Portal.Modules.OrientalSails.Repository
             return _session.QueryOver<Booking>()
                 .Where(x => x.Deleted == false)
                 .Where(x => x.Status == StatusType.Pending && x.Deadline >= DateTime.Now)
-                .Select(Projections.RowCount()).FutureValue<int>().Value;
+                .Select(Projections.RowCount()).SingleOrDefault<int>();
         }
 
         public IList<Booking> BookingListBLL_BookingSearchBy(User user, int bookingId, int tripId, int cruiseId, int status,
@@ -132,7 +132,7 @@ namespace Portal.Modules.OrientalSails.Repository
             mainQuery = mainQuery.Where(() => userRoleCruiseAlias.Id == user.Id);
             mainQuery = mainQuery.OrderBy(x => x.StartDate).Desc;
             count = mainQuery.RowCount();
-            return mainQuery.Skip(currentPageIndex * pageSize).Take(pageSize).Future<Booking>().ToList();
+            return mainQuery.Skip(currentPageIndex * pageSize).Take(pageSize).List();
         }
 
         public IList<Booking> PaymentReportBLL_BookingSearchBy(string spay, DateTime? from, DateTime? to,
@@ -202,7 +202,7 @@ namespace Portal.Modules.OrientalSails.Repository
         public Booking BookingGetById(int bookingId)
         {
             return _session.QueryOver<Booking>().Where(x => x.Deleted == false)
-                .Where(x => x.Id == bookingId).FutureValue<Booking>().Value;
+                .Where(x => x.Id == bookingId).SingleOrDefault();
         }
 
         public IList<Booking> BookingReportBLL_BookingSearchBy(DateTime? startDate, int cruiseId, int bookingStatus)
@@ -228,13 +228,13 @@ namespace Portal.Modules.OrientalSails.Repository
                     ), startDate.Value.Date));
             }
 
-            return query.Future<Booking>().ToList();
+            return query.List();
         }
 
         public IList<Booking> BookingGetBySeries(int seriesId)
         {
             return _session.QueryOver<Booking>().Where(x => x.Deleted == false)
-                .Where(x => x.Series.Id == seriesId).Future().ToList();
+                .Where(x => x.Series.Id == seriesId).List();
         }
 
         public IList<Booking> SeriesViewBLL_BookingSearchBy(int seriesId, string taCode, int bookingCode, DateTime? startDate)
@@ -266,7 +266,7 @@ namespace Portal.Modules.OrientalSails.Repository
                   ), startDate.Value.Date));
             }
 
-            return query.Future<Booking>().ToList();
+            return query.List();
         }
 
         public IList<Booking> ViewActivitiesBLL_BookingGetAllBy(int userId, DateTime? from, DateTime? to)
@@ -287,7 +287,7 @@ namespace Portal.Modules.OrientalSails.Repository
                 query = query.Where(x => x.CreatedDate <= to || x.ModifiedDate <= to);
             }
 
-            return query.Future().ToList();
+            return query.List();
         }
 
         public IList<Booking> BookingGetAllBy(DateTime? startDate, int bookingStatus, bool isLimousine)
@@ -308,7 +308,7 @@ namespace Portal.Modules.OrientalSails.Repository
                     ), startDate.Value.Date));
             }
 
-            return query.Future<Booking>().ToList();
+            return query.List();
         }
 
         public IQueryOver<Booking, Booking> BookingGetAllByCriterionTransfer(BusType busType, Route route, string way, DateTime? date)
@@ -497,7 +497,7 @@ namespace Portal.Modules.OrientalSails.Repository
             query = query.Where(() => bookingSalesAlias.Sale == user);
             query = query.Where(x => x.StartDate == DateTime.Today);
             query = query.Where(x => x.Status == StatusType.Approved);
-            return query.Future().ToList();
+            return query.List();
         }
 
         public IEnumerable<Booking> BookingGetAllNewBookings(User user)
@@ -513,7 +513,7 @@ namespace Portal.Modules.OrientalSails.Repository
             query = query.Where(x => x.CreatedDate >= DateTime.Today && x.CreatedDate <= DateTime.Today.Add(new TimeSpan(23, 59, 59)));
             //--
             query = query.Where(x => x.Status == StatusType.Pending);
-            return query.Future().ToList();
+            return query.List();
         }
 
         public IEnumerable<Booking> BookingGetAllBookingsInMonth(User user)
@@ -526,7 +526,7 @@ namespace Portal.Modules.OrientalSails.Repository
             query = query.Where(() => bookingSalesAlias.Sale == user);
             query = query.Where(x => x.StartDate >= firstDateOfMonth && x.StartDate <= lastDateOfMonth);
             query = query.Where(x => x.Status == StatusType.Approved);
-            return query.Future().ToList();
+            return query.List();
         }
 
         public int BookingGetNumberOfBookingsInMonth(int month, int year, User user)
@@ -543,7 +543,7 @@ namespace Portal.Modules.OrientalSails.Repository
             query = query.Where(x => x.StartDate >= firstDateOfMonth && x.StartDate <= lastDateOfMonth);
             query = query.Where(x => x.Status == StatusType.Approved);
             query = query.Select(Projections.RowCount());
-            return query.FutureValue<int>().Value;
+            return query.SingleOrDefault<int>();
         }
 
         public double BookingGetTotalRevenueInMonth(int month, int year, User user)
@@ -588,14 +588,14 @@ namespace Portal.Modules.OrientalSails.Repository
                 query = query.Where(x => x.Cruise == cruise);
             }
             query = query.Where(x => x.Deleted == false);
-            return query.Future().ToList();
+            return query.List();
         }
 
         public IEnumerable<Booking> BookingGetAllNewBookingsByCampaign(Campaign campaign)
         {
             var query = _session.QueryOver<Booking>().Where(b => b.CreatedDate > campaign.CreatedDate);
             query = query.AndRestrictionOn(b => b.StartDate).IsIn(campaign.GoldenDays.Select(gd => new DateTime(gd.Date.Year, gd.Date.Month, gd.Date.Day)).ToList());
-            return query.Future().ToList();
+            return query.List();
         }
 
         public IEnumerable<Booking> BookingGetAllNewBookings()
@@ -610,7 +610,7 @@ namespace Portal.Modules.OrientalSails.Repository
             query = query.Where(x => x.CreatedDate >= date && x.CreatedDate <= date.Add(new TimeSpan(23, 59, 59)));
             //--
             query = query.Where(x => x.Status == StatusType.Pending || x.Status == StatusType.Approved);
-            return query.Future().ToList();
+            return query.List();
         }
 
         public IEnumerable<Booking> BookingGetAllCancelledBookingOnDate(DateTime date)
@@ -620,7 +620,7 @@ namespace Portal.Modules.OrientalSails.Repository
             query = query.JoinAlias(b => b.BookingHistories, () => bookingHistory);
             query = query.Where(() => bookingHistory.Date >= date && bookingHistory.Date <= date.Add(new TimeSpan(23, 59, 59)));
             query = query.Where(() => bookingHistory.Status == StatusType.Cancelled);
-            return query.TransformUsing(new DistinctRootEntityResultTransformer()).Future().ToList();
+            return query.TransformUsing(new DistinctRootEntityResultTransformer()).List();
         }
 
         public IQueryOver<Booking, Booking> BookingGetAllByListId(List<int> listBookingId)

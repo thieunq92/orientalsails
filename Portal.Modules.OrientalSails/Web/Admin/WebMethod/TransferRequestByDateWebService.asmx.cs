@@ -75,14 +75,14 @@ namespace Portal.Modules.OrientalSails.Web.Admin.WebMethod
                 busTypeId = Int32.Parse(bti);
             }
             catch { }
-            var listBusType = TransferRequestByDateBLL.BusTypeGetAllById(busTypeId).Future().ToList();
+            var listBusType = TransferRequestByDateBLL.BusTypeGetAllById(busTypeId).List();
             var routeId = -1;
             try
             {
                 routeId = Int32.Parse(ri);
             }
             catch { }
-            var listRoute = TransferRequestByDateBLL.RouteGetAllById(routeId).Future().ToList();
+            var listRoute = TransferRequestByDateBLL.RouteGetAllById(routeId).List();
             var listRouteDTO = new List<RouteDTO>();
             foreach (var route in listRoute)
             {
@@ -104,10 +104,10 @@ namespace Portal.Modules.OrientalSails.Web.Admin.WebMethod
                     };
                     var listBusByDateDTO = new List<BusByDateDTO>();
                     var listBusByDate = TransferRequestByDateBLL.BusByDateGetAllByCriterion(date, busType, route, route.Way)
-                        .OrderBy(y => y.Group).Asc.Future().ToList();
+                        .OrderBy(y => y.Group).Asc.List();
                     listBusByDate.ForEach(busByDate =>
                     {
-                        var listBookingBusByDate = TransferRequestByDateBLL.BookingBusByDateGetAllByCriterion(busByDate).Future().ToList();
+                        var listBookingBusByDate = TransferRequestByDateBLL.BookingBusByDateGetAllByCriterion(busByDate).List();
                         var listBooking = listBookingBusByDate.Select(x => x.Booking).Distinct().ToList();
                         int? supplierId = null;
                         if (busByDate.Supplier != null) supplierId = busByDate.Supplier.Id;
@@ -161,11 +161,11 @@ namespace Portal.Modules.OrientalSails.Web.Admin.WebMethod
         {
             var haveBookingNoGroup = false;
             var listBooking = TransferRequestByDateBLL.BookingGetAllByCriterionTransfer(busType, route, date)
-                      .Future().ToList();
+                      .List();
             listBooking.ForEach(booking =>
             {
                 var listBookingBusByDate = TransferRequestByDateBLL.BookingBusByDateGetAllByCriterion(booking)
-                    .Future().ToList().Where(x => x.BusByDate.Route.Id == route.Id).ToList();
+                    .List().Where(x => x.BusByDate.Route.Id == route.Id).ToList();
                 if (listBookingBusByDate.Count == 0)
                 {
                     haveBookingNoGroup = true;
@@ -178,7 +178,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin.WebMethod
         {
             var haveNoBooking = false;
             var listBooking = TransferRequestByDateBLL.BookingGetAllByCriterionTransfer(busType, route, date)
-                      .Future().ToList();
+                      .List();
             if (listBooking.Count == 0)
             {
                 haveNoBooking = true;
@@ -289,7 +289,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin.WebMethod
             clonedBusByDateRouteBack.Route = routeBack;
             //Xóa hết các liên kết bookingbusbydate cũ của busByDateRouteBack 
             var listBookingBusByDate = TransferRequestByDateBLL
-                   .BookingBusByDateGetAllByCriterion(clonedBusByDateRouteBack).Future().ToList();
+                   .BookingBusByDateGetAllByCriterion(clonedBusByDateRouteBack).List();
             listBookingBusByDate.ForEach(x =>
             {
                 TransferRequestByDateBLL.BookingBusByDateDelete(x);
@@ -331,7 +331,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin.WebMethod
         public string Supplier_AgencyGetAllByRole()
         {
             var role = TransferRequestByDateBLL.RoleGetByName("Suppliers");
-            var listSupplier = TransferRequestByDateBLL.AgencyGetAllByRole(role).Future().ToList();
+            var listSupplier = TransferRequestByDateBLL.AgencyGetAllByRole(role).List();
             var listSupplierDTO = new List<AgencyDTO>();
             listSupplier.ForEach(supplier =>
             {
@@ -363,16 +363,15 @@ namespace Portal.Modules.OrientalSails.Web.Admin.WebMethod
             var way = w;
             var route = TransferRequestByDateBLL.RouteGetById(routeId);
             var role = TransferRequestByDateBLL.RoleGetByName("Guides");
-            var listGuide = TransferRequestByDateBLL.AgencyGetAllByRole(role).Future().ToList();
-            var listGuideInDay = TransferRequestByDateBLL.Guide_AgencyGetAllGuideInDay(role, date, route).Future().ToList();
+            var listGuide = TransferRequestByDateBLL.AgencyGetAllByRole(role).List();
+            var listGuideInDay = TransferRequestByDateBLL.Guide_AgencyGetAllGuideInDay(role, date, route).List();
             var listGuideDTO = new List<AgencyDTO>();
             listGuide.ForEach(guide =>
             {
                 var guideInDay = listGuideInDay.Where(x => x.Id == guide.Id).FirstOrDefault();
                 Expense guideExpenseInDay = null;
                 if (guideInDay != null)
-                    guideExpenseInDay = TransferRequestByDateBLL.ExpenseGetAllByCriterion(guide, date, route)
-                        .Future().SingleOrDefault();
+                    guideExpenseInDay = TransferRequestByDateBLL.ExpenseGetAllByCriterion(guide, date, route).SingleOrDefault();
                 var guideDTO = new AgencyDTO()
                 {
                     Id = guide.Id,
@@ -383,7 +382,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin.WebMethod
             });
             if (way == "Back")
             {
-                var listGuideDayBefore = TransferRequestByDateBLL.Guide_AgencyGetAllGuideInDay(role, date.Value.AddDays(-1), route).Future().ToList();
+                var listGuideDayBefore = TransferRequestByDateBLL.Guide_AgencyGetAllGuideInDay(role, date.Value.AddDays(-1), route).List();
                 listGuideDayBefore.ForEach(guideDayBefore =>
                 {
                     var guideDTO = new AgencyDTO()
@@ -486,7 +485,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin.WebMethod
             }
             catch { }
             var listBusByDate = TransferRequestByDateBLL.BusByDateGetAllByCriterion(date, busType, route, "All")
-                .Future().ToList().OrderBy(x => x.Route.Id).ThenBy(x => x.Id);
+                .List().OrderBy(x => x.Route.Id).ThenBy(x => x.Id);
             using (var memoryStream = new MemoryStream())
             {
                 using (var excelPackage = new ExcelPackage(new FileInfo(Server.MapPath("/Modules/Sails/Admin/ExportTemplates/TourCommandAndWelcomeBoard.xlsx"))))
@@ -513,7 +512,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin.WebMethod
 
         public void ExportWelcomeBoard(ExcelPackage excelPackage, BusByDate busByDate)
         {
-            var listBookingBusByDate = TransferRequestByDateBLL.BookingBusByDateGetAllByCriterion(busByDate).Future().ToList();
+            var listBookingBusByDate = TransferRequestByDateBLL.BookingBusByDateGetAllByCriterion(busByDate).List();
             var listBooking = listBookingBusByDate.Select(x => x.Booking).ToList();
             var shortRouteName = StringUtil.GetFirstLetter(busByDate.Route.Name);
             var sheet = excelPackage.Workbook.Worksheets.Copy("Welcome Board", "WB" + "-"
@@ -549,7 +548,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin.WebMethod
         }
         public void ExportTour(ExcelPackage excelPackage, BusByDate busByDate)
         {
-            var listBookingBusByDate = TransferRequestByDateBLL.BookingBusByDateGetAllByCriterion(busByDate).Future().ToList();
+            var listBookingBusByDate = TransferRequestByDateBLL.BookingBusByDateGetAllByCriterion(busByDate).List();
             var listBooking = listBookingBusByDate.Select(x => x.Booking).ToList();
             var listCustomer = listBooking.SelectMany(x => x.Customers).ToList();
             var shortRouteName = StringUtil.GetFirstLetter(busByDate.Route.Name);
@@ -593,7 +592,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin.WebMethod
             foreach (var guide in listGuide)
             {
                 var guideExpense = TransferRequestByDateBLL.ExpenseGetAllByCriterion(guide, busByDate.Date, busByDate.Route)
-                .Future().ToList().FirstOrDefault();
+                .List().FirstOrDefault();
                 if (guideExpense != null) listGuideExpense.Add(guideExpense);
             }
             var templateOptRow = currentRow;
@@ -610,7 +609,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin.WebMethod
             int totalRow = templateRow + listBooking.Count();
             int index = 1;
             currentRow++;//Chuyển current row đến trước template row để bắt đầu coppyrow
-            var expenses = TransferRequestByDateBLL.ExpenseGetAllByCriterion(busByDate.Date).Future().ToList();
+            var expenses = TransferRequestByDateBLL.ExpenseGetAllByCriterion(busByDate.Date).List();
             if (shortRouteName == "H N - T C ")
             {
                 sheet.Cells[titleRow, 9].Value = "Hà Nội - Ô 26 Tuần Châu \r\n(Giao cho)";

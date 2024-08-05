@@ -19,7 +19,7 @@ namespace Portal.Modules.OrientalSails.Repository
 
         public Series SeriesGetById(int seriesId)
         {
-            return _session.QueryOver<Series>().Where(x => x.Id == seriesId).FutureValue().Value;
+            return _session.QueryOver<Series>().Where(x => x.Id == seriesId).SingleOrDefault();
         }
 
         public IList<Series> SeriesGetByQueryString(User user, string partnerName, string seriesCode, int agencyId, int salesInChargeId, int pageSize, int currentPageIndex, out int count)
@@ -69,7 +69,7 @@ namespace Portal.Modules.OrientalSails.Repository
             mainQuery = mainQuery.OrderBy(x => x.Id).Desc;
 
             count = mainQuery.RowCount();
-            return mainQuery.Skip(currentPageIndex * pageSize).Take(pageSize).Future().ToList();
+            return mainQuery.Skip(currentPageIndex * pageSize).Take(pageSize).List();
         }
 
         public bool CheckDuplicateSeriesCode(string txtSeriesCode, int seriesId)
@@ -85,7 +85,7 @@ namespace Portal.Modules.OrientalSails.Repository
 
         public Series SeriesGetBySeriesCode(string seriesCode)
         {
-            Series series = _session.Query<Series>().Where(x => x.SeriesCode.ToLower() == seriesCode.ToLower()).ToFutureValue().Value;
+            Series series = _session.Query<Series>().Where(x => x.SeriesCode.ToLower() == seriesCode.ToLower()).SingleOrDefault();
             return series;
         }
 
@@ -107,7 +107,7 @@ namespace Portal.Modules.OrientalSails.Repository
                 query = query.Where(x => x.CreatedDate <= to);
             }
 
-            return query.Future().ToList();
+            return query.List();
         }
     }
 }
