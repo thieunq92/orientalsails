@@ -35,10 +35,13 @@
          newExpense_OperatedPhone = '<%= CurrentUser.Phone %>';
          date = '<%= Date.ToString("dd/MM/yyyy") %>';
          cruiseId = <%= Cruise != null ? Cruise.Id : -1%>;
+         tripId = <%= Trip != null ? Trip.Id : -1 %>;
          getListAllCruiseExpenseDTO();
          getListCruiseExpenseDTO();
          bookingGetAllByCriterion();
-         LockingExpense = <%=LockingExpenseString %>">
+         shadowBookingGetByDate();
+         LockingExpense = <%=LockingExpenseString %>;
+         ">
         <div class="sticky" style="z-index: 999; background-color: #ffffff">
             <!--Phần chọn ngày xem booking-->
             <div class="form-group">
@@ -165,183 +168,80 @@
                         </td>
                         <td><% if (CanViewTotal)
                                 {%>
-                            {{booking.Total}} 
+                            {{formatTotal(booking.Total)}} 
                             <% } %></td>
                         <td><a href="" ng-click="openPopupFeedback(booking.Id)">Feedback</a></td>
                     </tr>
-
-                    <asp:Repeater ID="rptBookingList" runat="server" OnItemDataBound="rptBookingList_OnItemDataBound">
-
-                        <ItemTemplate>
-                            <tr class="
-                            <%# ((Booking)(Container.DataItem)).StartDate < Date ? "custom-warning":""%>
-                            <%-- 06082023Bo Bo to mau chuc nang booking owner--%>
-                            <%--<%# IsBookingOwner((Booking)(Container.DataItem)) ? "custom-bookingowner":""%>--%>
-                            <%# ((Booking)(Container.DataItem)).Status == StatusType.Pending ? "custom-info":""%>
-                            ">
-                                <td <%= ((List<Booking>)(rptBookingList.DataSource)).Any(x=>x.Inspection == true) ? "" : "class='hide'" %>>
-                                    <i class="fa fa-lg fa-clipboard-list text-disabled 
-                                    <%# ((Booking)(Container.DataItem)).Inspection == true ? "":"hide"%>"
-                                        data-toggle="tooltip" title="Inspection"></i>
-                                </td>
-                                <td <%=((List<Booking>)(rptBookingList.DataSource)).Any(x=>x.Customers.Any(y => y.Birthday != null && y.Birthday.Value.Day == Date.Day && y.Birthday.Value.Month == Date.Month)) 
-                                ? "" : "class='hide'" %>>
-                                    <i class="fa fa-lg fa-birthday-cake
-                                     <%# ((Booking)(Container.DataItem)).BookingRooms.Any(x=>x.Customers.Any(y=> y.Birthday!= null && y.Birthday.Value.Day == Date.Day && y.Birthday.Value.Month == Date.Month)) ? "":"hide"%>"
-                                        style="color: hotpink" data-toggle="tooltip" title="Birthday"></i>
-                                </td>
-                                <td>
-                                    <%# Container.ItemIndex + 1 %>
-                                </td>
-                                <td class="--text-left">
-                                    <%# ((Booking)(Container.DataItem)).CustomerName %>
-                                </td>
-                                <td>
-                                    <%# ((Booking)Container.DataItem).Adult%>
-                                </td>
-                                <td>
-                                    <%# ((Booking)Container.DataItem).Child%>
-                                </td>
-                                <td>
-                                    <%# ((Booking)Container.DataItem).Baby%>
-                                </td>
-                                <td>
-                                    <%# ((Booking)(Container.DataItem)).Trip != null 
-                                ? ((Booking)(Container.DataItem)).Trip.TripCode : "" %>
-                                </td>
-                                <td class="--text-left">
-                                    <%# ((Booking)(Container.DataItem)).PickupAddress != null ? ((Booking)(Container.DataItem)).PickupAddress.Replace(Environment.NewLine,"<br/>") :"" %>
-                                </td>
-                                <td class="--text-left">
-                                    <%# CanViewSpecialRequestFood && ((Booking)(Container.DataItem)).SpecialRequest != null ? ((Booking)(Container.DataItem)).SpecialRequest.Replace(Environment.NewLine,"<br/>") :"" %>
-                                    <%# CanViewSpecialRequestRoom && ((Booking)(Container.DataItem)).SpecialRequestRoom != null ? ((Booking)(Container.DataItem)).SpecialRequestRoom.Replace(Environment.NewLine,"<br/>") :"" %>
-                                </td>
-                                <% if (CanViewAgency)
-                                    { %>
-                                <td>
-                                    <a href="" data-toggle="tooltip" title="<%# GetAgencyNotes(((Booking)Container.DataItem).Agency) %>">
-                                        <i class="fa fa-lg fa-comment-dots icon icon__note"></i>
-                                    </a>
-                                    <br />
-                                    <a href="AgencyView.aspx?NodeId=1&SectionId=15&agencyid=<%# ((Booking)(Container.DataItem)).Agency != null ? ((Booking)(Container.DataItem)).Agency.Id :-1%>"><%# ((Booking)(Container.DataItem)).Agency != null ? ((Booking)(Container.DataItem)).Agency.Name : "" %></a>
-                                </td>
-                                <% } %>
-                                <td>
-                                    <a href="BookingView.aspx?NodeId=1&SectionId=15&bi=<%#((Booking)(Container.DataItem)).Id%>">
-                                        <%#((Booking)(Container.DataItem)).BookingIdOS%>
-                                    </a>
-                                    <%#  ((Booking)(Container.DataItem)).HasInvoice ? "<div class='star' title='VAT'>*</div>" : "" %>
-                                </td>
-                                <% if (CanViewAgency)
-                                    { %>
-                                <td>
-                                    <%# ((Booking)(Container.DataItem)).Agency.Sale != null ? ((Booking)(Container.DataItem)).Agency.Sale.FullName + (!String.IsNullOrEmpty(((Booking)(Container.DataItem)).Agency.Sale.Website) ? "-" : "" ) + ((Booking)(Container.DataItem)).Agency.Sale.Website : ""%>
-                                </td>
-                                <% } %>
-                                <% if (CanViewTotal)
-                                    { %>
-                                <td><%# ((Booking)(Container.DataItem)).Total.ToString("#,##0.##") %></td>
-                                <% } %>
-                                <td>
-                                    <a href="" onclick="openPopup('SurveyInput.aspx?NodeId=1&SectionId=15&bi=<%# ((Booking)Container.DataItem).Id %>','Surveyinput', 600,800)">Feedback</a>
-                                </td>
-                                <td>
-                                    <asp:HiddenField runat="server" ID="hidId" Value='<%#Eval("Id") %>' />
-                                    <asp:Literal runat="server" ID="litPickupTime"></asp:Literal>
-                                    <asp:TextBox ID="txtPickupTime" autocomplete="off" runat="server" CssClass="form-control timepicker" Style="width: 65px" placeholder="hh:mm" data-control="timepicker"></asp:TextBox>
-                                </td>
-                            </tr>
-                        </ItemTemplate>
-                        <FooterTemplate>
-                            <tr class="item">
-                                <td colspan="6">
-                                    <strong>Grand total</strong>
-                                </td>
-                                <td>
-                                    <strong>
-                                       {{totalAdult}}</strong>
-                                </td>
-                                <td>
-                                    <strong>
-                                        {{totalChild}}</strong>
-                                </td>
-                                <td>
-                                    <strong>
-                                        {{totalBaby}}</strong>
-                                </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <% if (CanViewTotal)
-                                    { %>
-                                <td>
-                                    <strong><%= ((List<Booking>)rptBookingList.DataSource).Sum(x=>x.Total).ToString("#,##0.##")%></strong>
-                                </td>
-                                <% } %>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                        </FooterTemplate>
-                    </asp:Repeater>
-                    <asp:Repeater runat="server" ID="rptShadows">
-                        <HeaderTemplate>
-                            <tr>
-                                <td colspan="100%" class="custom-danger">Booking moved (to another date) or cancelled need attention (within 7 days if <
-                                    6 cabins and within 45 days if >=6 cabins)
-                                </td>
-                            </tr>
-                        </HeaderTemplate>
-                        <ItemTemplate>
-                            <tr>
-                                <td <%= ((List<Booking>)(rptBookingList.DataSource)).Any(x=>x.Inspection == true) ? "" : "class='hide'" %>></td>
-                                <td <%=((List<Booking>)(rptBookingList.DataSource)).Any(x=>x.Customers.Any(y => y.Birthday != null && y.Birthday.Value.Day == Date.Day && y.Birthday.Value.Month == Date.Month)) 
-                                ? "" : "class='hide'" %>></td>
-                                <td>
-                                    <%# Container.ItemIndex + 1 %>
-                                </td>
-                                <td class="--text-left">
-                                    <%# ((Booking)(Container.DataItem)).CustomerName %>
-                                </td>
-                                <td>
-                                    <%# ((Booking)Container.DataItem).BookingRooms.Sum(x=>x.Adult)%>
-                                </td>
-                                <td>
-                                    <%# ((Booking)Container.DataItem).BookingRooms.Sum(x=>x.Child)%>
-                                </td>
-                                <td>
-                                    <%# ((Booking)Container.DataItem).BookingRooms.Sum(x=>x.Baby)%>
-                                </td>
-                                <td>
-                                    <%# ((Booking)(Container.DataItem)).Trip != null 
-                                ? ((Booking)(Container.DataItem)).Trip.TripCode : "" %>
-                                </td>
-                                <td class="--text-left">
-                                    <%# ((Booking)(Container.DataItem)).PickupAddress != null ? ((Booking)(Container.DataItem)).PickupAddress.Replace(Environment.NewLine, "<br/>"):"" %>
-                                </td>
-                                <td class="--text-left">
-                                    <%# ((Booking)(Container.DataItem)).SpecialRequest != null ? ((Booking)(Container.DataItem)).SpecialRequest.Replace(Environment.NewLine, "<br/>"):"" %>
-                                </td>
-                                <td>
-                                    <a href="AgencyView.aspx?NodeId=1&SectionId=15&agencyid=<%# ((Booking)(Container.DataItem)).Agency != null ? ((Booking)(Container.DataItem)).Agency.Id :-1%>"><%# ((Booking)(Container.DataItem)).Agency != null ? ((Booking)(Container.DataItem)).Agency.Name : "" %></a>
-                                </td>
-                                <td>
-                                    <a href="BookingView.aspx?NodeId=1&SectionId=15&bi=<%#((Booking)(Container.DataItem)).Id%>">
-                                        <%#((Booking)(Container.DataItem)).BookingIdOS%>
-                                    </a>
-                                </td>
-                                <td>
-                                    <%# ((Booking)(Container.DataItem)).Total.ToString("#,##0.##") %>
-                                </td>
-                                <td>
-                                    <a href="BookingReport.aspx?NodeId=1&SectionId=15&date=<%# ((Booking)Container.DataItem).StartDate.ToString("dd/MM/yyyy") %>">
-                                        <%# ((Booking)Container.DataItem).ModifiedDate.ToString("dd/MM/yyyy")%>
-                                    </a>
-                                </td>
-                            </tr>
-                        </ItemTemplate>
-                    </asp:Repeater>
+                    <tr class="item">
+                        <td colspan="4">
+                            <strong>Grand total</strong>
+                        </td>
+                        <td>
+                            <strong>{{totalAdult}}</strong>
+                        </td>
+                        <td>
+                            <strong>{{totalChild}}</strong>
+                        </td>
+                        <td>
+                            <strong>{{totalBaby}}</strong>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><% if (CanViewTotal)
+                                { %><strong>{{totalOfTotalPrice}}</strong><% } %></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="100%" class="custom-danger">Booking moved (to another date) or cancelled need attention (within 7 days if &lt;
+                                    6 cabins and within 45 days if &gt;=6 cabins)
+                            </td>
+                    </tr>
+                    <tr ng-repeat="booking in listBookingShadow" ng-class="{'custom-warning': booking.IsWarningBooking, 'custom-info': booking.IsPendingBooking}">
+                        <td><i ng-show="booking.Inspection" class="fa fa-lg fa-clipboard-list text-disabled "
+                            data-toggle="tooltip" title="Inspection"></i></td>
+                        <td>
+                            <i ng-show="booking.HaveBirthdayBooking" class="fa fa-lg fa-birthday-cake"
+                                style="color: hotpink" data-toggle="tooltip" title="Birthday"></i>
+                        </td>
+                        <td>{{$index + 1}}</td>
+                        <td class="--text-left"><span ng-bind-html="booking.CustomerName"></span></td>
+                        <td>{{booking.Adult}}</td>
+                        <td>{{booking.Child}}</td>
+                        <td>{{booking.Baby}}</td>
+                        <td>{{booking.TripCode}}</td>
+                        <td class="--text-left">{{booking.PickupAddress}}</td>
+                        <td class="--text-left">{{booking.SpecialRequest}}<br />
+                            {{booking.SpecialRequestRoom}}</td>
+                        <td>
+                            <% if (CanViewAgency)
+                                { %>
+                            <a ng-show="booking.AgencyNotes != ''" href="" data-toggle="tooltip" title="{{booking.AgencyNotes}}">
+                                <i class="fa fa-lg fa-comment-dots icon icon__note"></i>
+                            </a>
+                            <br />
+                            <a href="AgencyView.aspx?NodeId=1&SectionId=15&agencyid={{booking.AgencyId}}">{{booking.AgencyName}}</a>
+                            <% } %>
+                        </td>
+                        <td>
+                            <a href="BookingView.aspx?NodeId=1&SectionId=15&bi={{booking.Id}}">{{booking.BookingId}}</a>
+                            <div ng-show="booking.HasInvoice" class="star" title="VAT">*</div>
+                        </td>
+                        <td>
+                            <% if (CanViewAgency)
+                                { %>
+                                {{booking.SalesInChargeName}} <span ng-show="booking.SalesInChargePhone != ''">-</span> {{booking.SalesInChargePhone}}
+                            <% } %>
+                        </td>
+                        <td><% if (CanViewTotal)
+                                {%>
+                                {{formatTotal(booking.Total)}} 
+                            <% } %></td>
+                        <td></td>
+                    </tr>
                 </table>
             </div>
         </div>

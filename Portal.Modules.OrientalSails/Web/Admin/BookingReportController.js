@@ -342,12 +342,14 @@
                 data: {
                     "date": $scope.date,
                     "cruiseId": $scope.cruiseId,
+                    "tripId": $scope.tripId,
                 }
             }).then(function (response) {
                 $scope.listBooking = JSON.parse(response.data.d);
                 $scope.totalAdult = $scope.listBooking.reduce((n, { Adult }) => n + Adult, 0);
                 $scope.totalChild = $scope.listBooking.reduce((n, { Child }) => n + Child, 0);
                 $scope.totalBaby = $scope.listBooking.reduce((n, { Baby }) => n + Baby, 0);
+                $scope.totalOfTotalPrice = Math.round($scope.listBooking.reduce((n, { Total }) => n + Total, 0)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             }, function (response) {
                 alert("Request failed. Please reload and try again. Message:" + response.data.Message);
             })
@@ -355,5 +357,23 @@
 
         $scope.openPopupFeedback = function (bookingId) {
             window.openPopup('SurveyInput.aspx?NodeId=1&SectionId=15&bi=' + bookingId, 'Surveyinput', 600, 800)
+        }
+
+        $scope.formatTotal = function (total) {
+            return Math.round(total).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        $scope.shadowBookingGetByDate = function () {
+            $http({
+                method: "POST",
+                url: "WebMethod/BookingReportWebService.asmx/ShadowBookingGetByDate",
+                data: {
+                    "date": $scope.date,
+                }
+            }).then(function (response) {
+                $scope.listBookingShadow = JSON.parse(response.data.d);
+            }, function (response) {
+                alert("Request failed. Please reload and try again. Message:" + response.data.Message);
+            })
         }
     }])

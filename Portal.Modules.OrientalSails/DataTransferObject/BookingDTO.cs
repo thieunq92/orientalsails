@@ -60,8 +60,6 @@ namespace Portal.Modules.OrientalSails.DataTransferObject
 
 		public string SalesInChargePhone { get; set; }
 
-		public string Total { get; set; }
-
 		public bool HasInvoice { get; set; }
 
 		public string AgencyNotes { get; set; }
@@ -73,5 +71,7 @@ namespace Portal.Modules.OrientalSails.DataTransferObject
 		public bool Inspection { get; set; }
 
 		public bool HaveBirthdayBooking { get; set; }
+		public double Total { get; set; }
+		public int TripId { get; set; }
 	}
 }

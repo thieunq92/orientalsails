@@ -26,6 +26,7 @@ namespace Portal.Modules.OrientalSails.BusinessLogic
         public BookingRoomRepository BookingRoomRepository { get; set; }
         public CustomerRepository CustomerRepository { get; set; }
         public AgencyNotesRepository AgencyNotesRepository { get; set; }
+        public TripRepository TripRepository { get; set; }
         public BookingReportBLL()
         {
             BookingRepository = new BookingRepository();
@@ -41,6 +42,7 @@ namespace Portal.Modules.OrientalSails.BusinessLogic
             BookingRoomRepository = new BookingRoomRepository();
             CustomerRepository = new CustomerRepository();
             AgencyNotesRepository = new AgencyNotesRepository();
+            TripRepository = new TripRepository();
         }
         public void Dispose()
         {
@@ -109,6 +111,11 @@ namespace Portal.Modules.OrientalSails.BusinessLogic
                 AgencyNotesRepository.Dispose();
                 AgencyNotesRepository = null;
             }
+            if (TripRepository != null)
+            {
+                TripRepository.Dispose(); 
+                TripRepository = null;
+            }
         }
         public IList<Booking> BookingReportBLL_BookingSearchBy(DateTime startDate, int cruiseId, int bookingStatus)
         {
@@ -118,6 +125,11 @@ namespace Portal.Modules.OrientalSails.BusinessLogic
         public Cruise CruiseGetById(int cruiseId)
         {
             return CruiseRepository.CruiseGetById(cruiseId);
+        }
+
+        public SailsTrip TripGetById(int tripId)
+        {
+            return TripRepository.TripGetById(tripId);
         }
 
         public IList<Booking> BookingGetAllBy(DateTime? startDate, int bookingStatus, bool isLimousine)
