@@ -29,7 +29,7 @@
     </style>
 </asp:Content>
 <asp:Content ID="AdminContent" ContentPlaceHolderID="AdminContent" runat="server">
-    <div ng-controller="bookingReportController" ng-init="
+    <div id="bookingReportContainer" ng-controller="bookingReportController" ng-init="
          newExpense_OperatedName = '<%= CurrentUser.FullName %>';
          newExpense_OperatedId = <%= CurrentUser.Id%>;
          newExpense_OperatedPhone = '<%= CurrentUser.Phone %>';
@@ -117,10 +117,10 @@
                         <th rowspan="2">Total
                         </th>
                         <th rowspan="2">Feedback</th>
-                        <th rowspan="2">P/u time
+                     <%--   <th rowspan="2">P/u time
                             <br />
                             <asp:Button runat="server" ID="btnSavePickupTime" Text="update" CssClass="btn btn-primary" OnClick="btnSavePickupTime_OnClick" />
-                        </th>
+                        </th>--%>
                     </tr>
                     <tr class="active">
                         <th>Adult
@@ -143,9 +143,10 @@
                         <td>{{booking.Child}}</td>
                         <td>{{booking.Baby}}</td>
                         <td>{{booking.TripCode}}</td>
-                        <td class="--text-left">{{booking.PickupAddress}}</td>
-                        <td class="--text-left">{{booking.SpecialRequest}}<br />
-                            {{booking.SpecialRequestRoom}}</td>
+                        <td class="--text-left"><span ng-bind-html="booking.PickupAddress"></span></td>
+                        <td class="--text-left"><span ng-bind-html="booking.SpecialRequest"></span>
+                            <br />
+                            <span ng-bind-html="booking.SpecialRequestRoom"></span></td>
                         <td>
                             <% if (CanViewAgency)
                                 { %>
@@ -213,9 +214,10 @@
                         <td>{{booking.Child}}</td>
                         <td>{{booking.Baby}}</td>
                         <td>{{booking.TripCode}}</td>
-                        <td class="--text-left">{{booking.PickupAddress}}</td>
-                        <td class="--text-left">{{booking.SpecialRequest}}<br />
-                            {{booking.SpecialRequestRoom}}</td>
+                        <td class="--text-left"><span ng-bind-html="booking.PickupAddress"></span></td>
+                        <td class="--text-left"><span ng-bind-html="booking.SpecialRequest"></span>
+                            <br />
+                            <span ng-bind-html="booking.SpecialRequestRoom"></span></td>
                         <td>
                             <% if (CanViewAgency)
                                 { %>
@@ -245,69 +247,6 @@
                 </table>
             </div>
         </div>
-        <%-- Need remove --%>
-        <div class="row" style="display: none">
-            <div class="col-xs-12">
-                <asp:PlaceHolder ID="plhDailyExpenses" runat="server">
-                    <table class="table borderless table-expense">
-                        <asp:Repeater ID="rptCruiseExpense" runat="server" OnItemDataBound="rptCruiseExpense_ItemDataBound">
-                            <ItemTemplate>
-                                <asp:PlaceHolder runat="server" ID="plhCruiseExpense">
-                                    <tr>
-                                        <td colspan="7" style="padding-top: 10px">
-                                            <asp:HiddenField ID="hiddenId" runat="server" Value='<%# DataBinder.Eval(Container.DataItem,"Id") %>' />
-                                            <strong><%# DataBinder.Eval(Container.DataItem,"Name") %></strong>
-                                        </td>
-                                    </tr>
-                                    <asp:Repeater ID="rptServices" runat="server" OnItemDataBound="rptServices_ItemDataBound">
-                                        <ItemTemplate>
-                                            <tr id="seperator" runat="server" class="seperator" visible="false">
-                                                <td colspan="8" style="border-top: solid 1px #eee">&nbsp
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td></td>
-                                                <td>
-                                                    <asp:HiddenField ID="hiddenId" runat="server" />
-                                                    <asp:HiddenField ID="hiddenType" runat="server" />
-                                                    <asp:Literal ID="litType" runat="server"></asp:Literal>
-                                                </td>
-                                                <td>
-                                                    <asp:TextBox ID="txtName" runat="server" CssClass="form-control" placeholder="Name"></asp:TextBox>
-                                                    <asp:DropDownList ID="ddlGuides" runat="server" CssClass="form-control">
-                                                    </asp:DropDownList>
-                                                </td>
-                                                <td>
-                                                    <asp:TextBox ID="txtPhone" runat="server" CssClass="form-control" placeholder="Phone"></asp:TextBox>
-                                                </td>
-                                                <td>
-                                                    <asp:DropDownList ID="ddlSuppliers" runat="server" CssClass="form-control">
-                                                    </asp:DropDownList>
-                                                </td>
-                                                <td>
-                                                    <asp:TextBox ID="txtCost" runat="server" CssClass="form-control" input-mask="{'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': true, 'rightAlign':false}"></asp:TextBox>
-                                                </td>
-                                            </tr>
-                                        </ItemTemplate>
-                                    </asp:Repeater>
-                                </asp:PlaceHolder>
-                            </ItemTemplate>
-                            <FooterTemplate>
-                                <tr>
-                                    <td colspan="5">Tổng
-                                    </td>
-                                    <td>
-                                        <strong>
-                                            <asp:Literal ID="litTotal" runat="server"></asp:Literal></strong>
-                                    </td>
-                                </tr>
-                            </FooterTemplate>
-                        </asp:Repeater>
-                    </table>
-                </asp:PlaceHolder>
-            </div>
-        </div>
-        <%-- /Need remove --%>
 
         <div ng-repeat="cruiseExpense in $root.listCruiseExpenseDTO" ng-show="isShowCruiseExpense('<%= CruiseIdAllow %>',cruiseExpense.Id.toString())">
             <div ng-show="cruiseExpense.ListGuideExpenseDTO.length == 0 && cruiseExpense.ListOthersExpenseDTO.length == 0">
@@ -608,7 +547,13 @@
     </script>
     <script>
         $(document).ready(function () {
-            $('.sticky').stick_in_parent({ enable_bottoming: false });
+            new ResizeObserver(function () {
+                setTimeout(function () {
+                    $('.sticky').stick_in_parent({ parent: '.container-fluid', enable_bottoming: false })
+                    //workaround refresh sticky when container resize
+                    window.dispatchEvent(new Event('resize'));
+                },1000);
+            }).observe($('table')[0])
         });
     </script>
 </asp:Content>

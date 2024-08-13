@@ -372,8 +372,11 @@
                 }
             }).then(function (response) {
                 $scope.listBookingShadow = JSON.parse(response.data.d);
+             
             }, function (response) {
                 alert("Request failed. Please reload and try again. Message:" + response.data.Message);
             })
         }
     }])
+
+
