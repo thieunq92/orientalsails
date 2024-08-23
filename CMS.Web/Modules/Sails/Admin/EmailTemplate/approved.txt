@@ -268,12 +268,7 @@ Oriental Sails xin xác nhận booking của quý anh chị như phía dưới:<
   none;border-bottom:solid lightgrey 1.0pt;border-right:solid lightgrey 1.0pt;
   padding:0in 5.4pt 0in 5.4pt'>
   <p class=MsoNormal><span style='font-size:12.0pt;line-height:115%;font-family:
-  "Times New Roman",serif;color:black'>Thanh toán trước 3 ngày check in
-Chuyển khoản theo thông tin tài khoản sau:
-TK CHUYỂN TIỀN TÀU ORIENTAL SAILS ( No VAT)
-Tên tài khoản    Bùi Văn Chi
-Số tài khoản     0011004389709
-Ngân hàng        Vietcombank SGD Hà Nội </span></p>
+  "Times New Roman",serif;color:black'>{20}</span></p>
   </td>
  </tr>
  <tr>
