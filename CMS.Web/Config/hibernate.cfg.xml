@@ -7,10 +7,6 @@
 		<property name="cache.use_second_level_cache">true</property>
 		<property name="cache.use_query_cache" >true</property>
 		<property name="cache.provider_class">NHibernate.Caches.SysCache.SysCacheProvider, NHibernate.Caches.SysCache</property>
-		<!--<property name="connection.connection_string">Server=localhost; Database=oriental; Uid=sa; Pwd=@#$sa123456;</property>-->
-		<!--<property name="connection.connection_string">Server=203.113.174.12\MSSQLSERVER2019,1437; Database=orientalsails; Uid=orientalsails; Pwd=4y7W75^kt;</property>-->
-		<!--<property name="connection.connection_string">Server=202.92.4.161\MSSQLSERVER2019, 1437; Database=mo1; Uid=mo1os; Pwd=Acs9v6*84;</property>-->
-		<property name="connection.connection_string">Server=112.78.2.112\MSSQLSERVER2019,1433; Database=moo38486_orientalsails; Uid=moo38486_os; Pwd=@#$Matbao1992;</property>
 		<property name="show_sql">true</property>
 	</session-factory>
 </hibernate-configuration>
