@@ -235,7 +235,7 @@ namespace Portal.Modules.OrientalSails.Web.Admin.WebMethod
                     BookerName = series.Booker.Name,
                     SalesInChargeName = salesInChargeName,
                     CutoffDate = series.CutoffDate,
-                    NoOfDays = series.NoOfDays == 1 ? "2 days 1 night" : "3 days 2 nights",
+                    NoOfDays = series.NoOfDays == 2 ? "2 days 1 night" : series.NoOfDays == 2 ? "3 days 2 nights" : series.NoOfDays == 97 ? "Morning Cruise - 4hours" : series.NoOfDays == 98 ? "Afternoon Cruise - 4hours" : "Dinner Cruise",
                     NoOfBooking = series.ListBooking.Count.ToString(),
                     Status = SeriesGetStatus(series.Id),
                 };

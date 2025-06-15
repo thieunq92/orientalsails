@@ -326,6 +326,7 @@ namespace Portal.Modules.OrientalSails.Repository
             query.JoinAlias(() => cruiseAlias.ListCruiseRoute, () => cruiseRouteAlias);
             Route routeAlias = null;
             query.JoinAlias(() => cruiseRouteAlias.Route, () => routeAlias);
+            query = query.Where(x => x.Transfer_Service != null && x.Transfer_Service != "");
             if (route != null)
             {
                 query = query.Where(() => cruiseRouteAlias.Route.Id == route.Id);
@@ -411,7 +412,6 @@ namespace Portal.Modules.OrientalSails.Repository
                 var bookingQuery = _session.QueryOver<Booking>().WithSubquery.WhereProperty(x => x.Id)
                     .In<Booking>(query.Select(x => x.Id));
 
-                bookingQuery = bookingQuery.Fetch(x => x.BookingRooms).Eager;
                 bookingQuery = bookingQuery.Fetch(x => x.Trip).Eager;
                 bookingQuery = bookingQuery.Fetch(x => x.Agency).Eager;
                 bookingQuery = bookingQuery.Fetch(x => x.Cruise).Eager;

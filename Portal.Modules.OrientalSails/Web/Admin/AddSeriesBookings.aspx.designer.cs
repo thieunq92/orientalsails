@@ -7,9 +7,20 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Portal.Modules.OrientalSails.Web.Admin {
-    
-    
-    public partial class AddSeriesBookings {
+namespace Portal.Modules.OrientalSails.Web.Admin
+{
+
+
+    public partial class AddSeriesBookings
+    {
+
+        /// <summary>
+        /// scriptManager control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager scriptManager;
     }
 }

@@ -612,11 +612,11 @@ namespace Portal.Modules.OrientalSails.Web.Admin.WebMethod
             var expenses = TransferRequestByDateBLL.ExpenseGetAllByCriterion(busByDate.Date).List();
             if (shortRouteName == "H N - T C ")
             {
-                sheet.Cells[titleRow, 9].Value = "Hà Nội - Ô 26 Tuần Châu \r\n(Giao cho)";
+                sheet.Cells[titleRow, 9].Value = "Hà Nội - Ô 27A Tuần Châu \r\n(Giao cho)";
             }
             else if (shortRouteName == "T C - H N ")
             {
-                sheet.Cells[titleRow, 9].Value = "Ô 26 Tuần Châu - Hà Nội \r\n(Nhận khách từ)";
+                sheet.Cells[titleRow, 9].Value = "Ô 27A Tuần Châu - Hà Nội \r\n(Nhận khách từ)";
             }
             else if (shortRouteName == "H N - H L ")
             {

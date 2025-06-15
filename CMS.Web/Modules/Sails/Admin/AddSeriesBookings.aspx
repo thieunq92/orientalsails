@@ -2,13 +2,17 @@
     AutoEventWireup="true"
     CodeBehind="AddSeriesBookings.aspx.cs"
     Inherits="Portal.Modules.OrientalSails.Web.Admin.AddSeriesBookings" %>
+
 <asp:Content ID="AdminContent" ContentPlaceHolderID="AdminContent" runat="server">
+    <asp:ScriptManager runat="server" ID="scriptManager">
+    </asp:ScriptManager>
     <div ng-controller="checkPermissionController">
         <div ng-show="displayErrorPanel">
             <div class="row">
                 <div class="col-xs-12">
                     <div class="alert alert-danger" role="alert">
                         <strong>Failed!</strong> Không có quyền truy cập trang này. Liên hệ manager để được cấp quyền
+                   
                     </div>
                 </div>
             </div>
@@ -35,6 +39,7 @@
                         <div class="row">
                             <div class="col-xs-1">
                                 Agency
+                           
                             </div>
                             <div class="col-xs-3">
                                 <input type="text" name="txtAgency" ng-model="series.Agency.Name" id="ctl00_AdminContent_agencySelectornameid" class="form-control"
@@ -44,6 +49,7 @@
                             </div>
                             <div class="col-xs-1">
                                 Booker
+                           
                             </div>
                             <div class="col-xs-3">
                                 <select class="form-control inline-block width90percent" ng-model="series.Booker.Id" ng-options="item.Id as item.Name for item in listBooker">
@@ -55,25 +61,16 @@
                     </div>
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-xs-4">
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        Series code
-                                    </div>
-                                    <div class="col-xs-9">
-                                        <input id="txtSeriesCode" name="txtSeriesCode" ng-model="series.SeriesCode" placeholder="Series code" class="form-control" />
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-12">
-                                        <button class="btn btn-primary" type="button" ng-click="createOrUpdateSeries()">{{lblBtnSeries}}</button>
-                                        <i class="fa fa-circle-o-notch fa-spin" aria-hidden="true" ng-show="show.createSeriesLoadingIcon"></i>
-                                    </div>
-                                </div>
+                            <div class="col-xs-1">
+                                Series code
+                            </div>
+                            <div class="col-xs-3">
+                                <input id="txtSeriesCode" name="txtSeriesCode" ng-model="series.SeriesCode" placeholder="Series code" class="form-control" />
                             </div>
                             <div class="col-xs-4">
                                 <div class="col-xs-3 nopadding-left">
                                     Cut-off date
+                               
                                 </div>
                                 <div class="col-xs-3" style="padding-left: 7px;">
                                     <div class="input-group">
@@ -83,20 +80,33 @@
                                 </div>
                                 <div class="col-xs-3 nopadding-right nopadding-left" style="width: 18%">
                                     Trip
+                               
                                 </div>
                                 <div class="col-xs-3 nopadding-left nopadding-right">
                                     <select ng-model="series.NoOfDays" id="ddlNoOfDays" name="ddlNoOfDays" class="form-control" style="padding-left: 0px; width: 100%" convert-to-number>
                                         <option value="">-- Trip --</option>
                                         <option value="2">2 Days 1 Night</option>
                                         <option value="3">3 Days 2 Nights</option>
+                                        <option value="97">Morning Cruise - 4hours</option>
+                                        <option value="98">Afternoon Cruise - 4hours</option>
+                                        <option value="99">Dinner Cruise</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-xs-1 nopadding-right">
                                 Special request
+                           
                             </div>
                             <div class="col-xs-3">
                                 <textarea ng-model="series.SpecialRequest" placeholder="Special request" class="form-control" style="width: 90%;"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <button class="btn btn-primary" type="button" ng-click="createOrUpdateSeries()">{{lblBtnSeries}}</button>
+                                <i class="fa fa-circle-o-notch fa-spin" aria-hidden="true" ng-show="show.createSeriesLoadingIcon"></i>
                             </div>
                         </div>
                     </div>
@@ -107,22 +117,28 @@
                         <div class="row">
                             <div class="col-xs-1">
                                 Series code
+                           
                             </div>
                             <div class="col-xs-2 text-wrap">
                                 {{series.SeriesCode}}
+                           
                             </div>
                             <div class="col-xs-1">
                                 Agency
+                           
                             </div>
                             <div class="col-xs-4 text-wrap">
                                 {{series.Agency.Name}}
+                           
                             </div>
                             <div ng-show="series.Booker != null">
                                 <div class="col-xs-1">
                                     Booker
+                               
                                 </div>
                                 <div class="col-xs-2">
                                     {{series.Booker.Name}}
+                               
                                 </div>
                             </div>
                         </div>
@@ -132,15 +148,19 @@
                         <div class="row">
                             <div class="col-xs-1">
                                 Cut-off date
+                           
                             </div>
                             <div class="col-xs-2">
                                 {{series.CutoffDate}} day(s)
+                           
                             </div>
                             <div class="col-xs-1">
                                 Trip
+                           
                             </div>
                             <div class="col-xs-2">
                                 {{series.NoOfDaysTrip}}
+                           
                             </div>
                         </div>
                     </div>
@@ -169,18 +189,21 @@
                             <div class="col-xs-12">
                                 <div class="col-xs-1">
                                     Booking code
+                               
                                 </div>
                                 <div class="col-xs-3">
                                     <input type="text" placeholder="Booking code" ng-model="bookingCode" class="form-control"></input>
                                 </div>
                                 <div class="col-xs-1">
                                     TA code
+                               
                                 </div>
                                 <div class="col-xs-3">
                                     <input type="text" placeholder="TA code" ng-model="taCode" class="form-control"></input>
                                 </div>
                                 <div class="col-xs-1">
                                     Start date
+                               
                                 </div>
                                 <div class="col-xs-3">
                                     <input type="text" placeholder="Start date" ng-model="startDate" class="form-control" id="txtSearchStartDate"></input>
@@ -261,18 +284,21 @@
                             </div>
                             <div class="col-xs-1">
                                 TA Code
+                           
                             </div>
                             <div class="col-xs-2">
                                 <input id="txtTACode" ng-model="rsBooking.TACode" placeholder="TACode" class="form-control" />
                             </div>
                             <div class="col-xs-1">
                                 Start date
+                           
                             </div>
                             <div class="col-xs-2">
                                 <input id="txtStartDate" ng-model="rsBooking.StartDate" placeholder="Start date (dd/MM/yyyy)" class="form-control" />
                             </div>
                             <div class="col-xs-1">
                                 Trip
+                           
                             </div>
                             <div class="col-xs-3">
                                 <select class="form-control inline-block" ng-model="rsBooking.Trip.Id" ng-options="item.Id as item.Name for item in listTrip">
@@ -291,6 +317,7 @@
                             </div>
                             <div class="col-xs-1 nopadding-right">
                                 Special Request
+                           
                             </div>
                             <div class="col-xs-9">
                                 <textarea id="txtSpecialRequest" ng-model="rsBooking.SpecialRequest" placeholder="Special Request" class="form-control"></textarea>
@@ -324,6 +351,7 @@
                             <div class="row" ng-repeat="item in listAvaiableRoom">
                                 <div class="col-xs-2">
                                     {{item.KindOfRoom}}
+                               
                                 </div>
                                 <div class="col-xs-1 custom1-col-xs-1">
                                     <select class="form-control" ng-model="item.selectedRoom" ng-options="adult as (adult  + ' ' + 'room(s)') for adult in range(1, item.NoOfAdult, 1)">
@@ -353,19 +381,19 @@
             </div>
         </div>
     </div>
-<div class="modal fade" id="addBookingModal" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" data-backdrop="static" data-keyboard="true">
-    <div class="modal-dialog" role="document" style="width: 85vw; height: 80vh">
-        <div class="modal-content">
-            <div class="modal-header">
-                <%--                    <span>Add booking</span>--%>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            </div>
-            <div class="modal-body">
-                <iframe frameborder="0" width="100%" style="height: 80vh" scrolling="yes"></iframe>
+    <div class="modal fade" id="addBookingModal" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" data-backdrop="static" data-keyboard="true">
+        <div class="modal-dialog" role="document" style="width: 85vw; height: 80vh">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <%--                    <span>Add booking</span>--%>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <iframe frameborder="0" width="100%" style="height: 80vh" scrolling="yes"></iframe>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </asp:Content>
 <asp:Content ID="Scripts" ContentPlaceHolderID="Scripts" runat="server">
     <script type="text/javascript" src="/modules/sails/admin/addseriesbookingscontroller.js"></script>
@@ -395,8 +423,8 @@
     </script>
     <script>
         var target = document.querySelector(".mutation-observer"),
-        observer = new MutationObserver(mutationCallback),
-        config = { childList: true, subtree: true }
+            observer = new MutationObserver(mutationCallback),
+            config = { childList: true, subtree: true }
         function mutationCallback(mutations) {
             mutations.forEach(function (mutation) {
                 $(".pax").each(function (e, v) {
